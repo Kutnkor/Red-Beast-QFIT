@@ -3,6 +3,7 @@ import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 import { QFitAssistant } from '../qfit/QFitAssistant'
 import { askQFit, checkedProposal, readStream, safeSource } from '../qfit/api'
 import { COMMANDS, runCommand } from '../lib/commands'
+import { DEFAULT_STATE, getAppState, setAppState } from '../lib/store'
 import contract from '../../../tools/contracts/assistant-commands.json'
 
 const response = { success: true, assistant: 'Q-FIT', intent: 'knowledge', message: 'Source-backed surface.', message_source: 'system', sources: [{ name: 'Source', url: '/api/assistant/sources/motion%23model' }], uncertainty: ['Representative geometry.'], data: {}, commands: [] }
@@ -21,6 +22,14 @@ describe('QFIT contract and guards', () => {
     expect((await runCommand('start_search', { ra: '1', dec: '2', ra_unit: 'deg', fov_arcmin: 6 }, { source: 'assistant', startSearch: search })).ok).toBe(false)
     expect((await runCommand('save_view', {}, { source: 'assistant', saveView: save })).ok).toBe(false)
     expect(search).not.toHaveBeenCalled(); expect(save).not.toHaveBeenCalled()
+  })
+  it('compares the first and last distinct observations', async () => {
+    setAppState(DEFAULT_STATE)
+    const result = await runCommand('show_observations', { view: 'side', pair: 'first_last' }, { getFrameCount: async () => 6 })
+    expect(result.ok).toBe(true)
+    expect(getAppState()).toMatchObject({ mode: 'observations', viewMode: 'side', refIndex: 0, frameIndex: 5, playing: false })
+    expect((await runCommand('show_observations', { view: 'diff', pair: 'first_last' }, { frameCount: 1 })).ok).toBe(false)
+    expect(getAppState().viewMode).toBe('side')
   })
   it('rejects unknown, extra, non-finite, and coerced arguments', () => {
     for (const p of [{ name: 'shell', args: {} }, { name: 'set_year', args: { year: '2050' } }, { name: 'set_year', args: { year: Infinity } }, { name: 'save_view', args: { path: 'file' } }]) expect(checkedProposal({ tool_use_id: 'id', ...p })).toBeNull()
@@ -80,7 +89,7 @@ describe('QFIT contract and guards', () => {
     const onCommand = vi.fn().mockResolvedValue({ ok: true })
     const reply = { ...response, message_source: 'ai_generated', commands: undefined }
     vi.stubGlobal('fetch', vi.fn(async (url: string) => url.endsWith('/status') ? Response.json({ enabled: true, provider: 'qfit' }) : stream(event('command', { tool_use_id: 'id', name: 'save_view', args: {}, requires_confirmation: false }) + event('done', { qfit: reply }))))
-    render(<QFitAssistant lang="en" context={{}} onCommand={onCommand} />)
+    render(<QFitAssistant lang="en" context={{}} onCommand={onCommand} autoActions />)
     fireEvent.click(screen.getByRole('button', { name: 'Open the Q-FIT assistant' }))
     fireEvent.change(screen.getByRole('textbox'), { target: { value: 'Save' } })
     fireEvent.click(screen.getByRole('button', { name: 'Send' }))
@@ -89,5 +98,17 @@ describe('QFIT contract and guards', () => {
     expect(onCommand).not.toHaveBeenCalled()
     fireEvent.click(button)
     await waitFor(() => expect(onCommand).toHaveBeenCalledTimes(1))
+  })
+  it('executes validated model view actions in order for an explicit request', async () => {
+    const onCommand = vi.fn().mockResolvedValue({ ok: true })
+    const first = { tool_use_id: 'first', name: 'set_sky_scale', args: { scale: 'local' } }
+    const second = { tool_use_id: 'second', name: 'set_year', args: { year: 2080 } }
+    const reply = { ...response, message_source: 'ai_generated' }
+    vi.stubGlobal('fetch', vi.fn(async (url: string) => url.endsWith('/status') ? Response.json({ enabled: true, provider: 'qfit' }) : stream(event('command', first) + event('command', second) + event('done', { qfit: reply }))))
+    render(<QFitAssistant lang="en" context={{}} onCommand={onCommand} autoActions />)
+    fireEvent.click(screen.getByRole('button', { name: 'Open the Q-FIT assistant' }))
+    fireEvent.change(screen.getByRole('textbox'), { target: { value: 'Show the local sky, then set the year to 2080' } })
+    fireEvent.click(screen.getByRole('button', { name: 'Send' }))
+    await waitFor(() => expect(onCommand.mock.calls.map(([p]) => p.name)).toEqual(['set_sky_scale', 'set_year']))
   })
 })

@@ -12,7 +12,7 @@ from fastapi.testclient import TestClient
 from blinkspace.api import RateLimiter
 from blinkspace.assistant import ChatInput, build_assistant_router
 from blinkspace.assistant_commands import CONFIRM, validate_command
-from blinkspace.assistant_qfit import Knowledge, UsageLedger, local_answer, local_sources, make_registry, run_qfit
+from blinkspace.assistant_qfit import Knowledge, UsageLedger, _needs_view_command, local_answer, local_sources, make_registry, run_qfit
 
 
 def client():
@@ -93,6 +93,12 @@ def test_only_local_knowledge_and_validated_ui_proposals_are_registered():
 
 def completed(text):
     return {'status': 'completed', 'output': [{'type': 'message', 'content': [{'type': 'output_text', 'text': text}]}]}
+
+def test_view_requests_offer_a_command_without_redirecting_science_questions():
+    assert _needs_view_command('Use the nearby-stars perspective centered on Proxima Centauri')
+    assert _needs_view_command('Proxima Centauri’yi gökyüzünde göster')
+    assert not _needs_view_command('Show me why Barnard appears to be moving')
+    assert not _needs_view_command('Why does the Milky Way look like a band?')
 
 
 def test_original_openai_provider_has_privacy_budget_and_priority_guards(tmp_path, monkeypatch, caplog):

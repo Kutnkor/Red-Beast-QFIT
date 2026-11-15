@@ -352,6 +352,8 @@ def instant(body) -> dict | None:
     q, tr = plain(body.message), body.context.get("ui_language") == "tr"
     if not q:
         return None
+    if re.search(r"\b(?:and then|then|after that|ardindan|sonra)\b", q):
+        return None
     named = find_star(q)
     selected = body.context.get("target") or {}
     current = star_by_id(selected.get("id")) if isinstance(selected, dict) else None

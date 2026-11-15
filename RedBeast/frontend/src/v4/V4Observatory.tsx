@@ -4,12 +4,13 @@ import { useCallback, useEffect, useMemo, useRef, useState, type ReactNode } fro
 import { createPortal } from 'react-dom'
 import { ColorMagnitude, type Props } from '../ui/observatory/Observatory'
 import { useI18n } from '../i18n'
-import { setAppState } from '../lib/store'
+import { getAppState, setAppState } from '../lib/store'
 import { buildAssistantContext } from '../lib/assistantContext'
 import { COMMANDS, runCommand, validateArgs } from '../lib/commands'
 import { QFitAssistant } from '../qfit/QFitAssistant'
 import { createLocalAssistant } from '../qfit/localIntent'
-import type { Proposal } from '../qfit/api'
+import { createActionAssistant, type ActionExecutor } from '../qfit/actions'
+import { api } from '../lib/api'
 import { uniqueCatalogueStars } from '../three/types'
 import { parseSkyQuery, angularSeparation, skyCoordinates } from '../three/science/astrometry'
 import { evolutionAt, evolutionTrack } from '../three/science/evolution'
@@ -99,11 +100,40 @@ export function V4Observatory(props: Props) {
     return () => { window.removeEventListener('blinkspace:open-search', open); window.removeEventListener('keydown', keys) }
   }, [])
 
-  const execute = async (p: Proposal) => {
+  const execute: ActionExecutor = async (p, signal) => {
+    signal?.throwIfAborted()
     const spec = COMMANDS.find(c => c.name === p.name); if (!spec || !validateArgs(spec.schema, p.args)) return { ok: false }
-    if (p.name === 'select_target') { props.select(p.args.target_id as string); setEducation(false); return { ok: true } }
-    return runCommand(p.name, p.args, { source: 'assistant', confirmed: true, frameCount: props.sequence?.frames.length, openSources: props.sources, saveView: props.save, startSearch: request => { window.dispatchEvent(new CustomEvent('blinkspace:search', { detail: request })) }, explainValue: () => { setMeasure(true); return L('Kaynaklı ölçümler', 'Source-backed measurements') } })
+    const current = latest.current
+    if (p.name === 'select_target' || p.name === 'open_target') {
+      const id = p.args.target_id
+      if (!current.targets.some(target => target.id === id) && !current.catalogue?.targets.some(star => star.id === id)
+        && !current.catalogue?.stars.some(star => star.id === id)) return { ok: false }
+    }
+    const getFrameCount = async () => {
+      const { targetId, sequenceId } = getAppState()
+      const loaded = current.sequence && (sequenceId ? current.sequence.id === sequenceId
+        : targetId !== null && current.sequence.meta.target_id === targetId) ? current.sequence : null
+      const id = sequenceId ?? current.targets.find(target => target.id === targetId)?.ready_sequence_id
+      const sequence = loaded ?? (id ? await api.sequence(id, signal) : null)
+      signal?.throwIfAborted()
+      const now = getAppState()
+      if (now.targetId !== targetId || (now.sequenceId && now.sequenceId !== sequence?.id)) throw new Error('Observation target changed')
+      if (p.args.view === 'trackstack' && !sequence?.frames.some(frame => frame.target_predicted)) throw new Error('No predicted track for this sequence')
+      return sequence?.frames.length ?? 0
+    }
+    const ctx = { source: 'assistant' as const, confirmed: true, getFrameCount, selectTarget: current.select, openSearch: () => setSearch(true),
+      openSources: current.sources, saveView: current.save, startSearch: (request: Parameters<typeof api.startSearch>[0]) => {
+        window.dispatchEvent(new CustomEvent('blinkspace:search', { detail: request }))
+      }, explainValue: () => { setMeasure(true); return L('Kaynaklı ölçümler', 'Source-backed measurements') } }
+    // These older proposals should open the actual observation view even when issued from another page.
+    if (p.name === 'set_view_mode') return runCommand('show_observations', { view: p.args.view, pair: 'current' }, ctx)
+    if (p.name === 'set_stage_view') return runCommand('show_observations', { view: p.args.view === 'timestack' ? 'timestack' : 'single', pair: 'current' }, ctx)
+    return runCommand(p.name, p.args, ctx)
   }
+  const actions = createActionAssistant(local, () => {
+    const { targets, catalogue } = latest.current
+    return [...targets, ...(catalogue ? uniqueCatalogueStars(catalogue).filter(star => !targets.some(target => target.id === star.id)) : [])]
+  }, execute)
   const track = evolutionTrack(state.evolutionTrack)
   const context = buildAssistantContext(state, { target: isEducation ? null : props.star, sequence: isEducation ? null : props.sequence, marks: props.marks })
   const stars = props.catalogue ? uniqueCatalogueStars(props.catalogue) : [], coordinates = parseSkyQuery(query)
@@ -162,7 +192,7 @@ export function V4Observatory(props: Props) {
     {measure && <Panel title={L('Kaynaklı ölçümler', 'Source-backed measurements')} closeLabel={L('Kapat', 'Close')} onClose={() => setMeasure(false)}>{props.measurements}</Panel>}
     <Opening lang={lang} />
     {hint && <RobinHint lang={lang} page={hint} onTour={() => { setHint(null); bridge.current?.guide?.() }} onClose={() => setHint(null)} />}
-    <QFitAssistant lang={lang} remember local={local} context={() => ({ ...context, ...(isEducation ? { view: 'illustrative_education', education_sample: sample(), model_warning: 'The visible V4 scenario is illustrative, not observations or a fitted target evolution. Never describe its values as measurements of the selected catalogue target.' } : evolving ? { view: 'published_comparison_model', model_source: track.source, model_url: track.url, model_sample: evolutionAt(track, state.evolutionProgress), model_warning: 'Published comparison track; not the measured age or fitted future of the selected target. No extrapolation beyond the source table.' } : {}) })} onCommand={execute} />
+    <QFitAssistant lang={lang} remember local={actions} autoActions context={() => ({ ...context, ...(isEducation ? { view: 'illustrative_education', education_sample: sample(), model_warning: 'The visible V4 scenario is illustrative, not observations or a fitted target evolution. Never describe its values as measurements of the selected catalogue target.' } : evolving ? { view: 'published_comparison_model', model_source: track.source, model_url: track.url, model_sample: evolutionAt(track, state.evolutionProgress), model_warning: 'Published comparison track; not the measured age or fitted future of the selected target. No extrapolation beyond the source table.' } : {}) })} onCommand={execute} />
   </div>
 }
 

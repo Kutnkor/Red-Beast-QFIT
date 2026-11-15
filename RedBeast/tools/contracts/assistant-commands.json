@@ -258,5 +258,52 @@
       "field"
     ],
     "additionalProperties": false
+  },
+  "show_observations": {
+    "type": "object",
+    "properties": {
+      "view": {
+        "type": "string",
+        "enum": [
+          "single",
+          "side",
+          "diff",
+          "stack",
+          "trackstack",
+          "timestack",
+          "blink"
+        ]
+      },
+      "pair": {
+        "type": "string",
+        "enum": [
+          "current",
+          "first_last"
+        ]
+      }
+    },
+    "required": [
+      "view",
+      "pair"
+    ],
+    "additionalProperties": false
+  },
+  "set_playback": {
+    "type": "object",
+    "properties": {
+      "playing": {
+        "type": "boolean"
+      }
+    },
+    "required": [
+      "playing"
+    ],
+    "additionalProperties": false
+  },
+  "open_search": {
+    "type": "object",
+    "properties": {},
+    "required": [],
+    "additionalProperties": false
   }
 }

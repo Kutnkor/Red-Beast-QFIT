@@ -106,7 +106,8 @@ and local source cards continue. The shipped default remains off.
 Only local knowledge and validated command proposals are registered. Generic internet, filesystem,
 shell/code and upstream candidate-write services are not mounted. Source passages are data under
 BlinkSpace's system rules, with QFIT persona subordinate. The UI never executes raw QFIT actions.
-All proposals require a user click; start_search/save_view buttons explicitly say confirmation.
+Q-FIT applies reversible view changes in order for direct action requests. Archive submissions
+and downloads retain their confirmation buttons. Requests for explanations do not execute proposals.
 Client results are sent as bounded objects on the next turn. Source links accept only HTTP(S).
 
 The provider uses the [OpenAI Responses API](https://developers.openai.com/api/reference/resources/responses/methods/create)

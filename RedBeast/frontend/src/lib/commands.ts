@@ -9,6 +9,9 @@ export interface CommandContext {
   source?: 'user' | 'assistant' | 'url'
   confirmed?: boolean
   frameCount?: number
+  getFrameCount?: () => Promise<number>
+  selectTarget?: (id: string) => void
+  openSearch?: () => void
   openSources?: () => void
   startSearch?: (request: SearchRequest) => void | Promise<void>
   saveView?: () => void | Promise<void>
@@ -47,12 +50,18 @@ export function openTarget(id: string, page: TargetPage, select: (id: string) =>
   if (page === 'sky') window.setTimeout(() => window.dispatchEvent(new CustomEvent('blinkspace:camera', { detail: { action: 'focus' } })), 120)
 }
 
+const observationViews = ['single', 'side', 'diff', 'stack', 'trackstack', 'timestack', 'blink'] as const
+async function observationCount(ctx: CommandContext) {
+  return ctx.getFrameCount ? ctx.getFrameCount() : (ctx.frameCount ?? 0)
+}
+
 export const COMMANDS: CommandSpec[] = [
-  spec('select_target', 'Select a catalogue target', 'Katalog hedefini seç', { target_id: string() }, a => selectTarget(a.target_id as string)),
+  spec('select_target', 'Select a catalogue target', 'Katalog hedefini seç', { target_id: string() }, (a, ctx) => (ctx.selectTarget ?? selectTarget)(a.target_id as string)),
   spec('set_mode', 'Change the scene', 'Sahneyi değiştir', { mode: string(['star', 'neighbors', 'observations']) }, a => setAppState({ mode: a.mode as AppMode, playing: false, evolutionPlaying: false })),
   spec('set_year', 'Set the model year', 'Model yılını ayarla', { year: number(2000, 2100) }, a => setAppState({ year: a.year as number })),
-  spec('set_frame', 'Select an observation frame', 'Gözlem karesini seç', { index: number(0, 10000, true) }, (a, ctx) => {
-    if (ctx.frameCount !== undefined && (a.index as number) >= ctx.frameCount) throw new Error('Frame index outside sequence')
+  spec('set_frame', 'Select an observation frame', 'Gözlem karesini seç', { index: number(0, 10000, true) }, async (a, ctx) => {
+    const count = ctx.getFrameCount ? await ctx.getFrameCount() : ctx.frameCount
+    if (count !== undefined && (a.index as number) >= count) throw new Error('Frame index outside sequence')
     setAppState({ frameIndex: a.index as number })
   }),
   spec('set_view_mode', 'Change image comparison', 'Görüntü karşılaştırmasını değiştir', { view: string(['single', 'side', 'diff', 'stack', 'trackstack']) }, a => setAppState({ viewMode: a.view as AppState['viewMode'], playing: false })),
@@ -68,10 +77,37 @@ export const COMMANDS: CommandSpec[] = [
     if (!ctx.saveView) throw new Error('Download is unavailable')
     await ctx.saveView()
   }, true),
-  spec('open_target', 'Go to a star', 'Bir yıldıza git', { target_id: string(), page: string(TARGET_PAGES) }, a => openTarget(a.target_id as string, a.page as TargetPage)),
+  spec('open_target', 'Go to a star', 'Bir yıldıza git', { target_id: string(), page: string(TARGET_PAGES) }, (a, ctx) => openTarget(a.target_id as string, a.page as TargetPage, ctx.selectTarget)),
   spec('set_stellar_mode', 'Choose the star view', 'Yıldız görünümünü seç', { mode: string(['surface', 'evolution', 'education']) }, a => setAppState({ mode: 'star', stellarMode: a.mode as AppState['stellarMode'], playing: false, evolutionPlaying: false })),
   spec('set_sky_scale', 'Choose the sky scale', 'Gökyüzü ölçeğini seç', { scale: string(['galaxy', 'local']) }, a => setAppState({ mode: 'neighbors', skyScale: a.scale as AppState['skyScale'], playing: false })),
   spec('explain_value', 'Explain a value and its source', 'Bir değeri ve kaynağını açıkla', { field: string(['distance', 'parallax', 'proper_motion', 'radial_velocity', 'teff', 'position', 'surface']) }, (a, ctx) => ctx.explainValue?.(a.field as string) ?? 'Source information is unavailable.'),
+  spec('show_observations', 'Open and compare observations', 'Gözlemleri aç ve karşılaştır',
+    { view: string(observationViews), pair: string(['current', 'first_last']) }, async (a, ctx) => {
+      const count = await observationCount(ctx)
+      if (!count || ((a.pair === 'first_last' || a.view !== 'single') && count < 2)) throw new Error('Not enough observation frames')
+      const state = getAppState()
+      const viewMode = a.view === 'timestack' || a.view === 'blink' ? 'single' : a.view as AppState['viewMode']
+      const comparing = viewMode === 'side' || viewMode === 'diff'
+      const indices = a.pair === 'first_last' ? { refIndex: 0, frameIndex: count - 1 }
+        : comparing && state.frameIndex === state.refIndex ? { frameIndex: (state.refIndex + 1) % count } : {}
+      setAppState({ mode: 'observations', stageView: a.view === 'timestack' ? 'timestack' : 'frames', viewMode, playing: a.view === 'blink', ...indices })
+    }),
+  spec('set_playback', 'Play or pause the current view', 'Görünümü oynat veya duraklat', { playing: { type: 'boolean' } }, async (a, ctx) => {
+    const state = getAppState(), playing = a.playing === true
+    if (!playing) { setAppState({ playing: false, evolutionPlaying: false }); return }
+    if (state.mode === 'star' && state.stellarMode === 'evolution') {
+      setAppState({ evolutionPlaying: true, ...(state.evolutionProgress >= 1 ? { evolutionProgress: 0 } : {}) })
+    } else if (state.mode === 'observations') {
+      if (await observationCount(ctx) < 2) throw new Error('Not enough observation frames')
+      setAppState({ stageView: 'frames', viewMode: 'single', playing: true })
+    } else if (state.mode === 'star' && state.stellarMode === 'education') {
+      throw new Error('Use the education model’s playback control')
+    } else setAppState({ playing: true, ...(state.year >= 2100 ? { year: 2000 } : {}) })
+  }),
+  spec('open_search', 'Open the star and coordinate search', 'Yıldız ve koordinat aramasını aç', {}, (_, ctx) => {
+    if (!ctx.openSearch) throw new Error('Search is unavailable')
+    ctx.openSearch()
+  }),
 ]
 
 export function validateArgs(schema: JSONSchema, args: unknown): args is Record<string, unknown> {

@@ -28,6 +28,9 @@ PROPERTIES = {
     "set_stellar_mode": {"mode": text("surface", "evolution", "education")},
     "set_sky_scale": {"scale": text("galaxy", "local")},
     "explain_value": {"field": text("distance", "parallax", "proper_motion", "radial_velocity", "teff", "position", "surface")},
+    "show_observations": {"view": text("single", "side", "diff", "stack", "trackstack", "timestack", "blink"), "pair": text("current", "first_last")},
+    "set_playback": {"playing": {"type": "boolean"}},
+    "open_search": {},
 }
 CONFIRM = {"start_search", "save_view"}
 # Commands that name a star: the id is checked against the loaded catalogue before a proposal is made.

@@ -215,8 +215,7 @@ def make_registry(knowledge, proposals, on_proposal=None):
         proposals.append(proposal)
         if on_proposal:
             on_proposal(proposal)
-        # Commands without a confirmation gate are applied by the browser on arrival; the others wait for a click.
-        return {"proposed": True, "executed": False, "applied_on_arrival": a.name not in CONFIRM, **proposal}
+        return {"proposed": True, "executed": False, **proposal}
 
     def present_proposal(result):
         return {"intent": "ui_proposal", "message": "Sent to the browser; not confirmed as executed.", "object": None,
@@ -237,9 +236,24 @@ def app_directory() -> str:
             "Pages of a star for open_target: star (its own page: the 3D star with its catalogue values around it; use this for 'take me to X'), sky (its place around the Sun), "
             "observations (its real SPHEREx frames), evolution (a published comparison table). set_sky_scale galaxy is the Milky Way view and local is the Sun's neighbourhood. "
             "set_stellar_mode education is the illustrative mass-and-time model. The context field page names what is on screen now. "
-            "When the user asks to go somewhere or change the view, call propose_ui_command first and keep the explanation to one or two sentences. "
-            "Navigation and view proposals are applied by the browser as soon as they arrive; only start_search and save_view wait for the user's confirmation click. "
+            "Use show_observations for comparison views and blink. For first and last frames set pair to first_last. Set the target with open_target first if the user names one. "
+            "Use set_playback for play or pause, toggle_layer for overlays, and open_search to open the search panel without submitting a job. "
+            "For example, to center the nearby-star view on Proxima Centauri, call propose_ui_command with name open_target and args {target_id: Proxima Centauri, page: sky}. "
+            "When the user explicitly asks for a supported app action, call propose_ui_command instead of telling the user to use the controls. For several actions, call it once per step in the requested order. Keep the reply brief. Explanatory questions never require UI commands. "
+            "The browser applies reversible proposals in order for direct action requests. start_search and save_view wait for a confirmation click. "
             "A client-reported command result in a later turn is the only evidence that a command ran.\n")
+
+
+def _needs_view_command(message: str) -> bool:
+    from .assistant_intent import EXPLAIN, find_star, plain
+
+    text = plain(message)
+    direct = re.match(r"^(?:(?:please|could you|can you|would you) )*(?:use|show|open|switch|focus|center|centre|take|navigate|set|display|compare|start|pause|resume)\b", text)
+    direct_tr = re.search(r"\b(?:goster|ac|gotur|odaklan|ayarla|karsilastir|baslat|duraklat)[.!?]*$", text)
+    if not (direct or direct_tr) or re.search(EXPLAIN, text):
+        return False
+    view = r"\b(?:views?|perspective|nearby.stars|overlays?|layers?|time stack|milky way|samanyolu|gorunum\w*|katman\w*)\b"
+    return bool(re.search(view, text) or find_star(text))
 
 
 async def run_qfit(body, *, transport=None, ledger=None, on_proposal=None):
@@ -255,11 +269,21 @@ async def run_qfit(body, *, transport=None, ledger=None, on_proposal=None):
     system += "\nUI proposals MUST use the available propose_ui_command function with {name: command_name, args: command_arguments}. Names such as set_year are not standalone functions. Writing a command in prose or JSON text does not create an interface proposal. Call the proposal function for an allowed UI-change request before explaining it. This function never executes the action itself; the browser validates and applies it, so do not ask permission before merely proposing it.\n"
 
     class BoundedClient(httpx.AsyncClient):
+        first_call = True
+
         async def post(self, url, **kwargs):
             limit = bounded_env("BLINKSPACE_ASSISTANT_DAILY_LIMIT", 100, 0, 10000)
             if not ledger.reserve(limit):
                 raise RateLimitedError("The daily model-request budget has been reached.")
-            kwargs["json"].update(store=False, max_output_tokens=bounded_env("QFIT_MAX_OUTPUT_TOKENS", 1200, 128, 4096))
+            payload = kwargs["json"]
+            payload.update(store=False, max_output_tokens=bounded_env("QFIT_MAX_OUTPUT_TOKENS", 1200, 128, 4096))
+            for tool in payload.get("tools", []):
+                if tool["name"] == "propose_ui_command":
+                    # The per-command validator checks the variable args object in both API and browser.
+                    tool["strict"] = False
+            if self.first_call and _needs_view_command(body.message):
+                payload["tool_choice"] = {"type": "function", "name": "propose_ui_command"}
+            self.first_call = False
             response = await super().post(url, **kwargs)
             if response.is_success and response.json().get("status") != "completed":
                 raise UpstreamError("The provider response is incomplete.")

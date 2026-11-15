@@ -10,10 +10,12 @@ import type { MotionStar, StellarProfile } from '../three/types'
 import { openTarget, type TargetPage } from '../lib/commands'
 import { askedFields, EXPLAIN, factRows, POINTS, type FactRow } from './facts'
 import { findStar, plain } from './match'
+import type { QFitResponse } from './api'
 
 export { plain }
 export interface Chip { label: string; text: string }
-export interface LocalReply { message: string; run?: () => void; pin?: { label: string; text: string }; facts?: FactRow[]; note?: string; chips?: Chip[] }
+export interface LocalActionResult { message: string; response?: QFitResponse; failed?: boolean }
+export interface LocalReply { message: string; run?: (signal?: AbortSignal) => void | LocalActionResult | Promise<void | LocalActionResult>; pin?: { label: string; text: string }; facts?: FactRow[]; note?: string; chips?: Chip[] }
 export interface LocalDeps {
   /** The ready targets. */
   targets: () => { id: string; name: string }[]
@@ -55,8 +57,8 @@ export function createLocalAssistant(deps: LocalDeps) {
     const reply = (label: [string, string], message: [string, string], run: () => void, chips?: Chip[]): LocalReply => ({ message: say(...message), run, pin: { label: say(...label), text }, chips })
 
     if (/^(?:ne yapabilir\w*|neler yapabilir\w*|what can you do|yardim|help|komutlar|commands)[.!?]*$/.test(q)) return { message: say(
-      'Seni uygulamada gezdirebilir, katalogdaki değerleri anında söyleyebilirim. Şunları yazabilirsin:\n• Barnard’a götür (yazım hatası olsa da bulurum)\n• Ne kadar uzak? · Sıcaklığı kaç? · Bilgi ver\n• Barnard’ın karelerini göster, yan yana karşılaştır, farkı göster\n• Güneş’e götür, Samanyolu’nu göster\n• Yaşam evrimini göster, eğitim modelini aç\n• 2080 yılına git\n• Kaynakları aç, bu sayfayı gezdir\nBir komutu çalıştırdıktan sonra “Kısayol yap” ile sabitleyebilirsin. Açıklama isteyen soruları kaynak kartlarıyla yanıtlarım.',
-      'I can drive the app for you and read out catalogue values at once. Try:\n• Take me to Barnard (I will find it even if misspelt)\n• How far is it? · How hot is it? · Tell me about it\n• Show Barnard’s frames, compare side by side, show the difference\n• Take me to the Sun, show the Milky Way\n• Show the life cycle, open the education model\n• Go to the year 2080\n• Open sources, give me a tour of this page\nAfter a command runs you can pin it with “Make shortcut”. Questions that need an explanation get source cards.'),
+      'Seni uygulamada gezdirebilir, katalogdaki değerleri anında söyleyebilirim. Şunları yazabilirsin:\n• Barnard’a götür (yazım hatası olsa da bulurum)\n• Ne kadar uzak? · Sıcaklığı kaç? · Bilgi ver\n• Barnard’ın kanıtını göster\n• Epsilon Indi B’nin gözlemlerini aç, ilk ve son kareyi yan yana koy\n• Güneş’e götür, Samanyolu’nu göster\n• Yaşam evrimini göster, eğitim modelini aç\n• 2080 yılına git\n• Kaynakları aç, bu sayfayı gezdir\nBir komutu çalıştırdıktan sonra “Kısayol yap” ile sabitleyebilirsin. Açıklama isteyen soruları kaynak kartlarıyla yanıtlarım.',
+      'I can drive the app for you and read out catalogue values at once. Try:\n• Take me to Barnard (I will find it even if misspelt)\n• How far is it? · How hot is it? · Tell me about it\n• Show me the evidence for Barnard’s Star\n• Open Epsilon Indi B’s observations, then compare the first and last frames\n• Take me to the Sun, show the Milky Way\n• Show the life cycle, open the education model\n• Go to the year 2080\n• Open sources, give me a tour of this page\nAfter a command runs you can pin it with “Make shortcut”. Questions that need an explanation get source cards.'),
       chips: [{ label: say('Barnard’a götür', 'Take me to Barnard'), text: say('Barnard’a götür', 'Take me to Barnard') }, { label: say('Samanyolu', 'Milky Way'), text: say('Samanyolu’nu göster', 'Show the Milky Way') }] }
     const state = getAppState(), presets = deps.targets(), catalogue = deps.stars?.() ?? []
     if (has('neredeyim', 'where am i', 'hangi sayfa', 'which page')) { const name = presets.find(t => t.id === state.targetId)?.name ?? catalogue.find(t => t.id === state.targetId)?.name; return { message: `${PAGE[lang](state)}${name ? say(`. Seçili hedef: ${name}.`, `. Selected target: ${name}.`) : '.'}` } }
