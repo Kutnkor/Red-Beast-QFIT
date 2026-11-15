@@ -52,7 +52,12 @@ export function QFitAssistant({ lang, context, onCommand, local, remember }: { l
     window.clearTimeout(timer.current); setMotion(reduced ? null : value ? 'opening' : 'closing'); setOpenState(value)
     timer.current = window.setTimeout(() => { setMotion(null); if (value) inputRef.current?.focus(); else mascotRef.current?.focus() }, reduced ? 0 : 780)
   }, [])
-  useEffect(() => { const a = new AbortController(); getAssistantStatus(a.signal).then(setStatus).catch(() => undefined); return () => a.abort() }, [open])
+  useEffect(() => {
+    if (!open) return
+    const controller = new AbortController()
+    getAssistantStatus(controller.signal).then(setStatus).catch(() => undefined)
+    return () => controller.abort()
+  }, [open])
   useEffect(() => () => { abort.current?.abort(); window.clearTimeout(timer.current) }, [])
   useEffect(() => { panelRef.current?.querySelectorAll<HTMLElement>('.qf-head, .qf-log, .qf-form, .qf-status, .qf-feedback').forEach(el => { el.inert = !open }) }, [open, busy, messages, error])
   useEffect(() => { logRef.current?.scrollTo?.({ top: logRef.current.scrollHeight }) }, [messages, busy])
@@ -69,21 +74,23 @@ export function QFitAssistant({ lang, context, onCommand, local, remember }: { l
     setMessages(m => [...m, { id: ++counter.current, who: 'user', text }])
     const hit = local?.(text, lang)
     if (hit) {
-      // carried out here, in the app: no request leaves the page and no science claim is made
+      // Navigation and catalogue lookups run locally.
       hit.run?.()
-      setMessages(m => [...m, { id: ++counter.current, who: 'bot', text: hit.message, pin: hit.run ? hit.pin : undefined }])
-      history.current = [...history.current, { role: 'user' as const, content: text }, { role: 'assistant' as const, content: hit.message }].slice(-10)
+      const body = [hit.message, ...(hit.facts ?? []).map(f => `**${f.label}:** ${f.value}${f.note ? ` — ${f.note}` : ''}`), ...(hit.note ? [hit.note] : [])].join('\n')
+      setMessages(m => [...m, { id: ++counter.current, who: 'bot', text: body, pin: hit.run ? hit.pin : undefined }])
+      history.current = [...history.current, { role: 'user' as const, content: text }, { role: 'assistant' as const, content: body }].slice(-10)
       setState(hit.run ? 'found' : 'idle'); setBusy(false); abort.current = null
       return
     }
     try {
-      const response = await askQFit(text, history.current, typeof context === 'function' ? context() : context, controller.signal, pendingResults.current)
+      const response = await askQFit(text, history.current, typeof context === 'function' ? context() : context, controller.signal, pendingResults.current, status ?? undefined)
       pendingResults.current = []
       controller.signal.throwIfAborted()
       const id = ++counter.current, full = response.message
       setMessages(m => [...m, { id, who: 'bot', text: '', response }]); setState('speaking')
-      const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches, step = Math.max(12, Math.ceil(full.length / 60))
-      for (let n = reduced ? full.length : step; n < full.length; n += step) {
+      const instant = response.message_source === 'system' || window.matchMedia('(prefers-reduced-motion: reduce)').matches
+      const step = Math.max(12, Math.ceil(full.length / 60))
+      for (let n = instant ? full.length : step; n < full.length; n += step) {
         controller.signal.throwIfAborted()
         setMessages(m => m.map(row => row.id === id ? { ...row, text: full.slice(0, n) } : row))
         await new Promise(resolve => window.setTimeout(resolve, 20))

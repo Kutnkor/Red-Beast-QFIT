@@ -53,12 +53,18 @@ export async function readStream(response: Response, signal?: AbortSignal): Prom
     return result ? { ...result, commands } : { success: true, assistant: 'Q-FIT', message, intent: 'mock', message_source: 'system', data: {}, sources, uncertainty: [], commands }
   } finally { await reader.cancel().catch(() => undefined); reader.releaseLock() }
 }
-export async function askQFit(message: string, history: ChatTurn[], context: ChatContext, signal?: AbortSignal, toolResults: ToolResult[] = []): Promise<QFitResponse> {
-  const status = await getAssistantStatus(signal)
-  const response = await fetch(status.enabled ? '/api/assistant/chat' : '/api/assistant/knowledge', {
+export async function askQFit(message: string, history: ChatTurn[], context: ChatContext, signal?: AbortSignal, toolResults: ToolResult[] = [], knownStatus?: AssistantStatus): Promise<QFitResponse> {
+  const status = knownStatus ?? await getAssistantStatus(signal)
+  const options = {
     method: 'POST', headers: { 'Content-Type': 'application/json' }, signal,
     body: JSON.stringify({ message, history: history.slice(-10).map(h => ({ ...h, content: h.content.slice(0, 4000) })), context, tool_results: toolResults.slice(-10) }),
-  })
+  }
+  if (status.enabled) {
+    const response = await fetch('/api/assistant/chat', options)
+    if (response.ok) return readStream(response, signal)
+    if (response.status !== 503) throw new Error(`HTTP ${response.status}`)
+  }
+  const response = await fetch('/api/assistant/knowledge', options)
   if (!response.ok) throw new Error(`HTTP ${response.status}`)
-  return status.enabled ? readStream(response, signal) : response.json()
+  return response.json()
 }

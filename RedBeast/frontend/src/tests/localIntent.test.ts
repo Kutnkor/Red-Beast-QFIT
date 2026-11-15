@@ -49,5 +49,23 @@ describe('the robin’s own navigation', () => {
     expect(local('Güneş kaç yaşında?', 'tr')).toBeNull()
     expect(local('Why does Barnard’s Star move so fast?', 'en')).toBeNull()
     expect(local('Bu sayı nereden geliyor', 'tr')).toBeNull()
+    expect(local('What can I observe in a galaxy', 'en')).toBeNull()
+    expect(local('What is the source of these images', 'en')).toBeNull()
+  })
+
+  it("opens Barnard's star page from observations with a polite, misspelled command", () => {
+    const d = deps(), local = createLocalAssistant(d)
+    setAppState({ targetId: 'r-dra', mode: 'observations' })
+    local('Could you take me to Bernard?', 'en')?.run?.()
+    expect(d.select).toHaveBeenCalledWith('barnard')
+    expect(getAppState()).toMatchObject({ mode: 'star', stellarMode: 'surface' })
+  })
+
+  it('opens a named target in the requested comparison view', () => {
+    const local = createLocalAssistant(deps())
+    local("Compare Barnard's frames side by side", 'en')?.run?.()
+    expect(getAppState()).toMatchObject({ mode: 'observations', viewMode: 'side' })
+    local('Blink', 'en')?.run?.()
+    expect(getAppState()).toMatchObject({ mode: 'observations', viewMode: 'single', playing: true })
   })
 })

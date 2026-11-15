@@ -148,7 +148,7 @@ def test_sse_completion_and_fallback_are_truthfully_labelled(monkeypatch):
     from blinkspace import assistant_qfit as q
     monkeypatch.setenv('BLINKSPACE_ASSISTANT_PROVIDER', 'qfit')
     monkeypatch.setenv('OPENAI_API_KEY', 'fixture-not-a-key')
-    async def fake(body):
+    async def fake(body, **_):
         response = {**local_answer(body), 'message_source': 'ai_generated', 'message': 'Fixture answer'}
         return response, [{'tool_use_id': 'p1', 'name': 'save_view', 'args': {}, 'requires_confirmation': True}], []
     monkeypatch.setattr(q, 'run_qfit', fake)
@@ -156,9 +156,10 @@ def test_sse_completion_and_fallback_are_truthfully_labelled(monkeypatch):
         r = c.post('/api/assistant/chat', json={'message': 'test'})
         assert r.status_code == 200
         names = [b.splitlines()[0][7:] for b in r.text.strip().split('\n\n')]
-        assert names == ['text', 'command', 'sources', 'done']
+        # commands lead, so the page can move while the explanation is still arriving
+        assert names == ['command', 'text', 'sources', 'done']
         assert '"requires_confirmation":true' in r.text
-        async def fail(_):
+        async def fail(_, **__):
             raise RuntimeError('PRIVATE_FAILURE')
         monkeypatch.setattr(q, 'run_qfit', fail)
         r = c.post('/api/assistant/chat', json={'message': 'test'})

@@ -183,6 +183,61 @@
     "required": [],
     "additionalProperties": false
   },
+  "open_target": {
+    "type": "object",
+    "properties": {
+      "target_id": {
+        "type": "string"
+      },
+      "page": {
+        "type": "string",
+        "enum": [
+          "star",
+          "sky",
+          "observations",
+          "evolution"
+        ]
+      }
+    },
+    "required": [
+      "target_id",
+      "page"
+    ],
+    "additionalProperties": false
+  },
+  "set_stellar_mode": {
+    "type": "object",
+    "properties": {
+      "mode": {
+        "type": "string",
+        "enum": [
+          "surface",
+          "evolution",
+          "education"
+        ]
+      }
+    },
+    "required": [
+      "mode"
+    ],
+    "additionalProperties": false
+  },
+  "set_sky_scale": {
+    "type": "object",
+    "properties": {
+      "scale": {
+        "type": "string",
+        "enum": [
+          "galaxy",
+          "local"
+        ]
+      }
+    },
+    "required": [
+      "scale"
+    ],
+    "additionalProperties": false
+  },
   "explain_value": {
     "type": "object",
     "properties": {

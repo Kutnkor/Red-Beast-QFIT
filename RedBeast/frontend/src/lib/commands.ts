@@ -28,8 +28,27 @@ function spec(name: string, en: string, tr: string, properties: Record<string, P
     async run(args, ctx) { const message = await action(args, ctx); return { ok: true, ...(message ? { message } : {}) } },
   }
 }
+const selectTarget = (id: string) => setAppState({ targetId: id, evolutionTrack: suggestedTrack(id), evolutionProgress: 0, sequenceId: null, frameIndex: 0, refIndex: 0, playing: false, evolutionPlaying: false })
+
+/** A star's own pages. "star" is its menu: the 3D star with its catalogue values around it. */
+export type TargetPage = 'star' | 'sky' | 'observations' | 'evolution'
+export const TARGET_PAGES = ['star', 'sky', 'observations', 'evolution'] as const
+const PAGE_STATE: Record<TargetPage, Partial<AppState>> = {
+  star: { mode: 'star', stellarMode: 'surface', sceneFraming: 'detail' },
+  sky: { mode: 'neighbors', skyScale: 'local' },
+  observations: { mode: 'observations', stageView: 'frames', viewMode: 'single' },
+  evolution: { mode: 'star', stellarMode: 'evolution' },
+}
+/** Select a star and land on one of its pages in one step, so the scene makes a single transition. */
+export function openTarget(id: string, page: TargetPage, select: (id: string) => void = selectTarget): void {
+  if (getAppState().targetId !== id) select(id)
+  setAppState({ ...PAGE_STATE[page], playing: false, evolutionPlaying: false })
+  // the sky scene needs a moment to exist before it can turn towards the star
+  if (page === 'sky') window.setTimeout(() => window.dispatchEvent(new CustomEvent('blinkspace:camera', { detail: { action: 'focus' } })), 120)
+}
+
 export const COMMANDS: CommandSpec[] = [
-  spec('select_target', 'Select a catalogue target', 'Katalog hedefini seç', { target_id: string() }, a => setAppState({ targetId: a.target_id as string, evolutionTrack:suggestedTrack(a.target_id as string), evolutionProgress:0, sequenceId: null, frameIndex: 0, refIndex: 0, playing: false, evolutionPlaying: false })),
+  spec('select_target', 'Select a catalogue target', 'Katalog hedefini seç', { target_id: string() }, a => selectTarget(a.target_id as string)),
   spec('set_mode', 'Change the scene', 'Sahneyi değiştir', { mode: string(['star', 'neighbors', 'observations']) }, a => setAppState({ mode: a.mode as AppMode, playing: false, evolutionPlaying: false })),
   spec('set_year', 'Set the model year', 'Model yılını ayarla', { year: number(2000, 2100) }, a => setAppState({ year: a.year as number })),
   spec('set_frame', 'Select an observation frame', 'Gözlem karesini seç', { index: number(0, 10000, true) }, (a, ctx) => {
@@ -49,6 +68,9 @@ export const COMMANDS: CommandSpec[] = [
     if (!ctx.saveView) throw new Error('Download is unavailable')
     await ctx.saveView()
   }, true),
+  spec('open_target', 'Go to a star', 'Bir yıldıza git', { target_id: string(), page: string(TARGET_PAGES) }, a => openTarget(a.target_id as string, a.page as TargetPage)),
+  spec('set_stellar_mode', 'Choose the star view', 'Yıldız görünümünü seç', { mode: string(['surface', 'evolution', 'education']) }, a => setAppState({ mode: 'star', stellarMode: a.mode as AppState['stellarMode'], playing: false, evolutionPlaying: false })),
+  spec('set_sky_scale', 'Choose the sky scale', 'Gökyüzü ölçeğini seç', { scale: string(['galaxy', 'local']) }, a => setAppState({ mode: 'neighbors', skyScale: a.scale as AppState['skyScale'], playing: false })),
   spec('explain_value', 'Explain a value and its source', 'Bir değeri ve kaynağını açıkla', { field: string(['distance', 'parallax', 'proper_motion', 'radial_velocity', 'teff', 'position', 'surface']) }, (a, ctx) => ctx.explainValue?.(a.field as string) ?? 'Source information is unavailable.'),
 ]
 

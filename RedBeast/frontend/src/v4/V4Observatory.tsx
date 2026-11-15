@@ -40,6 +40,8 @@ export function V4Observatory(props: Props) {
   // The robin's own abilities: it can move around the app when asked ("take me to the Sun").
   const local = useMemo(() => createLocalAssistant({
     targets: () => latest.current.targets.map(t => ({ id: t.id, name: t.name })), frameCount: () => latest.current.sequence?.frames.length ?? 0,
+    stars: () => latest.current.catalogue ? uniqueCatalogueStars(latest.current.catalogue) : [],
+    profile: id => id === latest.current.state.targetId ? latest.current.profile : undefined, sequence: () => latest.current.sequence,
     select: id => latest.current.select(id), guide: () => bridge.current?.guide?.(), sources: () => latest.current.sources(), setLang,
   }), [setLang])
   // On the first visit to a page the robin says what the page is and offers its tour.

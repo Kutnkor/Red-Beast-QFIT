@@ -1,6 +1,7 @@
 """Disabled-by-default assistant contract, local mock and lazy QFIT adapter."""
 from __future__ import annotations
 
+import asyncio
 import json
 import os
 import threading
@@ -90,7 +91,8 @@ class AssistantProvider(Protocol):
 
 COMMAND_NAMES = (
     "select_target", "set_mode", "set_year", "set_frame", "set_view_mode", "set_stage_view",
-    "toggle_layer", "open_drawer_tab", "open_sources", "start_search", "save_view", "explain_value",
+    "toggle_layer", "open_drawer_tab", "open_sources", "start_search", "save_view",
+    "open_target", "set_stellar_mode", "set_sky_scale", "explain_value",
 )
 
 
@@ -194,8 +196,16 @@ def build_assistant_router(rate_limiter_factory) -> APIRouter:
 
     @router.post("/knowledge")
     def knowledge(body: ChatInput):
-        from .assistant_qfit import local_answer
-        return local_answer(body)
+        """The quickest answer without a model: navigation, catalogue facts, a sourced passage or the target card."""
+        from .assistant_intent import answer
+        return answer(body)
+
+    @router.get("/targets")
+    def targets():
+        """The stars a command may name, so a client can resolve names without loading the whole catalogue."""
+        from .assistant_intent import ALIASES, directory
+        return {"targets": [{"id": item["star"]["id"], "name": item["star"]["name"], "ready": item["star"]["id"] in ALIASES,
+                             "aliases": ALIASES.get(item["star"]["id"], [])} for item in directory()]}
 
     @router.post("/chat")
     async def chat(body: ChatInput, request: Request):
@@ -218,24 +228,49 @@ def build_assistant_router(rate_limiter_factory) -> APIRouter:
                 yield Event("done", {"stop_reason": "error"}).encode()
 
         async def qfit_stream():
+            from .assistant_intent import instant
             from .assistant_qfit import local_answer, run_qfit
+            # Navigation and catalogue look-ups need no model round: answer at once and spend no budget.
+            quick = None if body.tool_results else instant(body)
+            if quick is not None:
+                for proposal in quick["commands"]:
+                    yield Event("command", proposal).encode()
+                yield Event("text", {"delta": quick["message"]}).encode()
+                yield Event("sources", [s.get("id") or s.get("url") for s in quick["sources"]]).encode()
+                yield Event("done", {"stop_reason": "tool_use" if quick["commands"] else "end_turn", "qfit": quick}).encode()
+                return
+            # Proposals leave as soon as the model makes them, so the page moves while the explanation is written.
+            early: asyncio.Queue = asyncio.Queue()
+            task = asyncio.ensure_future(run_qfit(body, on_proposal=early.put_nowait))
+            sent = 0
             try:
-                result, proposals, errors = await run_qfit(body)
+                while not task.done():
+                    waiter = asyncio.ensure_future(early.get())
+                    await asyncio.wait({task, waiter}, return_when=asyncio.FIRST_COMPLETED)
+                    if waiter.done():
+                        sent += 1
+                        yield Event("command", waiter.result()).encode()
+                    else:
+                        waiter.cancel()
+                result, proposals, errors = task.result()
                 for error in errors:
                     yield Event("error", error).encode()
-                yield Event("text", {"delta": result["message"]}).encode()
-                for proposal in proposals:
+                for proposal in proposals[sent:]:
                     yield Event("command", proposal).encode()
+                yield Event("text", {"delta": result["message"]}).encode()
                 yield Event("sources", [s.get("id") or s.get("url") for s in result["sources"]]).encode()
                 yield Event("done", {"stop_reason": "tool_use" if proposals else "end_turn", "qfit": result}).encode()
             except Exception:
-                # CancelledError is a BaseException: browser abort cancels the model request.
                 # No prompts, keys or provider exception text are persisted or returned.
                 yield Event("error", {"code": "qfit_unavailable", "message": "AI is unavailable. Showing local sources."}).encode()
                 result = local_answer(body)
                 yield Event("text", {"delta": result["message"]}).encode()
                 yield Event("sources", [s["id"] for s in result["sources"]]).encode()
                 yield Event("done", {"stop_reason": "error", "qfit": result}).encode()
+            finally:
+                # CancelledError is a BaseException: a browser abort lands here and cancels the model request.
+                if not task.done():
+                    task.cancel()
 
         return StreamingResponse(qfit_stream() if provider == "qfit" else stream(), media_type="text/event-stream", headers={"Cache-Control": "no-store", "X-Accel-Buffering": "no"})
 

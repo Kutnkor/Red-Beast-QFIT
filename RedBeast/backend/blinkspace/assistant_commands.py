@@ -24,9 +24,14 @@ PROPERTIES = {
     "open_sources": {},
     "start_search": {"ra": text(), "dec": text(), "ra_unit": text("auto", "deg", "hour"), "fov_arcmin": number(2, 30)},
     "save_view": {},
+    "open_target": {"target_id": text(), "page": text("star", "sky", "observations", "evolution")},
+    "set_stellar_mode": {"mode": text("surface", "evolution", "education")},
+    "set_sky_scale": {"scale": text("galaxy", "local")},
     "explain_value": {"field": text("distance", "parallax", "proper_motion", "radial_velocity", "teff", "position", "surface")},
 }
 CONFIRM = {"start_search", "save_view"}
+# Commands that name a star: the id is checked against the loaded catalogue before a proposal is made.
+TARGET_COMMANDS = {"select_target", "open_target"}
 
 
 def schemas():

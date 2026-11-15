@@ -84,6 +84,7 @@ and scientific-confirmation claims and requires sources and explicit assumptions
 `MockProvider` retains its original events. The lazy QFIT adapter runs the supplied agent and
 Responses transport asynchronously. The existing `done` payload gains optional `qfit` metadata
 (message origin, source links, caveats and model); all existing fields/event names stay intact.
+Simple catalogue questions and navigation requests can return before any provider call.
 Provider response status must be completed; incomplete responses, errors and timeout emit an
 error then a clearly non-AI local source card and terminal `done`. Cancelling the browser request
 cancels the model operation and closes its HTTP client. Text currently arrives after a complete
@@ -91,8 +92,9 @@ provider turn; the mascot's short reveal animation is not represented as token-l
 
 Additive routes:
 
-- `GET /api/assistant/commands`: the server mirror of the 12 browser command schemas.
-- `POST /api/assistant/knowledge`: the same bounded input, returning a local source card without any model call.
+- `GET /api/assistant/commands`: the server mirror of the browser command schemas, including `open_target`.
+- `GET /api/assistant/targets`: catalogue names and ready target aliases that Q-FIT can resolve.
+- `POST /api/assistant/knowledge`: the same bounded input, returning a navigation proposal, catalogue answer, or local source passage without any model call.
 - `GET /api/assistant/sources/{source_id}`: exact lookup in the public versioned sources, never arbitrary filesystem paths.
 
 Set `BLINKSPACE_ASSISTANT_PROVIDER=qfit` and server-only `OPENAI_API_KEY` to configure QFIT.
