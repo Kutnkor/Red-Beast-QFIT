@@ -43,6 +43,22 @@ RedBeast is our answer: open the page, pick a star, press **Blink**.
 | <img alt="Published stellar model" src=".github/assets/screen-model.jpg" width="420"> | **Follow its life.** Published evolution tracks (MIST, BHAC15, ATMO) for each target, and an education model that runs a star from birth to white dwarf, neutron star or a lensed black hole. |
 | <img alt="Q-FIT assistant" src=".github/assets/screen-qfit.jpg" width="420"> | **Ask the robin.** Q-FIT, the assistant behind our robin, carries out plain requests such as *take me to the Sun* or *compare side by side*, and answers science questions with the sources attached. |
 
+## Inside RedBeast
+
+### Q-FIT evidence walkthrough
+
+Ask *Show me the evidence for Barnard’s Star*. Q-FIT opens the first and last SPHEREx frames side by side, overlays the predicted position, and brings up the measurement report.
+
+![Q-FIT shows Barnard’s first and last SPHEREx frames beside the measurement summary and its sources](.github/assets/screen-qfit-evidence.jpg)
+
+| 3D time stack | Coordinate search |
+|:--|:--|
+| <img alt="RW Aurigae observation frames stacked in 3D by observation date" src=".github/assets/screen-time-stack.jpg" width="420"> | <img alt="Coordinate search with catalogue stars ranked by angular distance" src=".github/assets/screen-coordinate-search.jpg" width="420"> |
+| See how the actual frames line up across observation dates. | Enter right ascension and declination to find nearby catalogue objects. |
+| **Solar neighbourhood** | **Educational black-hole model** |
+| <img alt="Gaia stars in the solar neighbourhood" src=".github/assets/screen-around-the-sun.jpg" width="420"> | <img alt="Illustrative black-hole endpoint in the stellar evolution education model" src=".github/assets/screen-black-hole.jpg" width="420"> |
+| Explore nearby stars from Gaia’s catalogue. | Change the starting mass to explore one possible outcome in the illustrative simulation. |
+
 ## What we measured
 
 Run on real SPHEREx Level-2 frames with RedBeast's own pipeline. "Change seen" means at least 3σ in

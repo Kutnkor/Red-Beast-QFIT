@@ -43,6 +43,22 @@ RedBeast bizim cevabımız: sayfayı aç, bir yıldız seç, **Blink**'e bas.
 | <img alt="Yayımlanmış evrim modeli" src=".github/assets/screen-model.jpg" width="420"> | **Yaşamını izle.** Her hedef için yayımlanmış evrim tabloları (MIST, BHAC15, ATMO) ve bir yıldızı doğumdan beyaz cüceye, nötron yıldızına ya da ışığı büken bir kara deliğe götüren eğitim modeli. |
 | <img alt="Q-FIT asistanı" src=".github/assets/screen-qfit.jpg" width="420"> | **Kuşa sor.** Kuşumuzun arkasındaki asistan Q-FIT, *Güneş'e götür* ya da *yan yana karşılaştır* gibi istekleri uygulamada kendisi yapar; bilim sorularına kaynağıyla cevap verir. |
 
+## RedBeast’in içinden
+
+### Q-FIT ile ölçüm kanıtını incele
+
+*Barnard’ın kanıtını göster* yaz. Q-FIT ilk ve son SPHEREx karelerini yan yana açar, tahmini konumu işaretler ve ölçüm raporunu gösterir.
+
+![Q-FIT, Barnard Yıldızı’nın ilk ve son SPHEREx karesiyle ölçüm özetini ve kaynaklarını gösteriyor](.github/assets/screen-qfit-evidence.jpg)
+
+| 3B zaman yığını | Koordinat araması |
+|:--|:--|
+| <img alt="RW Aurigae’nin gözlem tarihine göre üç boyutlu dizilmiş SPHEREx kareleri" src=".github/assets/screen-time-stack.jpg" width="420"> | <img alt="Açısal uzaklığa göre sıralanmış katalog sonuçlarıyla koordinat araması" src=".github/assets/screen-coordinate-search.jpg" width="420"> |
+| Gerçek karelerin farklı gözlem tarihlerinde nasıl hizalandığını gör. | Sağ açıklık ve dik açıklık girerek yakın katalog cisimlerini bul. |
+| **Güneş’in çevresi** | **Kara delik eğitim modeli** |
+| <img alt="Gaia kataloğundan Güneş’in çevresindeki yıldızlar" src=".github/assets/screen-around-the-sun.jpg" width="420"> | <img alt="Yıldız evrimi eğitim modelinde temsili kara delik sonu" src=".github/assets/screen-black-hole.jpg" width="420"> |
+| Gaia kataloğundan Güneş’e yakın yıldızları incele. | Başlangıç kütlesini değiştirerek temsili modeldeki olası sonlardan birini gör. |
+
 ## Ne ölçtük
 
 Gerçek SPHEREx Level-2 kareleri üzerinde, RedBeast'in kendi hattıyla. "Değişim görülüyor", kendi
