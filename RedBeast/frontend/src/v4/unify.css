@@ -111,7 +111,7 @@ kbd{font-family:var(--mono);font-stretch:87.5%;font-size:12px;border:1px solid r
 .v4-render-root .wavelength-line{grid-area:5/1/6/3;border:0;padding:8px 2px 0;font:500 12.5px var(--font);font-variant-numeric:tabular-nums;color:#c6d3f7}
 .v4-render-root .readout{grid-area:6/1/7/3;margin:2px 2px 0;font:500 12.5px var(--font);font-variant-numeric:tabular-nums;color:#c6d3f7;border:0;padding:0}
 .v4-render-root .transport{grid-area:7/1/8/3;border:0;background:none;padding:0 118px 0 0;margin:4px 0 0;min-height:76px;align-items:center;flex-wrap:nowrap}
-.v4-render-root .transport-buttons{gap:6px}
+.v4-render-root .transport-buttons{left:24px;bottom:24px;gap:6px}
 .v4-render-root .transport select{height:32px;min-height:32px;font-size:12px;border-radius:10px;font-family:var(--mono);font-stretch:87.5%}
 .v4-render-root .now{align-items:flex-end;gap:2px}
 .v4-render-root .now .kx-odo{font-size:30px}
@@ -171,6 +171,7 @@ kbd{font-family:var(--mono);font-stretch:87.5%;font-size:12px;border:1px solid r
  .v4-render-root .wavelength-line{order:7}
  .v4-render-root .readout{order:8}
  .v4-render-root .transport{order:9;flex-wrap:wrap;row-gap:4px}
+ .v4-render-root .transport-buttons{position:fixed;left:max(16px,env(safe-area-inset-left));bottom:calc(80px + env(safe-area-inset-bottom))}
  .v4-render-root .timeline{order:10}
  .v4-render-root .play-note{order:11;padding-right:96px}
  .v4-render-root .integrated-viewer.show-frames{position:relative;height:auto}

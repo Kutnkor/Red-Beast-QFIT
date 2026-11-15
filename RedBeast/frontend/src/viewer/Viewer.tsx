@@ -1,6 +1,6 @@
 // The viewer: real frames first, everything else around them.
 
-import { useCallback, useEffect, useMemo, useRef, useState, type KeyboardEvent as ReactKeyboardEvent, type SetStateAction } from 'react'
+import { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState, type KeyboardEvent as ReactKeyboardEvent, type SetStateAction } from 'react'
 import { useI18n } from '../i18n'
 import { api, request } from '../lib/api'
 import { getAppState, setAppState, useAppState, type DrawerTab } from '../lib/store'
@@ -79,6 +79,22 @@ export function Viewer({ sequence, observation = null, tutorialId = null, integr
     setAppState(s => ({ playing: typeof next === 'function' ? next(s.playing) : next }))
   }, [integrated])
   const [fps, setFps] = useState(2)
+  const playbackControls = useRef<HTMLDivElement>(null)
+  useLayoutEffect(() => {
+    const controls = playbackControls.current, slot = controls?.parentElement
+    if (!controls || !slot) return
+    // Reserve the original footprint so the date readout and timeline keep their positions.
+    const reserve = () => {
+      if (!controls.offsetWidth) return
+      slot.style.width = `${controls.offsetWidth}px`
+      slot.style.height = `${controls.offsetHeight}px`
+    }
+    reserve()
+    if (typeof ResizeObserver !== 'function') return
+    const observer = new ResizeObserver(reserve)
+    observer.observe(controls)
+    return () => observer.disconnect()
+  }, [])
   const [markMode, setMarkMode] = useState(false)
   const [markClass, setMarkClass] = useState<Classification>('unsure')
   const [activeTrack, setActiveTrack] = useState<string | null>(null)
@@ -803,24 +819,26 @@ export function Viewer({ sequence, observation = null, tutorialId = null, integr
         <Readout view={view} grid={grid} />
 
         <div className="transport">
-          <div className="transport-buttons">
-            <RingPlay playing={playing} onToggle={() => setPlaying((p) => !p)} disabled={!canPlay} progress={n > 1 ? cur / (n - 1) : 0} segments={Math.max(1, n - 1)} labelPlay={t('play.play')} labelPause={t('play.pause')} />
-            <button type="button" className="btn btn-icon" onClick={() => step(-1)} disabled={n < 2} aria-label={t('play.prev')} title={t('play.prev')}>
-              <KIcon name="prev" />
-            </button>
-            <button type="button" className="btn btn-icon" onClick={() => step(1)} disabled={n < 2} aria-label={t('play.next')} title={t('play.next')}>
-              <KIcon name="next" />
-            </button>
-            <label className="field-inline">
-              <span className="sr-only">{t('play.speed')}</span>
-              <select value={fps} onChange={(e) => setFps(Number(e.target.value))} aria-label={t('play.speed')}>
-                {SPEEDS.map((s) => (
-                  <option key={s} value={s}>
-                    {t('play.fps', { n: s })}
-                  </option>
-                ))}
-              </select>
-            </label>
+          <div className="transport-slot">
+            <div className="transport-buttons" ref={playbackControls}>
+              <RingPlay playing={playing} onToggle={() => setPlaying((p) => !p)} disabled={!canPlay} progress={n > 1 ? cur / (n - 1) : 0} segments={Math.max(1, n - 1)} labelPlay={t('play.play')} labelPause={t('play.pause')} />
+              <button type="button" className="btn btn-icon" onClick={() => step(-1)} disabled={n < 2} aria-label={t('play.prev')} title={t('play.prev')}>
+                <KIcon name="prev" />
+              </button>
+              <button type="button" className="btn btn-icon" onClick={() => step(1)} disabled={n < 2} aria-label={t('play.next')} title={t('play.next')}>
+                <KIcon name="next" />
+              </button>
+              <label className="field-inline">
+                <span className="sr-only">{t('play.speed')}</span>
+                <select value={fps} onChange={(e) => setFps(Number(e.target.value))} aria-label={t('play.speed')}>
+                  {SPEEDS.map((s) => (
+                    <option key={s} value={s}>
+                      {t('play.fps', { n: s })}
+                    </option>
+                  ))}
+                </select>
+              </label>
+            </div>
           </div>
           <div className="now">
             <span className="sr-only" data-testid="current-date">{fmtDateUTC(frame.date_avg)}</span>

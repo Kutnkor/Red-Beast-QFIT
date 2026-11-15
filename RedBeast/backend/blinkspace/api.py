@@ -439,6 +439,12 @@ def create_app(settings: Settings | None = None, pipeline: Pipeline | None = Non
         except ArchiveError as exc:
             raise ApiError(502, "archive_error", str(exc)[:200])
 
+    @app.get("/api/assistant/comparison/{seq_id}")
+    def assistant_comparison(seq_id: str, a: int | None = None, b: int | None = None):
+        from .qfit_comparison import compare_observations
+
+        return analysis_call(compare_observations, analysis, get_seq(seq_id), a, b)
+
     @app.get("/api/sequences/{seq_id}/diff")
     def diff(seq_id: str, a: int, b: int):
         seq = get_seq(seq_id)

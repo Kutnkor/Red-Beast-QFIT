@@ -288,6 +288,32 @@
     ],
     "additionalProperties": false
   },
+  "set_observation_pair": {
+    "type": "object",
+    "properties": {
+      "sequence_id": {
+        "type": "string"
+      },
+      "a": {
+        "type": "number",
+        "minimum": 0,
+        "maximum": 10000,
+        "integer": true
+      },
+      "b": {
+        "type": "number",
+        "minimum": 0,
+        "maximum": 10000,
+        "integer": true
+      }
+    },
+    "required": [
+      "sequence_id",
+      "a",
+      "b"
+    ],
+    "additionalProperties": false
+  },
   "set_playback": {
     "type": "object",
     "properties": {

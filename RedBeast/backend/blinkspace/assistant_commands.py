@@ -29,6 +29,7 @@ PROPERTIES = {
     "set_sky_scale": {"scale": text("galaxy", "local")},
     "explain_value": {"field": text("distance", "parallax", "proper_motion", "radial_velocity", "teff", "position", "surface")},
     "show_observations": {"view": text("single", "side", "diff", "stack", "trackstack", "timestack", "blink"), "pair": text("current", "first_last")},
+    "set_observation_pair": {"sequence_id": text(), "a": number(0, 10000, True), "b": number(0, 10000, True)},
     "set_playback": {"playing": {"type": "boolean"}},
     "open_search": {},
 }

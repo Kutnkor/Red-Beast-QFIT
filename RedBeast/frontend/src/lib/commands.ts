@@ -92,6 +92,13 @@ export const COMMANDS: CommandSpec[] = [
         : comparing && state.frameIndex === state.refIndex ? { frameIndex: (state.refIndex + 1) % count } : {}
       setAppState({ mode: 'observations', stageView: a.view === 'timestack' ? 'timestack' : 'frames', viewMode, playing: a.view === 'blink', ...indices })
     }),
+  spec('set_observation_pair', 'Compare two specific observation frames', 'İki belirli gözlem karesini karşılaştır',
+    { sequence_id: string(), a: number(0, 10000, true), b: number(0, 10000, true) }, async (args, ctx) => {
+      const a = args.a as number, b = args.b as number
+      const count = await observationCount(ctx)
+      if (a === b || a >= count || b >= count) throw new Error('Invalid observation pair')
+      setAppState({ mode: 'observations', stageView: 'frames', viewMode: 'side', refIndex: a, frameIndex: b, playing: false })
+    }),
   spec('set_playback', 'Play or pause the current view', 'Görünümü oynat veya duraklat', { playing: { type: 'boolean' } }, async (a, ctx) => {
     const state = getAppState(), playing = a.playing === true
     if (!playing) { setAppState({ playing: false, evolutionPlaying: false }); return }

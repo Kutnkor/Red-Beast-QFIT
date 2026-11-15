@@ -20,6 +20,8 @@ from .photometry import aperture_photometry
 from .spx import read_spx
 
 QUANT_TOL = 0.25          # nicel karşılaştırma için dalga boyu toleransı (bant genişliği kesri)
+MIN_COMMON_PIXELS = 50
+MAX_ALIGNMENT_RMS_ARCSEC = 0.3 * align.NATIVE_PIXSCALE_ARCSEC
 CAND_SNR = 6.0            # aday eşiği (fark görüntüsünde σ)
 CAND_MIN_FRAC = 0.25      # yerel akıya göre en küçük kesirsel değişim
 CAND_PAIR_PX = 4.0        # hareket çifti (artı/eksi) için en büyük ayrıklık (piksel)
@@ -29,6 +31,10 @@ class AnalysisError(ValueError):
     def __init__(self, code: str, message: str = ""):
         super().__init__(message or code)
         self.code = code
+
+
+def comparable_pixels(frame: dict) -> np.ndarray:
+    return ~frame["invalid"] & frame["comparable"]
 
 
 class Analysis:
@@ -56,10 +62,10 @@ class Analysis:
         if a == b:
             raise AnalysisError("same_frame")
         fa, fb = self._frame(seq, a), self._frame(seq, b)
-        invalid = fa["invalid"] | fb["invalid"] | ~fa["comparable"] | ~fb["comparable"]
+        invalid = ~(comparable_pixels(fa) & comparable_pixels(fb))
         d = np.where(invalid, np.nan, self._sub(fb) - self._sub(fa))
         vals = d[np.isfinite(d)]
-        if vals.size < 50:
+        if vals.size < MIN_COMMON_PIXELS:
             raise AnalysisError("no_common_area")
         sigma = 1.4826 * float(np.median(np.abs(vals - np.median(vals))))
         return fa, fb, d, invalid, sigma
@@ -81,7 +87,7 @@ class Analysis:
         al = seq["meta"].get("alignment", {})
         if al.get("status") != "ok":
             caveats.append("alignment_not_verified")
-        elif al.get("rms_arcsec", 0) > 0.3 * align.NATIVE_PIXSCALE_ARCSEC:
+        elif al.get("rms_arcsec", 0) > MAX_ALIGNMENT_RMS_ARCSEC:
             caveats.append("alignment_residual_large")
         return {
             "file": name, "a": a, "b": b, "definition": "B − A (arka planı çıkarılmış, MJy/sr)",

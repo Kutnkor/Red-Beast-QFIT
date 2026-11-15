@@ -12,6 +12,7 @@ import { angularShift, distanceLy, skyCoordinates, parseSkyQuery, angularSeparat
 import { temperatureToRgb } from '../../three/science/blackbody'
 import { QFitAssistant } from '../../qfit/QFitAssistant'
 import type { Proposal } from '../../qfit/api'
+import { createComparisonAssistant, loadObservationSequence } from '../../qfit/comparison'
 import robinIcon from '../../qfit/assets/robin-64.png'
 import { Dialog } from '../common'
 import { Timeline } from '../../viewer/Timeline'
@@ -80,11 +81,13 @@ export function Observatory(props: Props) {
     return () => { window.removeEventListener('blinkspace:open-search', open); window.removeEventListener('keydown', keys) }
   }, [state.mode])
   useEffect(() => { if (searchOpen) searchRef.current?.focus() }, [searchOpen])
-  const execute = async (p: Proposal) => {
+  const execute = async (p: Proposal, signal?: AbortSignal) => {
     const spec = COMMANDS.find(c => c.name === p.name)
     if (!spec || !validateArgs(spec.schema, p.args)) return { ok: false }
     if (p.name === 'select_target') { props.select(p.args.target_id as string); return { ok: true } }
     return runCommand(p.name, p.args, { source: 'assistant', confirmed: true, frameCount: sequence?.frames.length,
+      ...(p.name === 'set_observation_pair' ? { getFrameCount: async () => (await loadObservationSequence(props, signal, p.args.sequence_id as string))?.frames.length ?? 0 } : {}),
+      ...(p.name === 'open_target' ? { selectTarget: props.select } : {}),
       openSources: props.sources, saveView: props.save,
       startSearch: request => { window.dispatchEvent(new CustomEvent('blinkspace:search', { detail: request })) },
       explainValue: () => { setPanel('measure'); return words.sources },
@@ -100,6 +103,7 @@ export function Observatory(props: Props) {
   ]
   const tags: Record<string, string> = lang === 'tr' ? { measured: 'Ölçüme dayalı', computed: 'Hesaplanan', unknown: 'Veri yok', assumed: 'Varsayılan', representative: 'Temsili' } : { measured: 'Measured', computed: 'Computed', unknown: 'No value', assumed: 'Assumed', representative: 'Representative' }
   const allStars = uniqueCatalogueStars(catalogue)
+  const comparison = createComparisonAssistant(() => [...props.targets, ...allStars], () => props, execute)
   const coordinateQuery = parseSkyQuery(query)
   const filtered = coordinateQuery ? [...allStars].sort((a, b) => angularSeparation(coordinateQuery, skyCoordinates(a, state.year)) - angularSeparation(coordinateQuery, skyCoordinates(b, state.year))).slice(0, 5) : allStars.filter(s => `${s.name} ${s.id}`.toLocaleLowerCase(lang).includes(query.toLocaleLowerCase(lang))).slice(0, 35)
   const shift = star ? angularShift(star, 2026, state.year) : null
@@ -155,7 +159,7 @@ export function Observatory(props: Props) {
       </aside>}
     </main>
     {searchOpen && <Dialog title={words.search} onClose={() => setSearchOpen(false)}><div className="sx-search-dialog"><input ref={searchRef} type="search" placeholder={lang === 'tr' ? 'Ad veya RA, Dec (derece)' : 'Name or RA, Dec (degrees)'} aria-label={words.find} value={query} onChange={e => setQuery(e.target.value)} /><div className="sx-search-results">{coordinateQuery && <p>{lang === 'tr' ? 'Yerel katalogdaki en yakın 5 yön; eşleşme garantisi değildir.' : 'Nearest 5 directions in the local catalogue; not a guaranteed counterpart.'}</p>}{filtered.map(s => <button key={s.id} onClick={() => { props.select(s.id); setSearchOpen(false) }}><span>{s.name}</span><small>{coordinateQuery ? `${format(angularSeparation(coordinateQuery, skyCoordinates(s, state.year)), 4)}° · ` : ''}{s.spectralType} · {format(distanceLy(s, state.year))} ly</small></button>)}{!filtered.length && <p>{catalogue ? words.empty : words.loading}</p>}</div><details><summary>{words.archive}</summary>{props.search}</details></div></Dialog>}
-    <QFitAssistant lang={lang} context={buildAssistantContext(state, { target: star, sequence, marks: props.marks })} onCommand={execute} />
+    <QFitAssistant lang={lang} local={comparison} context={buildAssistantContext(state, { target: star, sequence, marks: props.marks })} onCommand={execute} />
     {props.dialogs}
   </div>
 }
