@@ -1,0 +1,22 @@
+services:
+  blinkspace:
+    build: .
+    ports:
+      - "8000:8000"
+    environment:
+      PORT: "8000"
+      BLINKSPACE_DATA_DIR: /data
+      BLINKSPACE_ASSISTANT_PROVIDER: "${BLINKSPACE_ASSISTANT_PROVIDER:-off}"
+      OPENAI_API_KEY: "${OPENAI_API_KEY:-}"
+      BLINKSPACE_ASSISTANT_DAILY_LIMIT: "${BLINKSPACE_ASSISTANT_DAILY_LIMIT:-100}"
+      QFIT_MAX_OUTPUT_TOKENS: "${QFIT_MAX_OUTPUT_TOKENS:-1200}"
+      QFIT_TIMEOUT_SECONDS: "${QFIT_TIMEOUT_SECONDS:-60}"
+      BLINKSPACE_ARCHIVE_PROTOCOL: "sia"
+      BLINKSPACE_GAIA_PROVIDER: "esa"
+      BLINKSPACE_ALLWISE_PROVIDER: "vizier"
+    volumes:
+      - blinkspace-data:/data
+    restart: unless-stopped
+
+volumes:
+  blinkspace-data:

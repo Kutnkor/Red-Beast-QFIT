@@ -1,0 +1,22 @@
+{
+  "image_id": "sha256:6a633d90d9d4b8d7109e3285d65ca7bd193b48537b6ff2517d33dc4ca7839260",
+  "image_bytes": 269287557,
+  "ready_seconds": 2.23,
+  "uid": 1000,
+  "ready_targets": 5,
+  "source_card_targets": 5,
+  "http_assets_byte_verified": 45,
+  "assistant_default": {
+    "enabled": false,
+    "provider": null
+  },
+  "csp_same_origin": true,
+  "seed_verified": true,
+  "image_secret_scan": "clean",
+  "qfit_lazy_import_and_retrieval": "passed",
+  "scope": "HTTP/API and file checks, not browser/GPU rendering",
+  "baseline_image_bytes": 265013964,
+  "baseline_ready_seconds": null,
+  "baseline_boot_comparison": "not available",
+  "image_delta_bytes": 4273593
+}

@@ -1,0 +1,35 @@
+{
+  "job": {
+    "id": "nkv3fmyhzrsf",
+    "kind": "sequence",
+    "status": "queued",
+    "stage": "queued",
+    "progress": 0.0,
+    "result_id": null,
+    "detail": null,
+    "error": null,
+    "sequence_id": null,
+    "cancel_requested": false,
+    "params": {
+      "ra_deg": 269.44627,
+      "dec_deg": 4.7682,
+      "fov_arcmin": 6.0,
+      "lam_um": null,
+      "tol": 0.5,
+      "max_frames": 4,
+      "mjd_min": null,
+      "mjd_max": null,
+      "target_id": null
+    },
+    "created_at": 1794675616.556278,
+    "updated_at": 1794675616.556278
+  },
+  "position": {
+    "ra_deg": 269.446269,
+    "dec_deg": 4.768204,
+    "frame": "ICRS",
+    "ra_hms": "17h57m47.10s",
+    "dec_dms": "+04d46m05.5s",
+    "notes": []
+  }
+}

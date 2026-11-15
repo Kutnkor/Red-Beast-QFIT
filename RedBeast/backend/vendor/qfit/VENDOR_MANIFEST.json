@@ -1,0 +1,800 @@
+{
+  "source": "User-provided QFIT-AI-for-github.zip",
+  "zip_sha256": "49ed5600a68975d34eb7a188ed2f1be9782fa19a528adb8dc35f09efee38a091",
+  "commit": null,
+  "reason": "GitHub repository returned 404; ZIP content is pinned by SHA-256.",
+  "files": [
+    {
+      "path": "LICENSE",
+      "sha256": "1eb45de25ee1b79eff4de4083e4108a9bb4e05dd198c8d669b92c1df9a7c90e5"
+    },
+    {
+      "path": "QFIT-AI/.env.example",
+      "sha256": "2a255987cffbdecb1679cb7de5b57468d6564c31a45df6cb3604cfd4e2eb17bd"
+    },
+    {
+      "path": "QFIT-AI/HANDOFF.md",
+      "sha256": "21f8a608f3a80daec0d7003b9f940d19e11ea78adca0d0b66aee3d968893b779"
+    },
+    {
+      "path": "QFIT-AI/README.md",
+      "sha256": "65c8ff012dfb62db3f69eb9aedcb1b2c41d22003a21b209c5425d33b50463463"
+    },
+    {
+      "path": "QFIT-AI/app/__init__.py",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "QFIT-AI/app/ai/__init__.py",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "QFIT-AI/app/ai/agent.py",
+      "sha256": "cd39ff62842c54f487c4b6803796a090455f7eb3a63a9f7346fc488b871e0002"
+    },
+    {
+      "path": "QFIT-AI/app/ai/gemini_client.py",
+      "sha256": "8688fdcd649e4491e4500ed87b1270059ffc4e5cd3bef9cde48bd00fa04fa4b6"
+    },
+    {
+      "path": "QFIT-AI/app/ai/grounding.py",
+      "sha256": "47b532b0998cf05304cfc3f472a2cc39efef39876e5f6e684a45c2ddd8be34aa"
+    },
+    {
+      "path": "QFIT-AI/app/ai/llm_provider.py",
+      "sha256": "71eaa2664ea6f47e61599d7f8f2907760a8c0a205a084b8ba399d194051baf23"
+    },
+    {
+      "path": "QFIT-AI/app/ai/ollama_client.py",
+      "sha256": "edff542964ae6ad1e548420bbaf64feea0f7634dd670e00ac7442496cf08338b"
+    },
+    {
+      "path": "QFIT-AI/app/ai/openai_client.py",
+      "sha256": "fdf1337eca1f1f3ea98dae6b2112337fbdef8a136afe215d6053471c65fc316e"
+    },
+    {
+      "path": "QFIT-AI/app/ai/prompts.py",
+      "sha256": "31af8fa04b8041def7e4b1ec660572e04b6cb71bc640f2f3e2a8fc5dd5bbb1e3"
+    },
+    {
+      "path": "QFIT-AI/app/ai/tool_registry.py",
+      "sha256": "f8b33f88cef198a417773660e98ad066e3eda902297b93e7e0f42c68ed7a0e3c"
+    },
+    {
+      "path": "QFIT-AI/app/api/__init__.py",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "QFIT-AI/app/api/dependencies.py",
+      "sha256": "942b6dd96912e5201621277154a483e26b460ab3fecb4db173b499ba4568b0f0"
+    },
+    {
+      "path": "QFIT-AI/app/api/routes/__init__.py",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "QFIT-AI/app/api/routes/candidates.py",
+      "sha256": "89c8ba5e52c6102a37dc656f75828337f638d2b8057d3009f16784ff76ef58ad"
+    },
+    {
+      "path": "QFIT-AI/app/api/routes/chat.py",
+      "sha256": "d72ca4ae464e9ce91eb89836033935f1c6787fff259c7ffdc897debdcdc25316"
+    },
+    {
+      "path": "QFIT-AI/app/api/routes/health.py",
+      "sha256": "875e094dfc27f5f25ba2a0b4e7875e1755e71a74a3dd5f32d44b38ca31f08f4c"
+    },
+    {
+      "path": "QFIT-AI/app/api/routes/knowledge.py",
+      "sha256": "3a549d445cb07093d9a39f602eab6037f2b9bda1ea3c33b8975c78c2db811c70"
+    },
+    {
+      "path": "QFIT-AI/app/api/routes/objects.py",
+      "sha256": "6b009413818f790ac42f828581eba9460f0a445160d873983cc34325a9d03cf7"
+    },
+    {
+      "path": "QFIT-AI/app/api/routes/observations.py",
+      "sha256": "c4afaaced2152fc5c0a7f81c4f9b7249863f98721ef4e26901f0c2a912b5fff1"
+    },
+    {
+      "path": "QFIT-AI/app/api/routes/spectrum.py",
+      "sha256": "30d59d9c8f115798ac7c52f76a15a1a6d71bde973d68e89a5050826b94af6d2e"
+    },
+    {
+      "path": "QFIT-AI/app/astronomy/__init__.py",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "QFIT-AI/app/astronomy/archive_client.py",
+      "sha256": "d4dc55396f71fd4f1127422cac0b8b5b2cf05e0510c7b55780144df4bf82d8bb"
+    },
+    {
+      "path": "QFIT-AI/app/astronomy/data_models.py",
+      "sha256": "0bed82d020a22e81ebd9d8cb986cf40e3243d4475ecb8133036a6f2d8555cdee"
+    },
+    {
+      "path": "QFIT-AI/app/astronomy/horizons_client.py",
+      "sha256": "1be24b7b52581930e8ce37d7de84844d0678cd281d163f403d887948691eb942"
+    },
+    {
+      "path": "QFIT-AI/app/astronomy/object_resolver.py",
+      "sha256": "ac1257c2ca1fdbeccb4aa0d10fb97155a743e75db70f889a7025b66f6d50b856"
+    },
+    {
+      "path": "QFIT-AI/app/astronomy/spherex_client.py",
+      "sha256": "663b91563d23e671265339791fa0422ef31abc9de6261ed1eb0a9c22a4ced5c0"
+    },
+    {
+      "path": "QFIT-AI/app/citizen/__init__.py",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "QFIT-AI/app/citizen/store.py",
+      "sha256": "45ea9e2a9263964c8e1b6d56b50162e8a28db0b6e45a6dcb5052c1fdcc162c37"
+    },
+    {
+      "path": "QFIT-AI/app/config.py",
+      "sha256": "f5816037c521647d19948b13b0095272ff00d2f3b934bdfd17d966077c5da4c5"
+    },
+    {
+      "path": "QFIT-AI/app/evaluation/__init__.py",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "QFIT-AI/app/evaluation/agent_eval.py",
+      "sha256": "576d8abe2dd418c4a509d3db52aa01d5ffa8aa840448c088f4486358fe545b15"
+    },
+    {
+      "path": "QFIT-AI/app/evaluation/report.py",
+      "sha256": "9b35a173900183fdb1dd47d3a1aff7452302a48023c49809649790d4f3dd6c20"
+    },
+    {
+      "path": "QFIT-AI/app/evaluation/retrieval.py",
+      "sha256": "426629883102c4e8c284e16048c63abaf258f537993ffaedfb28b836d980db18"
+    },
+    {
+      "path": "QFIT-AI/app/knowledge/__init__.py",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "QFIT-AI/app/knowledge/documents.py",
+      "sha256": "7238aec38f62904cbbc9e8f6db71dbfc20abf680c2a2553726341773b4f3391a"
+    },
+    {
+      "path": "QFIT-AI/app/knowledge/index.py",
+      "sha256": "2ac7e43cfe47bd86a3f170321bedd05910f31a6e63e3cdd0f3a8238b66f25b8d"
+    },
+    {
+      "path": "QFIT-AI/app/knowledge/language.py",
+      "sha256": "00fdc4c33215626549b547434c7ed7e304dfc75eb4560bf1bee8159be2591f5e"
+    },
+    {
+      "path": "QFIT-AI/app/knowledge/registry.py",
+      "sha256": "d676d8d82331d2a3bcd49bfa2b778f1a9a9f1848a252d0cd9e45738e20b1e471"
+    },
+    {
+      "path": "QFIT-AI/app/knowledge/service.py",
+      "sha256": "ea1ef19781cc7c40eafe1f813f021709de772dd16723a4107f50991f52633a1f"
+    },
+    {
+      "path": "QFIT-AI/app/main.py",
+      "sha256": "8ba42527b2f6bbd0a309a5eeea79809e125ac8f83ef47c02e66d1ccbccf50285"
+    },
+    {
+      "path": "QFIT-AI/app/models/__init__.py",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "QFIT-AI/app/models/astronomy.py",
+      "sha256": "7cad6cff18a053612686ad6fdcc15fdbcc55ac534abb35a13937e2eb366b8d11"
+    },
+    {
+      "path": "QFIT-AI/app/models/requests.py",
+      "sha256": "08ee1f45685d4f223b17828ed199713b8151e27aec0eba6309ea24bce4c256d2"
+    },
+    {
+      "path": "QFIT-AI/app/models/responses.py",
+      "sha256": "6d10927a62954279236ec569f48ad016d59a280f6810456bcda04ffb772f6ba4"
+    },
+    {
+      "path": "QFIT-AI/app/scientific/__init__.py",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "QFIT-AI/app/scientific/config_loader.py",
+      "sha256": "ba9235172e69851c46e991c5d2b0b56b39bd4c42ae6b3f526eb6f81fa521acdb"
+    },
+    {
+      "path": "QFIT-AI/app/services/__init__.py",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "QFIT-AI/app/services/fallback.py",
+      "sha256": "ae547fb75e69c05816314036108230fd19c624943c7237f5775855e5a8378275"
+    },
+    {
+      "path": "QFIT-AI/app/services/observation_service.py",
+      "sha256": "160c5a102b49568ee718611e4ece8d1de9659a7a61f132c640a74f4ae113e014"
+    },
+    {
+      "path": "QFIT-AI/app/services/preview_service.py",
+      "sha256": "a5523b46eda7e84d41cd69a7cd0f10fc330bba94d422b3f918204bfac3ed8721"
+    },
+    {
+      "path": "QFIT-AI/app/services/response_builder.py",
+      "sha256": "39dc9ae9a581757af3bed975ef710fd2b75d9c6039664c906e3b18dd81fdbbca"
+    },
+    {
+      "path": "QFIT-AI/app/services/retrieval_service.py",
+      "sha256": "bbe66f98d8196fc130bffdebfb6ab70d91bd686e728f92a0b5db5ab592f27730"
+    },
+    {
+      "path": "QFIT-AI/app/services/search_service.py",
+      "sha256": "d60f3a448f921df915a7f594547310ed9b7729645d2b196336be60d8434dc338"
+    },
+    {
+      "path": "QFIT-AI/app/training/__init__.py",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "QFIT-AI/app/training/dataset.py",
+      "sha256": "58c325a7500b9e95b7acee92f2994f0f4aff4866bfef3bfea3dbc3ab3beec4bf"
+    },
+    {
+      "path": "QFIT-AI/app/training/schema.py",
+      "sha256": "9a3a4539b12fcf02adbcfdafbfb67f4eef1c56b5b71c9f091167eb195e97ea1b"
+    },
+    {
+      "path": "QFIT-AI/app/training/vertex_export.py",
+      "sha256": "a9dce01c1fea85d8ffaf2c46a443ec19459ec86e4076504a8fee97da0146f968"
+    },
+    {
+      "path": "QFIT-AI/app/utils/__init__.py",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "QFIT-AI/app/utils/cache.py",
+      "sha256": "94ea06c62a6c6a557d5d238fe07147147b6d5f7abb24c420cf8eeae4dd68862c"
+    },
+    {
+      "path": "QFIT-AI/app/utils/coordinates.py",
+      "sha256": "3efec422678584c1f1acd1ab85425d1842e86f97c686f1b23550d2c1df6d701c"
+    },
+    {
+      "path": "QFIT-AI/app/utils/errors.py",
+      "sha256": "14812ac2c8b3d087a34f0a99d042bd7041d7c25cb92e708466d9c2fd49756bb9"
+    },
+    {
+      "path": "QFIT-AI/app/utils/logging.py",
+      "sha256": "739f57789d98627d72b58976b76a6fad2751bace5c45cb9cf428ef0c9830950d"
+    },
+    {
+      "path": "QFIT-AI/app/utils/validation.py",
+      "sha256": "54326e31ade53c82c31a423ee32c52b005a4e04e24467cd714c6e0a0758f3793"
+    },
+    {
+      "path": "QFIT-AI/docs/AI_ARCHITECTURE.md",
+      "sha256": "cdaf17048ad245360f2cd2687a013db8cee4f4762c9aaa442a5376878fefa6ba"
+    },
+    {
+      "path": "QFIT-AI/docs/AI_TRAINING_PIPELINE.md",
+      "sha256": "29c99021cb4d58bde73a5aeba7d504581e364d161b209537ed65a93b4bf7ecf0"
+    },
+    {
+      "path": "QFIT-AI/docs/API_CONTRACT.md",
+      "sha256": "4b1f9aaf988967d44755121eb31938f00e5d6ff07195dc79b8f5c63dc2793057"
+    },
+    {
+      "path": "QFIT-AI/docs/ARCHITECTURE.md",
+      "sha256": "71a810517719d1ce125bee5b62caf31dfaec1e7cae1e75073c53b9260c58a3be"
+    },
+    {
+      "path": "QFIT-AI/docs/DATA_SOURCES.md",
+      "sha256": "cebce4c0b583864d919ab4b8c0c99ba4087698d47cfcea83533746805a1c593c"
+    },
+    {
+      "path": "QFIT-AI/docs/DEPLOYMENT.md",
+      "sha256": "b26153258d8cb3750635311dbdd96bd160e994033b9227ed045d6bfd883837c3"
+    },
+    {
+      "path": "QFIT-AI/docs/FRONTEND_CONTRACT.md",
+      "sha256": "b457ae223138569d094061bd86d59ff9861cebd00e261b9dde2c0dfc0a6e4a3d"
+    },
+    {
+      "path": "QFIT-AI/docs/MASCOT_AND_CHAT_UI.md",
+      "sha256": "0dd4d3c7329165f8f0f3ea6d1bd912ccb2198777fb959edda3dd6d22aa4d9de3"
+    },
+    {
+      "path": "QFIT-AI/docs/MASTER_PROMPT.md",
+      "sha256": "ea0444c9a54378e15c821e5488f7a8b18eead67d86b3c5b195fbcad38dc0e17c"
+    },
+    {
+      "path": "QFIT-AI/docs/MODEL_EVALUATION.md",
+      "sha256": "d672b260ebce0e12a9d103f670df42e7f584924e8511b93d109f670fe7b03a55"
+    },
+    {
+      "path": "QFIT-AI/docs/SCIENTIFIC_SOURCES.md",
+      "sha256": "015181311159292e47041ee482e4027237edf6a1251ddeab391c837393d68923"
+    },
+    {
+      "path": "QFIT-AI/docs/images/m31-spherex-band1-preview.png",
+      "sha256": "f7e2976565307e28c5b67072bab29baee1c601b751c3d395848ecaa382b86c51"
+    },
+    {
+      "path": "QFIT-AI/docs/images/qfit-robin-128.png",
+      "sha256": "92ad2008d8b926021d3027a8140160ce6556bd4cbd1713d996a19df811e1e2fc"
+    },
+    {
+      "path": "QFIT-AI/mascot/assets/icons/robin_128.png",
+      "sha256": "92ad2008d8b926021d3027a8140160ce6556bd4cbd1713d996a19df811e1e2fc"
+    },
+    {
+      "path": "QFIT-AI/mascot/assets/icons/robin_256.png",
+      "sha256": "aa40ace6e0f95ecb724f657e496c2787ca30c9c523a02c998c5e77a34631b6b8"
+    },
+    {
+      "path": "QFIT-AI/mascot/assets/icons/robin_32.png",
+      "sha256": "91adb6d06534d50e3229a3fb540de6ee21aabf840a031cf0b3616c7da9b4952a"
+    },
+    {
+      "path": "QFIT-AI/mascot/assets/icons/robin_512.png",
+      "sha256": "de1b30d6fa8b5ad2e8b6911ed3e89b34a0cc9c855022970ecda6cc7e7e592756"
+    },
+    {
+      "path": "QFIT-AI/mascot/assets/icons/robin_64.png",
+      "sha256": "3694339c3e9fe5a5ecb4f40e1ff71e9ea3349d5e63dd7f2332e122b3a9ae1708"
+    },
+    {
+      "path": "QFIT-AI/mascot/assets/mascot.json",
+      "sha256": "7c4ebda4278b9e5dab6f1b314bdf98cda6e81b42c8591349c986ad31d9198790"
+    },
+    {
+      "path": "QFIT-AI/mascot/assets/normalized/idle.png",
+      "sha256": "9b6077acd5e55e6a8f1e8974d2435fa126c737b185d4c6973dbafdf6b313906e"
+    },
+    {
+      "path": "QFIT-AI/mascot/assets/normalized/quiet.png",
+      "sha256": "7b88043dc0508faf00d0dbb972ef8732a160e1121a862ad75783a3619a288131"
+    },
+    {
+      "path": "QFIT-AI/mascot/assets/normalized/speaking/frame_00.png",
+      "sha256": "7b88043dc0508faf00d0dbb972ef8732a160e1121a862ad75783a3619a288131"
+    },
+    {
+      "path": "QFIT-AI/mascot/assets/normalized/speaking/frame_01.png",
+      "sha256": "4a9980afa10fd942b12fa70ae8ec5eb483004c107da2f9d1e6a6aeea4632a060"
+    },
+    {
+      "path": "QFIT-AI/mascot/assets/normalized/speaking/frame_02.png",
+      "sha256": "a7ff8b5cdb67548e23fb4574eb4ba24fda8a3474630c9fda77ccbdac12b0cafa"
+    },
+    {
+      "path": "QFIT-AI/mascot/assets/normalized/speaking/frame_03.png",
+      "sha256": "5c5690352c1e3e748dd50980f23a44476efb0ff2d9fa627f8eb29b5724876d12"
+    },
+    {
+      "path": "QFIT-AI/mascot/assets/normalized/speaking/frame_04.png",
+      "sha256": "cdade7cb238bf4da7ac5080834a80e4f52dc5456a829f8c611ae3a583b0cc6a5"
+    },
+    {
+      "path": "QFIT-AI/mascot/assets/normalized/speaking/frame_05.png",
+      "sha256": "6c1a24a5ec23636e3c0c37a0b653abc2ba6c988cc13bb7dc7563d4030a2d39c6"
+    },
+    {
+      "path": "QFIT-AI/mascot/assets/normalized/speaking/frame_06.png",
+      "sha256": "3b903067a7236e6cf77ac89034fd5ff9548ccf3ed3fe383541152671cd8f556a"
+    },
+    {
+      "path": "QFIT-AI/mascot/assets/normalized/speaking/frame_07.png",
+      "sha256": "9ae591c771d76641f3cad42f4cc0db8fb7083ea58e17bad78e424215025353bc"
+    },
+    {
+      "path": "QFIT-AI/mascot/assets/normalized/speaking/frame_08.png",
+      "sha256": "9e2b70de764de83114306822cd57eb9bf1f0b1ab78b2eed758a3555e9f0e2902"
+    },
+    {
+      "path": "QFIT-AI/mascot/assets/normalized/thinking/frame_00.png",
+      "sha256": "2839fe6a8888291668eafa0b502ef3c30ef4eeaea011693f6c0c669c62609dc8"
+    },
+    {
+      "path": "QFIT-AI/mascot/assets/normalized/thinking/frame_01.png",
+      "sha256": "a544b4c9533f5eed2e5e2e28387cf9d8bde37368dccc362fffefc9c51270df39"
+    },
+    {
+      "path": "QFIT-AI/mascot/assets/normalized/thinking/frame_02.png",
+      "sha256": "200c9e5120b9f693ca1248c870e9571afc2659ebe16f5dbf3967d5fc33e3bfef"
+    },
+    {
+      "path": "QFIT-AI/mascot/assets/normalized/thinking/frame_03.png",
+      "sha256": "a15f9591a0274de484c7055accffefb4bddfcd667241466239290f7524e3984c"
+    },
+    {
+      "path": "QFIT-AI/mascot/assets/normalized/thinking/frame_04.png",
+      "sha256": "e8838e603aed0dbf9a70bab036792d752f6d1165fad8fb6ed43550674a889a46"
+    },
+    {
+      "path": "QFIT-AI/mascot/assets/normalized/thinking/frame_05.png",
+      "sha256": "7367bafee6307227d6a46f5d48321df61620f126e5d8e8f8e2d152c7f2525c83"
+    },
+    {
+      "path": "QFIT-AI/mascot/assets/normalized/thinking/frame_06.png",
+      "sha256": "be014d2476ad446ea4e97af65ec9750726c036cefec919d18b644f421aa17d75"
+    },
+    {
+      "path": "QFIT-AI/mascot/assets/normalized/thinking/frame_07.png",
+      "sha256": "b7b76a13f8f8cdaaa3f1d37c1bf1ae653e34b437e56ee93638a519850995cbc4"
+    },
+    {
+      "path": "QFIT-AI/mascot/assets/normalized/thinking/frame_08.png",
+      "sha256": "77a42756cdeecd98305c9a459f2ddde44df3a1ff6a481b09bc93a24094488390"
+    },
+    {
+      "path": "QFIT-AI/mascot/assets/source/robin_figure.png",
+      "sha256": "10a2a7ba791bea2fb1872f645060644e3e5e113f119949b1728e8cdc62d9fe02"
+    },
+    {
+      "path": "QFIT-AI/mascot/assets/source/robin_speaking.gif",
+      "sha256": "27da9cc8be35c50f0bdf7ef95bfa051f4fa8a794cf2b96f3d8e25b4e8af9e4ed"
+    },
+    {
+      "path": "QFIT-AI/mascot/assets/source/robin_thinking.gif",
+      "sha256": "bc4558ed21768e718330375c0925df011ab003499eebd3ef767d9ea56bf28935"
+    },
+    {
+      "path": "QFIT-AI/mascot/assets/spritesheets/speaking.png",
+      "sha256": "222e07cd0a3870ee86ecc57ecef9161c9d4be8b8effbc3fb1ed44e341a8e8bb3"
+    },
+    {
+      "path": "QFIT-AI/mascot/assets/spritesheets/thinking.png",
+      "sha256": "a59b45ca6a0ca6f51a676c14b5f99f1bde6dbc2260c08c3b315ea6ae75a1efe4"
+    },
+    {
+      "path": "QFIT-AI/mascot/react/package-lock.json",
+      "sha256": "bd53a91bf2b7c94eb7ec50c319de5105b9c7da887c543ce07b785505e0a241e0"
+    },
+    {
+      "path": "QFIT-AI/mascot/react/package.json",
+      "sha256": "758b2695f6fbdc34ad69657419493816a8ea270b91a3ff8cd63d482437da4d08"
+    },
+    {
+      "path": "QFIT-AI/mascot/react/src/env.d.ts",
+      "sha256": "75055fd23a6a1d5891bf50fd4da7547a38c5970df6d089a2a51d72971598c358"
+    },
+    {
+      "path": "QFIT-AI/mascot/react/src/qfit/QFitAssistant.tsx",
+      "sha256": "2dc89d3f24e550a9ce92c6510d3c36fcf17aa0c0c2094c8c2a87938f392f8e46"
+    },
+    {
+      "path": "QFIT-AI/mascot/react/src/qfit/api.ts",
+      "sha256": "fd28a6bdb82d3860e1ae2d670d9467f5973feaac567bd9659543e8a295099d5b"
+    },
+    {
+      "path": "QFIT-AI/mascot/react/src/qfit/assets/idle.png",
+      "sha256": "9b6077acd5e55e6a8f1e8974d2435fa126c737b185d4c6973dbafdf6b313906e"
+    },
+    {
+      "path": "QFIT-AI/mascot/react/src/qfit/assets/quiet.png",
+      "sha256": "7b88043dc0508faf00d0dbb972ef8732a160e1121a862ad75783a3619a288131"
+    },
+    {
+      "path": "QFIT-AI/mascot/react/src/qfit/assets/robin-64.png",
+      "sha256": "3694339c3e9fe5a5ecb4f40e1ff71e9ea3349d5e63dd7f2332e122b3a9ae1708"
+    },
+    {
+      "path": "QFIT-AI/mascot/react/src/qfit/assets/speaking-sheet.png",
+      "sha256": "222e07cd0a3870ee86ecc57ecef9161c9d4be8b8effbc3fb1ed44e341a8e8bb3"
+    },
+    {
+      "path": "QFIT-AI/mascot/react/src/qfit/assets/thinking-sheet.png",
+      "sha256": "a59b45ca6a0ca6f51a676c14b5f99f1bde6dbc2260c08c3b315ea6ae75a1efe4"
+    },
+    {
+      "path": "QFIT-AI/mascot/react/src/qfit/qfit-assistant.css",
+      "sha256": "8c553ab74be5b9a9dfff0182df7c3d7e0cdc439151c1739d24e1e57abd79aa3f"
+    },
+    {
+      "path": "QFIT-AI/mascot/react/tsconfig.json",
+      "sha256": "63ec14814095e6c7b4db42a53f7789f07ba50eb40c4906e0ce71f6f2c5142171"
+    },
+    {
+      "path": "QFIT-AI/mascot/vanilla/qfit-widget.css",
+      "sha256": "aa1562a49cc01f48257657306efbf7835252710591783e527aad2c5aada51e64"
+    },
+    {
+      "path": "QFIT-AI/mascot/vanilla/qfit-widget.js",
+      "sha256": "d7892846e51adc9c3c175b692ed6921785ee19a6ed38f7c2c9eb175873698694"
+    },
+    {
+      "path": "QFIT-AI/pytest.ini",
+      "sha256": "3abeaee528436c431af2fc9c481791b514632ac8957e8326ff65b9791e0f4a01"
+    },
+    {
+      "path": "QFIT-AI/requirements.txt",
+      "sha256": "6018c85670c76765701db9f917ed4b48ae2e1a4b3031328752111ffb3b5add4a"
+    },
+    {
+      "path": "QFIT-AI/research/datasets/qfit_seed_v1.jsonl",
+      "sha256": "b2acf2400d3b8a6bf607e3de7d54f7077c81782e7f266b29ba1c0ae9f95d9e6a"
+    },
+    {
+      "path": "QFIT-AI/research/datasets/splits/qfit_seed_v1/manifest.json",
+      "sha256": "fc08bbee1319da05fe3d39dc406d9ac063cda1686c157897358e839966e2885f"
+    },
+    {
+      "path": "QFIT-AI/research/datasets/splits/qfit_seed_v1/test.jsonl",
+      "sha256": "78115510d8d83f89e421e310a42e6f117fd3746aa0fb91540962564a10e5817b"
+    },
+    {
+      "path": "QFIT-AI/research/datasets/splits/qfit_seed_v1/train.jsonl",
+      "sha256": "6ea13ca93a6d9025530999ae42bf527840907de512c9ad07e1ce4f38a1be4c7f"
+    },
+    {
+      "path": "QFIT-AI/research/datasets/splits/qfit_seed_v1/validation.jsonl",
+      "sha256": "ac35fd0849ddf9e664c0b5a7f66f9b1463ab1d21641dc582e7d782b073c11e3b"
+    },
+    {
+      "path": "QFIT-AI/research/datasets/splits/qfit_seed_v1/vertex_test.jsonl",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "QFIT-AI/research/datasets/splits/qfit_seed_v1/vertex_train.jsonl",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "QFIT-AI/research/datasets/splits/qfit_seed_v1/vertex_validation.jsonl",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "QFIT-AI/research/evaluation/reports/agent_20261114T134416Z.json",
+      "sha256": "65353946211d5e7ef10f5b6e8fb9c87ff17a51fb390a6bbd686de3728b1ee326"
+    },
+    {
+      "path": "QFIT-AI/research/evaluation/reports/agent_20261114T134416Z.md",
+      "sha256": "2a263578af8bd3dc31988b97adfd420b74111b72c620e29f68d61da3a7ab6ae2"
+    },
+    {
+      "path": "QFIT-AI/research/evaluation/reports/agent_20261114T135310Z.json",
+      "sha256": "20488c2b993393dbb53784085cf39220818e4cf07bdf076def94e753b1156224"
+    },
+    {
+      "path": "QFIT-AI/research/evaluation/reports/agent_20261114T135310Z.md",
+      "sha256": "3b5dbdeb02e59c68212a2c7f149da751899f89756eadd9ec8d617df1a2c4efa5"
+    },
+    {
+      "path": "QFIT-AI/research/evaluation/reports/agent_20261114T150130Z.json",
+      "sha256": "8ba7236c8040738f71ce351e94546e3bb94f231d2f83d1ca3e76c799f8934dec"
+    },
+    {
+      "path": "QFIT-AI/research/evaluation/reports/agent_20261114T150130Z.md",
+      "sha256": "f6c483ebb4edc8802da700a47b0e36fecab66128930f76582aeda61e8827e4a9"
+    },
+    {
+      "path": "QFIT-AI/research/evaluation/reports/agent_20261114T153137Z.json",
+      "sha256": "519668cccb29be53292dc4c573e42ed227dab0e14c4b8aa23fca9d4393498dbc"
+    },
+    {
+      "path": "QFIT-AI/research/evaluation/reports/agent_20261114T153137Z.md",
+      "sha256": "62be859a2e3a57451787ff5614795005a8f85a246ac46d7f60aa990fa4f9cc69"
+    },
+    {
+      "path": "QFIT-AI/research/evaluation/reports/agent_20261114T160750Z.json",
+      "sha256": "3dcf25a8117a45d50cefa264879827b8488c0e99e92c7a0bfa6db2f6e9709442"
+    },
+    {
+      "path": "QFIT-AI/research/evaluation/reports/agent_20261114T160750Z.md",
+      "sha256": "c92e2eb2f772c30bb3d7fa9d3d7f6b5a2410b05c9f127587aceaeedefb177b83"
+    },
+    {
+      "path": "QFIT-AI/research/evaluation/reports/agent_20261114T161600Z.json",
+      "sha256": "434d8b309e08add03adc2df397f4397a2826b29d2a4db5fdd6981ef75137a278"
+    },
+    {
+      "path": "QFIT-AI/research/evaluation/reports/agent_20261114T161600Z.md",
+      "sha256": "1241704d790423258a9672145fb1077f7995424796ad7d28eb0c3d5603417db8"
+    },
+    {
+      "path": "QFIT-AI/research/evaluation/reports/agent_20261114T165413Z.json",
+      "sha256": "de46aad2c43a2a95f59a9153b24a5bc31239137eaebe369907ea08e54793523f"
+    },
+    {
+      "path": "QFIT-AI/research/evaluation/reports/agent_20261114T165413Z.md",
+      "sha256": "8819e26eded355c25bb58cf74cf79ccde5ece3d31063c76f4d8b7f8a1c740d50"
+    },
+    {
+      "path": "QFIT-AI/research/evaluation/reports/agent_20261114T170232Z.json",
+      "sha256": "d86c1df3024ed1733447d1516b18d4e062207bf7006dfac286380ed2b0117d42"
+    },
+    {
+      "path": "QFIT-AI/research/evaluation/reports/agent_20261114T170232Z.md",
+      "sha256": "6684f7f09af064a927e37b5cf9804b5ca5e6c69812b2d321084c2640bdb26e0f"
+    },
+    {
+      "path": "QFIT-AI/research/evaluation/reports/retrieval_20261114T115801Z.json",
+      "sha256": "ab248ffe9aec545a7a2c8ae2c703b4469a280183c4b66515b59e2c16292af32f"
+    },
+    {
+      "path": "QFIT-AI/research/evaluation/reports/retrieval_20261114T115801Z.md",
+      "sha256": "8714fff6c5beb2cecc1456e74727f035b99f000c227a23a5b8b3915b6c681c52"
+    },
+    {
+      "path": "QFIT-AI/research/evaluation/reports/retrieval_20261114T134558Z.json",
+      "sha256": "06604a29d0c350c48c44c9c58ce2d2b9021378137b632cf6fcdae210504a76e1"
+    },
+    {
+      "path": "QFIT-AI/research/evaluation/reports/retrieval_20261114T134558Z.md",
+      "sha256": "85fa86171d1bae8b3a8c1b4266a434471a842f29095cbdffa02c7937994f3c9d"
+    },
+    {
+      "path": "QFIT-AI/research/evaluation/reports/retrieval_20261114T143423Z.json",
+      "sha256": "5add59670685752fdf078a09afd124d2cce5fd51ef6bca2ab8e408275df276fa"
+    },
+    {
+      "path": "QFIT-AI/research/evaluation/reports/retrieval_20261114T143423Z.md",
+      "sha256": "05833ba0a0fae1a54a0c2d8a9c63716277b63526130578a15f36e25ca3d23eeb"
+    },
+    {
+      "path": "QFIT-AI/research/evaluation/reports/retrieval_20261114T150300Z.json",
+      "sha256": "81f8ef6760a43b04431600abdabd6476bffe1fdef5e9ab11dfe5ba15971b82f2"
+    },
+    {
+      "path": "QFIT-AI/research/evaluation/reports/retrieval_20261114T150300Z.md",
+      "sha256": "dcb48175d743c6da3240f004ef185f8fabf0bddbff9a8405a1372d86dfa3253f"
+    },
+    {
+      "path": "QFIT-AI/research/evaluation/speed_check_12.jsonl",
+      "sha256": "2165b035411eadee1efec22b7e92aa35976aac0aaa36747fa161a64ad8347935"
+    },
+    {
+      "path": "QFIT-AI/research/knowledge/en/brown-dwarfs.md",
+      "sha256": "cc822cbf22c7beda3a692c8447bdb348acb7dd8f995888fafea4a5133dfade8c"
+    },
+    {
+      "path": "QFIT-AI/research/knowledge/en/citizen-science.md",
+      "sha256": "4e3b5b5ceb902937f6b6941565074d003b849014d09fdd29652f7d1998cac822"
+    },
+    {
+      "path": "QFIT-AI/research/knowledge/en/hr-diagram.md",
+      "sha256": "fb194dc90bb0322dcd13122f10df9cfdb34cfdca8984d9b1ad4082677b9a9540"
+    },
+    {
+      "path": "QFIT-AI/research/knowledge/en/qfit-evidence-policy.md",
+      "sha256": "38e3d5933914815624b596835dd8e991602b7efe81b4d2211223107c98bc8025"
+    },
+    {
+      "path": "QFIT-AI/research/knowledge/en/spectroscopy.md",
+      "sha256": "8caa6bbd14e6848e5df4c4c7b744065d7485b938a2fe2c530e07d00fbe082dbb"
+    },
+    {
+      "path": "QFIT-AI/research/knowledge/en/spherex-data-access.md",
+      "sha256": "bd42b62391a0a0f56b4c90c676f2cf6b2b250fedccfb2e7fbfeccb0002ea7122"
+    },
+    {
+      "path": "QFIT-AI/research/knowledge/en/spherex-data-products.md",
+      "sha256": "2ea0e524b84b6d570bd55ce9ec34afbea6cb3753a4c94fdf9a32a4858c4e7127"
+    },
+    {
+      "path": "QFIT-AI/research/knowledge/en/spherex-mission.md",
+      "sha256": "aae088ddfbba484fd3a0d8020f97d5e4466422620c6d754a3f20c1daf8a87097"
+    },
+    {
+      "path": "QFIT-AI/research/knowledge/en/temporal-coverage.md",
+      "sha256": "05b23749633a334e83e2654642899f7046b481c66e283cd6c4b2ce400405c787"
+    },
+    {
+      "path": "QFIT-AI/research/knowledge/index.json",
+      "sha256": "4976b51001c22b5c86a45e1a47093b225eed9e226b137b79ef20e1c34ebe6280"
+    },
+    {
+      "path": "QFIT-AI/research/knowledge/tr/brown-dwarfs.md",
+      "sha256": "064028017cc7c545bb06851d9545d6730e2c9934c4be3365247ab317b91a80ab"
+    },
+    {
+      "path": "QFIT-AI/research/knowledge/tr/citizen-science.md",
+      "sha256": "638e781a277f7b0dc5d8d096856ccb968aafde437587eae9a589ec8d6cce290d"
+    },
+    {
+      "path": "QFIT-AI/research/knowledge/tr/hr-diagram.md",
+      "sha256": "61511dd1e69cc22dc2b22b00580759401bb1281b52ddb68af15c9afdf9d72dbe"
+    },
+    {
+      "path": "QFIT-AI/research/knowledge/tr/qfit-evidence-policy.md",
+      "sha256": "6da776886c00ab3be17f1a97ac283c2f035f69b9d5f50b638c2c2d4d90147870"
+    },
+    {
+      "path": "QFIT-AI/research/knowledge/tr/spectroscopy.md",
+      "sha256": "c6f59ea3ae9a32e5e681af9e21349b5309178fbb74c82eef5897fa64fbe96740"
+    },
+    {
+      "path": "QFIT-AI/research/knowledge/tr/spherex-data-access.md",
+      "sha256": "e52f83aa5a11277fa38fb067bcfdd1c57d9acb3cc0ed5bbb5347d545d36d9deb"
+    },
+    {
+      "path": "QFIT-AI/research/knowledge/tr/spherex-data-products.md",
+      "sha256": "5cc3d086cb73a132e3530b24120e883fd6550eadeb2e8655c2aa1b85b15ce92e"
+    },
+    {
+      "path": "QFIT-AI/research/knowledge/tr/spherex-mission.md",
+      "sha256": "bfb1b59d76032cc710e0a4006310a0f42a1f62cde806aa22f19de4cd4624d14c"
+    },
+    {
+      "path": "QFIT-AI/research/knowledge/tr/temporal-coverage.md",
+      "sha256": "35f99710d6636d91c02a6b549ba1b96dccd89df44e3e6de7b493dd045fdcb1ae"
+    },
+    {
+      "path": "QFIT-AI/research/sources/registry.json",
+      "sha256": "7c7e4da779ae80c916dff71e7a88dcb84e07b2b23bda7e4be299dbe02a37204e"
+    },
+    {
+      "path": "QFIT-AI/tests/__init__.py",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "QFIT-AI/tests/conftest.py",
+      "sha256": "573f8bc6bc5863055a906e7bcf8807fafd71ec1591d85031b3f19436e019107d"
+    },
+    {
+      "path": "QFIT-AI/tests/test_ai.py",
+      "sha256": "3395a15c33ecf3655ef78458624b467f450d456917a467d27eb46b7a000c1070"
+    },
+    {
+      "path": "QFIT-AI/tests/test_api.py",
+      "sha256": "18c581915afa0d5875b48d2f052f03e2c8f906cddd101fcf81ad1ba7e13aae0a"
+    },
+    {
+      "path": "QFIT-AI/tests/test_citizen.py",
+      "sha256": "4c52f9d9b83a7d2ad701b9d595133d00eff3321a026ebe18edf623b1d109ca98"
+    },
+    {
+      "path": "QFIT-AI/tests/test_cutouts.py",
+      "sha256": "b2fc1433c9ed4b3679a22b52544c4d2b209c11ced39be52498ff431c81a870c8"
+    },
+    {
+      "path": "QFIT-AI/tests/test_evaluation.py",
+      "sha256": "1ed274db4f9f3b62fb2cb0e0125f156b76350f37635c37acfebe704036269fe5"
+    },
+    {
+      "path": "QFIT-AI/tests/test_grounding.py",
+      "sha256": "3fa4dec3f4939851bd83a613f8bd218f1a47d57e346c5dc87965034aed5bf377"
+    },
+    {
+      "path": "QFIT-AI/tests/test_knowledge.py",
+      "sha256": "f0bcefb004140572364d4dbaaf4316a2da409e43231402b8b92e213d9ff846e6"
+    },
+    {
+      "path": "QFIT-AI/tests/test_live.py",
+      "sha256": "d003accb0ac8f0ebc7f30d3b49a80e4f905beb2e46d5879b5027b59817785f66"
+    },
+    {
+      "path": "QFIT-AI/tests/test_object_resolver.py",
+      "sha256": "717110b71266b8242f2769563b7fe7313ff52e4faf6e96f307e4d567ae532c8c"
+    },
+    {
+      "path": "QFIT-AI/tests/test_ollama.py",
+      "sha256": "8e82768834f47552a7e45cf3e24166c2b1796b577b96ebc31914aa999d3c0abe"
+    },
+    {
+      "path": "QFIT-AI/tests/test_openai.py",
+      "sha256": "88a4f7296a7ec45b29b9932f8c16afaa8d369e970502356c988e5731d1fc2f64"
+    },
+    {
+      "path": "QFIT-AI/tests/test_preview.py",
+      "sha256": "300257b2d120c3d96ca199106a26566c0335be763b408f69c470a56707629e6a"
+    },
+    {
+      "path": "QFIT-AI/tests/test_scientific_config.py",
+      "sha256": "393af5912767caaae19ce0cac3432fa68bc36808ca39a98bd71519d2b9d9614f"
+    },
+    {
+      "path": "QFIT-AI/tests/test_spherex.py",
+      "sha256": "020c2ec244960c239901ce8bf14da6ccca4c87e16f7c973b4951f3ba8dec80a4"
+    },
+    {
+      "path": "QFIT-AI/tests/test_training.py",
+      "sha256": "cfc8681cca521e5d8c094098d8114922292324ea2395874bd94deb894ad59502"
+    },
+    {
+      "path": "QFIT-AI/tests/test_web_safety.py",
+      "sha256": "a3d1d3347ab09933a5d38c1b2667493a827cd05a8e506643bdf88e1a8303c21c"
+    }
+  ]
+}

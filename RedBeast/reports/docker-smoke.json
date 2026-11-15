@@ -1,0 +1,72 @@
+{
+  "image": "blinkspace:smoke",
+  "container_port": 8123,
+  "host_port": 18080,
+  "health": {
+    "status": "ok",
+    "app": "BlinkSpace",
+    "pipeline_version": "1.2.0",
+    "active_jobs": 0,
+    "limits": {
+      "fov_arcmin": [
+        2.0,
+        30.0
+      ],
+      "max_frames": 16,
+      "default_fov_arcmin": 6.0,
+      "default_frames": 8
+    },
+    "classifications": [
+      "possible_motion",
+      "possible_brightness_change",
+      "possible_artifact",
+      "unsure"
+    ]
+  },
+  "/api/targets": {
+    "status": 200,
+    "cache_control": "no-store",
+    "bytes": 9177,
+    "target_count": 5,
+    "ready_count": 0
+  },
+  "/api/assistant/status": {
+    "status": 200,
+    "cache_control": "no-store",
+    "bytes": 33,
+    "body": {
+      "enabled": false,
+      "provider": null
+    }
+  },
+  "/api/motion": {
+    "status": 200,
+    "cache_control": "public, max-age=86400",
+    "bytes": 146768
+  },
+  "/api/sky/bright.json": {
+    "status": 200,
+    "cache_control": "public, max-age=86400",
+    "bytes": 99393
+  },
+  "/api/sky/bright.bin": {
+    "status": 200,
+    "cache_control": "public, max-age=86400",
+    "bytes": 245980
+  },
+  "frontend": {
+    "status": 200,
+    "content_type": "text/html; charset=utf-8",
+    "csp": "default-src 'self'; img-src 'self' data: blob:; style-src 'self' 'unsafe-inline'; script-src 'self'; connect-src 'self'; frame-ancestors *; base-uri 'self'",
+    "bytes": 2338
+  },
+  "assistant_chat": {
+    "status": 503,
+    "body": {
+      "error": {
+        "code": "assistant_disabled",
+        "message": "Assistant is disabled."
+      }
+    }
+  }
+}

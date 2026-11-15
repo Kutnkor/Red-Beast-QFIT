@@ -1,0 +1,385 @@
+/* One design language: re-skins the original viewer, panels and dialogs in the V4 kit.
+   Loaded globally, so it reaches the top document, the V4 frame and the viewer's shadow root alike.
+   Rule of thumb: surfaces are navy glass, the selected thing is a white plate with navy ink, orange is "now". */
+body{font-family:var(--font)}
+.mono,.readout,.now-date,.wavelength-line,code,pre{font-stretch:87.5%}
+*{scrollbar-width:thin;scrollbar-color:rgba(156,178,238,.4) transparent}
+
+/* ---------- buttons ---------- */
+.btn{border:1px solid rgba(156,178,238,.34);background:linear-gradient(170deg,rgba(124,154,236,.18),rgba(16,34,79,.3));border-radius:12px;font-weight:600;
+  transition:transform 120ms cubic-bezier(.16,1,.3,1),background 220ms,color 220ms,border-color 220ms,box-shadow 220ms}
+.btn:hover:not(:disabled){border-color:#fff;background:linear-gradient(170deg,rgba(124,154,236,.3),rgba(16,34,79,.4))}
+.btn:active:not(:disabled){transform:scale(.96)}
+.btn:disabled{opacity:.4}
+.btn-primary{background:rgba(255,255,255,.96);border-color:#fff;color:#0a1634}
+.btn-primary:hover:not(:disabled){background:#fff;border-color:#fff;box-shadow:0 6px 18px rgba(0,0,0,.35)}
+.btn-small{min-height:32px;border-radius:10px}
+.btn-icon{border-color:transparent;background:none}
+.btn-icon:hover:not(:disabled){background:rgba(255,255,255,.96);color:#0a1634;border-color:transparent}
+.btn-text{border-color:transparent;background:none}
+a{color:#fff;text-underline-offset:3px}
+
+/* ---------- fields ---------- */
+select,input[type=text],input[type=number],input[type=search],input:not([type]),textarea{border:1px solid rgba(156,178,238,.34);border-radius:12px;background-color:rgba(10,22,52,.72);color:#fff;font-family:var(--font);
+  transition:border-color 220ms,box-shadow 220ms}
+select{appearance:none;-webkit-appearance:none;padding-right:30px;cursor:pointer;font-weight:600;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12' fill='none' stroke='%23c6d3f7' stroke-width='1.7' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M2.5 4.5 6 8l3.5-3.5'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 10px center}
+select:hover,input:hover,textarea:hover{border-color:rgba(255,255,255,.7)}
+select:focus-visible,input:focus-visible,textarea:focus-visible{outline:2px solid var(--signal);outline-offset:2px}
+option{background:#0a1634;color:#fff}
+input[type=range]{accent-color:#fff}
+input[type=checkbox],input[type=radio]{accent-color:#fff}
+
+/* ---------- notices, tags ---------- */
+.notice{border:0;border-radius:12px;background:linear-gradient(170deg,rgba(124,154,236,.2),rgba(16,34,79,.34));box-shadow:inset 0 0 0 1px rgba(156,178,238,.26);color:#e4ebfd}
+.notice-warn{border-left:0;box-shadow:inset 3px 0 0 #c6d3f7,inset 0 0 0 1px rgba(156,178,238,.26)}
+.tag{border-radius:8px;border-color:rgba(156,178,238,.4)}
+kbd{font-family:var(--mono);font-stretch:87.5%;font-size:12px;border:1px solid rgba(156,178,238,.36);border-radius:7px;padding:3px 7px;background:rgba(5,11,32,.45);color:#c6d3f7}
+
+/* ---------- side tabs (analysis drawer) ---------- */
+.tabs{border-bottom:0;gap:2px;padding:6px;scrollbar-width:none}
+.tab{min-height:34px;border-bottom:0;border-radius:10px;font-weight:600;font-size:13.5px;padding:0 10px;transition:background 220ms,color 220ms}
+.tab:hover{color:#fff}
+.tab-on{background:rgba(255,255,255,.96);color:#0a1634;border-bottom-color:transparent}
+
+/* ---------- dialogs ---------- */
+.dialog-backdrop{background:rgba(3,7,20,.42);animation:kx-fade 260ms ease-out both;z-index:110;place-items:end center;padding:0 16px;overflow:hidden}
+.dialog-backdrop[data-closing]{animation:kx-fade-out 240ms ease-in both}
+.dialog{width:min(680px,100%);max-height:min(82vh,780px);border:0;border-radius:26px 26px 0 0;background:linear-gradient(180deg,rgba(16,34,79,.9),rgba(6,14,38,.95));-webkit-backdrop-filter:blur(22px) saturate(1.3);backdrop-filter:blur(22px) saturate(1.3);
+  box-shadow:0 -18px 60px rgba(0,0,0,.5),inset 0 0 0 1px rgba(156,178,238,.26),inset 0 1px 0 rgba(255,255,255,.22);transform-origin:50% 50%;animation:kx-sheet-in 620ms linear both;overflow:auto}
+.dialog.dialog-wide{width:min(940px,100%)}
+.dialog-backdrop[data-closing] .dialog{animation:kx-sheet-out 240ms cubic-bezier(.5,0,.8,.3) both}
+.dialog-head{background:none;position:sticky}
+.dialog-head::before{content:"";position:absolute;left:50%;top:7px;width:38px;height:4px;margin-left:-19px;border-radius:2px;background:rgba(198,211,247,.45)}
+.dialog-head{border-bottom:1px solid rgba(156,178,238,.2);min-height:60px;padding:6px 10px 0 22px}
+.dialog-head h2{font-size:18px;font-weight:750}
+.dialog-body{font-size:15px;line-height:1.5}
+.dialog-body h3{font-size:15px;font-weight:700}
+.dialog table{border-collapse:collapse}
+.dialog th,.dialog td{border-color:rgba(156,178,238,.2)}
+
+/* ---------- search panel (top document) ---------- */
+.kx-find{flex:1;display:flex;align-items:center;gap:12px;min-height:56px;color:#c6d3f7}
+.kx-find input{flex:1;min-width:0;border:0;background:none;outline:0;font:500 18px var(--kx-font);color:#fff;padding:0}
+.kx-find input::placeholder{color:#9cb2ee}
+.kx-results{position:relative;margin:-6px -10px 4px;max-height:308px;overflow:auto}
+.kx-results>button{position:relative;z-index:1;display:flex;align-items:center;gap:11px;width:100%;height:44px;padding:0 12px 0 10px;border:0;border-radius:11px;background:none;color:#e4ebfd;font:500 15.5px var(--kx-font);text-align:left;cursor:pointer;transition:color 140ms}
+.kx-results>button span{flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.kx-results>button small{font:400 12.5px var(--kx-mono);font-stretch:87.5%;color:#9cb2ee;transition:color 140ms}
+.kx-results>button[data-on="true"]{color:#0a1634;font-weight:650}
+.kx-results>button[data-on="true"] small{color:#465a8e}
+.kx-hl{position:absolute;left:0;right:0;top:0;height:44px;border-radius:11px;background:rgba(255,255,255,.97);box-shadow:0 6px 18px rgba(0,0,0,.35);transition:transform 180ms cubic-bezier(.16,1,.3,1);will-change:transform}
+.kx-empty{padding:16px 12px;color:#c6d3f7;margin:0}
+.kx-archive{border-top:1px solid rgba(156,178,238,.2);margin:8px -20px 0;padding:6px 20px 0}
+.kx-archive summary{display:flex;align-items:center;gap:10px;min-height:44px;cursor:pointer;font-weight:650;list-style:none}
+.kx-archive summary::-webkit-details-marker{display:none}
+.kx-archive[open] summary{margin-bottom:8px}
+.kx-hint{display:flex;align-items:center;gap:8px;margin:12px 0 0;font-size:13px;color:#9cb2ee}
+.kx-hint kbd{margin-left:6px}
+.kx-hint kbd:first-child{margin-left:0}
+
+/* ---------- the observation viewer inside the V4 stage ---------- */
+.v4-render-root{font-family:var(--font);color:#fff}
+.v4-render-root .integrated-viewer.show-frames{position:absolute;inset:0;height:100%;display:block;background:none;border:0;border-radius:0;overflow:visible}
+.v4-render-root .integrated-viewer.show-frames .viewer-main{display:grid;grid-template-columns:auto minmax(0,1fr);grid-template-rows:auto auto auto minmax(200px,1fr) auto auto auto auto auto;height:100%;min-height:0;overflow:visible;padding:0;gap:0;position:relative}
+.v4-render-root .viewer-head{display:none}
+.v4-render-root .integrated-viewer .viewer-main,.v4-render-root .integrated-viewer .transport,.v4-render-root .integrated-viewer .timeline{background:none!important}
+.v4-render-root .wavelength-line,.v4-render-root .readout,.v4-render-root .readout *{font-family:var(--font)!important;font-size:12.5px!important;font-stretch:100%}
+.v4-render-root .banners{grid-area:2/1/3/3;min-height:0}
+.v4-render-root .banners .notice{margin:8px 0 0;padding:7px 12px;font-size:13px;line-height:1.35;animation:kx-rise 500ms cubic-bezier(.16,1,.3,1) both}
+.v4-render-root .toolbar{display:contents}
+.v4-render-root .kx-modes{grid-area:1/1;align-self:center;animation:kx-drop 600ms cubic-bezier(.16,1,.3,1) both}
+.v4-render-root .ab{grid-area:1/2;justify-self:end;align-self:center;flex-wrap:nowrap;animation:kx-drop 600ms cubic-bezier(.16,1,.3,1) both;animation-delay:60ms}
+.v4-render-root .zoom{grid-area:4/1/5/3;align-self:end;justify-self:end;z-index:3;margin:0 10px 10px 0;padding:4px;border-radius:14px;background:rgba(10,22,52,.72);box-shadow:inset 0 0 0 1px rgba(156,178,238,.3);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);animation:kx-fade 700ms ease-out both}
+.v4-render-root .ab .field-inline{font-size:12.5px;color:#c6d3f7;gap:6px}
+.v4-render-root .ab select{height:34px;min-height:34px;max-width:176px;font-size:12px;border-radius:10px}
+.v4-render-root .ab .btn{min-height:34px;height:34px;width:34px;padding:0;border-radius:10px}
+.v4-render-root .zoom{gap:2px}
+.v4-render-root .zoom .btn-icon{width:34px;min-height:34px;border-radius:10px}
+.v4-render-root .zoom .btn-mark{min-height:34px;border-radius:10px;font-size:13px;margin-left:6px}
+.v4-render-root .zoom-level{font-size:12px}
+.v4-render-root .zoom .btn-blink{min-height:34px;border-radius:10px;font-size:13px;gap:7px;margin-right:6px;background:rgba(255,255,255,.96);color:#0a1634;border-color:#fff}
+.v4-render-root .zoom .btn-blink:hover{background:#fff}
+.v4-render-root .zoom .btn-blink kbd{background:#e4ebfd;color:#465a8e;border-color:#c6d3f7;padding:2px 6px}
+.btn-blink kbd{margin-left:2px}
+.v4-render-root .derived{grid-area:3/1/4/3;border:0;border-radius:12px;background:linear-gradient(170deg,rgba(124,154,236,.2),rgba(16,34,79,.34));box-shadow:inset 0 0 0 1px rgba(156,178,238,.26);padding:8px 12px;margin:8px 0 0;font-size:13px;animation:kx-rise 500ms cubic-bezier(.16,1,.3,1) both}
+.v4-render-root .integrated-viewer .viewer-main .stage{grid-area:4/1/5/3;min-height:200px;height:auto;margin-top:10px;gap:10px;animation:kx-fade 700ms ease-out both}
+.v4-render-root .pane{border:0;border-radius:18px;background:#000;box-shadow:0 0 0 1px rgba(156,178,238,.26),0 24px 60px rgba(0,0,0,.5);transition:box-shadow 220ms}
+.v4-render-root .pane:hover{box-shadow:0 0 0 1px rgba(255,255,255,.5),0 24px 60px rgba(0,0,0,.5)}
+.v4-render-root .pane-marking{box-shadow:0 0 0 2px var(--signal),0 24px 60px rgba(0,0,0,.5)}
+.v4-render-root .pane-chip{left:10px;top:10px;padding:5px 10px;border-radius:10px;border:0;font-size:12px;background:rgba(10,22,52,.72);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);box-shadow:inset 0 0 0 1px rgba(156,178,238,.3)}
+.v4-render-root .wavelength-line{grid-area:5/1/6/3;border:0;padding:8px 2px 0;font:500 12.5px var(--font);font-variant-numeric:tabular-nums;color:#c6d3f7}
+.v4-render-root .readout{grid-area:6/1/7/3;margin:2px 2px 0;font:500 12.5px var(--font);font-variant-numeric:tabular-nums;color:#c6d3f7;border:0;padding:0}
+.v4-render-root .transport{grid-area:7/1/8/3;border:0;background:none;padding:0 118px 0 0;margin:4px 0 0;min-height:76px;align-items:center;flex-wrap:nowrap}
+.v4-render-root .transport-buttons{gap:6px}
+.v4-render-root .transport select{height:32px;min-height:32px;font-size:12px;border-radius:10px;font-family:var(--mono);font-stretch:87.5%}
+.v4-render-root .now{align-items:flex-end;gap:2px}
+.v4-render-root .now .kx-odo{font-size:30px}
+.v4-render-root .now .small{font-size:13px;color:#c6d3f7}
+.v4-render-root .timeline{grid-area:8/1/9/3;padding:0 118px 0 0;margin:0}
+.v4-render-root .timeline-track{height:66px;border-radius:8px}
+.v4-render-root .tl-axis{stroke:rgba(198,211,247,.75)}
+.v4-render-root .tl-minor{fill:none;stroke:rgba(198,211,247,.5);stroke-width:1.5;stroke-linecap:round}
+.v4-render-root .tl-month{stroke:rgba(198,211,247,.8);stroke-width:1.5}
+.v4-render-root .tl-month-text{font:12px var(--mono);font-stretch:87.5%;fill:#9cb2ee}
+.v4-render-root .tl-tick line{stroke:#fff;stroke-width:1.5;stroke-linecap:round}
+.v4-render-root .tl-tick-current line{stroke:var(--signal);stroke-width:2}
+.v4-render-root .tl-handle{height:24px;border:0;border-radius:8px;background:rgba(16,34,79,.8);box-shadow:inset 0 0 0 1px rgba(156,178,238,.4);font:500 12px var(--mono);color:#e4ebfd;transition:background 200ms,color 200ms,transform 160ms cubic-bezier(.16,1,.3,1)}
+.v4-render-root .tl-handle:hover{background:#fff;color:#0a1634;transform:translateY(-2px)}
+.v4-render-root .tl-handle-ref{box-shadow:inset 0 0 0 1.5px #fff}
+.v4-render-root .tl-handle-current{background:#fff;color:#0a1634;box-shadow:0 4px 12px rgba(0,0,0,.4);font-weight:700}
+.v4-render-root .tl-badge{background:#c6d3f7;color:#0a1634;border-radius:5px;font-size:10px;line-height:13px;padding:0 4px;right:-7px;top:-8px}
+.v4-render-root .tl-needle{position:absolute;left:0;top:26px;width:2px;height:22px;margin-left:-1px;border-radius:1px;background:var(--signal);pointer-events:none;transition:transform 420ms cubic-bezier(.16,1,.3,1);will-change:transform}
+.v4-render-root .tl-needle::after{content:"";position:absolute;left:-4px;bottom:-5px;width:10px;height:10px;border-radius:50%;background:var(--signal);box-shadow:0 0 0 4px rgba(255,106,26,.24)}
+.v4-render-root .timeline-ends{font-size:12px;color:#9cb2ee}
+.v4-render-root .play-note{grid-area:9/1/10/3;margin:2px 0 0;font-size:12px;color:#9cb2ee;padding-right:118px}
+/* analysis drawer: a glass panel that slides in over the right edge */
+.v4-render-root .integrated-viewer.drawer-open .viewer-side{position:absolute;z-index:6;right:0;top:46px;bottom:122px;height:auto;width:372px;max-height:none;border:0;border-radius:20px;overflow:auto;
+  background:linear-gradient(180deg,rgba(16,34,79,.92),rgba(6,14,38,.96));box-shadow:0 24px 60px rgba(0,0,0,.55),inset 0 0 0 1px rgba(156,178,238,.28),inset 0 1px 0 rgba(255,255,255,.18);
+  -webkit-backdrop-filter:blur(16px);backdrop-filter:blur(16px);animation:kx-drawer 420ms cubic-bezier(.16,1,.3,1) both}
+@keyframes kx-drawer{from{opacity:0;transform:translateX(28px)}to{opacity:1;transform:none}}
+.v4-render-root .viewer-side .tabs{flex-wrap:wrap;overflow:visible;padding:8px 52px 4px 8px}
+.v4-render-root .viewer-side .tab{flex:0 0 auto}
+.v4-render-root .viewer-side .drawer-close{position:absolute;right:8px;top:8px;margin:0;float:none;z-index:2}
+.v4-render-root .viewer-side .panel-body{font-size:14px;line-height:1.5}
+.v4-render-root .viewer-side h3{font-size:15px;font-weight:700}
+.v4-render-root .drawer-close{margin:6px 6px 0 0}
+/* 3D scene: no box, soft edges, captions as quiet text under the star */
+/* the canvas is transparent; only its outermost band fades, so nothing is cut off at a hard edge */
+.v4-render-root .sky-canvas canvas{-webkit-mask-image:linear-gradient(to right,transparent,#000 6%,#000 95%,transparent),linear-gradient(to bottom,transparent,#000 8%,#000 90%,transparent);-webkit-mask-composite:source-in;mask-image:linear-gradient(to right,transparent,#000 6%,#000 95%,transparent),linear-gradient(to bottom,transparent,#000 8%,#000 90%,transparent);mask-composite:intersect}
+.v4-render-root .sky-science-caption{left:50%;right:auto;bottom:24px;width:640px;margin-left:-320px;display:block;text-align:center;font:400 12px/1.45 var(--font)!important;color:#c6d3f7;max-height:none;overflow:visible;text-shadow:0 1px 2px rgba(5,11,32,.75),0 0 16px rgba(5,11,32,.5);pointer-events:none}
+.v4-render-root .sky-science-caption span{display:inline!important}
+.v4-render-root .sky-science-caption span+span::before{content:" · "}
+.v4-render-root .sky-background-credit{left:50%;right:auto;bottom:5px;width:640px;margin-left:-320px;text-align:center;font:400 12px var(--font)!important;color:#9cb2ee;white-space:nowrap}
+.v4-render-root .stage-tools{right:24px;bottom:8px;gap:2px;padding:4px;border-radius:14px;background:linear-gradient(170deg,rgba(124,154,236,.2),rgba(16,34,79,.3));box-shadow:inset 0 0 0 1px rgba(156,178,238,.26);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px)}
+.v4-render-root .stage-tools .btn{min-height:34px;width:34px;border-radius:10px}
+.v4-render-root .sky-neighbour-list{right:24px;top:36px;border:0;border-radius:14px;background:linear-gradient(180deg,rgba(16,34,79,.9),rgba(6,14,38,.94));box-shadow:inset 0 0 0 1px rgba(156,178,238,.28);font-size:13px}
+
+@media (prefers-reduced-motion:reduce){.dialog,.dialog-backdrop,.v4-render-root *{animation-duration:.01ms!important;animation-delay:0ms!important;transition-duration:.01ms!important}}
+@media(max-width:759px){
+ .v4-render-root .transport,.v4-render-root .timeline,.v4-render-root .play-note{padding-right:0}
+ .v4-render-root .integrated-viewer.show-frames .viewer-main{display:flex;flex-direction:column;height:auto}
+ .v4-render-root .kx-modes{order:1;align-self:stretch}
+ .v4-render-root .banners{order:2}
+ .v4-render-root .derived{order:3}
+ .v4-render-root .integrated-viewer .viewer-main .stage{order:4}
+ .v4-render-root .zoom{order:5;align-self:flex-end;margin:-54px 10px 10px 0;position:relative}
+ .v4-render-root .zoom .btn-mark span{display:none}
+ .v4-render-root .ab{order:6;justify-self:stretch;flex-wrap:wrap;margin-top:8px}
+ .v4-render-root .ab select{max-width:none;flex:1;height:44px;min-height:44px}
+ .v4-render-root .ab .btn{height:44px;width:44px;min-height:44px}
+ .v4-render-root .wavelength-line{order:7}
+ .v4-render-root .readout{order:8}
+ .v4-render-root .transport{order:9;flex-wrap:wrap;row-gap:4px}
+ .v4-render-root .timeline{order:10}
+ .v4-render-root .play-note{order:11;padding-right:96px}
+ .v4-render-root .integrated-viewer.show-frames{position:relative;height:auto}
+ .v4-render-root .integrated-viewer .viewer-main .stage{min-height:300px;height:74vw;flex:none}
+ .v4-render-root .now .kx-odo{font-size:24px}
+ .v4-render-root .integrated-viewer.drawer-open .viewer-side{position:fixed;inset:70px 10px 76px 10px;width:auto}
+ .v4-render-root .sky-science-caption{left:16px;right:16px;width:auto;margin-left:0;bottom:64px}
+ .v4-render-root .sky-background-credit{left:16px;right:16px;width:auto;margin-left:0;white-space:normal;bottom:8px}
+ .v4-render-root .stage-tools{right:8px;bottom:auto;top:8px}
+ .v4-render-root .zoom .btn-blink kbd{display:none}
+}
+
+/* ---------- focus: programmatic focus on a container never draws a ring ---------- */
+.dialog:focus,.dialog:focus-visible,.kx-panel:focus,.kx-panel:focus-visible{outline:none}
+.kx-find input:focus,.kx-find input:focus-visible{outline:none}
+
+/* ---------- orange means "now" only: epistemic and warning cues are typographic ---------- */
+.computed{color:#c6d3f7}
+.assumed{text-decoration:underline dotted #9cb2ee;text-underline-offset:4px}
+.hint-warn,.flag-warn,.status-line,.tag-cyan{color:#c6d3f7}
+.flag-warn::before{content:"! ";font-weight:800;color:#fff}
+.notice-accent,.notice-info{border-left:0;box-shadow:inset 3px 0 0 #9cb2ee,inset 0 0 0 1px rgba(156,178,238,.26)}
+.check input,input[type=checkbox],.quiz-option input,.year-range input{accent-color:#c6d3f7}
+.progress span{background:#fff}
+.status-dot{border-color:#c6d3f7}
+.obs-banner{border-bottom-color:rgba(156,178,238,.4)}
+.obs-banner strong{color:#fff}
+.tag-synthetic{background:#fff;border-color:#fff;color:#0a1634}
+a.target:hover,button.target:hover:not(:disabled){border-color:#fff}
+.lc-unreliable .lc-mark,.lc-unreliable .lc-err{stroke:#9cb2ee;stroke-dasharray:2 2}
+
+/* ---------- sources dialog: a plain two-column list and quiet disclosure rows ---------- */
+.epistemic-legend{gap:20px;padding:12px 0 4px;font-size:13.5px}
+.source-list{list-style:none;padding:6px 0 10px;margin:0;columns:2;column-gap:32px}
+.source-list li{padding:5px 0;break-inside:avoid}
+.source-list a{text-decoration:underline;text-decoration-color:rgba(156,178,238,.5);text-underline-offset:3px;transition:text-decoration-color 180ms}
+.source-list a:hover{text-decoration-color:#fff}
+.dialog-body details{border-top:1px solid rgba(156,178,238,.16)}
+.dialog-body details:last-of-type{border-bottom:1px solid rgba(156,178,238,.16);margin-bottom:14px}
+.dialog-body summary{list-style:none;display:flex;align-items:center;gap:12px;min-height:40px;cursor:pointer;font-weight:600}
+.dialog-body summary::-webkit-details-marker{display:none}
+.dialog-body summary::before{content:"";flex:none;width:7px;height:7px;margin-left:3px;border-right:1.8px solid #c6d3f7;border-bottom:1.8px solid #c6d3f7;transform:rotate(-45deg);transition:transform 200ms ease-out}
+.dialog-body details[open]>summary::before{transform:rotate(45deg)}
+.dialog-body summary:hover{color:#fff}
+.dialog-body details ul{margin:2px 0 10px;padding-left:34px}
+.dialog-body details li{padding:3px 0}
+.dialog-body details p{margin:6px 0 6px 22px}
+.dialog-body pre{margin:4px 0 12px 22px;padding:12px;border-radius:10px;background:rgba(3,8,24,.6);font-family:var(--mono);font-stretch:87.5%;font-size:12px;line-height:1.5;max-height:220px;overflow:auto}
+@media (max-width:640px){.source-list{columns:1}}
+
+/* ---------- filmstrip: every real frame at a glance, hard cut on click (single-frame mode) ---------- */
+.stage{position:relative}
+.kx-film{position:absolute;z-index:2;right:12px;top:12px;bottom:12px;display:flex;flex-direction:column;justify-content:center;gap:6px;pointer-events:none}
+.kx-film-b{pointer-events:auto;position:relative;flex:0 1 46px;min-height:26px;width:46px;padding:0;border:0;border-radius:9px;background-color:#000;background-size:cover;background-position:center;image-rendering:pixelated;cursor:pointer;
+  box-shadow:0 0 0 1px rgba(156,178,238,.34);opacity:.62;transition:transform 200ms cubic-bezier(.3,1.22,.5,1),opacity 220ms,box-shadow 220ms;animation:kx-rise 460ms cubic-bezier(.16,1,.3,1) both}
+.kx-film-b:hover{opacity:1;transform:translateX(-4px) scale(1.06)}
+.kx-film-b:active{transform:scale(.95)}
+.kx-film-b[data-on]{opacity:1;box-shadow:0 0 0 2px #fff,0 6px 18px rgba(0,0,0,.5)}
+.kx-film-b span{position:absolute;left:-7px;top:-6px;min-width:17px;height:17px;padding:0 4px;display:grid;place-items:center;border-radius:99px;background:#0a1634;box-shadow:0 0 0 1px rgba(156,178,238,.5);
+  color:#c6d3f7;font:600 10px/1 var(--mono);font-stretch:87.5%}
+.kx-film-b[data-on] span{background:#fff;color:#0a1634;box-shadow:none}
+.kx-film-b[data-on]::after{content:"";position:absolute;right:-5px;top:50%;width:6px;height:6px;margin-top:-3px;border-radius:50%;background:var(--orange)}
+.kx-film-b[data-ref]::before{content:"A";position:absolute;right:-7px;top:-6px;width:17px;height:17px;display:grid;place-items:center;border-radius:50%;background:#c6d3f7;color:#0a1634;font:700 10px/1 var(--font)}
+@media (max-width:759px){.kx-film{display:none}}
+@media (prefers-reduced-motion:reduce){.kx-film-b{animation:none;transition:none}}
+
+/* ---------- the observatory shell resets every <button>; these restate the kit look with enough weight to survive it ---------- */
+.tabs .tab{min-height:40px;border-radius:0;border-bottom:2px solid transparent;background:none;color:#9cb2ee;font:600 13px/1 var(--font);padding:0 7px;transition:color 180ms,border-color 180ms}
+.tabs .tab:hover{color:#fff}
+.tabs .tab.tab-on{background:none;color:#fff;border-bottom-color:#fff}
+.dialog .btn{min-height:40px;padding:0 16px;border:1px solid rgba(156,178,238,.34);background:linear-gradient(170deg,rgba(124,154,236,.18),rgba(16,34,79,.3));border-radius:12px;font:600 14px/1 var(--font);color:#fff}
+.dialog .btn:hover:not(:disabled){border-color:#fff;background:rgba(255,255,255,.96);color:#0a1634}
+.dialog .btn.btn-primary{background:rgba(255,255,255,.96);border-color:#fff;color:#0a1634}
+.dialog .btn.btn-icon{min-height:36px;padding:0;border-color:transparent;background:none}
+.dialog .btn.btn-icon:hover:not(:disabled){background:rgba(255,255,255,.96);color:#0a1634}
+.v4-render-root .kx-film{bottom:62px}
+.target-filter input,.target-filter input:hover{border:0;background:none;border-radius:0}
+.target-filter:focus-within{border-color:#fff}
+.target-filter input:focus-visible{outline:none}
+
+/* ---------- sky: pick a star by name (glass disclosure, same chevron and rows as the search palette) ---------- */
+.v4-render-root .sky-neighbour-list{top:14px;right:16px;width:300px;max-width:calc(100% - 32px);border:0;border-radius:14px;background:linear-gradient(170deg,rgba(124,154,236,.18),rgba(16,34,79,.34));box-shadow:inset 0 0 0 1px rgba(156,178,238,.3);
+  -webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);color:#fff;font:600 13.5px/1.2 var(--font);overflow:hidden}
+.v4-render-root .sky-neighbour-list[open]{background:linear-gradient(180deg,rgba(16,34,79,.94),rgba(6,14,38,.97));border:0;box-shadow:0 24px 60px rgba(0,0,0,.55),inset 0 0 0 1px rgba(156,178,238,.3)}
+.v4-render-root .sky-neighbour-list summary{list-style:none;display:flex;align-items:center;gap:10px;min-height:40px;padding:0 14px;transition:background 220ms}
+.v4-render-root .sky-neighbour-list summary::-webkit-details-marker{display:none}
+.v4-render-root .sky-neighbour-list summary::before{content:"";flex:none;width:7px;height:7px;border-right:1.8px solid #c6d3f7;border-bottom:1.8px solid #c6d3f7;transform:rotate(-45deg);transition:transform 280ms cubic-bezier(.3,1.22,.5,1)}
+.v4-render-root .sky-neighbour-list[open] summary::before{transform:rotate(45deg)}
+.v4-render-root .sky-neighbour-list summary:hover{background:rgba(124,154,236,.16)}
+.v4-render-root .sky-neighbour-list>div{max-height:330px;padding:4px 6px 6px;gap:2px;animation:kx-rise 360ms cubic-bezier(.16,1,.3,1) both}
+.v4-render-root .sky-neighbour-list button{min-height:36px;padding:0 10px;border:0;border-radius:10px;font:500 13px/1.2 var(--font);color:#e4ebfd;cursor:pointer;transition:background 180ms,color 180ms,transform 160ms cubic-bezier(.16,1,.3,1)}
+.v4-render-root .sky-neighbour-list button:hover{background:rgba(255,255,255,.96);color:#0a1634;transform:translateX(3px)}
+/* the value chips float over the right of the scene, so the picker sits in the clear band between the title column and the chips */
+.v4-render-root .sky-neighbour-list{right:auto;left:470px}
+@media (max-width:759px){.v4-render-root .sky-neighbour-list{left:12px;right:12px;top:10px;width:auto;max-width:none}}
+
+
+/* ---------- calmer defaults: fewer boxes, and controls that only appear when they are needed ---------- */
+/* notices are one line of text with a mark */
+.v4-render-root .banners .notice{background:none;box-shadow:none;padding:8px 2px 0;margin:0;color:#c6d3f7;animation:none}
+.v4-render-root .banners .notice::before{content:"!";display:inline-grid;place-items:center;width:16px;height:16px;margin-right:8px;border-radius:50%;background:#c6d3f7;color:#0a1634;font-weight:800;font-size:11px;line-height:1;vertical-align:1px}
+/* the A and B pickers belong to the comparison modes; looking at one frame needs neither */
+.v4-render-root .integrated-viewer:is([data-view=single],[data-view=stack],[data-view=trackstack]) .ab{display:none}
+/* pointer coordinates show while the pointer is on the image */
+.v4-render-root .readout{opacity:0;transition:opacity 200ms}
+.v4-render-root .viewer-main:hover .readout,.v4-render-root .viewer-main:focus-within .readout{opacity:1}
+/* target list: plain tabs, no tray */
+.lv-targets{padding:0;gap:2px;margin-left:-10px}
+/* analysis drawer: a flat sheet with one row of underlined tabs */
+.v4-render-root .integrated-viewer.drawer-open .viewer-side{width:430px;border-radius:16px;background:#0a1634;box-shadow:0 24px 60px rgba(0,0,0,.55),0 0 0 1px rgba(156,178,238,.22);-webkit-backdrop-filter:none;backdrop-filter:none;animation:kx-drawer 300ms cubic-bezier(.16,1,.3,1) both}
+.v4-render-root .viewer-side .tabs{flex-wrap:nowrap;overflow:visible;gap:0;padding:4px 48px 0 10px;border-bottom:1px solid rgba(156,178,238,.2)}
+/* scene captions: the first note is always there, the rest on hover or focus */
+.v4-render-root .sky-science-caption{pointer-events:auto}
+.v4-render-root .sky-science-caption span:not(:first-child){display:none!important}
+.v4-render-root .sky-science-caption span:first-child:not(:only-child)::after{content:"  …";color:#9cb2ee}
+.v4-render-root .sky-science-caption:hover span:not(:first-child){display:inline!important}
+.v4-render-root .sky-science-caption:hover span:first-child::after{content:none}
+@media (max-width:759px){.v4-render-root .sky-science-caption{z-index:3;padding:6px 10px;border-radius:10px;background:rgba(3,8,24,.78)}}
+
+/* ---------- every layer in its own lane: nothing sits on top of the image any more ---------- */
+/* image tools live on the line under the image, on the right */
+.v4-render-root .zoom{grid-area:5/1/6/3;align-self:center;justify-self:end;margin:8px 0 0;padding:0;background:none;box-shadow:none;-webkit-backdrop-filter:none;backdrop-filter:none;border-radius:0}
+.v4-render-root .wavelength-line{padding-top:14px;max-width:52%}
+/* the filmstrip is a column beside the image */
+.v4-render-root .integrated-viewer .viewer-main .stage:not(.stage-side){display:flex;gap:12px}
+.v4-render-root .stage:not(.stage-side)>:first-child{flex:1;min-width:0}
+.v4-render-root .kx-film{position:static;flex:none;width:52px;padding:0 0 0 6px;justify-content:center;pointer-events:auto}
+/* the analysis drawer is a column of the page: the viewer makes room for it instead of being covered */
+.v4-render-root .integrated-viewer.drawer-open .viewer-main{margin-right:446px}
+.v4-render-root .integrated-viewer.drawer-open .viewer-side{top:0;bottom:104px;width:430px;animation:kx-drawer-in 460ms cubic-bezier(.22,1.12,.36,1) both}
+@keyframes kx-drawer-in{from{opacity:0;transform:translateX(100%)}to{opacity:1;transform:none}}
+.v4-render-root .integrated-viewer.drawer-open .transport,.v4-render-root .integrated-viewer.drawer-open .timeline,.v4-render-root .integrated-viewer.drawer-open .play-note{padding-right:0}
+/* Sky, around the Sun: the value chips describe the chosen star, so they stand in a column at the right edge, clear of the map */
+.lv[data-view=sky] .lv-chips .kx-chip{left:1206px!important;top:calc(150px + var(--i,0)*76px)!important;width:210px}
+.v4-render-root .kx-film{width:64px;padding:0 10px 0 6px}
+.v4-render-root .integrated-viewer.drawer-open .wavelength-line{display:none}
+.v4-render-root .integrated-viewer.drawer-open .now .kx-odo{font-size:20px}
+.v4-render-root .integrated-viewer.drawer-open .transport{min-height:64px}
+
+/* ---------- the robin: speech bubble, shortcuts and "done in the app" notes (the mascot's art is untouched) ---------- */
+.rb-hint{position:fixed;right:22px;bottom:118px;z-index:102;width:min(300px,calc(100vw - 44px));padding:14px 16px 12px;border-radius:18px 18px 4px 18px;color:#0a1634;background:rgba(255,255,255,.97);
+  font:500 14px/1.45 var(--font);box-shadow:0 18px 44px rgba(0,0,0,.45);transform-origin:100% 100%;animation:rb-hint-in 520ms cubic-bezier(.22,1.3,.36,1) both}
+@keyframes rb-hint-in{from{opacity:0;transform:translate(18px,34px) scale(.2)}to{opacity:1;transform:none}}
+.rb-hint p{margin:0}
+.rb-hint .rb-hint-tip{margin-top:6px;font-size:12.5px;color:#465a8e}
+.rb-hint div{display:flex;gap:8px;margin-top:10px}
+.rb-hint button{min-height:34px;padding:0 14px;border:0;border-radius:10px;background:#e4ebfd;color:#0a1634;font:650 13px/1 var(--font);cursor:pointer;transition:transform 120ms cubic-bezier(.16,1,.3,1),background 200ms}
+.rb-hint button:hover{background:#c6d3f7}
+.rb-hint button:active{transform:scale(.96)}
+.rb-hint .rb-hint-go{background:var(--orange);color:#0a1634}
+.rb-hint .rb-hint-go:hover{background:var(--orange-hover,#ff8540)}
+@media (prefers-reduced-motion:reduce){.rb-hint{animation:none}}
+.qf-shortcuts{display:flex;flex-wrap:wrap;gap:6px;padding:0 16px 10px}
+.qf-shortcut{display:inline-flex;align-items:stretch;border-radius:10px;overflow:hidden;box-shadow:inset 0 0 0 1px rgba(156,178,238,.4)}
+.observatory .qf-shortcut button{min-height:30px;padding:0 10px;font:600 12.5px/1 var(--font);color:#fff;background:rgba(124,154,236,.16);cursor:pointer;transition:background 180ms}
+.observatory .qf-shortcut button:hover:not(:disabled){background:rgba(255,255,255,.96);color:#0a1634}
+.observatory .qf-shortcut .qf-shortcut-x{padding:0 8px;color:#c6d3f7;background:none;border-left:1px solid rgba(156,178,238,.3)}
+.observatory .qf-msg .qf-did{color:#ffb58a}
+.observatory .qf-msg .qf-pin{padding:0;color:#fff;text-decoration:underline;text-underline-offset:3px;font:inherit;cursor:pointer}
+
+/* the robin's bubble sits above the scene tools, so it covers neither them nor the mascot */
+.rb-hint{bottom:186px}
+/* sheets and the top document share the glass recipe */
+.dialog{background:radial-gradient(120% 80% at 100% 118%,rgba(255,106,26,.13),rgba(255,106,26,0) 60%),linear-gradient(180deg,rgba(16,34,79,.8),rgba(6,14,38,.9))}
+.tabs .tab.tab-on{border-bottom-color:#ff6a1a}
+
+/* ---------- final pass ---------- */
+/* the star list in the scene is replaced by the Ctrl+K search (button in the left column) */
+.v4-render-root .sky-neighbour-list{display:none}
+.lv-kbd{margin-left:auto;padding:2px 6px;border-radius:6px;font:500 11px/1.3 var(--mono,monospace);font-stretch:87.5%;color:#c6d3f7;background:rgba(10,22,52,.6);box-shadow:inset 0 0 0 1px rgba(156,178,238,.34)}
+/* sheets: the header is the handle */
+.kx-scrim:not([data-place=top]) .kx-panel-head,.dialog-head{cursor:grab;touch-action:none;user-select:none;-webkit-user-select:none}
+.kx-panel[data-dragging] .kx-panel-head,.dialog[data-dragging] .dialog-head{cursor:grabbing}
+.kx-scrim:not([data-place=top]) .kx-panel-head::before,.dialog-head::before{transition:width 180ms,background 180ms}
+.kx-scrim:not([data-place=top]) .kx-panel-head:hover::before,.dialog-head:hover::before{width:54px;margin-left:-27px;background:#fff}
+
+/* ---------- opening moment: the wordmark draws itself, the robin lands, the curtain lifts ---------- */
+.rb-open{position:fixed;inset:0;z-index:3000;display:grid;place-content:center;justify-items:center;gap:22px;background:radial-gradient(120% 90% at 50% 40%,#10224f 0%,#050b20 62%,#02040c 100%);color:#c6d3f7;font:500 17px/1.4 var(--font)}
+.rb-open-mark{display:flex;align-items:center;gap:20px}
+.rb-open-mark img{animation:rb-open-bird 900ms cubic-bezier(.22,1.3,.36,1) both}
+.rb-open-mark svg{height:74px;width:auto;overflow:visible}
+.rb-open-mark path{stroke-dasharray:1;stroke-dashoffset:1;animation:rb-open-draw 620ms cubic-bezier(.4,0,.2,1) forwards}
+.rb-open-red{stroke:#ff6a1a}
+.rb-open-beast{stroke:#fff}
+.rb-open p{margin:0;opacity:0;animation:rb-open-line 600ms ease-out 1150ms forwards}
+.rb-open[data-phase=lift]{animation:rb-open-lift 700ms cubic-bezier(.7,0,.2,1) forwards;pointer-events:none}
+@keyframes rb-open-draw{to{stroke-dashoffset:0}}
+@keyframes rb-open-bird{from{opacity:0;transform:translate(-26px,-34px) rotate(-18deg) scale(.6)}to{opacity:1;transform:none}}
+@keyframes rb-open-line{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+@keyframes rb-open-lift{to{opacity:0;transform:scale(1.06);filter:blur(6px)}}
+/* ---------- icons answer the pointer ---------- */
+.kx-act .kx-ic,.kx-tabs button .kx-ic,.kx-ibtn .kx-ic{transition:transform 280ms cubic-bezier(.3,1.4,.5,1)}
+.kx-act:hover .kx-ic{transform:translateX(2px) rotate(-8deg) scale(1.1)}
+.kx-tabs button:hover .kx-ic{transform:translateY(-1px) scale(1.12)}
+.kx-ibtn:hover .kx-ic{transform:rotate(90deg)}
+@media (prefers-reduced-motion:reduce){.kx-act .kx-ic,.kx-tabs button .kx-ic,.kx-ibtn .kx-ic{transition:none}}
+/* ---------- empty state: no prepared frames for this star ---------- */
+.v4-render-root .scene-message{position:absolute;left:50%;top:44%;translate:-50% -50%;width:min(460px,calc(100% - 32px));padding:22px 24px;border-radius:18px;text-align:left;font-size:15px;line-height:1.5;color:#e4ebfd;
+  background:linear-gradient(170deg,rgba(124,154,236,.16),rgba(16,34,79,.3));box-shadow:inset 0 0 0 1px rgba(156,178,238,.3);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);animation:kx-rise 500ms cubic-bezier(.16,1,.3,1) both}
+.v4-render-root .scene-message p{margin:0 0 14px}
+.v4-render-root .scene-message .btn{min-height:42px;padding:0 18px;border:0;border-radius:12px;background:rgba(255,255,255,.96);color:#0a1634;font:650 14px/1 var(--font);box-shadow:inset 0 -2px 0 #ff6a1a;cursor:pointer}
+.v4-render-root .scene-message .btn:disabled{opacity:.5;cursor:default}
+/* labels never slide under the value chips that stand at the right edge of the Sky view */
+.v4-render-root .sky-canvas[data-scene=neighbors] .sky-labels{--label-reserve-right:244px;--label-reserve-left:366px}
+.v4-render-root .sky-canvas[data-scene=star] .sky-labels{--label-reserve-left:366px}
+/* the mascot is sized in window pixels while the stage scales with the window: keep it in proportion on small windows */
+.v4-shell .qf-root{--qf-mascot-w:clamp(64px,7.5vw,108px)}
+
+/* desktop: the message grows upwards from a fixed line, so the job panel under it (top 440px on the stage) never meets it */
+@media (min-width:760px){.v4-render-root .scene-message{top:auto;bottom:calc(100% - 334px);translate:-50% 0}}
+/* phone: the scene box has no height of its own when it holds only this message, so the message takes its place in the flow */
+@media (max-width:759px){.v4-render-root .scene-message{position:relative;left:auto;top:auto;bottom:auto;translate:none;width:auto;margin:0}}

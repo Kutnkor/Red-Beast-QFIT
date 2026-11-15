@@ -1,0 +1,504 @@
+{
+ "generated_at": "2026-11-14T21:03:32Z",
+ "pipeline_version": "1.1.0",
+ "note": "Yanıt anahtarları hazır dizilerdeki gerçek ölçümlerden üretilmiştir (tools/build_tutorials.py). Sentetik veri yoktur.",
+ "skipped": [],
+ "tutorials": [
+  {
+   "id": "start",
+   "kind": "guided",
+   "target_id": "barnard",
+   "synthetic": false,
+   "title": {
+    "tr": "İlk gözlemin",
+    "en": "Your first observation"
+   },
+   "summary": {
+    "tr": "Gerçek bir SPHEREx dizisi aç, kareler arasında gez, bir nokta işaretle ve paylaş.",
+    "en": "Open a real SPHEREx sequence, step through frames, mark a point and share it."
+   },
+   "steps": [
+    {
+     "id": "open",
+     "event": "sequence_opened",
+     "text": {
+      "tr": "Barnard Yıldızı dizisini aç.",
+      "en": "Open the Barnard's Star sequence."
+     }
+    },
+    {
+     "id": "step",
+     "event": "frame_changed",
+     "text": {
+      "tr": "Sonraki kareye geç ve tarihin değiştiğini gör.",
+      "en": "Go to the next frame and watch the date change."
+     }
+    },
+    {
+     "id": "mark",
+     "event": "mark_added",
+     "text": {
+      "tr": "Dikkatini çeken bir noktayı işaretle ve bir sınıf seç.",
+      "en": "Mark a point that catches your eye and pick a class."
+     }
+    },
+    {
+     "id": "share",
+     "event": "observation_shared",
+     "text": {
+      "tr": "Gözlemini kaydet ve bağlantısını kopyala.",
+      "en": "Save your observation and copy its link."
+     }
+    }
+   ],
+   "frames_used": [
+    "2025W35_1A_0146_1",
+    "2025W35_2A_0418_1",
+    "2026W11_2A_0501_3",
+    "2026W34_1A_0363_1",
+    "2026W34_2A_0264_1",
+    "2026W39_1A_0371_1"
+   ],
+   "sources": [
+    {
+     "label": "SPHEREx Quick Release Spectral Images (IRSA, doi:10.26131/IRSA629)",
+     "url": "https://irsa.ipac.caltech.edu/Missions/spherex.html"
+    }
+   ]
+  },
+  {
+   "id": "spot-motion",
+   "kind": "quiz",
+   "target_id": "eps-indi-b",
+   "synthetic": false,
+   "title": {
+    "tr": "Hareketi fark et",
+    "en": "Spot the motion"
+   },
+   "summary": {
+    "tr": "İlk ve son kare arasında yer değiştiren kaynağı bul.",
+    "en": "Find the source that changes place between the first and last frame."
+   },
+   "question": {
+    "tr": "İlk kare (2025-04-26) ile son kareyi (2026-10-02) art arda göster. Alan merkezindeki kaynak hangi yöne kayıyor? (Kuzey yukarıda, doğu solda.)",
+    "en": "Blink the first frame (2025-04-26) against the last (2026-10-02). Which way does the source at the field centre move? (North is up, east is left.)"
+   },
+   "options": [
+    {
+     "id": "northeast",
+     "text": {
+      "tr": "Kuzeydoğu (yukarı-sol)",
+      "en": "North-east (up-left)"
+     }
+    },
+    {
+     "id": "northwest",
+     "text": {
+      "tr": "Kuzeybatı (yukarı-sağ)",
+      "en": "North-west (up-right)"
+     }
+    },
+    {
+     "id": "southeast",
+     "text": {
+      "tr": "Güneydoğu (aşağı-sol)",
+      "en": "South-east (down-left)"
+     }
+    },
+    {
+     "id": "southwest",
+     "text": {
+      "tr": "Güneybatı (aşağı-sağ)",
+      "en": "South-west (down-right)"
+     }
+    },
+    {
+     "id": "none",
+     "text": {
+      "tr": "Kaymıyor",
+      "en": "It does not move"
+     }
+    }
+   ],
+   "answer_id": "southeast",
+   "explanation": {
+    "tr": "Ölçüm: 4 karedeki konumlara doğrusal uyum yılda (+3.91″ doğu, -2.98″ kuzey) ± 0.49″ veriyor; toplam kayma 1.15 piksel. Katalog özdevinimi (+3.98″, -2.47″) ile uyumlu. Kayma yaklaşık bir piksel olduğu için fark küçüktür: yakınlaştır ve yalnızca iki uç kareyi karşılaştır. Çevredeki yıldızlar yerinde kalır.",
+    "en": "Measurement: a linear fit to the positions in 4 frames gives (+3.91″ east, -2.98″ north) ± 0.49″ per year; the total shift is 1.15 pixels. This agrees with the catalogue proper motion (+3.98″, -2.47″). The shift is only about one pixel, so zoom in and compare just the two end frames. The surrounding stars stay put."
+   },
+   "view": {
+    "mode": "blink",
+    "frame_a": 1,
+    "frame_b": 5
+   },
+   "evidence": {
+    "sequence_id": "86ajarw3he",
+    "pipeline_version": "1.1.0",
+    "motion": {
+     "n_points": 4,
+     "from_date": "2025-04-26T19:44:33Z",
+     "to_date": "2026-10-02T06:32:51Z",
+     "span_years": 1.433,
+     "fit_pm_e_arcsec_yr": 3.91,
+     "fit_pm_n_arcsec_yr": -2.98,
+     "fit_pm_total_arcsec_yr": 4.92,
+     "fit_pm_err_arcsec_yr": 0.49,
+     "catalog_pm_e_arcsec_yr": 3.98,
+     "catalog_pm_n_arcsec_yr": -2.47,
+     "catalog_pm_total_arcsec_yr": 4.68,
+     "measured_shift_arcsec": 7.05,
+     "measured_shift_px": 1.15,
+     "predicted_shift_arcsec": 6.71,
+     "significance_sigma": 7.0,
+     "residual_vs_catalog_sigma": 0.7,
+     "significant": true,
+     "consistent_with_catalog": true,
+     "per_point_error_arcsec": 0.62,
+     "per_point_error_source": "sequence alignment rms vs Gaia (per-axis, floor 0.1 px)",
+     "methods": [
+      "flux_weighted_centroid"
+     ],
+     "note": "doğrusal uyum; paralaks ve gözlemci etkisi modellenmedi"
+    }
+   },
+   "frames_used": [
+    "2025W17_4B_0315_1",
+    "2025W41_2B_0083_1",
+    "2026W40_1A_0518_1",
+    "2026W40_2A_0172_1"
+   ],
+   "sources": [
+    {
+     "label": "SPHEREx Quick Release Spectral Images (IRSA, doi:10.26131/IRSA629)",
+     "url": "https://irsa.ipac.caltech.edu/Missions/spherex.html"
+    },
+    {
+     "label": "SIMBAD (CDS) — katalog konumu ve özdevinim",
+     "url": "https://simbad.cds.unistra.fr/simbad/"
+    }
+   ]
+  },
+  {
+   "id": "brightness-change",
+   "kind": "quiz",
+   "target_id": "rw-aur",
+   "synthetic": false,
+   "title": {
+    "tr": "Parlaklık değişimini incele",
+    "en": "Examine a brightness change"
+   },
+   "summary": {
+    "tr": "Yerinde duran ama parlaklığı değişen bir yıldızı ışık eğrisiyle doğrula.",
+    "en": "Confirm with the light curve a star that stays put but changes brightness."
+   },
+   "question": {
+    "tr": "Alan merkezindeki yıldız (RW Aurigae) 2025-09-02 ile 2026-09-08 arasında nasıl değişiyor? Önce kareleri karşılaştır, sonra ışık eğrisi paneline bak.",
+    "en": "How does the star at the field centre (RW Aurigae) change between 2025-09-02 and 2026-09-08? Compare the frames first, then open the light-curve panel."
+   },
+   "options": [
+    {
+     "id": "brighter",
+     "text": {
+      "tr": "Belirgin biçimde parlaklaşıyor",
+      "en": "It brightens markedly"
+     }
+    },
+    {
+     "id": "fainter",
+     "text": {
+      "tr": "Belirgin biçimde sönükleşiyor",
+      "en": "It fades markedly"
+     }
+    },
+    {
+     "id": "same",
+     "text": {
+      "tr": "Değişmiyor",
+      "en": "It does not change"
+     }
+    },
+    {
+     "id": "moves",
+     "text": {
+      "tr": "Yer değiştiriyor",
+      "en": "It moves"
+     }
+    }
+   ],
+   "answer_id": "brighter",
+   "explanation": {
+    "tr": "Ham piksellerdeki açıklık akısı 0.764 µm'de 74 → 192 mJy (2.587×, 5.6σ). Aynı karelerdeki 5 karşılaştırma yıldızı %2 içinde sabit kalıyor; yani değişim görüntü ölçeğinden kaynaklanmıyor. Konum değişmiyor. Bu bir \"değişim görülüyor\" sonucudur: Hızlı Bakış kalibrasyonu ve 0.5 bant genişliğine kadar dalga boyu kayması nedeniyle bilimsel doğrulama değildir.",
+    "en": "Aperture flux on the native pixels at 0.764 µm goes 74 → 192 mJy (2.587×, 5.6σ). The 5 comparison stars in the same frames stay constant to within 2%, so the change is not an image-scale effect. The position does not change. This is a \"change seen\" result, not a scientific confirmation: the calibration is Quick Release and wavelength offsets of up to 0.5 bandwidths are present."
+   },
+   "view": {
+    "mode": "side_by_side",
+    "frame_a": 0,
+    "frame_b": 2
+   },
+   "evidence": {
+    "sequence_id": "e4rkds26a8",
+    "pipeline_version": "1.1.0",
+    "brightness": {
+     "n_points": 3,
+     "lam_um": 0.76447,
+     "wavelength_tolerance_used": 0.5,
+     "dlam_over_bw": [
+      0.0,
+      -0.34,
+      0.372
+     ],
+     "normalized_by_comparison_stars": true,
+     "systematic_frac": 0.1028,
+     "points": [
+      {
+       "date": "2025-09-02T00:46:30Z",
+       "flux_mjy": 74.075,
+       "err_mjy": 7.624
+      },
+      {
+       "date": "2026-03-08T16:15:59Z",
+       "flux_mjy": 124.398,
+       "err_mjy": 12.799
+      },
+      {
+       "date": "2026-09-08T06:39:20Z",
+       "flux_mjy": 191.644,
+       "err_mjy": 19.714
+      }
+     ],
+     "flux_min_mjy": 74.0745,
+     "flux_max_mjy": 191.6439,
+     "date_min": "2025-09-02T00:46:30Z",
+     "date_max": "2026-09-08T06:39:20Z",
+     "max_over_min": 2.587,
+     "diff_sigma": 5.6,
+     "chi2_constant": 36.7,
+     "dof": 2,
+     "caveats": [
+      "aperture flux without aperture correction",
+      "quick-release calibration",
+      "wavelength offsets up to 0.5 bandwidth; 10% systematic added for spectral slope",
+      "systematic error from comparison-star scatter"
+     ]
+    },
+    "comparison": {
+     "status": "ok",
+     "n_stars": 5,
+     "gmax": 16.0,
+     "frame_scale": [
+      1.0,
+      1.0009,
+      1.0
+     ],
+     "frame_scatter": [
+      0.024,
+      0.0211,
+      0.0231
+     ],
+     "systematic_frac": 0.0231,
+     "method": "Gaia DR3 comparison stars, r=2 px aperture on native pixels, flux / own median"
+    }
+   },
+   "frames_used": [
+    "2025W36_1A_0233_3",
+    "2026W10_2B_0591_4",
+    "2026W37_1A_0234_3"
+   ],
+   "sources": [
+    {
+     "label": "SPHEREx Quick Release Spectral Images (IRSA, doi:10.26131/IRSA629)",
+     "url": "https://irsa.ipac.caltech.edu/Missions/spherex.html"
+    }
+   ]
+  },
+  {
+   "id": "recognise-artifact",
+   "kind": "quiz",
+   "target_id": "r-dra",
+   "synthetic": false,
+   "title": {
+    "tr": "Görüntü hatasını tanı",
+    "en": "Recognise an image artefact"
+   },
+   "summary": {
+    "tr": "Çok parlak bir yıldızın ortasındaki \"delik\" gerçek mi?",
+    "en": "Is the \"hole\" in the middle of a very bright star real?"
+   },
+   "question": {
+    "tr": "R Draconis'in tam ortası desenli (ölçüm yok) görünüyor ve çevresinde turuncu kalite katmanı var. Bu neyi gösterir?",
+    "en": "The very centre of R Draconis is hatched (no measurement) and surrounded by the orange quality layer. What does this show?"
+   },
+   "options": [
+    {
+     "id": "saturation",
+     "text": {
+      "tr": "Yıldız dedektörü doyuruyor; merkez pikseller ölçülemiyor",
+      "en": "The star saturates the detector; the central pixels cannot be measured"
+     }
+    },
+    {
+     "id": "dark-object",
+     "text": {
+      "tr": "Yıldızın önünden karanlık bir cisim geçiyor",
+      "en": "A dark object is passing in front of the star"
+     }
+    },
+    {
+     "id": "vanished",
+     "text": {
+      "tr": "Yıldız kaybolmuş",
+      "en": "The star has vanished"
+     }
+    },
+    {
+     "id": "moving",
+     "text": {
+      "tr": "Hızlı hareket eden bir kaynak",
+      "en": "A fast-moving source"
+     }
+    }
+   ],
+   "answer_id": "saturation",
+   "explanation": {
+    "tr": "8 karenin tamamında yıldızın çekirdek pikselleri BLOOM, NONFUNC, OVERFLOW, SUR_ERROR bayraklarını taşıyor: yıldız SPHEREx için fazla parlak, merkez pikseller doymuş ve \"ölçüm yok\" olarak korunuyor (sıfırla doldurulmuyor). Bu yüzden R Draconis bir Mira değişeni olduğu hâlde bu görüntülerden parlaklık değişimi ölçülemiyor. Çevredeki BLOOM/HALO bayrakları da parlak yıldızın saçtığı ışığı işaret eder.",
+    "en": "In all 8 frames the core pixels of the star carry the flags BLOOM, NONFUNC, OVERFLOW, SUR_ERROR: the star is too bright for SPHEREx, the central pixels are saturated and are kept as \"no measurement\" (never filled with zero). That is why, although R Draconis is a Mira variable, its brightness change cannot be measured from these images. The BLOOM/HALO flags around it mark light scattered by the bright star."
+   },
+   "view": {
+    "mode": "blink",
+    "layers": [
+     "mask"
+    ]
+   },
+   "evidence": {
+    "sequence_id": "d2j7mqxjt3",
+    "pipeline_version": "1.1.0",
+    "n_frames": 8,
+    "core_flags": [
+     "BLOOM",
+     "NONFUNC",
+     "OVERFLOW",
+     "SUR_ERROR"
+    ],
+    "core_pixels": [
+     235,
+     180,
+     174,
+     197,
+     178,
+     176,
+     193,
+     211
+    ]
+   },
+   "frames_used": [
+    "2025W23_2B_0206_1",
+    "2025W37_1A_0100_3",
+    "2025W42_2A_0526_3",
+    "2026W29_1A_0364_1",
+    "2026W33_1A_0175_3",
+    "2026W35_2A_0040_1",
+    "2026W36_2A_0474_3",
+    "2026W38_1A_0674_4"
+   ],
+   "sources": [
+    {
+     "label": "SPHEREx Quick Release Spectral Images (IRSA, doi:10.26131/IRSA629)",
+     "url": "https://irsa.ipac.caltech.edu/Missions/spherex.html"
+    },
+    {
+     "label": "SPHEREx Explanatory Supplement (bayrak tanımları)",
+     "url": "https://irsa.ipac.caltech.edu/data/SPHEREx/docs/SPHEREx_Expsupp_QR.pdf"
+    }
+   ]
+  },
+  {
+   "id": "why-wavelength",
+   "kind": "quiz",
+   "target_id": "rw-aur",
+   "synthetic": false,
+   "title": {
+    "tr": "Neden uygun dalga boyu gerekir?",
+    "en": "Why the right wavelength matters"
+   },
+   "summary": {
+    "tr": "Aynı yıldız, birkaç gün arayla, iki farklı dalga boyu: parlaklık farkı zamandan mı?",
+    "en": "Same star, a few days apart, two different wavelengths: is the brightness difference due to time?"
+   },
+   "question": {
+    "tr": "SPHEREx, RW Aurigae'yi 2025-09-02 tarihinde 0.75 µm'de 71 mJy, 2025-09-03 tarihinde 1.00 µm'de 178 mJy ölçtü. Bu iki kare yan yana konursa yıldız 2 günde 2.5 katına çıkmış gibi görünür. Doğru yorum hangisi?",
+    "en": "SPHEREx measured RW Aurigae at 71 mJy at 0.75 µm on 2025-09-02, and 178 mJy at 1.00 µm on 2025-09-03. Put side by side, the star seems to brighten 2.5× in 2 days. Which reading is right?"
+   },
+   "options": [
+    {
+     "id": "not-comparable",
+     "text": {
+      "tr": "Bu iki kare zaman karşılaştırması olarak kullanılamaz: dalga boyları farklı, fark yıldızın rengini gösterir",
+      "en": "These two frames cannot be used as a time comparison: the wavelengths differ, so the difference shows the star's colour"
+     }
+    },
+    {
+     "id": "real-doubling",
+     "text": {
+      "tr": "Yıldız gerçekten birkaç günde bu kadar parladı",
+      "en": "The star really brightened that much in a few days"
+     }
+    },
+    {
+     "id": "detector-fault",
+     "text": {
+      "tr": "İkinci karede dedektör hatası var",
+      "en": "The second frame has a detector fault"
+     }
+    },
+    {
+     "id": "moved",
+     "text": {
+      "tr": "Yıldız yer değiştirdiği için daha parlak göründü",
+      "en": "The star looks brighter because it moved"
+     }
+    }
+   ],
+   "answer_id": "not-comparable",
+   "explanation": {
+    "tr": "SPHEREx'te her dedektör pikseli farklı bir dalga boyu görür; yıldız dedektör üzerinde kaydıkça tayfı 7 güne yayılarak taranır. 0.75 µm ile 1.00 µm arasındaki 2.5 katlık fark yıldızın tayf eğimidir (kırmızıya doğru parlaklaşır). Uzun dalga boylarında yıldız başka günlerde de parlak: 2025-09-01 tarihinde 1.07 µm'de 151 mJy. Bu yüzden BlinkSpace zaman dizisine yalnızca hedefteki dalga boyu aynı olan kareleri alır (bant genişliğinin yarısı içinde) ve farklı dalga boylarını \"dalga boyu keşfi\" olarak ayrı gösterir. Spektrum panelinde bu noktaların tarihleriyle birlikte tamamını görebilirsin.",
+    "en": "In SPHEREx every detector pixel sees a different wavelength; as the star drifts across the detector its spectrum is scanned over 7 days. The 2.5× difference between 0.75 µm and 1.00 µm is the star's spectral slope (it is brighter toward the red). At long wavelengths the star is bright on other days too: 151 mJy at 1.07 µm on 2025-09-01. That is why BlinkSpace only puts frames into a time sequence when the wavelength at the target is the same (within half a bandwidth), and shows other wavelengths separately as \"wavelength exploration\". The spectrum panel shows all of these points with their dates."
+   },
+   "view": {
+    "mode": "blink"
+   },
+   "evidence": {
+    "spectrum_id": "fab6db0d3a9a3beadb1740610b54031e",
+    "pipeline_version": "1.1.0",
+    "date_window": [
+     "2025-08-28T00:00:00Z",
+     "2025-09-09T00:00:00Z"
+    ],
+    "point_short": {
+     "obs_id": "2025W36_1A_0233_2",
+     "date": "2025-09-02T00:44:22Z",
+     "lam_um": 0.74692,
+     "flux_mjy": 71.05929177880124,
+     "err_mjy": 0.29430171874874866
+    },
+    "point_long": {
+     "obs_id": "2025W36_1A_0663_2",
+     "date": "2025-09-03T23:56:38Z",
+     "lam_um": 0.99574,
+     "flux_mjy": 178.1497270269018,
+     "err_mjy": 0.4495249410068468
+    },
+    "ratio": 2.51,
+    "rejected_alternative": "WISE 0855: kısa dalga boyunda da öngörülen konumda akı ölçüldü (kaynak karışması); yanıt anahtarı desteklenmediği için kullanılmadı"
+   },
+   "frames_used": [
+    "2025W36_1A_0233_2",
+    "2025W36_1A_0663_2"
+   ],
+   "sources": [
+    {
+     "label": "SPHEREx Quick Release Spectral Images (IRSA, doi:10.26131/IRSA629)",
+     "url": "https://irsa.ipac.caltech.edu/Missions/spherex.html"
+    }
+   ]
+  }
+ ]
+}

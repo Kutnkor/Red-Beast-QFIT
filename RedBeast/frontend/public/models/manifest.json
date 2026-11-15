@@ -1,0 +1,51 @@
+{
+  "schema_version": 1,
+  "format": "Three.js ObjectLoader JSON",
+  "three_version": "0.170.0",
+  "profile_sha256": "98a810e34063aa1abc6ec324452f4c7d9ad8a63f6b9dabcd27d4b297c9867da9",
+  "quality": "low geometry / full procedural materials",
+  "snapshots": [
+    {
+      "target_id": "barnard",
+      "file": "barnard.three.json",
+      "sha256": "37c09f33f312d79109decc3c55dacfb29150563b84fcd13ceb74683f903d09d3",
+      "bytes": 129032,
+      "meshes": 10,
+      "point_clouds": 1
+    },
+    {
+      "target_id": "eps-indi-b",
+      "file": "eps-indi-b.three.json",
+      "sha256": "007101ce089e9ad69b416028371c5571de21996177ec45e103d066edc92af041",
+      "bytes": 188554,
+      "meshes": 6,
+      "point_clouds": 0
+    },
+    {
+      "target_id": "wise-0855",
+      "file": "wise-0855.three.json",
+      "sha256": "4896318a7a6e58562c166c9258736fce69491446b9b28cbdaef05d34bd90182d",
+      "bytes": 78963,
+      "meshes": 3,
+      "point_clouds": 0
+    },
+    {
+      "target_id": "rw-aur",
+      "file": "rw-aur.three.json",
+      "sha256": "65398d1182a5baf8f83a11c66a58821cabe543e4cfb48c6f22badc54c5437468",
+      "bytes": 320756,
+      "meshes": 9,
+      "point_clouds": 2
+    },
+    {
+      "target_id": "r-dra",
+      "file": "r-dra.three.json",
+      "sha256": "560463c5f326cbdd232162be9a401b4f109027a69bcb6ac1d77900daa7ddb634",
+      "bytes": 624910,
+      "meshes": 5,
+      "point_clouds": 1
+    }
+  ],
+  "limitation": "Representative geometry; no measured surface map or fluid simulation. Use animate-stellar-model.js for the illustrative animation clock.",
+  "animation_sha256": "aed6cc223d1991b4509d0bcb06ad41cfd3d51bcb1a87ed0814382cd311c4e126"
+}

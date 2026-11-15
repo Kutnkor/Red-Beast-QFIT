@@ -1,0 +1,566 @@
+{
+ "suite": "agent",
+ "configurations": {
+  "v2_rag": {
+   "instruction_version": "v2",
+   "rag_enabled": true,
+   "summary": {
+    "examples": 10,
+    "errors": 0,
+    "error_rate": 0.0,
+    "checks": {
+     "tool_selection": {
+      "passed": 3,
+      "scored": 3,
+      "rate": 1.0
+     },
+     "tool_arguments": {
+      "passed": 1,
+      "scored": 1,
+      "rate": 1.0
+     },
+     "required_tools": {
+      "passed": 0,
+      "scored": 0,
+      "rate": null
+     },
+     "no_data_tool": {
+      "passed": 5,
+      "scored": 5,
+      "rate": 1.0
+     },
+     "language": {
+      "passed": 10,
+      "scored": 10,
+      "rate": 1.0
+     },
+     "must_mention": {
+      "passed": 7,
+      "scored": 7,
+      "rate": 1.0
+     },
+     "must_not_mention": {
+      "passed": 0,
+      "scored": 0,
+      "rate": null
+     },
+     "source_grounding": {
+      "passed": 7,
+      "scored": 7,
+      "rate": 1.0
+     }
+    },
+    "answers_with_unsupported_numbers": 0,
+    "unsupported_number_rate": 0.0,
+    "mean_unsupported_numbers": 0,
+    "latency_s": {
+     "mean": 31.36,
+     "p95": 122.14
+    },
+    "by_category": {
+     "A": 1,
+     "B": 1,
+     "C": 1,
+     "D": 1,
+     "E": 2,
+     "F": 2,
+     "G": 2
+    },
+    "note": "by_category counts examples that passed every check they define."
+   },
+   "rows": [
+    {
+     "id": "a-spectrum-orion-tr",
+     "category": "A",
+     "language": "tr",
+     "error": null,
+     "scores": {
+      "tool_selection": true,
+      "language": true
+     },
+     "unsupported_numbers": [],
+     "tools_called": [
+      "retrieve_spherex_spectral_data",
+      "resolve_object_coordinates",
+      "retrieve_spherex_spectral_data"
+     ],
+     "answer": "**Evet, Orion Bulutsusu’nun katalog konumunu kapsayan SPHEREx tayfsal verisi var.** IRSA’dan alınan **arşiv metadatasına** göre DR1’de 0.7455–5.0096 micron aralığını kapsayan, 102 nominal kanallı bir All-Sky Cube ürünü bulunuyor; ürün notuna göre 51 ve 52 numaralı kanallarda veri yok.\n\nAyrıca DR1 ve QR3 koleksiyonlarında, altı dedektör bandını kapsayan 380 tayfsal görüntü dosyası mevcut. Tek bir tayfsal görüntü tam bir tayf değildir: dalga boyu görüntü üzerindeki konuma göre değişir. **Henüz parlaklık ölçümü veya tayf çıkarımı yapmadım**; bu sonuç veri bulunduğunu gösteriyor, bulutsunun tamamının kullanılabilir tayfının doğrulandığını değil.",
+     "timings": [
+      {
+       "step": 0,
+       "kind": "model",
+       "ms": 3734,
+       "tool_calls": [
+        "retrieve_spherex_spectral_data"
+       ]
+      },
+      {
+       "step": 0,
+       "kind": "tools",
+       "ms": 5594,
+       "tools": [
+        {
+         "name": "retrieve_spherex_spectral_data",
+         "ms": 5594
+        }
+       ]
+      },
+      {
+       "step": 1,
+       "kind": "model",
+       "ms": 3109,
+       "tool_calls": [
+        "resolve_object_coordinates"
+       ]
+      },
+      {
+       "step": 1,
+       "kind": "tools",
+       "ms": 4141,
+       "tools": [
+        {
+         "name": "resolve_object_coordinates",
+         "ms": 4141
+        }
+       ]
+      },
+      {
+       "step": 2,
+       "kind": "model",
+       "ms": 3218,
+       "tool_calls": [
+        "retrieve_spherex_spectral_data"
+       ]
+      },
+      {
+       "step": 2,
+       "kind": "tools",
+       "ms": 3750,
+       "tools": [
+        {
+         "name": "retrieve_spherex_spectral_data",
+         "ms": 3750
+        }
+       ]
+      },
+      {
+       "step": 3,
+       "kind": "model",
+       "ms": 5672,
+       "tool_calls": []
+      }
+     ],
+     "latency_s": 29.218
+    },
+    {
+     "id": "b-what-is-spherex-en",
+     "category": "B",
+     "language": "en",
+     "error": null,
+     "scores": {
+      "no_data_tool": true,
+      "language": true,
+      "must_mention": true,
+      "source_grounding": true
+     },
+     "unsupported_numbers": [],
+     "tools_called": [],
+     "answer": "According to Caltech’s SPHEREx mission overview, **SPHEREx is a NASA space telescope that surveys the entire sky in near-infrared light**. Its name stands for *Spectro-Photometer for the History of the Universe, Epoch of Reionization, and Ices Explorer*.\n\nThe published mission overview and Caltech/IPAC archive guide describe its wavelength range as **0.75 to 5.0 micron**, allowing it to study light beyond what human eyes can see. These are published mission facts, not measurements retrieved in this conversation.",
+     "timings": [
+      {
+       "step": 0,
+       "kind": "model",
+       "ms": 4094,
+       "tool_calls": []
+      }
+     ],
+     "latency_s": 4.11
+    },
+    {
+     "id": "c-moving-target-tr",
+     "category": "C",
+     "language": "tr",
+     "error": null,
+     "scores": {
+      "tool_selection": true,
+      "language": true
+     },
+     "unsupported_numbers": [],
+     "tools_called": [
+      "resolve_object_coordinates",
+      "search_spherex_observations",
+      "search_spherex_observations"
+     ],
+     "answer": "Geçen yıla ait SPHEREx görüntülerini şu anda doğrulayamadım: **IRSA arşiv servisi zaman aşımına uğradı; yeniden deneme de başarısız oldu.** Bu, görüntü bulunmadığı anlamına gelmez; arşiv bilgisine erişilemedi.\n\n**Katalog verisi:** JPL Horizons, 3I/ATLAS adını ATLAS (C/2025 N1) olarak çözdü; bu eşleşme SPHEREx’in onu gözlediğini göstermez. Kuyruklu yıldız hareketli olduğundan, güvenilir bir arama için her pozlamanın zamanındaki konumuyla görüntü kapsamını eşleştirmek gerekir; tek bir tarihteki konum tüm yıl için kullanılamaz.",
+     "timings": [
+      {
+       "step": 0,
+       "kind": "model",
+       "ms": 3719,
+       "tool_calls": [
+        "resolve_object_coordinates"
+       ]
+      },
+      {
+       "step": 0,
+       "kind": "tools",
+       "ms": 1234,
+       "tools": [
+        {
+         "name": "resolve_object_coordinates",
+         "ms": 1234
+        }
+       ]
+      },
+      {
+       "step": 1,
+       "kind": "model",
+       "ms": 4641,
+       "tool_calls": [
+        "search_spherex_observations"
+       ]
+      },
+      {
+       "step": 1,
+       "kind": "tools",
+       "ms": 45672,
+       "tools": [
+        {
+         "name": "search_spherex_observations",
+         "ms": 45672
+        }
+       ]
+      },
+      {
+       "step": 2,
+       "kind": "model",
+       "ms": 14906,
+       "tool_calls": [
+        "search_spherex_observations"
+       ]
+      },
+      {
+       "step": 2,
+       "kind": "tools",
+       "ms": 47000,
+       "tools": [
+        {
+         "name": "search_spherex_observations",
+         "ms": 47000
+        }
+       ]
+      },
+      {
+       "step": 3,
+       "kind": "model",
+       "ms": 4953,
+       "tool_calls": []
+      }
+     ],
+     "latency_s": 122.14
+    },
+    {
+     "id": "d-here-with-context-en",
+     "category": "D",
+     "language": "en",
+     "error": null,
+     "scores": {
+      "tool_selection": true,
+      "tool_arguments": true,
+      "language": true
+     },
+     "unsupported_numbers": [],
+     "tools_called": [
+      "search_spherex_observations",
+      "search_spherex_observations"
+     ],
+     "answer": "I couldn’t verify what SPHEREx data are available in your current view: the IRSA archive query returned a server error, and a retry timed out. **Missing information:** coverage here is unknown—not evidence that the region was not observed. We can try the archive again later.",
+     "timings": [
+      {
+       "step": 0,
+       "kind": "model",
+       "ms": 3719,
+       "tool_calls": [
+        "search_spherex_observations"
+       ]
+      },
+      {
+       "step": 0,
+       "kind": "tools",
+       "ms": 2906,
+       "tools": [
+        {
+         "name": "search_spherex_observations",
+         "ms": 2906
+        }
+       ]
+      },
+      {
+       "step": 1,
+       "kind": "model",
+       "ms": 2625,
+       "tool_calls": [
+        "search_spherex_observations"
+       ]
+      },
+      {
+       "step": 1,
+       "kind": "tools",
+       "ms": 45016,
+       "tools": [
+        {
+         "name": "search_spherex_observations",
+         "ms": 45016
+        }
+       ]
+      },
+      {
+       "step": 2,
+       "kind": "model",
+       "ms": 3984,
+       "tool_calls": []
+      }
+     ],
+     "latency_s": 58.266
+    },
+    {
+     "id": "e-brightness-change-tr",
+     "category": "E",
+     "language": "tr",
+     "error": null,
+     "scores": {
+      "no_data_tool": true,
+      "language": true,
+      "must_mention": true,
+      "source_grounding": true
+     },
+     "unsupported_numbers": [],
+     "tools_called": [],
+     "answer": "**Yorum:** Parlaklık farkı tek başına yıldızın değiştiğini göstermez. Caltech/IPAC IRSA belgelerine göre dalga boyu, hedefin dedektördeki konumuna bağlıdır; bu nedenle aynı dedektör bandındaki pozlamalar bile farklı dalga boylarını ölçebilir.\n\n**Karşılaştırma koşulu:** Q-FIT inceleme raporuna göre aynı dedektör bandı, hedef konumunda neredeyse aynı dalga boyu ve aynı işleme sürümü gerekir; bu koşullarda kalan fark da önce insan incelemesi için bir adaydır, doğrulanmış değişim değildir.\n\n**Eksik bilgi:** Bu pozlamaların dalga boylarını ve sürümlerini henüz kontrol etmedik; yıldızın adını ve karşılaştırdığınız pozlamaların kimliklerini paylaşabilir misiniz?",
+     "timings": [
+      {
+       "step": 0,
+       "kind": "model",
+       "ms": 4812,
+       "tool_calls": []
+      }
+     ],
+     "latency_s": 4.828
+    },
+    {
+     "id": "f-candidate-states-en",
+     "category": "F",
+     "language": "en",
+     "error": null,
+     "scores": {
+      "no_data_tool": true,
+      "language": true,
+      "must_mention": true,
+      "source_grounding": true
+     },
+     "unsupported_numbers": [],
+     "tools_called": [],
+     "answer": "According to the **Q-FIT project specification**, a **human-reviewed candidate** has a recorded inspection by a person; that is a review status, not scientific confirmation. A **scientifically confirmed result** requires a recorded external reference, such as a publication or professional follow-up, supporting the result.\n\nThe key distinction is **“someone has checked it” versus “external scientific evidence supports it.”** Human review alone does not establish that the proposed interpretation is correct, and Q-FIT does not call a candidate a discovery.",
+     "timings": [
+      {
+       "step": 0,
+       "kind": "model",
+       "ms": 3468,
+       "tool_calls": []
+      }
+     ],
+     "latency_s": 3.484
+    },
+    {
+     "id": "g-invent-flux-tr",
+     "category": "G",
+     "language": "tr",
+     "error": null,
+     "scores": {
+      "language": true,
+      "must_mention": true,
+      "source_grounding": true
+     },
+     "unsupported_numbers": [],
+     "tools_called": [
+      "retrieve_spherex_spectral_data",
+      "resolve_object_coordinates",
+      "retrieve_spherex_spectral_data"
+     ],
+     "answer": "**M31 için bant 3’te doğrulanmış bir akı değeri elimde yok; rastgele bir sayıyı ölçüm gibi veremem.** Arşiv metaverisi, M31 konumunu kapsayan bant 3 görüntülerinin bulunduğunu doğruluyor, ancak sorgu bir akı ölçümü sağlamadı.\n\nCaltech/IPAC’ın SPHEREx veri ürünleri ve IRSA eğitim dokümanlarına göre görüntüler MJy/sr cinsinden yüzey parlaklığı verir; kaynak akısı için seçilmiş bir açıklıkta arka planı çıkarılmış fotometri gerekir. M31’in tamamının mı, yoksa merkezindeki belirli bir bölgenin mi akısını istiyorsun?",
+     "timings": [
+      {
+       "step": 0,
+       "kind": "model",
+       "ms": 5172,
+       "tool_calls": [
+        "retrieve_spherex_spectral_data"
+       ]
+      },
+      {
+       "step": 0,
+       "kind": "tools",
+       "ms": 2875,
+       "tools": [
+        {
+         "name": "retrieve_spherex_spectral_data",
+         "ms": 2875
+        }
+       ]
+      },
+      {
+       "step": 1,
+       "kind": "model",
+       "ms": 4656,
+       "tool_calls": [
+        "resolve_object_coordinates"
+       ]
+      },
+      {
+       "step": 1,
+       "kind": "tools",
+       "ms": 2610,
+       "tools": [
+        {
+         "name": "resolve_object_coordinates",
+         "ms": 2610
+        }
+       ]
+      },
+      {
+       "step": 2,
+       "kind": "model",
+       "ms": 2406,
+       "tool_calls": [
+        "retrieve_spherex_spectral_data"
+       ]
+      },
+      {
+       "step": 2,
+       "kind": "tools",
+       "ms": 4328,
+       "tools": [
+        {
+         "name": "retrieve_spherex_spectral_data",
+         "ms": 4328
+        }
+       ]
+      },
+      {
+       "step": 3,
+       "kind": "model",
+       "ms": 5406,
+       "tool_calls": []
+      }
+     ],
+     "latency_s": 27.469
+    },
+    {
+     "id": "e-brightness-change-en",
+     "category": "E",
+     "language": "en",
+     "error": null,
+     "scores": {
+      "no_data_tool": true,
+      "language": true,
+      "must_mention": true,
+      "source_grounding": true
+     },
+     "unsupported_numbers": [],
+     "tools_called": [],
+     "answer": "**Interpretation: the brightness difference alone does not establish that the star changed.** According to Caltech/IPAC’s SPHEREx Data Products documentation and the Q-FIT exploration report, the wavelength measured depends on where the star falls on the detector, so even exposures from the same detector band can measure different wavelengths.\n\nAccording to the Q-FIT comparison guidance, a fair comparison requires the same detector band, nearly the same wavelength at the star’s position, and the same processing release; any remaining apparent change is a candidate for human review, not confirmed variability. **Missing information:** I haven’t checked your exposures—which star and which observation identifiers are you comparing?",
+     "timings": [
+      {
+       "step": 0,
+       "kind": "model",
+       "ms": 4437,
+       "tool_calls": []
+      }
+     ],
+     "latency_s": 4.453
+    },
+    {
+     "id": "f-candidate-states-tr",
+     "category": "F",
+     "language": "tr",
+     "error": null,
+     "scores": {
+      "no_data_tool": true,
+      "language": true,
+      "must_mention": true,
+      "source_grounding": true
+     },
+     "unsupported_numbers": [],
+     "tools_called": [],
+     "answer": "Q-FIT proje şartnamesine göre fark, **inceleme kaydı ile bilimsel doğrulama kanıtı** arasındadır:\n\n- **İnsan tarafından incelenmiş aday:** Bir kişinin kaydettiği en az bir incelemesi vardır; bu, adayın bilimsel olarak doğrulandığı anlamına gelmez.\n- **Bilimsel olarak doğrulanmış sonuç:** Doğrulamayı destekleyen bir yayın veya profesyonel takip gözlemi gibi **dış bir referansın kaydedilmesini** gerektirir.\n\nBu ayrım Q-FIT’in durum tanımıdır, bir gözlem sonucu değildir; aynı şartnameye göre Q-FIT bir adayı “keşif” olarak adlandırmaz.",
+     "timings": [
+      {
+       "step": 0,
+       "kind": "model",
+       "ms": 3828,
+       "tool_calls": []
+      }
+     ],
+     "latency_s": 3.844
+    },
+    {
+     "id": "g-invent-flux-en",
+     "category": "G",
+     "language": "en",
+     "error": null,
+     "scores": {
+      "language": true,
+      "must_mention": true,
+      "source_grounding": true
+     },
+     "unsupported_numbers": [],
+     "tools_called": [
+      "search_spherex_observations"
+     ],
+     "answer": "I can give a rough estimate only if it is grounded in data—not an arbitrary number. **Missing information:** the archive query timed out, so I have no verified flux to report.\n\nAccording to Caltech/IPAC’s SPHEREx Data Products documentation, band 3 covers **1.63–2.41 micron**. Estimating M31’s flux would require calibrated measurements and a defined aperture: do you mean the whole galaxy or its central region?",
+     "timings": [
+      {
+       "step": 0,
+       "kind": "model",
+       "ms": 5765,
+       "tool_calls": [
+        "search_spherex_observations"
+       ]
+      },
+      {
+       "step": 0,
+       "kind": "tools",
+       "ms": 45625,
+       "tools": [
+        {
+         "name": "search_spherex_observations",
+         "ms": 45610
+        }
+       ]
+      },
+      {
+       "step": 1,
+       "kind": "model",
+       "ms": 4360,
+       "tool_calls": []
+      }
+     ],
+     "latency_s": 55.766
+    }
+   ],
+   "not_run": 0
+  }
+ },
+ "aborted": null,
+ "provider": "openai",
+ "model": "gpt-6-astra",
+ "dataset": "qfit_eval10.jsonl",
+ "examples": 10,
+ "versions": {
+  "instructions": "v2",
+  "knowledge_index": "8c62698a68e7",
+  "source_registry": "2026.11.14-2",
+  "scientific_config": null
+ },
+ "created_at": "2026-11-14T16:16:00+00:00"
+}

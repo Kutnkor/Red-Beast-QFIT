@@ -1,0 +1,190 @@
+{
+  "sequence_id": "vaszj8xtz2",
+  "target_id": "eps-indi-b",
+  "source": "precomputed",
+  "frames": [
+    {
+      "index": 0,
+      "mjd": 60789.857680217,
+      "date": "2025-04-24T20:35:04Z",
+      "predicted": {
+        "ra": 331.095256,
+        "dec": -56.800189,
+        "method": "proper_motion_only"
+      },
+      "measured": null,
+      "measured_reason": "invalid_pixels_at_target"
+    },
+    {
+      "index": 1,
+      "mjd": 60791.8226048,
+      "date": "2025-04-26T19:44:33Z",
+      "predicted": {
+        "ra": 331.095266,
+        "dec": -56.800193,
+        "method": "proper_motion_only"
+      },
+      "measured": {
+        "ra": 331.0953,
+        "dec": -56.800284,
+        "err_arcsec": 0.62,
+        "method": "flux_weighted_centroid"
+      },
+      "measured_reason": null
+    },
+    {
+      "index": 2,
+      "mjd": 60799.703372034,
+      "date": "2025-05-04T16:52:51Z",
+      "predicted": {
+        "ra": 331.09531,
+        "dec": -56.800208,
+        "method": "proper_motion_only"
+      },
+      "measured": null,
+      "measured_reason": "centroid_unavailable"
+    },
+    {
+      "index": 3,
+      "mjd": 60957.829689233,
+      "date": "2025-10-09T19:54:45Z",
+      "predicted": {
+        "ra": 331.096184,
+        "dec": -56.800504,
+        "method": "proper_motion_only"
+      },
+      "measured": {
+        "ra": 331.096105,
+        "dec": -56.800729,
+        "err_arcsec": 0.62,
+        "method": "flux_weighted_centroid"
+      },
+      "measured_reason": null
+    },
+    {
+      "index": 4,
+      "mjd": 61313.307759557,
+      "date": "2026-09-30T07:23:10Z",
+      "predicted": {
+        "ra": 331.098149,
+        "dec": -56.801171,
+        "method": "proper_motion_only"
+      },
+      "measured": {
+        "ra": 331.098242,
+        "dec": -56.801541,
+        "err_arcsec": 0.62,
+        "method": "flux_weighted_centroid"
+      },
+      "measured_reason": null
+    },
+    {
+      "index": 5,
+      "mjd": 61315.272810587,
+      "date": "2026-10-02T06:32:51Z",
+      "predicted": {
+        "ra": 331.09816,
+        "dec": -56.801175,
+        "method": "proper_motion_only"
+      },
+      "measured": {
+        "ra": 331.097976,
+        "dec": -56.801441,
+        "err_arcsec": 0.62,
+        "method": "flux_weighted_centroid"
+      },
+      "measured_reason": null
+    }
+  ],
+  "motion": {
+    "n_points": 4,
+    "from_date": "2025-04-26T19:44:33Z",
+    "to_date": "2026-10-02T06:32:51Z",
+    "span_years": 1.433,
+    "fit_pm_e_arcsec_yr": 3.91,
+    "fit_pm_n_arcsec_yr": -2.98,
+    "fit_pm_total_arcsec_yr": 4.92,
+    "fit_pm_err_arcsec_yr": 0.49,
+    "catalog_pm_e_arcsec_yr": 3.98,
+    "catalog_pm_n_arcsec_yr": -2.47,
+    "catalog_pm_total_arcsec_yr": 4.68,
+    "measured_shift_arcsec": 7.05,
+    "measured_shift_px": 1.15,
+    "predicted_shift_arcsec": 6.71,
+    "significance_sigma": 7.0,
+    "residual_vs_catalog_sigma": 0.7,
+    "significant": true,
+    "consistent_with_catalog": true,
+    "per_point_error_arcsec": 0.62,
+    "per_point_error_source": "sequence alignment rms vs Gaia (per-axis, floor 0.1 px)",
+    "methods": [
+      "flux_weighted_centroid"
+    ],
+    "note": "doğrusal uyum; paralaks ve gözlemci etkisi modellenmedi"
+  },
+  "status": {
+    "data_available": true,
+    "source_detected": true,
+    "change_seen": true,
+    "change_kind": "motion",
+    "change_scientifically_confirmed": false
+  },
+  "caveats": [
+    "proper_motion_only_no_parallax",
+    "scientific_confirmation_requires_follow_up"
+  ],
+  "data_fingerprint": "062a79e81568b8c9c02641ec",
+  "forced_mean": {
+    "n": 4,
+    "flux_mjy": 39.8239,
+    "err_mjy": 0.1029,
+    "snr": 387.0,
+    "note": "öngörülen (yalnızca özdevinim) konumlarda zorlanmış açıklık fotometrisinin ağırlıklı ortalaması; bağımsız bir keşif ölçümü değildir"
+  },
+  "blending": {
+    "radius_arcsec": 20.0,
+    "gaia": [],
+    "allwise": [
+      {
+        "id": "J220422.36-564811.2",
+        "w1": 16.824,
+        "w2": 16.563,
+        "min_sep_arcsec": 11.1,
+        "date": "2025-10-09T19:54:45Z"
+      },
+      {
+        "id": "J220424.47-564755.3",
+        "w1": 16.866,
+        "w2": 17.114,
+        "min_sep_arcsec": 11.7,
+        "date": "2026-10-02T06:32:51Z"
+      },
+      {
+        "id": "J220423.27-564742.3",
+        "w1": 16.397,
+        "w2": 16.074,
+        "min_sep_arcsec": 18.7,
+        "date": "2025-04-24T20:35:04Z"
+      }
+    ],
+    "status": "ok",
+    "catalogue_provenance": {
+      "gaia": {
+        "source_url": "https://gea.esac.esa.int/tap-server/tap",
+        "epoch_jyear": 2016.0
+      },
+      "allwise": {
+        "source_url": "https://vizier.cfa.harvard.edu/viz-bin/asu-tsv",
+        "epoch_jyear": 2010.56,
+        "provider": "VizieR Harvard mirror",
+        "catalogue_id": "II/328/allwise",
+        "bibcode": "2014yCat.2328....0C",
+        "query_url": "https://vizier.cfa.harvard.edu/viz-bin/asu-tsv?-source=II%2F328%2Fallwise&-c=331.0966440+-56.8006600&-c.rm=4.3860000&-out=AllWISE%2CRAJ2000%2CDEJ2000%2CW1mag%2CW2mag%2Csnr1%2Csnr2&-out.max=50000",
+        "response_sha256": "c18cc9d63ee27b0ac184ef7c8134e90bbf5e3f5fdba70aff39e09e66da860c65",
+        "response_bytes": 19874,
+        "retrieved_utc": "2026-11-14T17:16:40.927435+00:00"
+      }
+    },
+    "n_within_aperture": 2
+  }
+}

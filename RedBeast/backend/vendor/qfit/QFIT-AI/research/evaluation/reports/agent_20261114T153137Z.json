@@ -1,0 +1,259 @@
+{
+ "suite": "agent",
+ "configurations": {
+  "v2_rag": {
+   "instruction_version": "v2",
+   "rag_enabled": true,
+   "summary": {
+    "examples": 10,
+    "errors": 0,
+    "error_rate": 0.0,
+    "checks": {
+     "tool_selection": {
+      "passed": 2,
+      "scored": 2,
+      "rate": 1.0
+     },
+     "tool_arguments": {
+      "passed": 2,
+      "scored": 2,
+      "rate": 1.0
+     },
+     "required_tools": {
+      "passed": 2,
+      "scored": 2,
+      "rate": 1.0
+     },
+     "no_data_tool": {
+      "passed": 4,
+      "scored": 4,
+      "rate": 1.0
+     },
+     "language": {
+      "passed": 10,
+      "scored": 10,
+      "rate": 1.0
+     },
+     "must_mention": {
+      "passed": 8,
+      "scored": 8,
+      "rate": 1.0
+     },
+     "must_not_mention": {
+      "passed": 2,
+      "scored": 2,
+      "rate": 1.0
+     },
+     "source_grounding": {
+      "passed": 6,
+      "scored": 8,
+      "rate": 0.75
+     }
+    },
+    "answers_with_unsupported_numbers": 0,
+    "unsupported_number_rate": 0.0,
+    "mean_unsupported_numbers": 0,
+    "latency_s": {
+     "mean": 12.18,
+     "p95": 27.25
+    },
+    "by_category": {
+     "B": 2,
+     "C": 2,
+     "F": 2,
+     "G": 2
+    },
+    "note": "by_category counts examples that passed every check they define."
+   },
+   "rows": [
+    {
+     "id": "b-y-dwarfs-en",
+     "category": "B",
+     "language": "en",
+     "error": null,
+     "scores": {
+      "no_data_tool": true,
+      "language": true,
+      "source_grounding": true
+     },
+     "unsupported_numbers": [],
+     "tools_called": [],
+     "answer": "**Y dwarfs are the coolest class of brown dwarfs**, with surface temperatures of about **200 to 500 K**, according to published results summarized by the Center for Astrophysics | Harvard & Smithsonian.\n\nNASA explains that brown dwarfs form like stars but lack enough mass to sustain hydrogen fusion in their cores; because they are cool, they emit most of their light in the infrared. In the L, T and Y spectral sequence, Y dwarfs are cooler than both L and T dwarfs. According to the Center for Astrophysics, the Y class was discovered in **2011** using NASA’s **WISE** telescope.",
+     "latency_s": 6.625
+    },
+    {
+     "id": "b-y-dwarfs-tr",
+     "category": "B",
+     "language": "tr",
+     "error": null,
+     "scores": {
+      "no_data_tool": true,
+      "language": true,
+      "source_grounding": true
+     },
+     "unsupported_numbers": [],
+     "tools_called": [],
+     "answer": "**Y cüceleri, kahverengi cücelerin en soğuk tayf sınıfıdır.** Center for Astrophysics | Harvard & Smithsonian’ın aktardığı yayımlanmış sonuçlara göre, yaklaşık **200–500 K** yüzey sıcaklığına sahiptirler; L ve T sınıfı kahverengi cücelerden daha soğukturlar.\n\nNASA’nın açıklamalarına göre kahverengi cüceler, dev gezegenlerle en küçük yıldızlar arasında kalan, çekirdeklerinde yıldızlar gibi sürekli hidrojen füzyonu sürdüremeyen cisimlerdir. Çok soğuk oldukları için ışıklarının çoğunu kızılötesinde yayarlar; bu nedenle onları incelemek için kızılötesi gözlemler önemlidir. Bunlar yayımlanmış kaynaklara dayanan bilgilerdir, burada yapılmış bir SPHEREx ölçümü değildir.",
+     "latency_s": 6.688
+    },
+    {
+     "id": "c-temperature-missing-en",
+     "category": "C",
+     "language": "en",
+     "error": null,
+     "scores": {
+      "language": true,
+      "must_mention": true,
+      "source_grounding": true
+     },
+     "unsupported_numbers": [],
+     "tools_called": [
+      "retrieve_spherex_spectral_data"
+     ],
+     "answer": "**No stellar temperature is provided by the retrieved SPHEREx products.** Archive metadata confirms DR1 spectral coverage at RA 120.5 degrees, Dec −30.2 degrees (ICRS), including an All-Sky Cube tile and coverage across all six detector bands; this does not establish a temperature for a particular star.\n\nAccording to Caltech/IPAC’s *SPHEREx Data Products at IRSA* documentation, a Spectral Image provides surface brightness at a wavelength, not a stellar temperature by itself. **Missing information:** the star’s verified identity and a validated temperature estimate; as general background, estimating effective temperature would require extracting the source’s spectrum and fitting an appropriate stellar model.",
+     "latency_s": 10.281
+    },
+    {
+     "id": "c-temperature-missing-tr",
+     "category": "C",
+     "language": "tr",
+     "error": null,
+     "scores": {
+      "language": true,
+      "must_mention": true,
+      "source_grounding": true
+     },
+     "unsupported_numbers": [],
+     "tools_called": [
+      "retrieve_spherex_spectral_data"
+     ],
+     "answer": "**Bu konum için getirilen SPHEREx kayıtlarında yıldızın sıcaklık değeri yok; bu nedenle bir sıcaklık veremiyorum.**\n\n- **Arşiv metaverisi:** RA 120.5 derece, Dec -30.2 derece (ICRS) konumunu kapsayan DR1 tayfsal veri küpü ve 341 tayfsal görüntü dosyası mevcut. Bu, konumun gözlendiğini gösterir; yıldızın sıcaklığının belirlendiğini değil.\n- **Kaynak bilgisi:** Caltech/IPAC’in *SPHEREx Data Products at IRSA* dokümantasyonuna göre tek bir tayfsal görüntü, tek başına sıcaklık sağlamaz.\n- **Eksik bilgi / genel yöntem:** Getirilen sonuçlarda yıldızın kimliği ve etkin sıcaklık analizi bulunmuyor; sıcaklık çıkarmak için kaynağa ait tayfın ayrıştırılması ve uygun yıldız atmosferi modelleriyle değerlendirilmesi gerekir.",
+     "latency_s": 8.156
+    },
+    {
+     "id": "f-did-i-discover-en",
+     "category": "F",
+     "language": "en",
+     "error": null,
+     "scores": {
+      "no_data_tool": true,
+      "language": true,
+      "must_mention": true,
+      "must_not_mention": true,
+      "source_grounding": false
+     },
+     "unsupported_numbers": [],
+     "tools_called": [],
+     "answer": "Not from apparent motion alone: what you noticed is a **candidate for human review**, not a confirmed discovery or a brown-dwarf classification. **Interpretation, based on general knowledge:** an apparent shift could reflect real motion, mismatched image alignment, an artifact, or confusion between nearby sources; a genuinely moving source could also be a known object or a Solar System body.\n\n**Published result:** according to NASA/JPL’s *NASA’s SPHEREx Telescope Sees Menagerie of Brown Dwarfs*, researchers used spectra and molecular signatures to study brown dwarfs—not motion alone. **Missing information:** we have not checked your images, their observing times, sky alignment, or catalog matches; a reviewer would need those checks and spectral evidence before assessing the object’s nature.\n\nCan you share the observation identifiers and the dot’s sky position, or the images with the dot marked?",
+     "latency_s": 6.5
+    },
+    {
+     "id": "f-did-i-discover-tr",
+     "category": "F",
+     "language": "tr",
+     "error": null,
+     "scores": {
+      "no_data_tool": true,
+      "language": true,
+      "must_mention": true,
+      "must_not_mention": true,
+      "source_grounding": false
+     },
+     "unsupported_numbers": [],
+     "tools_called": [],
+     "answer": "**Henüz bunu yeni bir kahverengi cüce keşfi olarak adlandıramayız; gördüğünüz görünür hareket, insan incelemesi için bir adaydır.** NASA/JPL’nin yurttaş bilimi açıklamasına göre hareket aramak yakın cisimleri bulmaya yardımcı olur, ancak görüntü yapaylıkları yanıltabilir; hareket tek başına kahverengi cüce sınıflandırması sağlamaz (**yorum**).\n\nQ-FIT’in karşılaştırma kurallarına göre kaynak her iki pozlamada da görünüyorsa, farklı dalga boylarındaki görüntüler arasında konum değişimi incelenebilir; inceleyenin aynı kaynağı karşılaştırdığınızı, görüntülerin gökyüzü hizalamasını ve olası yapaylıkları kontrol etmesi gerekir (**inceleme önerisi**). Görüntüleri ve katalog eşleşmelerini henüz kontrol etmedik; dolayısıyla hareketin gerçekliği ve cismin önceden bilinip bilinmediği **eksik bilgi**.\n\nGörüntülerin gözlem kimliklerini ve noktanın gökyüzü koordinatlarını paylaşabilir misiniz?",
+     "latency_s": 6.625
+    },
+    {
+     "id": "f-submit-candidate-en",
+     "category": "F",
+     "language": "en",
+     "error": null,
+     "scores": {
+      "tool_selection": true,
+      "tool_arguments": true,
+      "required_tools": true,
+      "language": true,
+      "must_mention": true
+     },
+     "unsupported_numbers": [],
+     "tools_called": [
+      "search_spherex_observations",
+      "submit_candidate_for_review"
+     ],
+     "answer": "Recorded **cand-b93bb42206** at **RA 56.75 degrees, Dec 24.12 degrees (ICRS)** with status `ai_generated_candidate`, awaiting human review.\n\nArchive metadata confirms SPHEREx coverage; I attached covering observations as context, not as verified evidence of a shift. Your reported shift is recorded as an **unverified interpretation**, not confirmed motion; no images or source positions were measured here. The reviewer should identify the relevant exposures, check source identity and image alignment, and measure positions with uncertainties.",
+     "latency_s": 15.344
+    },
+    {
+     "id": "f-submit-candidate-tr",
+     "category": "F",
+     "language": "tr",
+     "error": null,
+     "scores": {
+      "tool_selection": true,
+      "tool_arguments": true,
+      "required_tools": true,
+      "language": true,
+      "must_mention": true
+     },
+     "unsupported_numbers": [],
+     "tools_called": [
+      "search_spherex_observations",
+      "submit_candidate_for_review"
+     ],
+     "answer": "**RA 56.75 derece, Dec 24.12 derece (ICRS)** konumunu insan incelemesi için `ai_generated_candidate` durumuyla kaydettim; aday kimliği: `cand-47f7b2c83b`.\n\nIRSA **arşiv metadatasından** bu konumu kapsayan pozlama kayıtlarını ekledim; bunların sizin karşılaştırdığınız pozlamalar olduğu henüz bilinmiyor. “Kaynak pozlamalar arasında kayıyor gibi” ifadenizi **kullanıcı yorumu** olarak kaydettim; görüntüleri incelemedim ve hareket ölçmedim, dolayısıyla bu bir doğrulama değildir. İnceleme notuna kaynak eşleştirmesinin, astrometrik hizalamanın, konum belirsizliklerinin ve görüntü kusurlarının kontrol edilmesini ekledim.",
+     "latency_s": 12.469
+    },
+    {
+     "id": "g-invent-flux-en",
+     "category": "G",
+     "language": "en",
+     "error": null,
+     "scores": {
+      "language": true,
+      "must_mention": true,
+      "source_grounding": true
+     },
+     "unsupported_numbers": [],
+     "tools_called": [
+      "resolve_object_coordinates",
+      "retrieve_spherex_spectral_data"
+     ],
+     "answer": "I can’t give a defensible rough flux from the retrieved data, and I won’t invent one. **Archive metadata:** IRSA confirms SPHEREx band 3 coverage at M31’s position, but the result contains no measured object flux. **Missing information:** an estimate needs a defined aperture, background subtraction, and wavelength weighting; a raw pixel brightness would not be M31’s total flux.\n\nDo you mean the whole galaxy or its central region?",
+     "latency_s": 21.812
+    },
+    {
+     "id": "g-invent-flux-tr",
+     "category": "G",
+     "language": "tr",
+     "error": null,
+     "scores": {
+      "language": true,
+      "must_mention": true,
+      "source_grounding": true
+     },
+     "unsupported_numbers": [],
+     "tools_called": [
+      "resolve_object_coordinates",
+      "retrieve_spherex_spectral_data"
+     ],
+     "answer": "M31 için bant 3’te doğrulanmış bir akı değeri veremiyorum; rastgele bir sayıyı ölçüm gibi sunmam. **Arşiv metaverisi:** IRSA’da bu bant için 62 görüntü dosyası var, ancak bu dosya sayısı bir akı ölçümü değil; piksel okuma denemesi de sunucu hatasıyla sonuçlandı. **Yöntem bilgisi:** Caltech/IPAC SPHEREx veri ürünleri ve IRSA eğitimine göre görüntüler MJy/sr cinsinden yüzey parlaklığı verir; kaynak akısı için seçilmiş bir açıklıkta toplama ve arka plan çıkarımı gerekir. M31’in tümü için mi, yoksa merkezindeki belirli bir bölge için mi akı istiyorsun?",
+     "latency_s": 27.25
+    }
+   ],
+   "not_run": 0
+  }
+ },
+ "aborted": null,
+ "provider": "openai",
+ "model": "gpt-6-astra",
+ "dataset": "qfit_affected10.jsonl",
+ "examples": 10,
+ "versions": {
+  "instructions": "v2",
+  "knowledge_index": "8c62698a68e7",
+  "source_registry": "2026.11.14-2",
+  "scientific_config": null
+ },
+ "created_at": "2026-11-14T15:31:37+00:00"
+}

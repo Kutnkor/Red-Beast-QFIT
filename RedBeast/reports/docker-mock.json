@@ -1,0 +1,50 @@
+{
+  "mock_status": {
+    "enabled": true,
+    "provider": "mock"
+  },
+  "content_type": "text/event-stream; charset=utf-8",
+  "events": [
+    {
+      "event": "text",
+      "data": {
+        "delta": "This is a local mock response; no model was called. The 3D path is computed and the stellar surface is representative. SPHEREx frames are separate observations; a computed path is not scientific confirmation."
+      }
+    },
+    {
+      "event": "command",
+      "data": {
+        "tool_use_id": "mock_command_1",
+        "name": "save_view",
+        "args": {},
+        "requires_confirmation": true
+      }
+    },
+    {
+      "event": "sources",
+      "data": [
+        "motion#model",
+        "epistemic#labels",
+        "method#6"
+      ]
+    },
+    {
+      "event": "done",
+      "data": {
+        "stop_reason": "tool_use"
+      }
+    }
+  ],
+  "frontend_assets": [
+    {
+      "url": "/assets/index-DxiRCiOX.js",
+      "bytes": 354147,
+      "status": 200
+    },
+    {
+      "url": "/assets/index-Dwjz1dz6.css",
+      "bytes": 35814,
+      "status": 200
+    }
+  ]
+}

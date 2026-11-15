@@ -1,0 +1,18 @@
+{
+  "name": "qfit-ai-mascot-react",
+  "private": true,
+  "version": "0.1.0",
+  "description": "Q-FIT AI robin mascot + chat panel (React component). Copy src/qfit into the app; this package only type-checks it.",
+  "type": "module",
+  "scripts": {
+    "typecheck": "tsc --noEmit"
+  },
+  "peerDependencies": {
+    "react": ">=18"
+  },
+  "devDependencies": {
+    "@types/react": "18.3.12",
+    "react": "18.3.1",
+    "typescript": "5.6.3"
+  }
+}

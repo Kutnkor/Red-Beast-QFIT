@@ -1,0 +1,11 @@
+{
+  "exit_code": 0,
+  "counts": {
+    "tests": 182,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 4
+  },
+  "passed": 178,
+  "live_archive": "4 opt-in live tests skipped here; separate real run failed with upstream HTTP 502"
+}

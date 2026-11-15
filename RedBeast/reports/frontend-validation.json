@@ -1,0 +1,24 @@
+{
+  "tests": {
+    "exit_code": 0,
+    "numTotalTests": 166,
+    "numPassedTests": 166,
+    "numFailedTests": 0,
+    "numPendingTests": 0,
+    "success": true
+  },
+  "build": {
+    "exit_code": 0,
+    "warning": "Lazy Three.js runtime chunk exceeds the Vite 500 kB warning threshold."
+  },
+  "lint": {
+    "exit_code": 0,
+    "warnings": 12,
+    "changed_model_files_warnings": 0
+  },
+  "main_bundle": {
+    "file": "index-H77mIirL.js",
+    "bytes": 362744,
+    "gzip_bytes": 112438
+  }
+}

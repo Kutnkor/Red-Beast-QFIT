@@ -1,0 +1,30 @@
+# çalışma zamanı verisi (ham SPHEREx cutout'ları ~4 MB/kare; depoya konmaz)
+/data/
+# ortam ve sırlar
+.env
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+# arayüz
+frontend/node_modules/
+# Built frontend included in full delivery
+frontend/*.tsbuildinfo
+# işletim sistemi
+.DS_Store
+Thumbs.db
+
+# yerel Claude başlatma ayarı (bu bilgisayara özgü yollar içerir)
+.claude/
+
+# Prepared release data are bundled separately, never committed.
+# Sanitized public seed included in full delivery
+!/seed-data/README.md
+*.log
+/reports/*-probe.xml
+
+/deliverables/.build/
+/.chart-data-*/
+# Imported screenshots/logs belong to the preserved source archive, not current acceptance.
+/evidence/
+/RELEASE_MANIFEST.json

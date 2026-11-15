@@ -1,0 +1,13 @@
+{
+  "schema_version": 1,
+  "preset_sequences": {
+    "barnard": "tyswfqfx8t",
+    "eps-indi-b": "vaszj8xtz2",
+    "wise-0855": "453tr9wzhc",
+    "rw-aur": "nhvk2kebw6",
+    "r-dra": "hq75kubcj4"
+  },
+  "raw_cutouts": 25,
+  "private_observations_included": false,
+  "source": "NASA/IPAC IRSA SPHEREx Level-2"
+}

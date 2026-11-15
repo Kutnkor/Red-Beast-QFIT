@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg"><defs>
+<!-- BlinkSpace icon family. 20 px grid, 1.6 px round strokes, and one solid dot in every icon:
+     the same dot as the logo's counter. Filled parts carry their own fill; strokes inherit from the <svg class="ic">. -->
+
+<!-- interface -->
+<symbol id="i-search" viewBox="0 0 20 20"><circle cx="8.75" cy="8.75" r="5.25"/><path d="M12.7 12.7 17 17"/><circle cx="8.75" cy="8.75" r="1.35" fill="currentColor" stroke="none"/></symbol>
+<symbol id="i-measure" viewBox="0 0 20 20"><circle cx="5.4" cy="13.8" r="2.6" fill="currentColor" stroke="none"/><path d="M7.5 11.7 11.4 7.2H17"/><path d="M12.6 11.6H17"/><path d="M11 15.8h6" opacity=".5"/></symbol>
+<symbol id="i-hr" viewBox="0 0 20 20"><path d="M3.75 3.5v12.75H17"/><circle cx="7.3" cy="6.7" r="1.15" fill="currentColor" stroke="none"/><circle cx="10.1" cy="9.7" r="1.15" fill="currentColor" stroke="none"/><circle cx="12.9" cy="12.5" r="1.15" fill="currentColor" stroke="none"/><circle cx="14.7" cy="5.9" r="1.7" fill="currentColor" stroke="none"/></symbol>
+<symbol id="i-ask" viewBox="0 0 20 20"><path d="M6.75 3.5h6.5a3.25 3.25 0 0 1 3.25 3.25v3.5a3.25 3.25 0 0 1-3.25 3.25H10.1l-3.6 3.1v-3.1h.25A3.25 3.25 0 0 1 3.5 10.25v-3.5A3.25 3.25 0 0 1 6.75 3.5z"/><circle cx="8" cy="8.5" r="1.05" fill="currentColor" stroke="none"/><circle cx="12" cy="8.5" r="1.05" fill="currentColor" stroke="none"/></symbol>
+<symbol id="i-guide" viewBox="0 0 20 20"><circle cx="10" cy="10" r="7"/><path d="M13 7 11.4 11.4 7 13l1.6-4.4z"/><circle cx="10" cy="10" r=".95" fill="currentColor" stroke="none"/></symbol>
+<symbol id="i-settings" viewBox="0 0 20 20"><path d="M3 6.5h6.1M13.9 6.5H17M3 13.5h2.1M9.9 13.5H17"/><circle cx="11.5" cy="6.5" r="2.4"/><circle cx="7.5" cy="13.5" r="2.4"/><circle cx="11.5" cy="6.5" r=".9" fill="currentColor" stroke="none"/><circle cx="7.5" cy="13.5" r=".9" fill="currentColor" stroke="none"/></symbol>
+<symbol id="i-book" viewBox="0 0 20 20"><path d="M10 5.6C8.3 4.4 5.9 4.1 3.5 4.6v10.3c2.4-.5 4.8-.2 6.5 1 1.7-1.2 4.1-1.5 6.5-1V4.6c-2.4-.5-4.8-.2-6.5 1z"/><path d="M10 5.6v10.3"/><circle cx="13.3" cy="8.2" r=".95" fill="currentColor" stroke="none"/></symbol>
+<symbol id="i-sky" viewBox="0 0 20 20"><path d="M2.75 14.6a7.25 7.25 0 0 1 14.5 0"/><path d="M1.75 14.6h16.5"/><circle cx="12.5" cy="8.7" r="1.3" fill="currentColor" stroke="none"/><circle cx="7.6" cy="11.1" r=".85" fill="currentColor" stroke="none"/></symbol>
+<symbol id="i-star" viewBox="0 0 20 20"><circle cx="10" cy="10" r="3.4" fill="currentColor" stroke="none"/><circle cx="10" cy="10" r="6.9"/></symbol>
+<symbol id="i-x" viewBox="0 0 20 20"><path d="M5.5 5.5l9 9M14.5 5.5l-9 9"/></symbol>
+<symbol id="i-ext" viewBox="0 0 20 20"><path d="M8.5 4.75H6a1.25 1.25 0 0 0-1.25 1.25v8A1.25 1.25 0 0 0 6 15.25h8A1.25 1.25 0 0 0 15.25 14v-2.5"/><path d="M11.75 4.75h3.5v3.5M15.25 4.75 9.75 10.25"/></symbol>
+<symbol id="i-send" viewBox="0 0 20 20"><path d="M10 15.75V4.75M5.25 9.25 10 4.5l4.75 4.75"/></symbol>
+<symbol id="i-trend" viewBox="0 0 20 20"><path d="M3.5 10h12.5M11.5 5.5 16 10l-4.5 4.5"/></symbol>
+<symbol id="i-info" viewBox="0 0 20 20"><circle cx="10" cy="10" r="7"/><path d="M10 9.3v4.2"/><circle cx="10" cy="6.5" r=".95" fill="currentColor" stroke="none"/></symbol>
+<symbol id="i-dash" viewBox="0 0 20 20"><circle cx="10" cy="10" r="6.5" stroke-dasharray="2.2 2.6"/></symbol>
+
+<!-- stellar phases: every glyph is a core plus what surrounds it -->
+<symbol id="g-protostar" viewBox="0 0 20 20"><circle cx="10" cy="10" r="7.2" stroke-dasharray="1.8 2.72"/><circle cx="10" cy="10" r="2.3" fill="currentColor" stroke="none"/></symbol>
+<symbol id="g-main_sequence" viewBox="0 0 20 20"><circle cx="10" cy="10" r="4.4" fill="currentColor" stroke="none"/><circle cx="10" cy="10" r="7.4" opacity=".55"/></symbol>
+<symbol id="g-red_giant" viewBox="0 0 20 20"><circle cx="10" cy="10" r="7.4"/><circle cx="10" cy="10" r="2.1" fill="currentColor" stroke="none"/></symbol>
+<symbol id="g-horizontal_branch" viewBox="0 0 20 20"><circle cx="10" cy="10" r="5.1"/><circle cx="10" cy="10" r="2.1" fill="currentColor" stroke="none"/><path d="M1.6 10h1.7M16.7 10h1.7"/></symbol>
+<symbol id="g-agb" viewBox="0 0 20 20"><circle cx="10" cy="10" r="5.4"/><circle cx="10" cy="10" r="2.1" fill="currentColor" stroke="none"/><path d="M14.3 2.6a8.6 8.6 0 0 1 3.9 4.6M5.7 17.4a8.6 8.6 0 0 1-3.9-4.6"/></symbol>
+<symbol id="g-planetary_nebula" viewBox="0 0 20 20"><circle cx="10" cy="10" r="7.4" stroke-dasharray="5.4 2.35"/><circle cx="10" cy="10" r="1.8" fill="currentColor" stroke="none"/></symbol>
+<symbol id="g-white_dwarf" viewBox="0 0 20 20"><circle cx="10" cy="10" r="2.8" fill="currentColor" stroke="none"/><path d="M5.2 5.2l1.5 1.5M14.8 5.2l-1.5 1.5M5.2 14.8l1.5-1.5M14.8 14.8l-1.5-1.5"/></symbol>
+<symbol id="g-red_supergiant" viewBox="0 0 20 20"><circle cx="10" cy="10" r="7.9" stroke-width="2.2"/><circle cx="10" cy="10" r="2.3" fill="currentColor" stroke="none"/></symbol>
+<symbol id="g-supernova" viewBox="0 0 20 20"><circle cx="10" cy="10" r="2.2" fill="currentColor" stroke="none"/><path d="M10 1.4v3.4M10 15.2v3.4M1.4 10h3.4M15.2 10h3.4M4.5 4.5l1.6 1.6M13.9 13.9l1.6 1.6M15.5 4.5l-1.6 1.6M6.1 13.9l-1.6 1.6"/></symbol>
+<symbol id="g-neutron_star" viewBox="0 0 20 20"><circle cx="10" cy="10" r="2.4" fill="currentColor" stroke="none"/><circle cx="10" cy="10" r="5.2"/><path d="M14.6 5.4l2.7-2.7M5.4 14.6l-2.7 2.7"/></symbol>
+<symbol id="g-black_hole" viewBox="0 0 20 20"><circle cx="10" cy="10" r="3.6" fill="currentColor" stroke="none"/><ellipse cx="10" cy="10" rx="8.3" ry="3" transform="rotate(-22 10 10)"/></symbol>
+</defs></svg>

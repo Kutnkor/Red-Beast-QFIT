@@ -1,0 +1,20 @@
+# Core backend
+fastapi>=0.115,<1.0
+uvicorn[standard]>=0.30
+pydantic>=2.7,<3
+pydantic-settings>=2.3
+python-dotenv>=1.0
+httpx>=0.27
+
+# AI
+google-genai>=1.0
+
+# Astronomy
+astropy>=6.0
+astroquery>=0.4.8
+numpy>=1.26
+pillow>=10.0      # PNG previews of FITS cutouts
+
+# Testing
+pytest>=8.0
+pytest-asyncio>=0.23

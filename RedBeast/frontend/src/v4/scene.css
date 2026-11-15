@@ -1,0 +1,18 @@
+/* Shadow-root glue for the live scene inside the V4 stage. Looks are in unify.css; this file only sizes things. */
+.v4-render-root{height:100%;min-height:0;background:transparent;position:relative}
+.v4-render-root .scene-content{height:100%;min-height:0;grid-template-rows:minmax(0,1fr);position:relative}
+.v4-render-root .scene-content>.sky-canvas{height:100%;min-height:0;background:transparent}
+.v4-render-root .big-number,.v4-render-root .sky-summary,.v4-render-root .sky-legend{display:none}
+.v4-render-root .stage-tools{position:absolute;margin:0;z-index:5;display:flex}
+.v4-render-root .sky-science-caption span{display:block;white-space:normal}
+.v4-render-root .sky-neighbour-list{z-index:5}
+.v4-render-root .frame-view>.sky-canvas{display:none}
+.v4-render-root .icon-sprite{display:none}
+/* A hidden 2D workspace must never cover the 3D renderer. */
+.v4-render-root .integrated-viewer.hide-frames{position:absolute;inset:0;background:transparent;border:0;pointer-events:none}
+.v4-render-root .integrated-viewer.hide-frames.drawer-closed{display:none}
+.v4-render-root .sky-canvas canvas:focus-visible{outline:2px solid #ff6a1a;outline-offset:-4px}
+@media(max-width:759px){
+ .v4-render-root .model-view:has(.drawer-open){grid-template-rows:minmax(0,1fr)}
+ .v4-render-root .model-view .integrated-viewer{grid-area:1/1}
+}

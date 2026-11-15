@@ -1,0 +1,7 @@
+{
+  "purpose": "Final fresh-coordinate availability probe",
+  "url": "https://irsa.ipac.caltech.edu/SIA?COLLECTION=spherex_dr1&POS=CIRCLE%20202.4695750%2047.1952580%200.000001",
+  "status_code": 200,
+  "bytes": 646637,
+  "is_votable": true
+}

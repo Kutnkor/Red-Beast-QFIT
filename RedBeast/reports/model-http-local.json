@@ -1,0 +1,86 @@
+{
+  "method": "Direct HTTP file checks; no browser rendering",
+  "checks": [
+    {
+      "port": 8765,
+      "target_id": "barnard",
+      "bytes": 121793,
+      "status": 200,
+      "sha256": "d02449635361444ad6de7358ee21ea353ab40a099c187e5eb8df315d52ddbaf1",
+      "content_type": "application/json"
+    },
+    {
+      "port": 8765,
+      "target_id": "eps-indi-b",
+      "bytes": 187930,
+      "status": 200,
+      "sha256": "d02b88afb216e771e42283c6d9a0bbc6762d5297c00fbe65902febc1eeba3648",
+      "content_type": "application/json"
+    },
+    {
+      "port": 8765,
+      "target_id": "wise-0855",
+      "bytes": 78651,
+      "status": 200,
+      "sha256": "598c85076c59754d841d5400970f18bccd8446e5344c4d0dcec25a1500948afa",
+      "content_type": "application/json"
+    },
+    {
+      "port": 8765,
+      "target_id": "rw-aur",
+      "bytes": 306590,
+      "status": 200,
+      "sha256": "d9fe190f329e7c63fe19dd547058e1bf8f96c7c8d97c71f6ca12669f8b89a5e5",
+      "content_type": "application/json"
+    },
+    {
+      "port": 8765,
+      "target_id": "r-dra",
+      "bytes": 617671,
+      "status": 200,
+      "sha256": "97d8b5ebda38877145f36e866b23fc2462a46908942a0125cc3a6827b6e2507f",
+      "content_type": "application/json"
+    },
+    {
+      "port": 5178,
+      "target_id": "barnard",
+      "bytes": 121793,
+      "status": 200,
+      "sha256": "d02449635361444ad6de7358ee21ea353ab40a099c187e5eb8df315d52ddbaf1",
+      "content_type": "application/json"
+    },
+    {
+      "port": 5178,
+      "target_id": "eps-indi-b",
+      "bytes": 187930,
+      "status": 200,
+      "sha256": "d02b88afb216e771e42283c6d9a0bbc6762d5297c00fbe65902febc1eeba3648",
+      "content_type": "application/json"
+    },
+    {
+      "port": 5178,
+      "target_id": "wise-0855",
+      "bytes": 78651,
+      "status": 200,
+      "sha256": "598c85076c59754d841d5400970f18bccd8446e5344c4d0dcec25a1500948afa",
+      "content_type": "application/json"
+    },
+    {
+      "port": 5178,
+      "target_id": "rw-aur",
+      "bytes": 306590,
+      "status": 200,
+      "sha256": "d9fe190f329e7c63fe19dd547058e1bf8f96c7c8d97c71f6ca12669f8b89a5e5",
+      "content_type": "application/json"
+    },
+    {
+      "port": 5178,
+      "target_id": "r-dra",
+      "bytes": 617671,
+      "status": 200,
+      "sha256": "97d8b5ebda38877145f36e866b23fc2462a46908942a0125cc3a6827b6e2507f",
+      "content_type": "application/json"
+    }
+  ],
+  "passed": true
+}

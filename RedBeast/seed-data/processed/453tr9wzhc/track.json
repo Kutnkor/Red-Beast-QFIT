@@ -1,0 +1,90 @@
+{
+  "sequence_id": "453tr9wzhc",
+  "target_id": "wise-0855",
+  "source": "precomputed",
+  "frames": [
+    {
+      "index": 0,
+      "mjd": 60800.835104036,
+      "date": "2025-05-05T20:02:33Z",
+      "predicted": {
+        "ra": 133.76126,
+        "dec": -7.242309,
+        "method": "proper_motion_only"
+      },
+      "measured": null,
+      "measured_reason": "centroid_unavailable"
+    },
+    {
+      "index": 1,
+      "mjd": 61169.194888736,
+      "date": "2026-05-09T04:40:38Z",
+      "predicted": {
+        "ra": 133.758966,
+        "dec": -7.24212,
+        "method": "proper_motion_only"
+      },
+      "measured": null,
+      "measured_reason": "centroid_unavailable"
+    }
+  ],
+  "motion": null,
+  "status": {
+    "data_available": true,
+    "source_detected": false,
+    "change_seen": false,
+    "change_kind": null,
+    "change_scientifically_confirmed": false
+  },
+  "caveats": [
+    "proper_motion_only_no_parallax",
+    "scientific_confirmation_requires_follow_up"
+  ],
+  "data_fingerprint": "8d4c70100021afee02082745",
+  "forced_mean": {
+    "n": 2,
+    "flux_mjy": 0.5928,
+    "err_mjy": 0.1506,
+    "snr": 3.9,
+    "note": "öngörülen (yalnızca özdevinim) konumlarda zorlanmış açıklık fotometrisinin ağırlıklı ortalaması; bağımsız bir keşif ölçümü değildir"
+  },
+  "blending": {
+    "radius_arcsec": 20.0,
+    "gaia": [
+      {
+        "id": "5756956644387831296",
+        "g": 16.314917,
+        "min_sep_arcsec": 4.5,
+        "date": "2026-05-09T04:40:38Z"
+      }
+    ],
+    "allwise": [
+      {
+        "id": "J085501.95-071428.1",
+        "w1": 14.983,
+        "w2": 15.051,
+        "min_sep_arcsec": 4.6,
+        "date": "2026-05-09T04:40:38Z"
+      }
+    ],
+    "status": "ok",
+    "catalogue_provenance": {
+      "gaia": {
+        "source_url": "https://gea.esac.esa.int/tap-server/tap",
+        "epoch_jyear": 2016.0
+      },
+      "allwise": {
+        "source_url": "https://vizier.cfa.harvard.edu/viz-bin/asu-tsv",
+        "epoch_jyear": 2010.56,
+        "provider": "VizieR Harvard mirror",
+        "catalogue_id": "II/328/allwise",
+        "bibcode": "2014yCat.2328....0C",
+        "query_url": "https://vizier.cfa.harvard.edu/viz-bin/asu-tsv?-source=II%2F328%2Fallwise&-c=133.7597650+-7.2421860&-c.rm=4.3860000&-out=AllWISE%2CRAJ2000%2CDEJ2000%2CW1mag%2CW2mag%2Csnr1%2Csnr2&-out.max=50000",
+        "response_sha256": "4d985814027a5c2cef8de7d5eab7d092e36dc641b071e7e7728d2a254847214e",
+        "response_bytes": 22833,
+        "retrieved_utc": "2026-11-14T17:16:47.386582+00:00"
+      }
+    },
+    "n_within_aperture": 2
+  }
+}

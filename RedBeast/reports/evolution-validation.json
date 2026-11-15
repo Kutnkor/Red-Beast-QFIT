@@ -1,0 +1,74 @@
+{
+  "revision": "Three.js framing, independent animation clocks and sourced evolution explorer",
+  "frontend_tests": {
+    "passed": 197,
+    "failed": 0
+  },
+  "typecheck_and_production_build": "passed",
+  "native_model_shader_link": {
+    "programs": 7,
+    "targets": 5,
+    "status": "passed"
+  },
+  "browser": {
+    "tool": "CUA in-app browser",
+    "webgl_rendered": true,
+    "console_errors_or_warnings": [],
+    "viewports": [
+      {
+        "width": 1280,
+        "height": 720,
+        "canvas_css": [
+          678,
+          468
+        ],
+        "drawing_pixels": [
+          1356,
+          936
+        ],
+        "aspect_error": 0
+      },
+      {
+        "width": 375,
+        "height": 812,
+        "canvas_css": [
+          345,
+          373
+        ],
+        "parent_content_css": [
+          345,
+          373
+        ],
+        "page_width": 375,
+        "aspect_error": 0
+      }
+    ],
+    "checks": [
+      "Close-up body is legible and distant catalogue points no longer shine through it.",
+      "Surface playback advanced rendered frames 31 to 836 while the calendar stayed at 2026.",
+      "Binary components and dark WISE 0855 render; RW Aur disk and jet flow inspected.",
+      "MIST giant-to-white-dwarf-boundary radius and colour changes inspected.",
+      "Evolution play, pause, restart and phase jumps exercised; table endpoint enforced.",
+      "Mobile scene/grid/canvas heights match after removing the inherited 560px grid row.",
+      "3D position focus opens the neighbourhood; target and Sun labels present.",
+      "RA=269.4463, Dec=4.7682 returned Barnard first, once, with angular separation.",
+      "Temporary viewport override reset."
+    ],
+    "fps_benchmark": "not measured; frame advancement is not a sustained performance guarantee"
+  },
+  "published_tracks": 5,
+  "published_samples": 3907,
+  "source_hashes_verified": true,
+  "unchanged_science_files": 141,
+  "unchanged_qfit_vendor_files": 198,
+  "secret_pattern_scan": "clean in source and built UI",
+  "new_lint_findings": 0,
+  "backend_tests": "not rerun; backend and science resources unchanged",
+  "limitations": [
+    "Evolution tracks are theoretical comparison models, not fitted histories/futures of the named targets.",
+    "Surface, cloud, magnetic and flow geometry remain illustrative, not resolved observations or hydrodynamics.",
+    "Existing astrometric source quality/recency was not re-audited; position search is limited to the loaded catalogue.",
+    "Original SPHEREx frames, processing and uncertainties were not modified.",
+    "Earlier ZIP and Docker build reports describe the earlier release; this revision was verified in the local app."
+  ]
+}

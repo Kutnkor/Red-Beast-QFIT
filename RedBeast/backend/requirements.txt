@@ -1,0 +1,13 @@
+# BlinkSpace backend runtime dependencies (full environment lock: requirements.lock)
+astropy==8.0.2
+numpy==2.5.4
+reproject==0.21.0
+photutils==3.1.1
+scipy==1.18.1
+fastapi==0.162.4
+uvicorn==0.54.0
+httpx==0.28.1
+pillow==13.0.0
+pydantic==2.14.3
+psutil==7.2.2
+python-dotenv==1.2.4

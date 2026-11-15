@@ -1,0 +1,26 @@
+[
+  {
+    "url": "https://irsa.ipac.caltech.edu/SIA?COLLECTION=spherex_dr1&POS=CIRCLE%20269.446269%204.768204%200.000001",
+    "status": 502,
+    "bytes": 341,
+    "sample": "<!DOCTYPE HTML PUBLIC \"-//IETF//DTD HTML 2.0//EN\">\n<html><head>\n<title>502 Proxy Error</ti"
+  },
+  {
+    "url": "https://irsa.ipac.caltech.edu/SIA?COLLECTION=spherex_dr1&POS=CIRCLE%20269.4462700%204.7682000%200.000001",
+    "status": 200,
+    "bytes": 525387,
+    "sample": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<VOTABLE version=\"1.3\" xmlns:xsi=\"http://www.w3.org"
+  },
+  {
+    "url": "https://irsa.ipac.caltech.edu/SIA?COLLECTION=spherex_dr1&POS=CIRCLE+269.4462700+4.7682000+0.000001",
+    "status": 502,
+    "bytes": 341,
+    "sample": "<!DOCTYPE HTML PUBLIC \"-//IETF//DTD HTML 2.0//EN\">\n<html><head>\n<title>502 Proxy Error</ti"
+  },
+  {
+    "url": "https://irsa.ipac.caltech.edu/SIA?COLLECTION=spherex_qr3&POS=CIRCLE%20269.446269%204.768204%200.000001",
+    "status": 502,
+    "bytes": 341,
+    "sample": "<!DOCTYPE HTML PUBLIC \"-//IETF//DTD HTML 2.0//EN\">\n<html><head>\n<title>502 Proxy Error</ti"
+  }
+]

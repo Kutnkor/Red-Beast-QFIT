@@ -1,0 +1,64 @@
+<?xml version='1.0' encoding='utf-8'?>
+<testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="1" skipped="0" tests="4" time="84.938"><testcase classname="tests.test_live_archive" name="test_live_tap_query_returns_unique_level2_products" time="7.504"><failure message="blinkspace.archive.ArchiveError: IRSA SIA spherex_dr1 failed: Server error '502 Proxy Error' for url 'https://irsa.ipac.caltech.edu/SIA?COLLECTION=spherex_dr1&amp;POS=CIRCLE%20269.4462690%204.7682040%200.000001'&#10;For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/502">live = (&lt;blinkspace.pipeline.Pipeline object at 0x10f2fd2b0&gt;, {'barnard': {'id': 'barnard', 'name': "Barnard's Star", 'kind':.....}, 'rw-aur': {'id': 'rw-aur', 'name': 'RW Aurigae', 'kind': 'variability', 'simbad_main_id': 'V* RW Aur', ...}, ...})
+
+    def test_live_tap_query_returns_unique_level2_products(live):
+        pipe, targets = live
+        t = targets["barnard"]["search"]
+        with httpx.Client(timeout=pipe.settings.tap_timeout_s, follow_redirects=True) as c:
+&gt;           obs, meta = query_observations(t["ra_deg"], t["dec_deg"], pipe.settings.tap_url, pipe.settings.tap_timeout_s, 3, c)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+backend/tests/test_live_archive.py:54: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+backend/blinkspace/archive.py:237: in query_observations
+    return query_sia_observations(ra_deg, dec_deg, timeout_s, max_retries, client, sleep)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+backend/blinkspace/archive.py:339: in query_sia_observations
+    results = list(pool.map(request_collection, SIA_COLLECTIONS))
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/concurrent/futures/_base.py:619: in result_iterator
+    yield _result_or_cancel(fs.pop())
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/concurrent/futures/_base.py:317: in _result_or_cancel
+    return fut.result(timeout)
+           ^^^^^^^^^^^^^^^^^^^
+/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/concurrent/futures/_base.py:456: in result
+    return self.__get_result()
+           ^^^^^^^^^^^^^^^^^^^
+/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/concurrent/futures/_base.py:401: in __get_result
+    raise self._exception
+/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/concurrent/futures/thread.py:59: in run
+    result = self.fn(*self.args, **self.kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+collection = 'spherex_dr1'
+
+    def request_collection(collection):
+        params = {"COLLECTION": collection, "POS": f"CIRCLE {ra_deg % 360:.7f} {dec_deg:.7f} 0.000001"}
+        last = None
+        for attempt in range(max(1, max_retries)):
+            try:
+                # SIA POS is a space-delimited geometry. IRSA's front proxy can
+                # reject form-style '+' separators; percent-encode real spaces.
+                url = SIA_URL + "?" + urlencode(params, quote_via=quote)
+                response = client.get(url, timeout=min(timeout_s, 120.0))
+                response.raise_for_status()
+                table = parse_single_table(io.BytesIO(response.content)).to_table(use_names_over_ids=True)
+                required = {"access_url", "obs_publisher_did", "s_region", "t_min", "t_max", "t_exptime"}
+                if not required &lt;= set(table.colnames):
+                    raise ArchiveError("IRSA SIA response schema changed")
+                rows = [{name: row[name] for name in table.colnames} for row in table]
+                meta = {"url": str(response.url), "collection": collection, "rows": len(rows),
+                        "response_sha256": hashlib.sha256(response.content).hexdigest(), "response_bytes": len(response.content),
+                        "attempts": attempt + 1}
+                return rows, meta
+            except (httpx.HTTPError, ValueError, ArchiveError) as exc:
+                last = exc
+                if attempt + 1 &lt; max_retries:
+                    sleep(2.0 * 2**attempt)
+&gt;       raise ArchiveError(f"IRSA SIA {collection} failed: {last}")
+E       blinkspace.archive.ArchiveError: IRSA SIA spherex_dr1 failed: Server error '502 Proxy Error' for url 'https://irsa.ipac.caltech.edu/SIA?COLLECTION=spherex_dr1&amp;POS=CIRCLE%20269.4462690%204.7682040%200.000001'
+E       For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/502
+
+backend/blinkspace/archive.py:335: ArchiveError</failure></testcase><testcase classname="tests.test_live_archive" name="test_live_cutout_layers_wavelength_and_footprint" time="38.191" /><testcase classname="tests.test_live_archive" name="test_live_end_to_end_preset_target" time="19.246" /><testcase classname="tests.test_live_archive" name="test_live_end_to_end_arbitrary_coordinate" time="19.629" /></testsuite></testsuites>

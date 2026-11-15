@@ -1,0 +1,20 @@
+{
+  "event_order": [
+    "text",
+    "command",
+    "sources",
+    "done"
+  ],
+  "terminal_done": true,
+  "provider_origin": "ai_generated",
+  "proposals": [
+    {
+      "name": "set_year",
+      "args": {
+        "year": 2050
+      },
+      "requires_confirmation": false
+    }
+  ],
+  "executed_in_browser": false
+}

@@ -1,0 +1,24 @@
+/* Generated from the SPHERE-X v5 design reference (not part of this repository); edit by hand from now on. */
+.observatory {
+  --black: #000;
+  --navy-950: #050b20;
+  --navy-900: #0a1634;
+  --navy-800: #10224f;
+  --navy-700: #193375;
+  --navy-500: #4062c4;
+  --navy-300: #9cb2ee;
+  --navy-200: #c6d3f7;
+  --navy-100: #e4ebfd;
+  --white: #fff;
+  --ink: #0a1634;
+  --ink-2: #465a8e;
+  --hair: #d6def4;
+  --orange: #ff6a1a;
+  --ease-out: cubic-bezier(.16,1,.3,1);
+  --ease-in: cubic-bezier(.4,0,1,1);
+  --ease-move: cubic-bezier(.4,0,.2,1);
+  --t1: 120ms;
+  --t2: 220ms;
+  --t3: 420ms;
+  --sc: 255,241,234;
+}

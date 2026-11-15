@@ -1,0 +1,11 @@
+{
+  "launcher": "Start-BlinkSpace.command",
+  "fresh_venv_install": true,
+  "fresh_seed_initialization": true,
+  "pipeline_version": "1.2.0",
+  "ready_targets": 5,
+  "model_profiles": 5,
+  "frontend_bytes": 2338,
+  "http_status": 200,
+  "public_zip_excludes_runtime_data": true
+}

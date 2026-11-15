@@ -1,0 +1,12 @@
+# Auto detect text files and perform LF normalization
+* text=auto
+
+# Preserve the supplied QFIT archive byte-for-byte, including its original CRLF files.
+backend/vendor/qfit/** -text whitespace=cr-at-eol
+
+# Supplied mascot stylesheet and official font licenses retain their original bytes.
+frontend/src/qfit/qfit-assistant.css -text whitespace=cr-at-eol
+frontend/public/fonts/*-OFL.txt -whitespace
+
+# Preserve the user-supplied V4 reference byte-for-byte, including CRLF.
+frontend/vendor/v4/app-v4.original.html -text

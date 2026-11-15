@@ -1,0 +1,140 @@
+{
+  "sequence_id": "nhvk2kebw6",
+  "target_id": "rw-aur",
+  "source": "precomputed",
+  "frames": [
+    {
+      "index": 0,
+      "mjd": 60920.03229708,
+      "date": "2025-09-02T00:46:30Z",
+      "predicted": {
+        "ra": 76.956586,
+        "dec": 30.401293,
+        "method": "proper_motion_only"
+      },
+      "measured": {
+        "ra": 76.956212,
+        "dec": 30.401191,
+        "err_arcsec": 0.62,
+        "method": "flux_weighted_centroid"
+      },
+      "measured_reason": null
+    },
+    {
+      "index": 1,
+      "mjd": 61107.677761178,
+      "date": "2026-03-08T16:15:59Z",
+      "predicted": {
+        "ra": 76.956587,
+        "dec": 30.40129,
+        "method": "proper_motion_only"
+      },
+      "measured": {
+        "ra": 76.956226,
+        "dec": 30.401054,
+        "err_arcsec": 0.62,
+        "method": "flux_weighted_centroid"
+      },
+      "measured_reason": null
+    },
+    {
+      "index": 2,
+      "mjd": 61291.277316444,
+      "date": "2026-09-08T06:39:20Z",
+      "predicted": {
+        "ra": 76.956588,
+        "dec": 30.401287,
+        "method": "proper_motion_only"
+      },
+      "measured": {
+        "ra": 76.956408,
+        "dec": 30.401183,
+        "err_arcsec": 0.62,
+        "method": "flux_weighted_centroid"
+      },
+      "measured_reason": null
+    }
+  ],
+  "motion": {
+    "n_points": 3,
+    "from_date": "2025-09-02T00:46:30Z",
+    "to_date": "2026-09-08T06:39:20Z",
+    "span_years": 1.016,
+    "fit_pm_e_arcsec_yr": 0.6,
+    "fit_pm_n_arcsec_yr": -0.03,
+    "fit_pm_total_arcsec_yr": 0.6,
+    "fit_pm_err_arcsec_yr": 0.86,
+    "catalog_pm_e_arcsec_yr": 0.01,
+    "catalog_pm_n_arcsec_yr": -0.02,
+    "catalog_pm_total_arcsec_yr": 0.02,
+    "measured_shift_arcsec": 0.61,
+    "measured_shift_px": 0.1,
+    "predicted_shift_arcsec": 0.02,
+    "significance_sigma": 0.5,
+    "residual_vs_catalog_sigma": 0.5,
+    "significant": false,
+    "consistent_with_catalog": true,
+    "per_point_error_arcsec": 0.62,
+    "per_point_error_source": "sequence alignment rms vs Gaia (per-axis, floor 0.1 px)",
+    "methods": [
+      "flux_weighted_centroid"
+    ],
+    "note": "doğrusal uyum; paralaks ve gözlemci etkisi modellenmedi"
+  },
+  "status": {
+    "data_available": true,
+    "source_detected": true,
+    "change_seen": true,
+    "change_kind": "brightness",
+    "change_scientifically_confirmed": false
+  },
+  "caveats": [
+    "proper_motion_only_no_parallax",
+    "scientific_confirmation_requires_follow_up"
+  ],
+  "data_fingerprint": "242dc5758342f86010c34acf",
+  "forced_mean": {
+    "n": 3,
+    "flux_mjy": 112.3207,
+    "err_mjy": 0.2123,
+    "snr": 529.1,
+    "note": "öngörülen (yalnızca özdevinim) konumlarda zorlanmış açıklık fotometrisinin ağırlıklı ortalaması; bağımsız bir keşif ölçümü değildir"
+  },
+  "blending": {
+    "radius_arcsec": 20.0,
+    "gaia": [],
+    "allwise": [
+      {
+        "id": "J050749.54+302404.7",
+        "w1": 6.246,
+        "w2": 5.228,
+        "min_sep_arcsec": 0.4,
+        "date": "2025-09-02T00:46:30Z"
+      }
+    ],
+    "status": "ok",
+    "catalogue_provenance": {
+      "gaia": {
+        "source_url": "https://gea.esac.esa.int/tap-server/tap",
+        "epoch_jyear": 2016.0
+      },
+      "allwise": {
+        "source_url": "https://vizier.cfa.harvard.edu/viz-bin/asu-tsv",
+        "epoch_jyear": 2010.56,
+        "provider": "VizieR Harvard mirror",
+        "catalogue_id": "II/328/allwise",
+        "bibcode": "2014yCat.2328....0C",
+        "query_url": "https://vizier.cfa.harvard.edu/viz-bin/asu-tsv?-source=II%2F328%2Fallwise&-c=76.9565870+30.4012910&-c.rm=4.3860000&-out=AllWISE%2CRAJ2000%2CDEJ2000%2CW1mag%2CW2mag%2Csnr1%2Csnr2&-out.max=50000",
+        "response_sha256": "888f0381dfc62149bc26b295e61ce826bde119a20135b7332b550a144b3e5263",
+        "response_bytes": 22166,
+        "retrieved_utc": "2026-11-14T17:16:55.498799+00:00"
+      }
+    },
+    "target_in_gaia": {
+      "id": "156430822114424576",
+      "g": 12.184072,
+      "sep_arcsec": 1.65
+    },
+    "n_within_aperture": 1
+  }
+}

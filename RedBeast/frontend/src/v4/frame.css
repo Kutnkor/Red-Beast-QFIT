@@ -1,0 +1,186 @@
+/* Layout of the V4 frame for every view. The stage is 1440 x 810 design pixels, scaled to the window.
+   One grammar everywhere: title column on the left (x 104), the scene around (772, 372), readout chips on a
+   286 px arc to its right, one time strip along the bottom. Components come from kit.css. */
+@font-face{font-family:'Bricolage Grotesque';src:url('/fonts/BricolageGrotesque.ttf') format('truetype');font-weight:200 800;font-stretch:75% 100%;font-display:swap}
+@font-face{font-family:'Martian Mono';src:url('/fonts/MartianMono.ttf') format('truetype');font-weight:100 800;font-stretch:75% 112.5%;font-display:swap}
+
+.logo{font-size:24px;gap:11px}.logo img{object-fit:contain;flex:none}.logo .wm{white-space:nowrap}.brand-red{color:#ff4d57}
+#langTabs button{min-width:40px;justify-content:center}
+.tour[data-side="none"]::before{display:none}
+/* The decorative backdrop never intercepts live controls. */
+.v4-stage>.scene{pointer-events:none}
+
+/* The original viewer's element styles are cloned into this document for the portals; keep them off the V4 widgets. */
+:where(#stage) :is(h1,h2,h3,h4,p,ul,ol,dl,dd,figure){margin:0}
+.top .tabs,#starTabs{overflow:visible;border-bottom:0}
+#time .transport{margin:0;padding:0;display:block;min-height:0;flex-wrap:nowrap}
+
+/* ---------- which layer shows in which view ---------- */
+#stage[data-mode=education] #v4-live-scene,#stage[data-mode=education] #v4-live-controls{display:none}
+#stage:not([data-mode=education])>.who,#stage:not([data-mode=education])>#chips,#stage:not([data-mode=education])>#leaders,#stage:not([data-mode=education])>#hrbox,#stage:not([data-mode=education])>#time,#stage:not([data-mode=education])>.scale-note{display:none}
+#stage:not([data-mode=education]) .scene .o{display:none}
+#stage:not([data-mode=education]) #v4-education-scene{display:none}
+#stage[data-mode=education] #star,#stage[data-mode=education] .scene .o{visibility:hidden!important}
+#v4-education-scene{position:absolute;left:520px;top:132px;width:504px;height:480px;pointer-events:none;z-index:1}
+.v4-education-canvas,.v4-education-canvas canvas{width:100%;height:100%;display:block}
+
+/* ---------- live scene ---------- */
+#v4-live-scene{position:absolute;z-index:1;left:104px;top:52px;width:1336px;height:640px}
+#stage[data-mode=observations] #v4-live-scene{left:476px;top:82px;width:940px;height:714px;z-index:2}
+
+/* ---------- live controls ---------- */
+#v4-live-controls{position:absolute;inset:0;pointer-events:none;z-index:2}
+.lv{position:absolute;inset:0;font-family:'Bricolage Grotesque',system-ui,sans-serif;color:#fff}
+.lv>*{pointer-events:auto}
+.lv-who{position:absolute;left:104px;width:356px;text-shadow:0 1px 2px rgba(5,11,32,.75),0 0 16px rgba(5,11,32,.5)}
+.lv[data-view=observations] .lv-who{width:348px}
+.lv-kicker{font-size:13px;color:var(--navy-200);margin:0 0 6px;letter-spacing:.005em;animation:lv-up 600ms var(--ease-out) both}
+.lv-title{font-weight:800;font-stretch:75%;line-height:.94;letter-spacing:-.012em;margin:0 0 0 -3px;display:flex;flex-wrap:wrap;column-gap:.22em}
+.lv-word{display:inline-flex;overflow:hidden;padding:.08em 0 .14em;margin:-.08em 0 -.14em;white-space:nowrap}
+.lv-ch{display:inline-block;animation:lv-letter 800ms var(--ease-out) both}
+@keyframes lv-letter{from{transform:translateY(115%)}to{transform:none}}
+@keyframes lv-up{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+.lv-phase{display:flex;align-items:center;gap:10px;min-height:40px;margin-top:10px;font-size:24px;font-weight:650;letter-spacing:-.01em;line-height:1.15;animation:lv-up 600ms var(--ease-out) both;animation-delay:120ms}
+.lv-phase>.kx-ic{flex:none;color:rgb(var(--sc,255,255,255))}
+.lv-badge{flex:none;font-size:12.5px;font-weight:500;padding:5px 10px;border-radius:12px;color:var(--navy-100);white-space:nowrap;text-shadow:none}
+.lv-targets{margin-top:14px;animation:lv-up 600ms var(--ease-out) both;animation-delay:180ms}
+.lv-say{margin:12px 0 0;font-size:15px;line-height:1.5;color:var(--navy-200);animation:lv-up 600ms var(--ease-out) both;animation-delay:220ms}
+.lv-actions{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:14px;text-shadow:none;animation:lv-up 600ms var(--ease-out) both;animation-delay:280ms}
+.lv-actions .lv-wide{grid-column:1/-1}
+.lv-actions .kx-tabs.lv-wide>button{flex:1;justify-content:center}
+.lv-actions .kx-act{width:100%}
+.lv-field{display:block;margin-top:14px;font-size:13px;color:var(--navy-200);text-shadow:none;animation:lv-up 600ms var(--ease-out) both;animation-delay:260ms}
+.lv-field select{display:block;width:100%;margin-top:6px;height:40px;padding:0 12px;border-radius:12px;border:1px solid rgba(156,178,238,.34);background:rgba(10,22,52,.72);color:#fff;font:600 14px 'Bricolage Grotesque',sans-serif;cursor:pointer}
+.lv-field select:hover{border-color:#fff}
+.lv-details{margin-top:12px;font-size:13.5px;color:var(--navy-200);text-shadow:none;animation:lv-up 600ms var(--ease-out) both;animation-delay:320ms}
+.lv-details summary{cursor:pointer;font-family:'Martian Mono',monospace;font-stretch:87.5%;font-size:12px;color:var(--navy-100);padding:6px 0}
+.lv-details p{margin:6px 0;line-height:1.5}
+.lv-details a{color:#fff}
+.lv-details dl{margin:4px 0}
+.lv-details dl>div{display:flex;justify-content:space-between;padding:3px 0;border-bottom:1px dashed rgba(156,178,238,.2)}
+.lv-details dd{font:500 12.5px 'Martian Mono',monospace;font-stretch:87.5%;color:#fff;margin:0}
+.lv-modes{position:absolute;left:104px;top:80px;z-index:6;animation:kx-drop 500ms var(--ease-out) both}
+.lv-chips{position:absolute;left:0;top:0}
+.lv-hr{position:absolute;left:1210px;top:478px;width:206px;height:128px;border-radius:14px;padding:8px 9px 6px;margin:0;animation:lv-up 600ms var(--ease-out) both;animation-delay:420ms}
+.lv-hr figcaption{display:flex;justify-content:space-between;align-items:baseline;font-size:12.5px;font-weight:650;line-height:1.2;height:17px}
+.lv-hr figcaption span{font-size:12px;font-weight:500;color:var(--navy-200)}
+.lv-hr svg{margin-top:3px;overflow:visible}
+.lv-hr text{font-size:12px;fill:var(--navy-200);font-family:'Bricolage Grotesque',sans-serif}
+.lv-swatch{position:absolute;right:10px;top:30px;width:12px;height:12px;border-radius:50%;box-shadow:0 0 0 2px rgba(255,255,255,.85)}
+.lv-track{min-width:0;padding-top:0}
+.lv-evo .kx-speed{display:none}
+.lv-scale{display:none}
+.v4-live-note{position:absolute;right:24px;top:84px;width:372px;z-index:7;text-shadow:none}
+.v4-live-note:empty{display:none}
+.v4-education-note{position:absolute;left:480px;right:260px;bottom:132px;text-align:center;font-size:12px;color:var(--navy-200);margin:0;pointer-events:none}
+#time{right:124px}
+
+/* search panel pieces that live in the top document are styled in unify.css */
+
+@media (prefers-reduced-motion:reduce){.lv *,.lv-modes{animation-duration:.01ms!important;animation-delay:0ms!important}}
+.calm .lv *,.calm .lv-modes{animation-duration:.01ms!important;animation-delay:0ms!important}
+
+/* ---------- small screens: one column, the image first ---------- */
+@media(max-width:759px){
+ html,body{height:auto;overflow-x:hidden;overflow-y:auto}
+ .v4-stage{position:relative;left:0;top:0;width:100%;height:1800px;margin:0;transform:none!important}
+ .top{left:16px;right:16px;top:12px;height:auto;flex-wrap:wrap;gap:8px}
+ .logo{font-size:22px;margin-right:auto;gap:8px}.logo img{width:38px;height:38px}.top>.tabs{flex:none}
+ #viewTabs{order:5;width:100%;justify-content:space-between}#viewTabs button{flex:1;justify-content:center;padding:0 8px}
+ #search{width:44px;height:44px;padding:0;margin:0;justify-content:center}#search span,#search kbd,#sourcesBtn{display:none}
+ #langTabs button{padding:0 7px}
+ .dock{top:auto;bottom:12px;left:12px;translate:none;position:fixed;flex-direction:row;padding:6px;gap:4px;z-index:20}
+ .dock button{width:44px;height:44px}.tip{display:none}
+ /* education view */
+ .who{left:16px;top:176px;width:calc(100% - 32px);max-height:none;overflow:visible}
+ .who h1{font-size:64px;height:78px}#name{font-size:64px!important;height:auto;min-height:78px}.who .phase{font-size:24px}.who .say{font-size:15px;width:100%;max-width:100%;min-height:0}
+ #pick{width:100%}#starTabs{width:100%}#starTabs button{font-size:12px;padding:0 6px;flex:1}
+ .massrow>span{font-size:12px}.massrow b{font-size:18px}.massrow .fate em{font-size:12px}
+ #v4-education-scene{left:0;top:540px;width:100%;height:370px}
+ .scene .o{left:50%;top:725px}#leaders{display:none}
+ #chips{top:980px;left:16px;right:16px;display:grid;grid-template-columns:1fr 1fr;gap:12px}
+ #chips .chip{position:relative;inset:auto!important;width:100%;height:66px;padding:8px}.chip b{font-size:17px}.chip .spark{width:40px}
+ #hrbox{left:16px;top:1150px;width:240px;height:156px}
+ .scale-note{top:912px;left:50%;font-size:12px}
+ .v4-education-note{top:940px;bottom:auto;left:16px;right:16px}
+ #time{left:16px;right:16px;bottom:auto;top:1370px;height:245px}
+ #ruler{left:0;right:0;top:100px;bottom:0}#marks .pm{font-size:12px}#marks .pm small{display:none}#marks .pm .ic{display:none}
+ #stage[data-mode=education] .lv-modes{left:16px;right:16px;top:124px}
+ /* live views flow as a document */
+ #stage:not([data-mode=education]){height:auto;min-height:100dvh;display:flex;flex-direction:column;gap:14px;padding:124px 16px 96px;box-sizing:border-box}
+ #stage:not([data-mode=education]) #v4-live-controls{display:contents}
+ #stage:not([data-mode=education]) #v4-model-switch{order:0}
+ #stage:not([data-mode=education]) .lv{display:contents}
+ #stage:not([data-mode=education]) .lv-modes{position:relative;left:auto;top:auto;width:100%}
+ .lv-modes>button{flex:1;justify-content:center;padding:0 6px;font-size:13px}.lv-modes .kx-ic{display:none}
+ #stage:not([data-mode=education]) #v4-live-scene{position:relative;left:auto;top:auto;width:100%;height:440px;flex:none;order:1}
+ #stage[data-mode=observations] #v4-live-scene{height:auto;min-height:560px}
+ #stage:not([data-mode=education]) .lv-who{position:relative;left:auto;top:auto!important;width:100%;order:2}
+ #stage[data-mode=observations] .lv-who{order:0}
+ #stage[data-mode=observations] .lv-who .lv-say,#stage[data-mode=observations] .lv-who .lv-actions{display:none}
+ .lv-title{font-size:56px!important}
+ #stage:not([data-mode=education]) .lv-chips{position:relative;order:3;display:grid;grid-template-columns:1fr 1fr;gap:10px}
+ .lv-chips .kx-chip{position:relative;left:auto!important;top:auto!important;width:100%}
+ #stage:not([data-mode=education]) .kx-time{position:relative;left:auto;right:auto;bottom:auto;order:4;width:100%;height:auto;grid-template-columns:auto auto 1fr;row-gap:6px}
+ .kx-time .lv-track{grid-column:1/-1;order:3}
+ .kx-time-read{text-align:right;padding-top:18px}
+ .kx-time-read em{display:none}
+ #stage:not([data-mode=education]) .lv-hr{position:relative;left:auto;top:auto;order:5;width:100%;height:auto}
+ .lv-hr svg{width:100%;height:auto}
+ .v4-live-note{position:relative;right:auto;top:auto;width:100%;order:0}
+ #settings{left:16px!important;top:auto!important;bottom:76px;max-width:calc(100vw - 32px);position:fixed}
+ #pal{left:12px!important;right:12px;width:auto!important;top:120px!important;transform:none!important}
+ #sources{left:12px!important;right:12px;top:124px;bottom:76px;width:auto!important;max-width:calc(100vw - 24px)}
+}
+/* disclosure rows: same chevron as the dialogs, content rises in */
+.lv-details summary{list-style:none;display:flex;align-items:center;gap:10px;border-radius:8px;transition:color 220ms}
+.lv-details summary::-webkit-details-marker{display:none}
+.lv-details summary::before{content:"";flex:none;width:6px;height:6px;margin-left:3px;border-right:1.6px solid currentColor;border-bottom:1.6px solid currentColor;transform:rotate(-45deg);transition:transform 280ms cubic-bezier(.3,1.22,.5,1)}
+.lv-details[open]>summary::before{transform:rotate(45deg)}
+.lv-details summary:hover{color:#fff}
+.lv-details[open]>:not(summary){animation:lv-up 360ms var(--ease-out) both}
+@media (prefers-reduced-motion:reduce){.lv-details[open]>:not(summary){animation:none}}
+
+/* Milky Way column: three plain facts, no boxes */
+.lv-facts{margin:14px 0 0;padding:0;display:grid;gap:0;text-shadow:none;animation:lv-up 600ms var(--ease-out) both;animation-delay:260ms}
+.lv-facts>div{display:flex;justify-content:space-between;align-items:baseline;gap:16px;padding:7px 0;border-top:1px solid rgba(156,178,238,.2)}
+.lv-facts>div:last-child{border-bottom:1px solid rgba(156,178,238,.2)}
+.lv-facts dt{font-size:14px;color:var(--navy-200)}
+.lv-facts dd{margin:0;font-size:15px;font-weight:650;color:#fff;font-variant-numeric:tabular-nums}
+
+/* ---------- wordmark: drawn geometric lowercase, one stroke weight; "red" carries the orange ---------- */
+.logo{gap:11px}
+.logo .wm{display:block;height:31px;width:auto;overflow:visible}
+.logo .wm-red{stroke:#ff6a1a}
+.logo .wm-beast{stroke:#fff}
+/* ---------- material: lighter glass that picks up colour, an orange rim light, and film grain over everything ---------- */
+.lg,.kx-glass{background:radial-gradient(130% 110% at 100% 135%,rgba(255,106,26,.2),rgba(255,106,26,0) 58%),linear-gradient(170deg,rgba(132,160,240,.17),rgba(40,66,140,.09) 46%,rgba(16,34,79,.16));
+  -webkit-backdrop-filter:blur(22px) saturate(210%) brightness(.8);backdrop-filter:blur(22px) saturate(210%) brightness(.8)}
+.kx-glass.kx-deep{background:radial-gradient(120% 80% at 100% 118%,rgba(255,106,26,.13),rgba(255,106,26,0) 60%),linear-gradient(180deg,rgba(16,34,79,.8),rgba(6,14,38,.88))}
+.solid .lg,.solid .kx-glass{background:#0a1634}
+@media (prefers-reduced-transparency:reduce){.lg,.kx-glass,.kx-glass.kx-deep{background:#0a1634}}
+.v4-shell::after{content:"";position:fixed;inset:0;z-index:2000;pointer-events:none;opacity:.07;mix-blend-mode:overlay;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 1.1 -.1'/%3E%3C/filter%3E%3Crect width='220' height='220' filter='url(%23n)'/%3E%3C/svg%3E")}
+/* ---------- the selected thing carries a short orange mark ---------- */
+.tabs .glider::after,.kx-tabs>.kx-glider::after{content:"";position:absolute;left:50%;bottom:3px;width:16px;height:2px;margin-left:-8px;border-radius:1px;background:#ff6a1a}
+.kx-act.kx-solid{box-shadow:inset 0 -2px 0 #ff6a1a,0 8px 22px rgba(0,0,0,.3)}
+@media (max-width:759px){.logo .wm{height:24px}}
+
+/* ---------- archive job panel ---------- */
+/* with no frames to show, the panel sits under the empty-state message in the middle of the stage */
+@media (min-width:760px){.lv[data-empty] .v4-live-note{right:auto;left:760px;top:440px;width:372px}}
+.v4-live-note .job{margin:0;padding:16px 18px;border:0;border-radius:18px;color:#e4ebfd;font:500 14px/1.45 var(--font);
+  background:linear-gradient(170deg,rgba(124,154,236,.18),rgba(16,34,79,.34));box-shadow:inset 0 0 0 1px rgba(156,178,238,.3),0 18px 44px rgba(0,0,0,.35);
+  -webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);animation:kx-rise 460ms cubic-bezier(.16,1,.3,1) both}
+.v4-live-note .job-head h2{font-size:15px;font-weight:700;margin:0}
+.v4-live-note .job-head p{font-size:13px;color:#c6d3f7}
+.v4-live-note .job-position{font-size:12.5px;color:#c6d3f7}
+.v4-live-note .stages{gap:4px}
+.v4-live-note .stages .stage{border:0;border-radius:99px;padding:3px 10px;font-size:12px;color:#9cb2ee;box-shadow:inset 0 0 0 1px rgba(156,178,238,.3)}
+.v4-live-note .stages .stage-done{color:#fff}
+.v4-live-note .stages .stage-current{color:#0a1634;background:#fff;box-shadow:inset 0 -2px 0 #ff6a1a}
+.v4-live-note .progress{height:4px;border-radius:2px;background:rgba(156,178,238,.2);overflow:hidden}
+.v4-live-note .progress span{display:block;height:100%;border-radius:2px;background:#ff6a1a;transition:width 400ms cubic-bezier(.16,1,.3,1)}
+.job-wait{margin:8px 0 10px;padding:8px 10px;border-radius:10px;font-size:13px;line-height:1.45;color:#e4ebfd;background:rgba(3,8,24,.4);box-shadow:inset 3px 0 0 #c6d3f7}
+/* phone, no frames yet: the scene box shrinks to the message, and the job panel follows it */
+@media (max-width:759px){#stage:has(.lv[data-empty]) #v4-live-scene{min-height:0}.lv[data-empty] .v4-live-note{order:2}}

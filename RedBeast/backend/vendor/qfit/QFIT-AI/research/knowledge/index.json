@@ -1,0 +1,1583 @@
+{
+ "format": 1,
+ "index_version": "8c62698a68e7",
+ "registry_version": "2026.11.14-2",
+ "built_at": "2026-11-14T15:03:00+00:00",
+ "chunking": {
+  "unit": "markdown '##' section",
+  "tokenizer": "fold+stem (tr prefix-5, en suffix)"
+ },
+ "embedding_model": null,
+ "counts": {
+  "chunks": 82,
+  "documents": 18,
+  "by_language": {
+   "en": 41,
+   "tr": 41
+  }
+ },
+ "update": {
+  "added": 0,
+  "changed": 2,
+  "unchanged": 80,
+  "removed": 0
+ },
+ "duplicates_skipped": [],
+ "chunks": [
+  {
+   "chunk_id": "brown-dwarfs:en:1",
+   "doc_id": "brown-dwarfs",
+   "language": "en",
+   "topic": "brown_dwarfs",
+   "title": "Brown dwarfs and substellar objects",
+   "heading": "What a brown dwarf is",
+   "text": "A brown dwarf is an object between the giant planets and the smallest stars. Brown dwarfs form like stars, from a collapsing cloud of gas, but never become massive enough to sustain the fusion of hydrogen in their cores. They shine through gravitational contraction, as gas giant planets do. Brown dwarfs of sufficient mass fuse deuterium (heavy hydrogen) for a time, but this stops after a few million years. Because they are cool, they emit most of their light in the infrared.",
+   "source_ids": [
+    "nasa-gl229b",
+    "nasa-webb-brown-dwarf",
+    "jpl-identity-crisis",
+    "nasa-webb-young-bd"
+   ],
+   "content_hash": "0cdf8def10677349",
+   "path": "en/brown-dwarfs.md",
+   "doc_version": "1",
+   "mission": null,
+   "data_release": null,
+   "verification_note": null
+  },
+  {
+   "chunk_id": "brown-dwarfs:en:2",
+   "doc_id": "brown-dwarfs",
+   "language": "en",
+   "topic": "brown_dwarfs",
+   "title": "Brown dwarfs and substellar objects",
+   "heading": "Mass range: the sources do not agree",
+   "text": "The upper limit is the mass needed to sustain hydrogen fusion, about 8 percent of the Sun's mass or roughly 75 to 80 Jupiter masses. The lower limit is stated differently by different sources: 15 to 75 Jupiter masses (NASA StarChild), 10 to 70 Jupiter masses (JPL), 1 to 8 percent of the Sun's mass (NASA Webb article), and 13.6 to 80 Jupiter masses with the deuterium-burning limit near 13 Jupiter masses as the lower bound (Gan et al. 2025). Webb observations suggest that objects formed like stars may exist down to 2-3 Jupiter masses. The disagreement reflects two definitions, one by deuterium fusion and one by how the object formed. Q-FIT reports the range together with the source it comes from.",
+   "source_ids": [
+    "nasa-starchild-bd",
+    "jpl-identity-crisis",
+    "nasa-webb-young-bd",
+    "gan-2025-apjl",
+    "nasa-webb-brown-dwarf"
+   ],
+   "content_hash": "112d1f51407a4735",
+   "path": "en/brown-dwarfs.md",
+   "doc_version": "1",
+   "mission": null,
+   "data_release": null,
+   "verification_note": null
+  },
+  {
+   "chunk_id": "brown-dwarfs:en:3",
+   "doc_id": "brown-dwarfs",
+   "language": "en",
+   "topic": "brown_dwarfs",
+   "title": "Brown dwarfs and substellar objects",
+   "heading": "Spectral types L, T and Y",
+   "text": "Brown dwarfs are grouped by temperature into spectral types: L dwarfs are the warmest group, T dwarfs are cooler, and Y dwarfs are the coolest, with surface temperatures of about 200 to 500 kelvin. The Y class was discovered in 2011 with NASA's Wide-field Infrared Survey Explorer (WISE).",
+   "source_ids": [
+    "cfa-y-dwarfs"
+   ],
+   "content_hash": "22ebfc2eadba1049",
+   "path": "en/brown-dwarfs.md",
+   "doc_version": "1",
+   "mission": null,
+   "data_release": null,
+   "verification_note": null
+  },
+  {
+   "chunk_id": "brown-dwarfs:en:4",
+   "doc_id": "brown-dwarfs",
+   "language": "en",
+   "topic": "brown_dwarfs",
+   "title": "Brown dwarfs and substellar objects",
+   "heading": "First detection",
+   "text": "The first unambiguous brown dwarf, Gliese 229B, was found in October 1994 as a companion of the red dwarf Gliese 229 and confirmed a year later. Its mass was estimated at 20 to 50 Jupiter masses, and its atmosphere resembles Jupiter's in composition.",
+   "source_ids": [
+    "nasa-gl229b"
+   ],
+   "content_hash": "294e9c457e0f5fde",
+   "path": "en/brown-dwarfs.md",
+   "doc_version": "1",
+   "mission": null,
+   "data_release": null,
+   "verification_note": null
+  },
+  {
+   "chunk_id": "brown-dwarfs:en:5",
+   "doc_id": "brown-dwarfs",
+   "language": "en",
+   "topic": "brown_dwarfs",
+   "title": "Brown dwarfs and substellar objects",
+   "heading": "SPHEREx and brown dwarfs",
+   "text": "A study published in The Astrophysical Journal and reported by NASA on 8 October 2026 used SPHEREx to study 37 nearby brown dwarfs, measuring the brightness of each in 102 colors to build a spectrum. The spectra show water, carbon dioxide, carbon monoxide and methane, and the sample spans temperatures from roughly 2,200 degrees Celsius down to about -20 degrees Celsius. The team reports that thousands more brown dwarfs are being analysed and that models have difficulty matching the data where clouds change. Observing from space avoids the wavelengths absorbed by water vapour in Earth's atmosphere. This is a published result of the SPHEREx team, not something Q-FIT measured.",
+   "source_ids": [
+    "nasa-spherex-brown-dwarfs"
+   ],
+   "content_hash": "64377951ced8273e",
+   "path": "en/brown-dwarfs.md",
+   "doc_version": "1",
+   "mission": null,
+   "data_release": null,
+   "verification_note": null
+  },
+  {
+   "chunk_id": "citizen-science:en:1",
+   "doc_id": "citizen-science",
+   "language": "en",
+   "topic": "citizen_science",
+   "title": "Citizen science method and candidate review",
+   "heading": "Backyard Worlds: Planet 9",
+   "text": "Backyard Worlds: Planet 9 is a NASA-funded citizen science project launched on 15 February 2017. Volunteers look at short animations (\"flipbooks\") of small patches of sky made from images of NASA's WISE mission taken over several years and search for objects that shift position between frames. It is a collaboration of NASA, UC Berkeley, the American Museum of Natural History, Arizona State University, the Space Telescope Science Institute and Zooniverse.",
+   "source_ids": [
+    "jpl-backyard-worlds"
+   ],
+   "content_hash": "68e8088ea367c5ef",
+   "path": "en/citizen-science.md",
+   "doc_version": "1",
+   "mission": null,
+   "data_release": null,
+   "verification_note": null
+  },
+  {
+   "chunk_id": "citizen-science:en:2",
+   "doc_id": "citizen-science",
+   "language": "en",
+   "topic": "citizen_science",
+   "title": "Citizen science method and candidate review",
+   "heading": "Why motion and why people",
+   "text": "Nearby objects appear to move across the sky, while distant ones barely shift, so searching for motion is a systematic way to find nearby objects such as brown dwarfs. Software struggles with image artefacts, especially in crowded star fields: brightness spikes from stars and blurry blobs from light scattered inside the instrument. People recognise real moving objects and ignore the artefacts.",
+   "source_ids": [
+    "jpl-backyard-worlds"
+   ],
+   "content_hash": "360a45c11edb334d",
+   "path": "en/citizen-science.md",
+   "doc_version": "1",
+   "mission": null,
+   "data_release": null,
+   "verification_note": null
+  },
+  {
+   "chunk_id": "citizen-science:en:3",
+   "doc_id": "citizen-science",
+   "language": "en",
+   "topic": "citizen_science",
+   "title": "Citizen science method and candidate review",
+   "heading": "From a flag to a result",
+   "text": "A volunteer's flag is not a discovery. The science team prioritises flagged objects for follow-up observations by professional astronomers, and participants share credit in resulting publications. By 2024 the project had helped build a census of more than 3,500 objects within 65 light-years of the Sun, published in The Astrophysical Journal with citizen scientists as co-authors.",
+   "source_ids": [
+    "jpl-backyard-worlds",
+    "nasa-bw-census"
+   ],
+   "content_hash": "70ba98a741a9c59f",
+   "path": "en/citizen-science.md",
+   "doc_version": "1",
+   "mission": null,
+   "data_release": null,
+   "verification_note": null
+  },
+  {
+   "chunk_id": "citizen-science:en:4",
+   "doc_id": "citizen-science",
+   "language": "en",
+   "topic": "citizen_science",
+   "title": "Citizen science method and candidate review",
+   "heading": "Candidate states in Q-FIT",
+   "text": "Q-FIT keeps four states apart. An AI-generated candidate was suggested by software and nobody has looked at it. An unreviewed candidate is waiting for human inspection. A human-reviewed candidate has at least one recorded review by a person. A scientifically confirmed result exists only when an external reference (a publication or a professional follow-up) is recorded. Q-FIT never calls a candidate a discovery, and human reviews enter an evaluation or training dataset only after a separate validation step.",
+   "source_ids": [
+    "qfit-spec"
+   ],
+   "content_hash": "58a48662e2742a3a",
+   "path": "en/citizen-science.md",
+   "doc_version": "1",
+   "mission": null,
+   "data_release": null,
+   "verification_note": null
+  },
+  {
+   "chunk_id": "hr-diagram:en:1",
+   "doc_id": "hr-diagram",
+   "language": "en",
+   "topic": "hr_diagram",
+   "title": "The Hertzsprung-Russell diagram and stellar classification",
+   "heading": "What the diagram plots",
+   "text": "The Hertzsprung-Russell (H-R) diagram plots stars by luminosity (or absolute magnitude) on the vertical axis against effective surface temperature (or spectral class, or colour) on the horizontal axis. Temperature runs backwards: hot stars, around 30,000-40,000 K, are on the left and cool stars, around 2,500 K, on the right. It goes back to work by Ejnar Hertzsprung (1911) and Henry Norris Russell (1913).",
+   "source_ids": [
+    "atnf-hr-intro",
+    "atnf-hr-classifying",
+    "chandra-hr"
+   ],
+   "content_hash": "5cd0786a14cd18d7",
+   "path": "en/hr-diagram.md",
+   "doc_version": "1",
+   "mission": null,
+   "data_release": null,
+   "verification_note": null
+  },
+  {
+   "chunk_id": "hr-diagram:en:2",
+   "doc_id": "hr-diagram",
+   "language": "en",
+   "topic": "hr_diagram",
+   "title": "The Hertzsprung-Russell diagram and stellar classification",
+   "heading": "The main groups",
+   "text": "Most stars, including the Sun, lie on the main sequence, a band from cool, dim stars at lower right to hot, luminous stars at upper left; these stars fuse hydrogen to helium in their cores. Giants and supergiants are luminous stars that have evolved off the main sequence and lie above it. White dwarfs are hot but dim and lie at lower left; they are roughly the size of Earth. About 90 percent of stars are on the main sequence. The Sun is a G2 star with an effective temperature of about 5,800 K.",
+   "source_ids": [
+    "atnf-hr-intro",
+    "atnf-hr-classifying",
+    "chandra-stellar-evolution",
+    "esa-stellar-types"
+   ],
+   "content_hash": "66345042650528c6",
+   "path": "en/hr-diagram.md",
+   "doc_version": "1",
+   "mission": null,
+   "data_release": null,
+   "verification_note": null
+  },
+  {
+   "chunk_id": "hr-diagram:en:3",
+   "doc_id": "hr-diagram",
+   "language": "en",
+   "topic": "hr_diagram",
+   "title": "The Hertzsprung-Russell diagram and stellar classification",
+   "heading": "Why position tells you size",
+   "text": "The energy a star emits per unit surface area per second rises with the fourth power of its temperature (the Stefan-Boltzmann relation). Two stars with the same temperature but very different luminosities must therefore differ in size: the more luminous one has the larger surface. That is why a cool but very luminous star must be a giant, and a hot but dim one must be a white dwarf.",
+   "source_ids": [
+    "atnf-hr-intro",
+    "chandra-hr"
+   ],
+   "content_hash": "7ae159df3d05fb75",
+   "path": "en/hr-diagram.md",
+   "doc_version": "1",
+   "mission": null,
+   "data_release": null,
+   "verification_note": null
+  },
+  {
+   "chunk_id": "hr-diagram:en:4",
+   "doc_id": "hr-diagram",
+   "language": "en",
+   "topic": "hr_diagram",
+   "title": "The Hertzsprung-Russell diagram and stellar classification",
+   "heading": "Luminosity classes",
+   "text": "Stars of one spectral type are further divided by luminosity class: I and II supergiants and bright giants, III giants, IV subgiants, V main-sequence stars, VI subdwarfs and VII white dwarfs.",
+   "source_ids": [
+    "chandra-hr"
+   ],
+   "content_hash": "0109818e7e256b55",
+   "path": "en/hr-diagram.md",
+   "doc_version": "1",
+   "mission": null,
+   "data_release": null,
+   "verification_note": null
+  },
+  {
+   "chunk_id": "hr-diagram:en:5",
+   "doc_id": "hr-diagram",
+   "language": "en",
+   "topic": "hr_diagram",
+   "title": "The Hertzsprung-Russell diagram and stellar classification",
+   "heading": "What is needed to place an object",
+   "text": "Placing an object on the H-R diagram needs two quantities: its effective temperature (or spectral type or colour) and its luminosity (or absolute magnitude). Absolute magnitude is the brightness the star would have at 10 parsecs, so it requires knowing the distance. A SPHEREx Spectral Image gives a surface brightness at one wavelength; by itself it gives neither temperature nor luminosity. If either quantity is missing, Q-FIT says which one and does not assign a position.",
+   "source_ids": [
+    "atnf-hr-classifying",
+    "spherex-data-products",
+    "qfit-spec"
+   ],
+   "content_hash": "3748bb4adc5770af",
+   "path": "en/hr-diagram.md",
+   "doc_version": "1",
+   "mission": null,
+   "data_release": null,
+   "verification_note": null
+  },
+  {
+   "chunk_id": "hr-diagram:en:6",
+   "doc_id": "hr-diagram",
+   "language": "en",
+   "topic": "hr_diagram",
+   "title": "The Hertzsprung-Russell diagram and stellar classification",
+   "heading": "Mass and the main sequence",
+   "text": "On the main sequence a star's properties are set almost entirely by its mass. More massive stars are more luminous, with luminosity rising roughly as the fourth power of mass, and they spend less time on the main sequence. There is no such mass-luminosity relation for giants or white dwarfs.",
+   "source_ids": [
+    "chandra-stellar-evolution"
+   ],
+   "content_hash": "4e77f73bf0b97fe8",
+   "path": "en/hr-diagram.md",
+   "doc_version": "1",
+   "mission": null,
+   "data_release": null,
+   "verification_note": null
+  },
+  {
+   "chunk_id": "qfit-evidence-policy:en:1",
+   "doc_id": "qfit-evidence-policy",
+   "language": "en",
+   "topic": "project_policy",
+   "title": "Q-FIT evidence and uncertainty policy",
+   "heading": "Evidence classes",
+   "text": "Every statement Q-FIT makes belongs to one class. Direct measurement: a value read from SPHEREx data. Archive metadata: what the archive records about a file. Catalog data: what SIMBAD or JPL Horizons lists. Deterministic calculation: a value computed by code from stated inputs. Published result: a finding reported by a cited source. Interpretation or hypothesis: reasoning that goes beyond the data. Missing information: something that was looked for and not found.",
+   "source_ids": [
+    "qfit-spec"
+   ],
+   "content_hash": "2fed47c5357bf3bd",
+   "path": "en/qfit-evidence-policy.md",
+   "doc_version": "1",
+   "mission": null,
+   "data_release": null,
+   "verification_note": null
+  },
+  {
+   "chunk_id": "qfit-evidence-policy:en:2",
+   "doc_id": "qfit-evidence-policy",
+   "language": "en",
+   "topic": "project_policy",
+   "title": "Q-FIT evidence and uncertainty policy",
+   "heading": "Things Q-FIT never invents",
+   "text": "Flux, wavelength, temperature, luminosity, mass, spectral measurements, observation times, catalogue identifiers and uncertainties are never made up. If a number is not in a tool result or a cited source, Q-FIT does not state it. Q-FIT gives no numerical confidence percentages unless they come from a calibrated statistical method.",
+   "source_ids": [
+    "qfit-spec"
+   ],
+   "content_hash": "c9590349e959e54b",
+   "path": "en/qfit-evidence-policy.md",
+   "doc_version": "1",
+   "mission": null,
+   "data_release": null,
+   "verification_note": null
+  },
+  {
+   "chunk_id": "qfit-evidence-policy:en:3",
+   "doc_id": "qfit-evidence-policy",
+   "language": "en",
+   "topic": "project_policy",
+   "title": "Q-FIT evidence and uncertainty policy",
+   "heading": "When sources disagree",
+   "text": "When two sources give different values, Q-FIT shows both with their sources and versions, explains possible reasons, and does not silently choose one.",
+   "source_ids": [
+    "qfit-spec"
+   ],
+   "content_hash": "812044d719334bc5",
+   "path": "en/qfit-evidence-policy.md",
+   "doc_version": "1",
+   "mission": null,
+   "data_release": null,
+   "verification_note": null
+  },
+  {
+   "chunk_id": "qfit-evidence-policy:en:4",
+   "doc_id": "qfit-evidence-policy",
+   "language": "en",
+   "topic": "project_policy",
+   "title": "Q-FIT evidence and uncertainty policy",
+   "heading": "About the name",
+   "text": "\"Quantum\" in Quantum Framework for Intelligent Tracking is a project name. Q-FIT does not perform quantum computing or quantum simulation.",
+   "source_ids": [
+    "qfit-spec"
+   ],
+   "content_hash": "a8ca9de3d8bcb599",
+   "path": "en/qfit-evidence-policy.md",
+   "doc_version": "1",
+   "mission": null,
+   "data_release": null,
+   "verification_note": null
+  },
+  {
+   "chunk_id": "spectroscopy:en:1",
+   "doc_id": "spectroscopy",
+   "language": "en",
+   "topic": "spectroscopy",
+   "title": "Spectroscopy, brightness and units in SPHEREx data",
+   "heading": "Spectroscopy",
+   "text": "Spectroscopy splits light into its wavelengths, as a prism makes a rainbow from sunlight. What the eye sees as colours are different wavelengths. SPHEREx works in the near-infrared, from 0.75 to 5.0 micron, beyond the red end of visible light.",
+   "source_ids": [
+    "jpl-spherex-presskit",
+    "spherex-goals"
+   ],
+   "content_hash": "5baf28b70c9a9a64",
+   "path": "en/spectroscopy.md",
+   "doc_version": "1",
+   "mission": null,
+   "data_release": null,
+   "verification_note": null
+  },
+  {
+   "chunk_id": "spectroscopy:en:2",
+   "doc_id": "spectroscopy",
+   "language": "en",
+   "topic": "spectroscopy",
+   "title": "Spectroscopy, brightness and units in SPHEREx data",
+   "heading": "Resolving power",
+   "text": "Spectral resolving power R is the wavelength divided by the smallest wavelength difference that can be separated, R = lambda / delta-lambda; it has no unit. SPHEREx's resolving power is between 35 and 41 in bands 1 to 4 and 112 and 128 in bands 5 and 6. With R about 40, a channel at 1.4 micron is about 0.035 micron wide. This is low resolution: broad molecular absorption bands can be seen, narrow lines cannot be separated.",
+   "source_ids": [
+    "irsa-sia",
+    "spherex-data-products"
+   ],
+   "content_hash": "2f71e85e59cf8e47",
+   "path": "en/spectroscopy.md",
+   "doc_version": "1",
+   "mission": null,
+   "data_release": null,
+   "verification_note": null
+  },
+  {
+   "chunk_id": "spectroscopy:en:3",
+   "doc_id": "spectroscopy",
+   "language": "en",
+   "topic": "spectroscopy",
+   "title": "Spectroscopy, brightness and units in SPHEREx data",
+   "heading": "Surface brightness is not flux",
+   "text": "SPHEREx Spectral Images give surface brightness in megajansky per steradian (MJy/sr): brightness per unit area of sky. To get the flux of a source, the pixel values must be summed over an aperture, the background subtracted, and the result multiplied by the solid angle of a pixel. IRSA's tutorial does this with aperture photometry and converts to millijansky, and states that the method is for visualization; for science it recommends IRSA's SPHEREx Spectrophotometry Tool. A single pixel value read by Q-FIT is a raw reading that still contains zodiacal light. It is not the flux of the object.",
+   "source_ids": [
+    "spherex-data-products",
+    "irsa-tutorial-hips"
+   ],
+   "content_hash": "4908cfddad587b55",
+   "path": "en/spectroscopy.md",
+   "doc_version": "1",
+   "mission": null,
+   "data_release": null,
+   "verification_note": null
+  },
+  {
+   "chunk_id": "spectroscopy:en:4",
+   "doc_id": "spectroscopy",
+   "language": "en",
+   "topic": "spectroscopy",
+   "title": "Spectroscopy, brightness and units in SPHEREx data",
+   "heading": "Luminosity and flux",
+   "text": "Luminosity is the total energy a star radiates per second; it is a property of the star. Flux is the energy received per unit area per second by the observer, so it depends on distance as well as on luminosity. Converting a measured flux to a luminosity needs the distance.",
+   "source_ids": [
+    "chandra-hr",
+    "atnf-hr-classifying"
+   ],
+   "content_hash": "47f201a5546d69ba",
+   "path": "en/spectroscopy.md",
+   "doc_version": "1",
+   "mission": null,
+   "data_release": null,
+   "verification_note": "the definition of flux is standard physics and is not stated in the cited pages; citation needed."
+  },
+  {
+   "chunk_id": "spectroscopy:en:5",
+   "doc_id": "spectroscopy",
+   "language": "en",
+   "topic": "spectroscopy",
+   "title": "Spectroscopy, brightness and units in SPHEREx data",
+   "heading": "Molecules in cool atmospheres",
+   "text": "Cool objects such as brown dwarfs have molecules in their atmospheres that absorb infrared light at particular wavelengths. In SPHEREx spectra of brown dwarfs the team reports signatures of water, carbon dioxide, carbon monoxide and methane, changing from object to object with temperature.",
+   "source_ids": [
+    "nasa-spherex-brown-dwarfs"
+   ],
+   "content_hash": "ca10a9b1a5a7b901",
+   "path": "en/spectroscopy.md",
+   "doc_version": "1",
+   "mission": null,
+   "data_release": null,
+   "verification_note": null
+  },
+  {
+   "chunk_id": "spherex-data-access:en:1",
+   "doc_id": "spherex-data-access",
+   "language": "en",
+   "topic": "data_access",
+   "title": "How SPHEREx data are found and retrieved",
+   "heading": "Searching the archive",
+   "text": "SPHEREx data are served by the NASA/IPAC Infrared Science Archive (IRSA). Q-FIT searches with the IVOA Simple Image Access v2 (SIA2) service, which returns every image whose footprint intersects a circle on the sky. The searchable collections are spherex_dr1 and spherex_qr3 (wide survey), spherex_dr1_deep and spherex_qr3_deep (deep survey) and spherex_dr1_cube (All-Sky Cube tiles). New exposures appear in SIA2 about a day after they appear in IRSA's other interfaces.",
+   "source_ids": [
+    "spherex-data-access",
+    "irsa-sia"
+   ],
+   "content_hash": "7d928b09598a21fb",
+   "path": "en/spherex-data-access.md",
+   "doc_version": "1",
+   "mission": "SPHEREx",
+   "data_release": "DR1, QR3",
+   "verification_note": null
+  },
+  {
+   "chunk_id": "spherex-data-access:en:2",
+   "doc_id": "spherex-data-access",
+   "language": "en",
+   "topic": "data_access",
+   "title": "How SPHEREx data are found and retrieved",
+   "heading": "What an archive record tells you",
+   "text": "One archive record describes one file: observation identifier, collection, detector band, start and end time (Modified Julian Date), exposure time, wavelength limits in metres, resolving power, image centre, field of view and download address. In the records Q-FIT inspected, a Spectral Image has a field of view of about 3.5 degrees, a pixel scale of 6.15 arcseconds and an exposure time of about 113.6 seconds. The image centre is not the position of the object you searched for; the object can be anywhere inside the image.",
+   "source_ids": [
+    "irsa-live-query",
+    "irsa-tutorial-intro"
+   ],
+   "content_hash": "276f6e107f6e1fca",
+   "path": "en/spherex-data-access.md",
+   "doc_version": "1",
+   "mission": "SPHEREx",
+   "data_release": "DR1, QR3",
+   "verification_note": null
+  },
+  {
+   "chunk_id": "spherex-data-access:en:3",
+   "doc_id": "spherex-data-access",
+   "language": "en",
+   "topic": "data_access",
+   "title": "How SPHEREx data are found and retrieved",
+   "heading": "Cutouts",
+   "text": "IRSA's cutout service returns a small part of a Spectral Image when \"?center=RA,Dec&size=SIZE\" (degrees) is appended to the file's on-premises address. The cutout keeps all extensions; IMAGE, FLAGS, VARIANCE and ZODI are trimmed and the wavelength table is remapped to the cutout.",
+   "source_ids": [
+    "spherex-data-access",
+    "spherex-data-products"
+   ],
+   "content_hash": "8d9ca638e4785a29",
+   "path": "en/spherex-data-access.md",
+   "doc_version": "1",
+   "mission": "SPHEREx",
+   "data_release": "DR1, QR3",
+   "verification_note": null
+  },
+  {
+   "chunk_id": "spherex-data-access:en:4",
+   "doc_id": "spherex-data-access",
+   "language": "en",
+   "topic": "data_access",
+   "title": "How SPHEREx data are found and retrieved",
+   "heading": "A catalog match is not an observation",
+   "text": "Finding an object in SIMBAD or JPL Horizons shows that the object is catalogued. It does not show that SPHEREx observed it. Only an archive query that returns files covering the position establishes that, and even then the files show that the position was imaged, not that the object was detected in them.",
+   "source_ids": [
+    "qfit-spec"
+   ],
+   "content_hash": "09763168dbb52583",
+   "path": "en/spherex-data-access.md",
+   "doc_version": "1",
+   "mission": "SPHEREx",
+   "data_release": "DR1, QR3",
+   "verification_note": null
+  },
+  {
+   "chunk_id": "spherex-data-products:en:1",
+   "doc_id": "spherex-data-products",
+   "language": "en",
+   "topic": "spherex_data",
+   "title": "SPHEREx data products and releases",
+   "heading": "Spectral Image (Level 2)",
+   "text": "The basic SPHEREx science product is the Spectral Image, a multi-extension FITS file of about 70 MB. There is one file per detector per sky pointing. It has six extensions: IMAGE (calibrated surface brightness in MJy/sr, 2040 x 2040 pixels, zodiacal light not subtracted), FLAGS (per-pixel status bits), VARIANCE (variance of IMAGE in (MJy/sr)^2), ZODI (a model of the zodiacal background, not subtracted from IMAGE), EPSF (point-spread functions on a grid of zones; called PSF in QR2), and WCS-WAVE (a lookup table from pixel position to central wavelength and bandwidth). Not all six detectors are present for every observation.",
+   "source_ids": [
+    "spherex-data-products"
+   ],
+   "content_hash": "b71fe17a32e43fed",
+   "path": "en/spherex-data-products.md",
+   "doc_version": "1",
+   "mission": "SPHEREx",
+   "data_release": "DR1, QR3",
+   "verification_note": null
+  },
+  {
+   "chunk_id": "spherex-data-products:en:2",
+   "doc_id": "spherex-data-products",
+   "language": "en",
+   "topic": "spherex_data",
+   "title": "SPHEREx data products and releases",
+   "heading": "A spectral image is not a spectrum",
+   "text": "Each detector sits behind a linear variable filter, so within one Spectral Image the wavelength changes with pixel position. One exposure therefore gives one wavelength for a given sky position, not a spectrum. A spectrum of a source is assembled from many exposures in which the source falls on different parts of the detectors. The WCS-WAVE table is meant for visualization; for science IRSA says to use the central-wavelength (CWAVE) and bandwidth (CBAND) extensions of the Spectral WCS calibration product.",
+   "source_ids": [
+    "spherex-data-products",
+    "irsa-tutorial-intro"
+   ],
+   "content_hash": "f9d0ad3769650588",
+   "path": "en/spherex-data-products.md",
+   "doc_version": "1",
+   "mission": "SPHEREx",
+   "data_release": "DR1, QR3",
+   "verification_note": null
+  },
+  {
+   "chunk_id": "spherex-data-products:en:3",
+   "doc_id": "spherex-data-products",
+   "language": "en",
+   "topic": "spherex_data",
+   "title": "SPHEREx data products and releases",
+   "heading": "The six detector bands",
+   "text": "Band 1: 0.75-1.09 micron, resolving power 39. Band 2: 1.10-1.62 micron, R 41. Band 3: 1.63-2.41 micron, R 41. Band 4: 2.42-3.82 micron, R 35. Band 5: 3.83-4.41 micron, R 112. Band 6: 4.42-5.00 micron, R 128. Detectors are numbered 1 to 6 and each Spectral Image covers one detector.",
+   "source_ids": [
+    "spherex-data-products"
+   ],
+   "content_hash": "641e2a386f1e50d3",
+   "path": "en/spherex-data-products.md",
+   "doc_version": "1",
+   "mission": "SPHEREx",
+   "data_release": "DR1, QR3",
+   "verification_note": null
+  },
+  {
+   "chunk_id": "spherex-data-products:en:4",
+   "doc_id": "spherex-data-products",
+   "language": "en",
+   "topic": "spherex_data",
+   "title": "SPHEREx data products and releases",
+   "heading": "All-Sky Cube",
+   "text": "The All-Sky Cube exists only in Data Release 1. It is built from DR1 Spectral Images and covers the whole sky in 12,288 HEALPix tiles (order 5, NESTED), each about 1.8 x 1.8 degrees. A tile has 512 x 512 pixels of 12.9 arcseconds and 102 spectral channels (channels 1-17 from each of the six detectors). Its IMAGE extension is surface brightness in MJy/sr with zodiacal light subtracted. Known issues stated by IRSA: channels 51 and 52 contain no data, atmospheric emission such as the 1.083 micron helium line creates stripes, and the HPX projection looks distorted in many FITS viewers.",
+   "source_ids": [
+    "spherex-data-products",
+    "spherex-dr1"
+   ],
+   "content_hash": "a530ba8a14773bb8",
+   "path": "en/spherex-data-products.md",
+   "doc_version": "1",
+   "mission": "SPHEREx",
+   "data_release": "DR1, QR3",
+   "verification_note": null
+  },
+  {
+   "chunk_id": "spherex-data-products:en:5",
+   "doc_id": "spherex-data-products",
+   "language": "en",
+   "topic": "spherex_data",
+   "title": "SPHEREx data products and releases",
+   "heading": "Releases",
+   "text": "IRSA lists these releases: the first Quick Release in July 2025, the reprocessed Quick Release 2 (QR2) in October 2025, Quick Release 3 (QR3) in September 2026 and Data Release 1 (DR1) in November 2026. DR1 Spectral Images are reprocessed versions of the QR2 images and are meant to be used together with QR3 as a uniformly processed set. QR2 is no longer searchable through the SIA2 service but stays downloadable until February 2027. A Flux Corrections calibration product exists for DR1 and QR3 to combine QR2 data (old gain) with QR3 data (new gain), so brightness values from different releases must not be compared directly without checking this.",
+   "source_ids": [
+    "irsa-spherex",
+    "spherex-dr1",
+    "spherex-data-access",
+    "spherex-data-products"
+   ],
+   "content_hash": "6a8b3c6109184dce",
+   "path": "en/spherex-data-products.md",
+   "doc_version": "1",
+   "mission": "SPHEREx",
+   "data_release": "DR1, QR3",
+   "verification_note": null
+  },
+  {
+   "chunk_id": "spherex-mission:en:1",
+   "doc_id": "spherex-mission",
+   "language": "en",
+   "topic": "spherex_mission",
+   "title": "SPHEREx mission overview",
+   "heading": "What SPHEREx is",
+   "text": "SPHEREx stands for Spectro-Photometer for the History of the Universe, Epoch of Reionization, and Ices Explorer. It is a NASA Astrophysics mission, selected as a Medium Explorer in February 2019 and launched in March 2025. NASA's Jet Propulsion Laboratory manages the mission, Caltech is home to the principal investigator and developed the payload, BAE Systems built the spacecraft, and the Korea Astronomy and Space Science Institute (KASI) is an instrument and science partner. The data are processed and archived at IPAC at Caltech. SPHEREx is an all-sky survey telescope that observes in near-infrared light, from 0.75 to 5.0 micron.",
+   "source_ids": [
+    "spherex-about",
+    "nasa-spherex-brown-dwarfs",
+    "spherex-user-guide",
+    "spherex-goals"
+   ],
+   "content_hash": "3ae2f1ed671970d0",
+   "path": "en/spherex-mission.md",
+   "doc_version": "1",
+   "mission": "SPHEREx",
+   "data_release": null,
+   "verification_note": null
+  },
+  {
+   "chunk_id": "spherex-mission:en:2",
+   "doc_id": "spherex-mission",
+   "language": "en",
+   "topic": "spherex_mission",
+   "title": "SPHEREx mission overview",
+   "heading": "Science goals",
+   "text": "SPHEREx has three science goals. (1) Constrain the physics of cosmic inflation by measuring its imprint on the three-dimensional large-scale distribution of matter. (2) Trace the history of light production by galaxies through a deep multi-band measurement of large-scale clustering. (3) Investigate the abundance and composition of water and biogenic ices in the early phases of star and planetary-disk formation.",
+   "source_ids": [
+    "spherex-goals"
+   ],
+   "content_hash": "f97a0a5ba4d39565",
+   "path": "en/spherex-mission.md",
+   "doc_version": "1",
+   "mission": "SPHEREx",
+   "data_release": null,
+   "verification_note": null
+  },
+  {
+   "chunk_id": "spherex-mission:en:3",
+   "doc_id": "spherex-mission",
+   "language": "en",
+   "topic": "spherex_mission",
+   "title": "SPHEREx mission overview",
+   "heading": "Survey design",
+   "text": "SPHEREx collects near-infrared spectra from 0.75 to 5.0 micron over the entire sky, with a measurement about every 6 arcseconds. It maps the full sky four times during its nominal 25-month mission, which is about one all-sky map every six months. NASA describes the result as a map in 102 colors, each color being a different wavelength of light. Spectroscopy splits light into its wavelengths, as a prism does.",
+   "source_ids": [
+    "spherex-goals",
+    "spherex-about",
+    "spherex-user-guide",
+    "jpl-spherex-presskit"
+   ],
+   "content_hash": "ed30b5bf9f0069de",
+   "path": "en/spherex-mission.md",
+   "doc_version": "1",
+   "mission": "SPHEREx",
+   "data_release": null,
+   "verification_note": null
+  },
+  {
+   "chunk_id": "spherex-mission:en:4",
+   "doc_id": "spherex-mission",
+   "language": "en",
+   "topic": "spherex_mission",
+   "title": "SPHEREx mission overview",
+   "heading": "Four kinds of statement to keep apart",
+   "text": "When talking about SPHEREx, four things must not be mixed up. Instrument specifications describe what the telescope is designed to do (for example the 0.75-5.0 micron range). Archive metadata describe one file (its date, detector, wavelength limits, download address). Measured values are numbers read from the data themselves (a surface brightness in MJy/sr at one pixel). Scientific interpretations are conclusions someone draws from measurements. Q-FIT labels which of the four a statement is.",
+   "source_ids": [
+    "qfit-spec"
+   ],
+   "content_hash": "838db8c1f18acc78",
+   "path": "en/spherex-mission.md",
+   "doc_version": "1",
+   "mission": "SPHEREx",
+   "data_release": null,
+   "verification_note": null
+  },
+  {
+   "chunk_id": "temporal-coverage:en:1",
+   "doc_id": "temporal-coverage",
+   "language": "en",
+   "topic": "temporal_analysis",
+   "title": "Time coverage and comparing SPHEREx observations",
+   "heading": "Survey cadence",
+   "text": "SPHEREx maps the whole sky four times in its nominal 25-month mission, so a typical sky position is revisited about every six months. During one visit a position is covered by several exposures taken close together in time, because the telescope steps across the sky and the position passes over different detectors.",
+   "source_ids": [
+    "spherex-goals",
+    "spherex-about",
+    "irsa-live-query"
+   ],
+   "content_hash": "ab7f6829cdde0c1e",
+   "path": "en/temporal-coverage.md",
+   "doc_version": "1",
+   "mission": "SPHEREx",
+   "data_release": null,
+   "verification_note": null
+  },
+  {
+   "chunk_id": "temporal-coverage:en:2",
+   "doc_id": "temporal-coverage",
+   "language": "en",
+   "topic": "temporal_analysis",
+   "title": "Time coverage and comparing SPHEREx observations",
+   "heading": "There is no uniform time series",
+   "text": "The exposures of one sky position are clustered into visits separated by long gaps. They are not evenly spaced. A timeline must show the actual exposure times and leave the gaps empty; a gap means \"not observed\", never \"no change\". Deep-survey fields are observed far more often than typical wide-survey positions.",
+   "source_ids": [
+    "spherex-data-access",
+    "qfit-spec"
+   ],
+   "content_hash": "f4ef4eaba1bce4ed",
+   "path": "en/temporal-coverage.md",
+   "doc_version": "1",
+   "mission": "SPHEREx",
+   "data_release": null,
+   "verification_note": null
+  },
+  {
+   "chunk_id": "temporal-coverage:en:3",
+   "doc_id": "temporal-coverage",
+   "language": "en",
+   "topic": "temporal_analysis",
+   "title": "Time coverage and comparing SPHEREx observations",
+   "heading": "Two exposures are rarely at the same wavelength",
+   "text": "Because the wavelength depends on where the position falls on the detector, two exposures of the same position usually measure different wavelengths even when they come from the same detector band. The Q-FIT team measured this on real QR2 files in the south ecliptic pole deep field: four exposure pairs taken 2 minutes, 1.5 hours, 1 day and 6 months apart all differed in wavelength by about one bandwidth or more. A brightness difference between two such exposures is therefore not evidence that the source changed. This measurement was made on QR2 data and should be rechecked for DR1 and QR3.",
+   "source_ids": [
+    "qfit-milestone-report",
+    "spherex-data-products"
+   ],
+   "content_hash": "e1f50ad8c529bb1f",
+   "path": "en/temporal-coverage.md",
+   "doc_version": "1",
+   "mission": "SPHEREx",
+   "data_release": null,
+   "verification_note": null
+  },
+  {
+   "chunk_id": "temporal-coverage:en:4",
+   "doc_id": "temporal-coverage",
+   "language": "en",
+   "topic": "temporal_analysis",
+   "title": "Time coverage and comparing SPHEREx observations",
+   "heading": "What can be compared",
+   "text": "A fair comparison in brightness needs the same detector band, nearly the same wavelength at the target position, and the same processing release. Changes in position (motion) can be judged between exposures at different wavelengths, as long as the source is visible in both. Any apparent change found this way is a candidate for human review, not a detection.",
+   "source_ids": [
+    "qfit-milestone-report",
+    "qfit-spec"
+   ],
+   "content_hash": "f1e716018f470388",
+   "path": "en/temporal-coverage.md",
+   "doc_version": "1",
+   "mission": "SPHEREx",
+   "data_release": null,
+   "verification_note": null
+  },
+  {
+   "chunk_id": "brown-dwarfs:tr:1",
+   "doc_id": "brown-dwarfs",
+   "language": "tr",
+   "topic": "brown_dwarfs",
+   "title": "Kahverengi cüceler ve yıldız altı cisimler",
+   "heading": "Kahverengi cüce nedir",
+   "text": "Kahverengi cüce, dev gezegenlerle en küçük yıldızlar arasında kalan bir cisimdir. Kahverengi cüceler yıldızlar gibi, çöken bir gaz bulutundan oluşur; ancak çekirdeklerinde hidrojen füzyonunu sürdürecek kadar kütleli hâle hiç gelmezler. Gaz devi gezegenler gibi kütleçekimsel büzülmeyle ışırlar. Yeterli kütleye sahip kahverengi cüceler bir süre döteryum (ağır hidrojen) füzyonu yapar, ancak bu birkaç milyon yıl sonra durur. Soğuk oldukları için ışıklarının çoğunu kızılötesinde yayarlar.",
+   "source_ids": [
+    "nasa-gl229b",
+    "nasa-webb-brown-dwarf",
+    "jpl-identity-crisis",
+    "nasa-webb-young-bd"
+   ],
+   "content_hash": "df1a83bd2c5a1e7c",
+   "path": "tr/brown-dwarfs.md",
+   "doc_version": "1",
+   "mission": null,
+   "data_release": null,
+   "verification_note": null
+  },
+  {
+   "chunk_id": "brown-dwarfs:tr:2",
+   "doc_id": "brown-dwarfs",
+   "language": "tr",
+   "topic": "brown_dwarfs",
+   "title": "Kahverengi cüceler ve yıldız altı cisimler",
+   "heading": "Kütle aralığı: kaynaklar uyuşmuyor",
+   "text": "Üst sınır, hidrojen füzyonunu sürdürmek için gereken kütledir: Güneş kütlesinin yaklaşık yüzde 8'i, yani kabaca 75-80 Jüpiter kütlesi. Alt sınırı kaynaklar farklı verir: 15-75 Jüpiter kütlesi (NASA StarChild), 10-70 Jüpiter kütlesi (JPL), Güneş kütlesinin yüzde 1-8'i (NASA Webb yazısı) ve alt sınır olarak 13 Jüpiter kütlesi civarındaki döteryum yakma sınırıyla 13.6-80 Jüpiter kütlesi (Gan ve ark. 2025). Webb gözlemleri, yıldız gibi oluşmuş cisimlerin 2-3 Jüpiter kütlesine kadar inebileceğine işaret ediyor. Bu uyuşmazlık iki farklı tanımdan kaynaklanır: biri döteryum füzyonuna, diğeri cismin nasıl oluştuğuna dayanır. Q-FIT aralığı, alındığı kaynakla birlikte bildirir.",
+   "source_ids": [
+    "nasa-starchild-bd",
+    "jpl-identity-crisis",
+    "nasa-webb-young-bd",
+    "gan-2025-apjl",
+    "nasa-webb-brown-dwarf"
+   ],
+   "content_hash": "788bc7a82b907f32",
+   "path": "tr/brown-dwarfs.md",
+   "doc_version": "1",
+   "mission": null,
+   "data_release": null,
+   "verification_note": null
+  },
+  {
+   "chunk_id": "brown-dwarfs:tr:3",
+   "doc_id": "brown-dwarfs",
+   "language": "tr",
+   "topic": "brown_dwarfs",
+   "title": "Kahverengi cüceler ve yıldız altı cisimler",
+   "heading": "L, T ve Y tayf türleri",
+   "text": "Kahverengi cüceler sıcaklığa göre tayf türlerine ayrılır: L cüceleri en sıcak gruptur, T cüceleri daha soğuktur, Y cüceleri ise yaklaşık 200-500 kelvin yüzey sıcaklığıyla en soğuk olanlardır. Y sınıfı 2011'de NASA'nın Wide-field Infrared Survey Explorer (WISE) uydusuyla keşfedilmiştir.",
+   "source_ids": [
+    "cfa-y-dwarfs"
+   ],
+   "content_hash": "99c411bcd3395189",
+   "path": "tr/brown-dwarfs.md",
+   "doc_version": "1",
+   "mission": null,
+   "data_release": null,
+   "verification_note": null
+  },
+  {
+   "chunk_id": "brown-dwarfs:tr:4",
+   "doc_id": "brown-dwarfs",
+   "language": "tr",
+   "topic": "brown_dwarfs",
+   "title": "Kahverengi cüceler ve yıldız altı cisimler",
+   "heading": "İlk tespit",
+   "text": "Kuşkuya yer bırakmayan ilk kahverengi cüce olan Gliese 229B, Ekim 1994'te kırmızı cüce Gliese 229'un bileşeni olarak bulunmuş ve bir yıl sonra doğrulanmıştır. Kütlesi 20-50 Jüpiter kütlesi olarak tahmin edilmiştir ve atmosferi bileşim bakımından Jüpiter'inkine benzer.",
+   "source_ids": [
+    "nasa-gl229b"
+   ],
+   "content_hash": "b97d742f81f874ad",
+   "path": "tr/brown-dwarfs.md",
+   "doc_version": "1",
+   "mission": null,
+   "data_release": null,
+   "verification_note": null
+  },
+  {
+   "chunk_id": "brown-dwarfs:tr:5",
+   "doc_id": "brown-dwarfs",
+   "language": "tr",
+   "topic": "brown_dwarfs",
+   "title": "Kahverengi cüceler ve yıldız altı cisimler",
+   "heading": "SPHEREx ve kahverengi cüceler",
+   "text": "The Astrophysical Journal'da yayımlanan ve NASA'nın 8 Ekim 2026'da duyurduğu bir çalışma, SPHEREx ile 37 yakın kahverengi cüceyi inceledi; her birinin parlaklığı 102 renkte ölçülerek tayfı oluşturuldu. Tayflarda su, karbondioksit, karbonmonoksit ve metan görülüyor; örneklem kabaca 2.200 santigrat dereceden yaklaşık -20 santigrat dereceye kadar sıcaklıkları kapsıyor. Ekip, binlerce kahverengi cücenin daha analiz edilmekte olduğunu ve modellerin bulutların değiştiği geçişlerde veriyle uyuşmakta zorlandığını bildiriyor. Uzaydan gözlem, Dünya atmosferindeki su buharının soğurduğu dalga boylarından kaçınmayı sağlar. Bu, SPHEREx ekibinin yayımlanmış bir sonucudur; Q-FIT'in kendi ölçümü değildir.",
+   "source_ids": [
+    "nasa-spherex-brown-dwarfs"
+   ],
+   "content_hash": "316802f724222343",
+   "path": "tr/brown-dwarfs.md",
+   "doc_version": "1",
+   "mission": null,
+   "data_release": null,
+   "verification_note": null
+  },
+  {
+   "chunk_id": "citizen-science:tr:1",
+   "doc_id": "citizen-science",
+   "language": "tr",
+   "topic": "citizen_science",
+   "title": "Yurttaş bilimi yöntemi ve aday incelemesi",
+   "heading": "Backyard Worlds: Planet 9",
+   "text": "Backyard Worlds: Planet 9, 15 Şubat 2017'de başlatılan, NASA destekli bir yurttaş bilimi projesidir. Gönüllüler, NASA'nın WISE görevinin birkaç yıl boyunca aldığı görüntülerden yapılmış, gökyüzünün küçük parçalarını gösteren kısa canlandırmalara (\"flipbook\") bakar ve kareler arasında yer değiştiren cisimleri arar. Proje NASA, UC Berkeley, Amerikan Doğa Tarihi Müzesi, Arizona State University, Space Telescope Science Institute ve Zooniverse iş birliğidir.",
+   "source_ids": [
+    "jpl-backyard-worlds"
+   ],
+   "content_hash": "d90f3ab3c07f6a1c",
+   "path": "tr/citizen-science.md",
+   "doc_version": "1",
+   "mission": null,
+   "data_release": null,
+   "verification_note": null
+  },
+  {
+   "chunk_id": "citizen-science:tr:2",
+   "doc_id": "citizen-science",
+   "language": "tr",
+   "topic": "citizen_science",
+   "title": "Yurttaş bilimi yöntemi ve aday incelemesi",
+   "heading": "Neden hareket ve neden insanlar",
+   "text": "Yakın cisimler gökyüzünde hareket ediyor görünür, uzak cisimler ise neredeyse hiç kaymaz; bu yüzden hareket aramak, kahverengi cüceler gibi yakın cisimleri bulmanın sistematik bir yoludur. Yazılım, özellikle kalabalık yıldız alanlarında görüntü yapaylıklarıyla zorlanır: yıldızlardan gelen parlaklık çıkıntıları ve aletin içinde saçılan ışığın oluşturduğu bulanık lekeler. İnsanlar gerçek hareketli cisimleri tanır ve yapaylıkları göz ardı eder.",
+   "source_ids": [
+    "jpl-backyard-worlds"
+   ],
+   "content_hash": "8db629b217b4ac13",
+   "path": "tr/citizen-science.md",
+   "doc_version": "1",
+   "mission": null,
+   "data_release": null,
+   "verification_note": null
+  },
+  {
+   "chunk_id": "citizen-science:tr:3",
+   "doc_id": "citizen-science",
+   "language": "tr",
+   "topic": "citizen_science",
+   "title": "Yurttaş bilimi yöntemi ve aday incelemesi",
+   "heading": "İşaretlemeden sonuca",
+   "text": "Bir gönüllünün işaretlemesi keşif değildir. Bilim ekibi, işaretlenen cisimleri profesyonel gökbilimcilerin yapacağı takip gözlemleri için önceliklendirir ve katılımcılar ortaya çıkan yayınlarda emeği paylaşır. 2024'e gelindiğinde proje, Güneş'e 65 ışık yılı içindeki 3.500'den fazla cismin sayımının oluşturulmasına yardım etmişti; çalışma, yurttaş bilimcilerin ortak yazar olduğu bir makaleyle The Astrophysical Journal'da yayımlandı.",
+   "source_ids": [
+    "jpl-backyard-worlds",
+    "nasa-bw-census"
+   ],
+   "content_hash": "0ae08c4c2697a872",
+   "path": "tr/citizen-science.md",
+   "doc_version": "1",
+   "mission": null,
+   "data_release": null,
+   "verification_note": null
+  },
+  {
+   "chunk_id": "citizen-science:tr:4",
+   "doc_id": "citizen-science",
+   "language": "tr",
+   "topic": "citizen_science",
+   "title": "Yurttaş bilimi yöntemi ve aday incelemesi",
+   "heading": "Q-FIT'te aday durumları",
+   "text": "Q-FIT dört durumu birbirinden ayırır. Yapay zekâ üretimi aday, yazılımın önerdiği ve kimsenin bakmadığı adaydır. İncelenmemiş aday insan incelemesini bekler. İnsan tarafından incelenmiş adayın, bir kişinin kaydettiği en az bir incelemesi vardır. Bilimsel olarak doğrulanmış sonuç ise yalnızca dış bir referans (bir yayın veya profesyonel takip gözlemi) kaydedildiğinde vardır. Q-FIT bir adaya asla keşif demez; insan incelemeleri bir değerlendirme veya eğitim veri setine ancak ayrı bir doğrulama adımından sonra girer.",
+   "source_ids": [
+    "qfit-spec"
+   ],
+   "content_hash": "1b390f605e1b8c6a",
+   "path": "tr/citizen-science.md",
+   "doc_version": "1",
+   "mission": null,
+   "data_release": null,
+   "verification_note": null
+  },
+  {
+   "chunk_id": "hr-diagram:tr:1",
+   "doc_id": "hr-diagram",
+   "language": "tr",
+   "topic": "hr_diagram",
+   "title": "Hertzsprung-Russell diyagramı ve yıldız sınıflandırması",
+   "heading": "Diyagram neyi gösterir",
+   "text": "Hertzsprung-Russell (H-R) diyagramı yıldızları, düşey eksende ışıtma gücüne (veya mutlak kadire), yatay eksende etkin yüzey sıcaklığına (veya tayf sınıfına ya da renge) göre yerleştirir. Sıcaklık ters yönde artar: yaklaşık 30.000-40.000 K'lik sıcak yıldızlar solda, yaklaşık 2.500 K'lik soğuk yıldızlar sağdadır. Diyagram Ejnar Hertzsprung (1911) ve Henry Norris Russell'ın (1913) çalışmalarına dayanır.",
+   "source_ids": [
+    "atnf-hr-intro",
+    "atnf-hr-classifying",
+    "chandra-hr"
+   ],
+   "content_hash": "ee6014a79e6191d9",
+   "path": "tr/hr-diagram.md",
+   "doc_version": "1",
+   "mission": null,
+   "data_release": null,
+   "verification_note": null
+  },
+  {
+   "chunk_id": "hr-diagram:tr:2",
+   "doc_id": "hr-diagram",
+   "language": "tr",
+   "topic": "hr_diagram",
+   "title": "Hertzsprung-Russell diyagramı ve yıldız sınıflandırması",
+   "heading": "Ana gruplar",
+   "text": "Güneş dahil yıldızların çoğu anakol üzerindedir; anakol, sağ alttaki soğuk ve sönük yıldızlardan sol üstteki sıcak ve parlak yıldızlara uzanan bir banttır ve bu yıldızlar çekirdeklerinde hidrojeni helyuma dönüştürür. Devler ve üstdevler anakoldan ayrılmış, ışıtma gücü yüksek yıldızlardır ve anakolun üstünde yer alır. Beyaz cüceler sıcak ama sönüktür ve sol altta bulunur; kabaca Dünya büyüklüğündedirler. Yıldızların yaklaşık yüzde 90'ı anakoldadır. Güneş, etkin sıcaklığı yaklaşık 5.800 K olan bir G2 yıldızıdır.",
+   "source_ids": [
+    "atnf-hr-intro",
+    "atnf-hr-classifying",
+    "chandra-stellar-evolution",
+    "esa-stellar-types"
+   ],
+   "content_hash": "99c2df7ea2e001f1",
+   "path": "tr/hr-diagram.md",
+   "doc_version": "1",
+   "mission": null,
+   "data_release": null,
+   "verification_note": null
+  },
+  {
+   "chunk_id": "hr-diagram:tr:3",
+   "doc_id": "hr-diagram",
+   "language": "tr",
+   "topic": "hr_diagram",
+   "title": "Hertzsprung-Russell diyagramı ve yıldız sınıflandırması",
+   "heading": "Konum neden boyutu söyler",
+   "text": "Bir yıldızın birim yüzey alanından saniyede yaydığı enerji, sıcaklığının dördüncü kuvvetiyle artar (Stefan-Boltzmann bağıntısı). Aynı sıcaklıkta ama ışıtma gücü çok farklı iki yıldız bu yüzden boyutça farklı olmalıdır: daha parlak olanın yüzeyi daha büyüktür. Soğuk ama çok parlak bir yıldızın dev, sıcak ama sönük bir yıldızın beyaz cüce olması gerektiği buradan çıkar.",
+   "source_ids": [
+    "atnf-hr-intro",
+    "chandra-hr"
+   ],
+   "content_hash": "14fc97b0c5196198",
+   "path": "tr/hr-diagram.md",
+   "doc_version": "1",
+   "mission": null,
+   "data_release": null,
+   "verification_note": null
+  },
+  {
+   "chunk_id": "hr-diagram:tr:4",
+   "doc_id": "hr-diagram",
+   "language": "tr",
+   "topic": "hr_diagram",
+   "title": "Hertzsprung-Russell diyagramı ve yıldız sınıflandırması",
+   "heading": "Işıtma sınıfları",
+   "text": "Aynı tayf türündeki yıldızlar ışıtma sınıfına göre ayrıca bölünür: I ve II üstdevler ve parlak devler, III devler, IV altdevler, V anakol yıldızları, VI altcüceler ve VII beyaz cüceler.",
+   "source_ids": [
+    "chandra-hr"
+   ],
+   "content_hash": "e3c2b0db767ccbc0",
+   "path": "tr/hr-diagram.md",
+   "doc_version": "1",
+   "mission": null,
+   "data_release": null,
+   "verification_note": null
+  },
+  {
+   "chunk_id": "hr-diagram:tr:5",
+   "doc_id": "hr-diagram",
+   "language": "tr",
+   "topic": "hr_diagram",
+   "title": "Hertzsprung-Russell diyagramı ve yıldız sınıflandırması",
+   "heading": "Bir cismi yerleştirmek için ne gerekir",
+   "text": "Bir cismi H-R diyagramına yerleştirmek için iki nicelik gerekir: etkin sıcaklığı (veya tayf türü ya da rengi) ve ışıtma gücü (veya mutlak kadiri). Mutlak kadir, yıldızın 10 parsek uzaklıkta olsaydı sahip olacağı parlaklıktır; dolayısıyla uzaklığın bilinmesini gerektirir. Bir SPHEREx Tayfsal Görüntüsü tek bir dalga boyunda yüzey parlaklığı verir; tek başına ne sıcaklık ne de ışıtma gücü verir. İki nicelikten biri eksikse Q-FIT hangisinin eksik olduğunu söyler ve cisme bir konum atamaz.",
+   "source_ids": [
+    "atnf-hr-classifying",
+    "spherex-data-products",
+    "qfit-spec"
+   ],
+   "content_hash": "a769a9c371ad2b3e",
+   "path": "tr/hr-diagram.md",
+   "doc_version": "1",
+   "mission": null,
+   "data_release": null,
+   "verification_note": null
+  },
+  {
+   "chunk_id": "hr-diagram:tr:6",
+   "doc_id": "hr-diagram",
+   "language": "tr",
+   "topic": "hr_diagram",
+   "title": "Hertzsprung-Russell diyagramı ve yıldız sınıflandırması",
+   "heading": "Kütle ve anakol",
+   "text": "Anakolda bir yıldızın özelliklerini neredeyse tümüyle kütlesi belirler. Daha kütleli yıldızlar daha parlaktır; ışıtma gücü kabaca kütlenin dördüncü kuvvetiyle artar ve bu yıldızlar anakolda daha kısa süre kalır. Devler veya beyaz cüceler için böyle bir kütle-ışıtma bağıntısı yoktur.",
+   "source_ids": [
+    "chandra-stellar-evolution"
+   ],
+   "content_hash": "d72cf1a64df6f318",
+   "path": "tr/hr-diagram.md",
+   "doc_version": "1",
+   "mission": null,
+   "data_release": null,
+   "verification_note": null
+  },
+  {
+   "chunk_id": "qfit-evidence-policy:tr:1",
+   "doc_id": "qfit-evidence-policy",
+   "language": "tr",
+   "topic": "project_policy",
+   "title": "Q-FIT kanıt ve belirsizlik politikası",
+   "heading": "Kanıt sınıfları",
+   "text": "Q-FIT'in her ifadesi bir sınıfa aittir. Doğrudan ölçüm: SPHEREx verisinden okunan değer. Arşiv üstverisi: arşivin bir dosya hakkında kaydettiği bilgi. Katalog verisi: SIMBAD'ın veya JPL Horizons'ın listelediği bilgi. Deterministik hesap: belirtilen girdilerden kodla hesaplanan değer. Yayımlanmış sonuç: atıf yapılan bir kaynağın bildirdiği bulgu. Yorum veya hipotez: verinin ötesine geçen akıl yürütme. Eksik bilgi: arandığı hâlde bulunamayan şey.",
+   "source_ids": [
+    "qfit-spec"
+   ],
+   "content_hash": "bc599a0c1ae5586c",
+   "path": "tr/qfit-evidence-policy.md",
+   "doc_version": "1",
+   "mission": null,
+   "data_release": null,
+   "verification_note": null
+  },
+  {
+   "chunk_id": "qfit-evidence-policy:tr:2",
+   "doc_id": "qfit-evidence-policy",
+   "language": "tr",
+   "topic": "project_policy",
+   "title": "Q-FIT kanıt ve belirsizlik politikası",
+   "heading": "Q-FIT'in asla uydurmadığı şeyler",
+   "text": "Akı, dalga boyu, sıcaklık, ışıtma gücü, kütle, tayf ölçümleri, gözlem zamanları, katalog kimlikleri ve belirsizlikler asla uydurulmaz. Bir sayı bir araç sonucunda veya atıf yapılan bir kaynakta yoksa Q-FIT onu söylemez. Q-FIT, kalibre edilmiş bir istatistik yönteminden gelmedikçe sayısal güven yüzdesi vermez.",
+   "source_ids": [
+    "qfit-spec"
+   ],
+   "content_hash": "d421298234004a1e",
+   "path": "tr/qfit-evidence-policy.md",
+   "doc_version": "1",
+   "mission": null,
+   "data_release": null,
+   "verification_note": null
+  },
+  {
+   "chunk_id": "qfit-evidence-policy:tr:3",
+   "doc_id": "qfit-evidence-policy",
+   "language": "tr",
+   "topic": "project_policy",
+   "title": "Q-FIT kanıt ve belirsizlik politikası",
+   "heading": "Kaynaklar çeliştiğinde",
+   "text": "İki kaynak farklı değer verdiğinde Q-FIT ikisini de kaynakları ve sürümleriyle gösterir, olası nedenleri açıklar ve sessizce birini seçmez.",
+   "source_ids": [
+    "qfit-spec"
+   ],
+   "content_hash": "8fa949b1ae731965",
+   "path": "tr/qfit-evidence-policy.md",
+   "doc_version": "1",
+   "mission": null,
+   "data_release": null,
+   "verification_note": null
+  },
+  {
+   "chunk_id": "qfit-evidence-policy:tr:4",
+   "doc_id": "qfit-evidence-policy",
+   "language": "tr",
+   "topic": "project_policy",
+   "title": "Q-FIT kanıt ve belirsizlik politikası",
+   "heading": "İsim hakkında",
+   "text": "\"Quantum Framework for Intelligent Tracking\" adındaki \"Quantum\" bir proje adıdır. Q-FIT kuantum hesaplama veya kuantum benzetimi yapmaz.",
+   "source_ids": [
+    "qfit-spec"
+   ],
+   "content_hash": "49bd791431beb944",
+   "path": "tr/qfit-evidence-policy.md",
+   "doc_version": "1",
+   "mission": null,
+   "data_release": null,
+   "verification_note": null
+  },
+  {
+   "chunk_id": "spectroscopy:tr:1",
+   "doc_id": "spectroscopy",
+   "language": "tr",
+   "topic": "spectroscopy",
+   "title": "SPHEREx verisinde tayfölçüm, parlaklık ve birimler",
+   "heading": "Tayfölçüm (spektroskopi)",
+   "text": "Tayfölçüm, bir prizmanın güneş ışığından gökkuşağı oluşturması gibi ışığı dalga boylarına ayırır. Gözün renk olarak gördüğü şey farklı dalga boylarıdır. SPHEREx yakın kızılötesinde, 0.75-5.0 mikron arasında, görünür ışığın kırmızı ucunun ötesinde çalışır.",
+   "source_ids": [
+    "jpl-spherex-presskit",
+    "spherex-goals"
+   ],
+   "content_hash": "e21d597c66168910",
+   "path": "tr/spectroscopy.md",
+   "doc_version": "1",
+   "mission": null,
+   "data_release": null,
+   "verification_note": null
+  },
+  {
+   "chunk_id": "spectroscopy:tr:2",
+   "doc_id": "spectroscopy",
+   "language": "tr",
+   "topic": "spectroscopy",
+   "title": "SPHEREx verisinde tayfölçüm, parlaklık ve birimler",
+   "heading": "Çözme gücü",
+   "text": "Tayfsal çözme gücü R, dalga boyunun ayırt edilebilen en küçük dalga boyu farkına oranıdır: R = lambda / delta-lambda; birimsizdir. SPHEREx'in çözme gücü 1-4 arası bantlarda 35 ile 41 arasında, 5. ve 6. bantlarda 112 ve 128'dir. R yaklaşık 40 iken 1.4 mikrondaki bir kanal yaklaşık 0.035 mikron genişliğindedir. Bu düşük çözünürlüktür: geniş molekül soğurma bantları görülebilir, dar çizgiler ayrılamaz.",
+   "source_ids": [
+    "irsa-sia",
+    "spherex-data-products"
+   ],
+   "content_hash": "29d7749b505246cd",
+   "path": "tr/spectroscopy.md",
+   "doc_version": "1",
+   "mission": null,
+   "data_release": null,
+   "verification_note": null
+  },
+  {
+   "chunk_id": "spectroscopy:tr:3",
+   "doc_id": "spectroscopy",
+   "language": "tr",
+   "topic": "spectroscopy",
+   "title": "SPHEREx verisinde tayfölçüm, parlaklık ve birimler",
+   "heading": "Yüzey parlaklığı akı değildir",
+   "text": "SPHEREx Tayfsal Görüntüleri yüzey parlaklığını megajansky bölü steradyan (MJy/sr) cinsinden verir: gökyüzünün birim alanı başına parlaklık. Bir kaynağın akısını elde etmek için piksel değerleri bir açıklık üzerinde toplanmalı, arka plan çıkarılmalı ve sonuç bir pikselin katı açısıyla çarpılmalıdır. IRSA'nın eğitim defteri bunu açıklık fotometrisiyle yapar, milijansky'ye çevirir ve yöntemin görselleştirme amaçlı olduğunu belirtir; bilimsel kullanım için IRSA'nın SPHEREx Spectrophotometry Tool aracını önerir. Q-FIT'in okuduğu tek bir piksel değeri, içinde hâlâ zodyak ışığı bulunan ham bir okumadır. Cismin akısı değildir.",
+   "source_ids": [
+    "spherex-data-products",
+    "irsa-tutorial-hips"
+   ],
+   "content_hash": "cec99747b3b089fc",
+   "path": "tr/spectroscopy.md",
+   "doc_version": "1",
+   "mission": null,
+   "data_release": null,
+   "verification_note": null
+  },
+  {
+   "chunk_id": "spectroscopy:tr:4",
+   "doc_id": "spectroscopy",
+   "language": "tr",
+   "topic": "spectroscopy",
+   "title": "SPHEREx verisinde tayfölçüm, parlaklık ve birimler",
+   "heading": "Işıtma gücü ve akı",
+   "text": "Işıtma gücü (lüminozite), bir yıldızın saniyede yaydığı toplam enerjidir; yıldızın kendi özelliğidir. Akı, gözlemcinin birim alanda saniyede aldığı enerjidir; bu yüzden ışıtma gücünün yanında uzaklığa da bağlıdır. Ölçülen bir akıyı ışıtma gücüne çevirmek için uzaklık gerekir.",
+   "source_ids": [
+    "chandra-hr",
+    "atnf-hr-classifying"
+   ],
+   "content_hash": "a8083bad4eaeb6c2",
+   "path": "tr/spectroscopy.md",
+   "doc_version": "1",
+   "mission": null,
+   "data_release": null,
+   "verification_note": "akı tanımı standart fiziktir ve atıf yapılan sayfalarda yer almaz; atıf gerekli."
+  },
+  {
+   "chunk_id": "spectroscopy:tr:5",
+   "doc_id": "spectroscopy",
+   "language": "tr",
+   "topic": "spectroscopy",
+   "title": "SPHEREx verisinde tayfölçüm, parlaklık ve birimler",
+   "heading": "Soğuk atmosferlerdeki moleküller",
+   "text": "Kahverengi cüceler gibi soğuk cisimlerin atmosferlerinde, kızılötesi ışığı belirli dalga boylarında soğuran moleküller bulunur. Ekip, kahverengi cücelerin SPHEREx tayflarında su, karbondioksit, karbonmonoksit ve metan izleri bildirmektedir; bu izler sıcaklığa bağlı olarak cisimden cisme değişir.",
+   "source_ids": [
+    "nasa-spherex-brown-dwarfs"
+   ],
+   "content_hash": "668733cc7c3a2b12",
+   "path": "tr/spectroscopy.md",
+   "doc_version": "1",
+   "mission": null,
+   "data_release": null,
+   "verification_note": null
+  },
+  {
+   "chunk_id": "spherex-data-access:tr:1",
+   "doc_id": "spherex-data-access",
+   "language": "tr",
+   "topic": "data_access",
+   "title": "SPHEREx verisi nasıl bulunur ve alınır",
+   "heading": "Arşivde arama",
+   "text": "SPHEREx verisini NASA/IPAC Infrared Science Archive (IRSA) sunar. Q-FIT aramayı IVOA Simple Image Access v2 (SIA2) servisiyle yapar; bu servis, ayak izi gökyüzündeki bir daireyle kesişen her görüntüyü döndürür. Aranabilir koleksiyonlar şunlardır: spherex_dr1 ve spherex_qr3 (geniş tarama), spherex_dr1_deep ve spherex_qr3_deep (derin tarama) ve spherex_dr1_cube (Tüm Gökyüzü Küpü karoları). Yeni pozlamalar SIA2'de, IRSA'nın diğer arayüzlerinde göründükten yaklaşık bir gün sonra görünür.",
+   "source_ids": [
+    "spherex-data-access",
+    "irsa-sia"
+   ],
+   "content_hash": "72262081b872e7be",
+   "path": "tr/spherex-data-access.md",
+   "doc_version": "1",
+   "mission": "SPHEREx",
+   "data_release": "DR1, QR3",
+   "verification_note": null
+  },
+  {
+   "chunk_id": "spherex-data-access:tr:2",
+   "doc_id": "spherex-data-access",
+   "language": "tr",
+   "topic": "data_access",
+   "title": "SPHEREx verisi nasıl bulunur ve alınır",
+   "heading": "Bir arşiv kaydı ne söyler",
+   "text": "Bir arşiv kaydı tek bir dosyayı tanımlar: gözlem kimliği, koleksiyon, dedektör bandı, başlangıç ve bitiş zamanı (Değiştirilmiş Jülyen Tarihi, MJD), pozlama süresi, metre cinsinden dalga boyu sınırları, çözme gücü, görüntü merkezi, görüş alanı ve indirme adresi. Q-FIT'in incelediği kayıtlarda bir Tayfsal Görüntünün görüş alanı yaklaşık 3.5 derece, piksel ölçeği 6.15 yay saniyesi ve pozlama süresi yaklaşık 113.6 saniyedir. Görüntü merkezi, aradığınız cismin konumu değildir; cisim görüntünün herhangi bir yerinde olabilir.",
+   "source_ids": [
+    "irsa-live-query",
+    "irsa-tutorial-intro"
+   ],
+   "content_hash": "a6578965f3f1f135",
+   "path": "tr/spherex-data-access.md",
+   "doc_version": "1",
+   "mission": "SPHEREx",
+   "data_release": "DR1, QR3",
+   "verification_note": null
+  },
+  {
+   "chunk_id": "spherex-data-access:tr:3",
+   "doc_id": "spherex-data-access",
+   "language": "tr",
+   "topic": "data_access",
+   "title": "SPHEREx verisi nasıl bulunur ve alınır",
+   "heading": "Kesitler (cutout)",
+   "text": "IRSA'nın kesit servisi, dosyanın kurum içi adresine \"?center=RA,Dec&size=BOYUT\" (derece) eklendiğinde Tayfsal Görüntünün küçük bir parçasını döndürür. Kesit tüm uzantıları korur; IMAGE, FLAGS, VARIANCE ve ZODI kırpılır, dalga boyu tablosu kesite göre yeniden eşlenir.",
+   "source_ids": [
+    "spherex-data-access",
+    "spherex-data-products"
+   ],
+   "content_hash": "83e155108630efc8",
+   "path": "tr/spherex-data-access.md",
+   "doc_version": "1",
+   "mission": "SPHEREx",
+   "data_release": "DR1, QR3",
+   "verification_note": null
+  },
+  {
+   "chunk_id": "spherex-data-access:tr:4",
+   "doc_id": "spherex-data-access",
+   "language": "tr",
+   "topic": "data_access",
+   "title": "SPHEREx verisi nasıl bulunur ve alınır",
+   "heading": "Katalog eşleşmesi gözlem demek değildir",
+   "text": "Bir cismin SIMBAD'da veya JPL Horizons'ta bulunması, cismin kataloglandığını gösterir. SPHEREx'in onu gözlediğini göstermez. Bunu yalnızca, o konumu kapsayan dosyalar döndüren bir arşiv sorgusu ortaya koyar; o durumda bile dosyalar konumun görüntülendiğini gösterir, cismin görüntüde saptandığını değil.",
+   "source_ids": [
+    "qfit-spec"
+   ],
+   "content_hash": "f3d8a64286817391",
+   "path": "tr/spherex-data-access.md",
+   "doc_version": "1",
+   "mission": "SPHEREx",
+   "data_release": "DR1, QR3",
+   "verification_note": null
+  },
+  {
+   "chunk_id": "spherex-data-products:tr:1",
+   "doc_id": "spherex-data-products",
+   "language": "tr",
+   "topic": "spherex_data",
+   "title": "SPHEREx veri ürünleri ve sürümleri",
+   "heading": "Tayfsal Görüntü (Spectral Image, Seviye 2)",
+   "text": "SPHEREx'in temel bilim ürünü Tayfsal Görüntüdür (Spectral Image); yaklaşık 70 MB boyutunda çok uzantılı bir FITS dosyasıdır. Her gökyüzü yönelimi için dedektör başına bir dosya vardır. Altı uzantısı bulunur: IMAGE (MJy/sr cinsinden kalibre yüzey parlaklığı, 2040 x 2040 piksel, zodyak ışığı çıkarılmamış), FLAGS (piksel başına durum bitleri), VARIANCE (IMAGE değerlerinin (MJy/sr)^2 cinsinden varyansı), ZODI (zodyak arka planının modeli, IMAGE'dan çıkarılmamış), EPSF (bölgelere ayrılmış nokta dağılım fonksiyonları; QR2'de adı PSF) ve WCS-WAVE (piksel konumundan merkez dalga boyuna ve bant genişliğine arama tablosu). Her gözlemde altı dedektörün hepsi bulunmayabilir.",
+   "source_ids": [
+    "spherex-data-products"
+   ],
+   "content_hash": "289edca16efa749c",
+   "path": "tr/spherex-data-products.md",
+   "doc_version": "1",
+   "mission": "SPHEREx",
+   "data_release": "DR1, QR3",
+   "verification_note": null
+  },
+  {
+   "chunk_id": "spherex-data-products:tr:2",
+   "doc_id": "spherex-data-products",
+   "language": "tr",
+   "topic": "spherex_data",
+   "title": "SPHEREx veri ürünleri ve sürümleri",
+   "heading": "Tayfsal görüntü bir tayf değildir",
+   "text": "Her dedektör doğrusal değişken bir filtrenin (LVF) arkasındadır; bu yüzden tek bir Tayfsal Görüntü içinde dalga boyu piksel konumuna göre değişir. Dolayısıyla tek bir pozlama, belirli bir gökyüzü konumu için bir tayf değil tek bir dalga boyu verir. Bir kaynağın tayfı, kaynağın dedektörlerin farklı yerlerine düştüğü çok sayıda pozlamadan birleştirilir. WCS-WAVE tablosu görselleştirme içindir; IRSA bilimsel kullanım için Spectral WCS kalibrasyon ürününün merkez dalga boyu (CWAVE) ve bant genişliği (CBAND) uzantılarının kullanılmasını söyler.",
+   "source_ids": [
+    "spherex-data-products",
+    "irsa-tutorial-intro"
+   ],
+   "content_hash": "510df2b6a9888909",
+   "path": "tr/spherex-data-products.md",
+   "doc_version": "1",
+   "mission": "SPHEREx",
+   "data_release": "DR1, QR3",
+   "verification_note": null
+  },
+  {
+   "chunk_id": "spherex-data-products:tr:3",
+   "doc_id": "spherex-data-products",
+   "language": "tr",
+   "topic": "spherex_data",
+   "title": "SPHEREx veri ürünleri ve sürümleri",
+   "heading": "Altı dedektör bandı",
+   "text": "Bant 1: 0.75-1.09 mikron, çözme gücü 39. Bant 2: 1.10-1.62 mikron, R 41. Bant 3: 1.63-2.41 mikron, R 41. Bant 4: 2.42-3.82 mikron, R 35. Bant 5: 3.83-4.41 mikron, R 112. Bant 6: 4.42-5.00 mikron, R 128. Dedektörler 1'den 6'ya numaralanır ve her Tayfsal Görüntü tek bir dedektörü kapsar.",
+   "source_ids": [
+    "spherex-data-products"
+   ],
+   "content_hash": "0bb51301b396183b",
+   "path": "tr/spherex-data-products.md",
+   "doc_version": "1",
+   "mission": "SPHEREx",
+   "data_release": "DR1, QR3",
+   "verification_note": null
+  },
+  {
+   "chunk_id": "spherex-data-products:tr:4",
+   "doc_id": "spherex-data-products",
+   "language": "tr",
+   "topic": "spherex_data",
+   "title": "SPHEREx veri ürünleri ve sürümleri",
+   "heading": "Tüm Gökyüzü Küpü (All-Sky Cube)",
+   "text": "Tüm Gökyüzü Küpü yalnızca Data Release 1'de vardır. DR1 Tayfsal Görüntülerinden üretilir ve tüm gökyüzünü, her biri yaklaşık 1.8 x 1.8 derece olan 12.288 HEALPix karosuyla (order 5, NESTED) kaplar. Bir karoda 12.9 yay saniyelik 512 x 512 piksel ve 102 tayf kanalı bulunur (altı dedektörün her birinden 1-17 arası kanallar). IMAGE uzantısı, zodyak ışığı çıkarılmış MJy/sr cinsinden yüzey parlaklığıdır. IRSA'nın belirttiği bilinen sorunlar: 51 ve 52 numaralı kanallar veri içermez, 1.083 mikron helyum çizgisi gibi atmosfer salması şeritler oluşturur ve HPX izdüşümü birçok FITS görüntüleyicide bozuk görünür.",
+   "source_ids": [
+    "spherex-data-products",
+    "spherex-dr1"
+   ],
+   "content_hash": "e308f2bd048d17df",
+   "path": "tr/spherex-data-products.md",
+   "doc_version": "1",
+   "mission": "SPHEREx",
+   "data_release": "DR1, QR3",
+   "verification_note": null
+  },
+  {
+   "chunk_id": "spherex-data-products:tr:5",
+   "doc_id": "spherex-data-products",
+   "language": "tr",
+   "topic": "spherex_data",
+   "title": "SPHEREx veri ürünleri ve sürümleri",
+   "heading": "Sürümler",
+   "text": "IRSA şu sürümleri listeler: Temmuz 2025'te ilk Quick Release, Ekim 2025'te yeniden işlenmiş Quick Release 2 (QR2), Eylül 2026'da Quick Release 3 (QR3) ve Kasım 2026'da Data Release 1 (DR1). DR1 Tayfsal Görüntüleri QR2 görüntülerinin yeniden işlenmiş hâlidir ve QR3 ile birlikte, aynı biçimde işlenmiş tek bir küme olarak kullanılmak üzere hazırlanmıştır. QR2 artık SIA2 servisiyle aranamaz, ancak Şubat 2027'ye kadar indirilebilir. DR1 ve QR3 için, QR2 verisini (eski kazanç) QR3 verisiyle (yeni kazanç) birleştirmeye yarayan bir Flux Corrections kalibrasyon ürünü vardır; bu yüzden farklı sürümlerden gelen parlaklık değerleri bu kontrol yapılmadan doğrudan karşılaştırılmamalıdır.",
+   "source_ids": [
+    "irsa-spherex",
+    "spherex-dr1",
+    "spherex-data-access",
+    "spherex-data-products"
+   ],
+   "content_hash": "28b392831bac7d62",
+   "path": "tr/spherex-data-products.md",
+   "doc_version": "1",
+   "mission": "SPHEREx",
+   "data_release": "DR1, QR3",
+   "verification_note": null
+  },
+  {
+   "chunk_id": "spherex-mission:tr:1",
+   "doc_id": "spherex-mission",
+   "language": "tr",
+   "topic": "spherex_mission",
+   "title": "SPHEREx görevine genel bakış",
+   "heading": "SPHEREx nedir",
+   "text": "SPHEREx, \"Spectro-Photometer for the History of the Universe, Epoch of Reionization, and Ices Explorer\" adının kısaltmasıdır. Bir NASA astrofizik görevidir; Şubat 2019'da Medium Explorer görevi olarak seçilmiş ve Mart 2025'te fırlatılmıştır. Görevi NASA'nın Jet Propulsion Laboratory (JPL) kurumu yönetir, baş araştırmacı Caltech'tedir ve faydalı yükü Caltech geliştirmiştir, uzay aracını BAE Systems üretmiştir, Kore Astronomi ve Uzay Bilimleri Enstitüsü (KASI) alet ve bilim ortağıdır. Veriler Caltech'teki IPAC'te işlenir ve arşivlenir. SPHEREx, tüm gökyüzünü yakın kızılötesi ışıkta, 0.75 ile 5.0 mikron arasında tarayan bir teleskoptur.",
+   "source_ids": [
+    "spherex-about",
+    "nasa-spherex-brown-dwarfs",
+    "spherex-user-guide",
+    "spherex-goals"
+   ],
+   "content_hash": "61ef64698f6d9982",
+   "path": "tr/spherex-mission.md",
+   "doc_version": "1",
+   "mission": "SPHEREx",
+   "data_release": null,
+   "verification_note": null
+  },
+  {
+   "chunk_id": "spherex-mission:tr:2",
+   "doc_id": "spherex-mission",
+   "language": "tr",
+   "topic": "spherex_mission",
+   "title": "SPHEREx görevine genel bakış",
+   "heading": "Bilimsel hedefler",
+   "text": "SPHEREx'in üç bilimsel hedefi vardır. (1) Kozmik şişmenin (enflasyon) maddenin üç boyutlu büyük ölçekli dağılımında bıraktığı izi ölçerek şişmenin fiziğini sınırlamak. (2) Büyük ölçekli kümelenmenin çok bantlı derin ölçümüyle gökadaların ışık üretim tarihini izlemek. (3) Yıldız ve gezegen diski oluşumunun erken evrelerinde suyun ve biyojenik buzların bolluğunu ve bileşimini araştırmak.",
+   "source_ids": [
+    "spherex-goals"
+   ],
+   "content_hash": "c73395e651dcf997",
+   "path": "tr/spherex-mission.md",
+   "doc_version": "1",
+   "mission": "SPHEREx",
+   "data_release": null,
+   "verification_note": null
+  },
+  {
+   "chunk_id": "spherex-mission:tr:3",
+   "doc_id": "spherex-mission",
+   "language": "tr",
+   "topic": "spherex_mission",
+   "title": "SPHEREx görevine genel bakış",
+   "heading": "Tarama tasarımı",
+   "text": "SPHEREx tüm gökyüzünde 0.75-5.0 mikron arasında yakın kızılötesi tayf toplar; yaklaşık her 6 yay saniyesinde bir ölçüm alır. Nominal 25 aylık görevi boyunca tüm gökyüzünü dört kez haritalar; bu, yaklaşık altı ayda bir tam gökyüzü haritası demektir. NASA sonucu 102 renkli bir harita olarak tanımlar; her renk ışığın farklı bir dalga boyudur. Tayfölçüm (spektroskopi), bir prizmanın yaptığı gibi ışığı dalga boylarına ayırır.",
+   "source_ids": [
+    "spherex-goals",
+    "spherex-about",
+    "spherex-user-guide",
+    "jpl-spherex-presskit"
+   ],
+   "content_hash": "07744e2204c7fdd7",
+   "path": "tr/spherex-mission.md",
+   "doc_version": "1",
+   "mission": "SPHEREx",
+   "data_release": null,
+   "verification_note": null
+  },
+  {
+   "chunk_id": "spherex-mission:tr:4",
+   "doc_id": "spherex-mission",
+   "language": "tr",
+   "topic": "spherex_mission",
+   "title": "SPHEREx görevine genel bakış",
+   "heading": "Birbirinden ayrı tutulması gereken dört ifade türü",
+   "text": "SPHEREx hakkında konuşurken dört şey karıştırılmamalıdır. Alet özellikleri teleskobun ne yapmak üzere tasarlandığını anlatır (örneğin 0.75-5.0 mikron aralığı). Arşiv üstverisi tek bir dosyayı tanımlar (tarihi, dedektörü, dalga boyu sınırları, indirme adresi). Ölçülen değerler doğrudan veriden okunan sayılardır (bir pikseldeki MJy/sr cinsinden yüzey parlaklığı). Bilimsel yorumlar ise birinin ölçümlerden çıkardığı sonuçlardır. Q-FIT bir ifadenin bu dördünden hangisi olduğunu belirtir.",
+   "source_ids": [
+    "qfit-spec"
+   ],
+   "content_hash": "edd37361abf609f7",
+   "path": "tr/spherex-mission.md",
+   "doc_version": "1",
+   "mission": "SPHEREx",
+   "data_release": null,
+   "verification_note": null
+  },
+  {
+   "chunk_id": "temporal-coverage:tr:1",
+   "doc_id": "temporal-coverage",
+   "language": "tr",
+   "topic": "temporal_analysis",
+   "title": "Zaman kapsamı ve SPHEREx gözlemlerinin karşılaştırılması",
+   "heading": "Tarama sıklığı",
+   "text": "SPHEREx nominal 25 aylık görevinde tüm gökyüzünü dört kez haritalar; dolayısıyla tipik bir gökyüzü konumu yaklaşık altı ayda bir yeniden gözlenir. Bir ziyaret sırasında konum, zamanca birbirine yakın birkaç pozlamayla kapsanır; çünkü teleskop gökyüzünde adım adım ilerler ve konum farklı dedektörlerin üzerinden geçer.",
+   "source_ids": [
+    "spherex-goals",
+    "spherex-about",
+    "irsa-live-query"
+   ],
+   "content_hash": "b027cd94665965db",
+   "path": "tr/temporal-coverage.md",
+   "doc_version": "1",
+   "mission": "SPHEREx",
+   "data_release": null,
+   "verification_note": null
+  },
+  {
+   "chunk_id": "temporal-coverage:tr:2",
+   "doc_id": "temporal-coverage",
+   "language": "tr",
+   "topic": "temporal_analysis",
+   "title": "Zaman kapsamı ve SPHEREx gözlemlerinin karşılaştırılması",
+   "heading": "Düzgün aralıklı bir zaman serisi yoktur",
+   "text": "Bir gökyüzü konumunun pozlamaları, uzun boşluklarla ayrılmış ziyaretler hâlinde kümelenir. Eşit aralıklı değildir. Bir zaman çizelgesi gerçek pozlama zamanlarını göstermeli ve boşlukları boş bırakmalıdır; boşluk \"gözlenmedi\" demektir, asla \"değişim yok\" demek değildir. Derin tarama alanları, tipik geniş tarama konumlarından çok daha sık gözlenir.",
+   "source_ids": [
+    "spherex-data-access",
+    "qfit-spec"
+   ],
+   "content_hash": "b7e0793851feec52",
+   "path": "tr/temporal-coverage.md",
+   "doc_version": "1",
+   "mission": "SPHEREx",
+   "data_release": null,
+   "verification_note": null
+  },
+  {
+   "chunk_id": "temporal-coverage:tr:3",
+   "doc_id": "temporal-coverage",
+   "language": "tr",
+   "topic": "temporal_analysis",
+   "title": "Zaman kapsamı ve SPHEREx gözlemlerinin karşılaştırılması",
+   "heading": "İki pozlama nadiren aynı dalga boyundadır",
+   "text": "Dalga boyu, konumun dedektörde nereye düştüğüne bağlı olduğundan, aynı konumun iki pozlaması aynı dedektör bandından gelse bile genellikle farklı dalga boylarını ölçer. Q-FIT ekibi bunu güney ekliptik kutbu derin alanındaki gerçek QR2 dosyalarında ölçtü: 2 dakika, 1.5 saat, 1 gün ve 6 ay arayla alınmış dört pozlama çiftinin hepsinde dalga boyu farkı yaklaşık bir bant genişliği veya daha fazlaydı. Bu nedenle böyle iki pozlama arasındaki parlaklık farkı, kaynağın değiştiğinin kanıtı değildir. Bu ölçüm QR2 verisiyle yapılmıştır ve DR1 ile QR3 için yeniden kontrol edilmelidir.",
+   "source_ids": [
+    "qfit-milestone-report",
+    "spherex-data-products"
+   ],
+   "content_hash": "601c62a6c1d7c2cb",
+   "path": "tr/temporal-coverage.md",
+   "doc_version": "1",
+   "mission": "SPHEREx",
+   "data_release": null,
+   "verification_note": null
+  },
+  {
+   "chunk_id": "temporal-coverage:tr:4",
+   "doc_id": "temporal-coverage",
+   "language": "tr",
+   "topic": "temporal_analysis",
+   "title": "Zaman kapsamı ve SPHEREx gözlemlerinin karşılaştırılması",
+   "heading": "Neler karşılaştırılabilir",
+   "text": "Parlaklıkta adil bir karşılaştırma için aynı dedektör bandı, hedef konumunda neredeyse aynı dalga boyu ve aynı işleme sürümü gerekir. Konum değişimi (hareket), kaynak her iki pozlamada da görünüyorsa farklı dalga boylarındaki pozlamalar arasında değerlendirilebilir. Bu yolla bulunan her görünür değişim insan incelemesi için bir adaydır, bir tespit değildir.",
+   "source_ids": [
+    "qfit-milestone-report",
+    "qfit-spec"
+   ],
+   "content_hash": "7f81c3332268d661",
+   "path": "tr/temporal-coverage.md",
+   "doc_version": "1",
+   "mission": "SPHEREx",
+   "data_release": null,
+   "verification_note": null
+  }
+ ],
+ "embeddings": {}
+}

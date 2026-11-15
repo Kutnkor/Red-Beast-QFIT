@@ -1,0 +1,47 @@
+{
+  "date": "2026-11-15",
+  "active_base": "user supplied app-v4.html",
+  "v5_is_active_base": false,
+  "default_view": "real SPHEREx observations",
+  "frontend": {
+    "passed": 203,
+    "failed": 0
+  },
+  "backend": {
+    "passed": 203,
+    "skipped": 4,
+    "failed": 0
+  },
+  "build": "passed, chunk-size warning",
+  "lint": "exit 0; warnings in preserved prototype and React lifecycle patterns",
+  "science_inputs_unchanged": 141,
+  "qfit_vendor_files_unchanged": 198,
+  "original_v4_sha256": "3ac0099e839f12f530a96fcd419fa60d67f805f82fa46e3e38f788ea652b1ca5",
+  "browser_checks": {
+    "desktop_viewport": "1280x720",
+    "observation_dates_wavelength_saturation_warning": "visible",
+    "live_three_scene_dimensions": "710x550 CSS pixels; matching camera aspect",
+    "education_full_mass_range": "0.1–100 solar masses preserved; 100-solar-mass endpoint and black-hole phase selected",
+    "education_timeline": "Phase offsets preserved after animated preset/mass changes; clearProps no longer removes left positions.",
+    "coordinate_search": "269.4463, 4.7682 returns Barnard at 0.0000 degrees",
+    "published_comparison_model": "MIST values and source link visible; distinct from education",
+    "console_errors": "none in inspected desktop tab",
+    "mobile_layout": "375px nested preview: readable flow and 351px scene width verified",
+    "mobile_full_interaction": "not completed: browser tool could inspect nested preview but could not activate its controls",
+    "language": "TR→EN→TR flags: native menus, phases, descriptions, units, settings, English Sun search, accessible labels, QFIT; phase position 50% unchanged when translated.",
+    "branding": "Header bird 42×42, wordmark 24px, Red #ff4d57; QFIT 108×91.8 preserving 320:272 art ratio."
+  },
+  "known_limits": [
+    "V4 physics_v1 values are illustrative and not validated quantitative evolution predictions.",
+    "Four live archive tests skipped in this run.",
+    "No fresh paid AI evaluation or public deployment."
+  ],
+  "github_uploaded": false,
+  "public_deployment": false,
+  "screenshots": [
+    "v4/education.jpg",
+    "v4/observations.jpg",
+    "v4/branding-language-en.jpg",
+    "v4/branding-language-tr.jpg"
+  ]
+}

@@ -1,0 +1,7 @@
+{
+  "url": "https://vizier.cfa.harvard.edu/viz-bin/asu-tsv?-source=I%2F239%2Fhip_main&-out=HIP%2CRAICRS%2CDEICRS%2CVmag%2CB-V%2CpmRA%2CpmDE&Vmag=%3C6.5&-out.max=20000&-sort=HIP",
+  "adql": null,
+  "retrieved_utc": "2026-11-14T16:58:19+00:00",
+  "sha256": "5764ac7ba0cd722ecd68162dae002d17c1396fb347825bb10c638c65106aa547",
+  "bytes": 564651
+}

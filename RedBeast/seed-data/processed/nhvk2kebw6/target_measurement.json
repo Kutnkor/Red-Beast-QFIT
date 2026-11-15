@@ -1,0 +1,222 @@
+{
+  "frames": [
+    {
+      "index": 0,
+      "date": "2025-09-02T00:46:30Z",
+      "mjd": 60920.03229708,
+      "lam_um": 0.76447,
+      "pred_ra": 76.956586,
+      "pred_dec": 30.401293,
+      "method": "flux_weighted_centroid",
+      "ra": 76.956212,
+      "dec": 30.401191,
+      "offset_e_arcsec": -1.16,
+      "offset_n_arcsec": -0.37,
+      "photometry": {
+        "valid": true,
+        "reason": null,
+        "flux_mjy": 74.07454185600186,
+        "err_mjy": 0.299323615913008,
+        "saturated": false,
+        "reliable": true,
+        "flags": {},
+        "lam_um": 0.76447,
+        "bw_um": 0.01808
+      },
+      "snr": 247.5
+    },
+    {
+      "index": 1,
+      "date": "2026-03-08T16:15:59Z",
+      "mjd": 61107.677761178,
+      "lam_um": 0.75832,
+      "pred_ra": 76.956587,
+      "pred_dec": 30.40129,
+      "method": "flux_weighted_centroid",
+      "ra": 76.956226,
+      "dec": 30.401054,
+      "offset_e_arcsec": -1.12,
+      "offset_n_arcsec": -0.85,
+      "photometry": {
+        "valid": true,
+        "reason": null,
+        "flux_mjy": 124.50968722595391,
+        "err_mjy": 0.3871876480890098,
+        "saturated": false,
+        "reliable": true,
+        "flags": {},
+        "lam_um": 0.75832,
+        "bw_um": 0.01785
+      },
+      "snr": 321.6
+    },
+    {
+      "index": 2,
+      "date": "2026-09-08T06:39:20Z",
+      "mjd": 61291.277316444,
+      "lam_um": 0.77119,
+      "pred_ra": 76.956588,
+      "pred_dec": 30.401287,
+      "method": "flux_weighted_centroid",
+      "ra": 76.956408,
+      "dec": 30.401183,
+      "offset_e_arcsec": -0.56,
+      "offset_n_arcsec": -0.37,
+      "photometry": {
+        "valid": true,
+        "reason": null,
+        "flux_mjy": 191.64391013153505,
+        "err_mjy": 0.47910418178654374,
+        "saturated": false,
+        "reliable": true,
+        "flags": {},
+        "lam_um": 0.77119,
+        "bw_um": 0.01823
+      },
+      "snr": 400.0
+    }
+  ],
+  "n_frames": 3,
+  "n_located": 3,
+  "n_detected": 3,
+  "n_saturated": 0,
+  "detect_snr_threshold": 5.0,
+  "status": {
+    "data_available": true,
+    "source_detected": true,
+    "change_seen": true,
+    "change_kind": "brightness",
+    "change_scientifically_confirmed": false
+  },
+  "motion": {
+    "n_points": 3,
+    "from_date": "2025-09-02T00:46:30Z",
+    "to_date": "2026-09-08T06:39:20Z",
+    "span_years": 1.016,
+    "fit_pm_e_arcsec_yr": 0.6,
+    "fit_pm_n_arcsec_yr": -0.03,
+    "fit_pm_total_arcsec_yr": 0.6,
+    "fit_pm_err_arcsec_yr": 0.86,
+    "catalog_pm_e_arcsec_yr": 0.01,
+    "catalog_pm_n_arcsec_yr": -0.02,
+    "catalog_pm_total_arcsec_yr": 0.02,
+    "measured_shift_arcsec": 0.61,
+    "measured_shift_px": 0.1,
+    "predicted_shift_arcsec": 0.02,
+    "significance_sigma": 0.5,
+    "residual_vs_catalog_sigma": 0.5,
+    "significant": false,
+    "consistent_with_catalog": true,
+    "per_point_error_arcsec": 0.62,
+    "per_point_error_source": "sequence alignment rms vs Gaia (per-axis, floor 0.1 px)",
+    "methods": [
+      "flux_weighted_centroid"
+    ],
+    "note": "doğrusal uyum; paralaks ve gözlemci etkisi modellenmedi"
+  },
+  "comparison": {
+    "status": "ok",
+    "n_stars": 5,
+    "gmax": 16.0,
+    "frame_scale": [
+      1.0,
+      1.0009,
+      1.0
+    ],
+    "frame_scatter": [
+      0.024,
+      0.0211,
+      0.0231
+    ],
+    "systematic_frac": 0.0231,
+    "method": "Gaia DR3 comparison stars, r=2 px aperture on native pixels, flux / own median"
+  },
+  "brightness": {
+    "n_points": 3,
+    "lam_um": 0.76447,
+    "wavelength_tolerance_used": 0.5,
+    "dlam_over_bw": [
+      0.0,
+      -0.34,
+      0.372
+    ],
+    "normalized_by_comparison_stars": true,
+    "systematic_frac": 0.1028,
+    "points": [
+      {
+        "date": "2025-09-02T00:46:30Z",
+        "flux_mjy": 74.075,
+        "err_mjy": 7.624
+      },
+      {
+        "date": "2026-03-08T16:15:59Z",
+        "flux_mjy": 124.398,
+        "err_mjy": 12.799
+      },
+      {
+        "date": "2026-09-08T06:39:20Z",
+        "flux_mjy": 191.644,
+        "err_mjy": 19.714
+      }
+    ],
+    "flux_min_mjy": 74.0745,
+    "flux_max_mjy": 191.6439,
+    "date_min": "2025-09-02T00:46:30Z",
+    "date_max": "2026-09-08T06:39:20Z",
+    "max_over_min": 2.587,
+    "diff_sigma": 5.6,
+    "chi2_constant": 36.7,
+    "dof": 2,
+    "caveats": [
+      "aperture flux without aperture correction",
+      "quick-release calibration",
+      "wavelength offsets up to 0.5 bandwidth; 10% systematic added for spectral slope",
+      "systematic error from comparison-star scatter"
+    ]
+  },
+  "forced_mean": {
+    "n": 3,
+    "flux_mjy": 112.3207,
+    "err_mjy": 0.2123,
+    "snr": 529.1,
+    "note": "öngörülen (yalnızca özdevinim) konumlarda zorlanmış açıklık fotometrisinin ağırlıklı ortalaması; bağımsız bir keşif ölçümü değildir"
+  },
+  "wing_proxy": null,
+  "blending": {
+    "radius_arcsec": 20.0,
+    "gaia": [],
+    "allwise": [
+      {
+        "id": "J050749.54+302404.7",
+        "w1": 6.246,
+        "w2": 5.228,
+        "min_sep_arcsec": 0.4,
+        "date": "2025-09-02T00:46:30Z"
+      }
+    ],
+    "status": "ok",
+    "catalogue_provenance": {
+      "gaia": {
+        "source_url": "https://gea.esac.esa.int/tap-server/tap",
+        "epoch_jyear": 2016.0
+      },
+      "allwise": {
+        "source_url": "https://vizier.cfa.harvard.edu/viz-bin/asu-tsv",
+        "epoch_jyear": 2010.56,
+        "provider": "VizieR Harvard mirror",
+        "catalogue_id": "II/328/allwise",
+        "bibcode": "2014yCat.2328....0C",
+        "query_url": "https://vizier.cfa.harvard.edu/viz-bin/asu-tsv?-source=II%2F328%2Fallwise&-c=76.9565870+30.4012910&-c.rm=4.3860000&-out=AllWISE%2CRAJ2000%2CDEJ2000%2CW1mag%2CW2mag%2Csnr1%2Csnr2&-out.max=50000",
+        "response_sha256": "888f0381dfc62149bc26b295e61ce826bde119a20135b7332b550a144b3e5263",
+        "response_bytes": 22166,
+        "retrieved_utc": "2026-11-14T17:16:55.498799+00:00"
+      }
+    },
+    "target_in_gaia": {
+      "id": "156430822114424576",
+      "g": 12.184072,
+      "sep_arcsec": 1.65
+    },
+    "n_within_aperture": 1
+  }
+}

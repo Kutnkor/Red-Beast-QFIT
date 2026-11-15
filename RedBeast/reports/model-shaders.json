@@ -1,0 +1,64 @@
+{
+  "method": "Native glslang GLSL ES 3.00 parse and vertex/fragment link; Three.js r170 chunks with ACES and sRGB output.",
+  "compiler": "Glslang Version: 11:16.6.0",
+  "unique_programs": 7,
+  "targets": [
+    {
+      "target_id": "barnard",
+      "programs": 4,
+      "passed": true
+    },
+    {
+      "target_id": "eps-indi-b",
+      "programs": 3,
+      "passed": true
+    },
+    {
+      "target_id": "wise-0855",
+      "programs": 3,
+      "passed": true
+    },
+    {
+      "target_id": "rw-aur",
+      "programs": 4,
+      "passed": true
+    },
+    {
+      "target_id": "r-dra",
+      "programs": 4,
+      "passed": true
+    }
+  ],
+  "programs": [
+    {
+      "sha256": "c89e4755c130dc4189831d2add4df74c1d646f6fb8cf91a076556b552a2329c9",
+      "linked": true
+    },
+    {
+      "sha256": "ee463f9f8b3fe0f0d03484fd7abafb1b0d17c8e16c0127d23adb124f9d40ca38",
+      "linked": true
+    },
+    {
+      "sha256": "1b25dcaaeffdd47b21162fd87dde90fb3e9534fc44171c13087aab01de22cd6c",
+      "linked": true
+    },
+    {
+      "sha256": "326e7d0be096a526c1cc808df808ee4d4d8cfcc28908b15315a78c1ba37e57a0",
+      "linked": true
+    },
+    {
+      "sha256": "14a27591dd35aa52671de4f7a54b257117b7248bf0a87486b5be946c8bbf9486",
+      "linked": true
+    },
+    {
+      "sha256": "2d47744f71faf9fa4ddde744db77096c4a2d422c32ad91d95213560a6e7c1ee0",
+      "linked": true
+    },
+    {
+      "sha256": "c2d960225ce2806e649b09b5ca3a21845a4bdee9db7130d897d3aff8542f6953",
+      "linked": true
+    }
+  ],
+  "browser_or_gpu_rendering_verified": false,
+  "limitation": "Does not exercise a WebGL driver, pixel output, frame rate or visual appearance."
+}

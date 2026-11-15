@@ -1,0 +1,70 @@
+{
+  "name": "Q-FIT robin mascot",
+  "canvas_px": [
+    320,
+    272
+  ],
+  "bird_height_px": 192,
+  "anchor_px": {
+    "bird_center_x": 120,
+    "feet_baseline_y": 250,
+    "note": "Identical on every image: swap images, never reposition."
+  },
+  "pivot_normalized": [
+    0.375,
+    0.0809
+  ],
+  "overlay_points_px": {
+    "eye": [
+      110.6,
+      83.5
+    ],
+    "star": [
+      222.3,
+      47.8
+    ],
+    "note": "On normalized/idle.png, origin top-left. For glow/twinkle effects."
+  },
+  "assets": {
+    "idle": {
+      "file": "normalized/idle.png",
+      "frames": 1
+    },
+    "quiet": {
+      "file": "normalized/quiet.png",
+      "frames": 1,
+      "note": "Bird without beam or sparkles (first speaking frame)."
+    },
+    "thinking": {
+      "frames_dir": "normalized/thinking",
+      "spritesheet": "spritesheets/thinking.png",
+      "frames": 9,
+      "frame_ms": 350,
+      "loop": true,
+      "note": "Frame 6 cleaned of a bubble smudge present in the source GIF."
+    },
+    "speaking": {
+      "frames_dir": "normalized/speaking",
+      "spritesheet": "spritesheets/speaking.png",
+      "frames": 9,
+      "frame_ms": 80,
+      "loop": true
+    },
+    "icons": {
+      "files": [
+        "icons/robin_512.png",
+        "icons/robin_256.png",
+        "icons/robin_128.png",
+        "icons/robin_64.png",
+        "icons/robin_32.png"
+      ]
+    }
+  },
+  "sources": {
+    "figure": "source/robin_figure.png",
+    "thinking": "source/robin_thinking.gif",
+    "speaking": "source/robin_speaking.gif",
+    "note": "Originals, unmodified. Rebuild with scripts/build_mascot_assets.py."
+  },
+  "states": "See docs/MASCOT_AND_CHAT_UI.md for the state machine and backend triggers."
+}

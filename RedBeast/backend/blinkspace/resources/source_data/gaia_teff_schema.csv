@@ -1,0 +1,3 @@
+column_name,datatype
+source_id,long
+teff_gspphot,float

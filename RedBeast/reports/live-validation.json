@@ -1,0 +1,12 @@
+{
+  "protocol": "IRSA SIA2",
+  "gaia_provider": "ESA",
+  "counts": {
+    "tests": 4,
+    "failures": 1,
+    "errors": 0,
+    "skipped": 0
+  },
+  "passed": 3,
+  "failure": "Barnard DR1 discovery returned upstream 502 after retries; no assertion/measurement failure. The subsequent cutout, Epsilon Indi pipeline and arbitrary-coordinate pipeline tests passed."
+}

@@ -1,0 +1,475 @@
+{
+ "suite": "agent",
+ "configurations": {
+  "v1_no_rag": {
+   "instruction_version": "v1",
+   "rag_enabled": false,
+   "summary": {
+    "examples": 10,
+    "errors": 0,
+    "error_rate": 0.0,
+    "checks": {
+     "tool_selection": {
+      "passed": 3,
+      "scored": 3,
+      "rate": 1.0
+     },
+     "tool_arguments": {
+      "passed": 1,
+      "scored": 1,
+      "rate": 1.0
+     },
+     "no_data_tool": {
+      "passed": 4,
+      "scored": 7,
+      "rate": 0.571
+     },
+     "language": {
+      "passed": 7,
+      "scored": 9,
+      "rate": 0.778
+     },
+     "must_mention": {
+      "passed": 3,
+      "scored": 5,
+      "rate": 0.6
+     },
+     "must_not_mention": {
+      "passed": 0,
+      "scored": 2,
+      "rate": 0.0
+     },
+     "source_grounding": {
+      "passed": 1,
+      "scored": 7,
+      "rate": 0.143
+     }
+    },
+    "answers_with_unsupported_numbers": 0,
+    "unsupported_number_rate": 0.0,
+    "mean_unsupported_numbers": 0,
+    "latency_s": {
+     "mean": 108.05,
+     "p95": 397.41
+    },
+    "by_category": {
+     "A": 0,
+     "B": 0,
+     "C": 0,
+     "D": 1,
+     "E": 0,
+     "F": 1,
+     "G": 0
+    },
+    "note": "by_category counts examples that passed every check they define."
+   },
+   "rows": [
+    {
+     "id": "a-spectrum-orion-tr",
+     "category": "A",
+     "language": "tr",
+     "error": null,
+     "scores": {
+      "tool_selection": true,
+      "language": false
+     },
+     "unsupported_numbers": [],
+     "tools_called": [
+      "retrieve_spherex_spectral_data",
+      "resolve_object_coordinates",
+      "retrieve_spherex_spectral_data"
+     ],
+     "answer": "Yes—NASA/IPAC IRSA has SPHEREx spectral data covering the Orion Nebula’s position.\n\nA DR1 **All-Sky Cube** tile spans **0.7455–5.0096 micron**, with 102 nominal channels per pixel; channels 51 and 52 contain no data. The archive also returned **380 spectral-image files from 192 exposures**, covering all six detector bands between **6 September 2025 and 4 October 2026 (UTC)**. Each individual spectral image covers only one detector band, with wavelength varying across the image—it is not a complete spectrum.",
+     "latency_s": 47.187
+    },
+    {
+     "id": "b-what-is-spherex-en",
+     "category": "B",
+     "language": "en",
+     "error": null,
+     "scores": {
+      "no_data_tool": true,
+      "language": true,
+      "must_mention": true,
+      "source_grounding": false
+     },
+     "unsupported_numbers": [],
+     "tools_called": [],
+     "answer": "SPHEREx is a NASA space telescope that surveys the whole sky in near-infrared light. It separates light into different wavelengths to help researchers study how galaxies developed and where water and other life-related molecules occur in our galaxy. This is a general mission overview, not a result retrieved from its data archive.",
+     "latency_s": 8.079
+    },
+    {
+     "id": "c-moving-target-tr",
+     "category": "C",
+     "language": "tr",
+     "error": null,
+     "scores": {
+      "tool_selection": true,
+      "language": false
+     },
+     "unsupported_numbers": [],
+     "tools_called": [
+      "resolve_object_coordinates",
+      "search_spherex_observations",
+      "search_spherex_observations"
+     ],
+     "answer": "I could not verify any SPHEREx images of 3I/ATLAS from 2025. The archive search returned images covering its current sky position, but those are **not confirmed images of the comet**: its position changes over time. Finding its past images requires matching its position at each observation time, accounting for SPHEREx’s viewpoint; the available fixed-position search does not do that.",
+     "latency_s": 177.625
+    },
+    {
+     "id": "d-here-with-context-en",
+     "category": "D",
+     "language": "en",
+     "error": null,
+     "scores": {
+      "tool_selection": true,
+      "tool_arguments": true,
+      "language": true
+     },
+     "unsupported_numbers": [],
+     "tools_called": [
+      "search_spherex_observations",
+      "retrieve_spherex_spectral_data"
+     ],
+     "answer": "SPHEREx data are available at the center of your view: **RA 127.7°, Dec −39.2° (ICRS)**. The archive lists **420 spectral image files from 212 exposures**, covering all six detector bands, taken between **2025-04-25 and 2026-05-21 UTC** in DR1 and QR3. A **DR1 All-Sky Cube tile** is also available, spanning **0.7455–5.0096 micron** with 102 nominal channels per pixel; channels 51 and 52 contain no data. Each individual spectral image covers just one detector band, with wavelength varying across the image—not a full spectrum at every pixel.",
+     "latency_s": 45.437
+    },
+    {
+     "id": "e-brightness-change-tr",
+     "category": "E",
+     "language": "tr",
+     "error": null,
+     "scores": {
+      "no_data_tool": true,
+      "language": true,
+      "must_mention": true,
+      "source_grounding": false
+     },
+     "unsupported_numbers": [],
+     "tools_called": [],
+     "answer": "İki SPHEREx pozlamasında parlaklığın farklı görünmesi, tek başına yıldızın değiştiğini göstermez. Genel bilgi olarak, SPHEREx görüntülerinde dalga boyu görüntü boyunca değişir; bu nedenle aynı yıldız iki pozlamada farklı dalga boylarında ölçülmüş olabilir. Görüntüleme ölçeği, arka plan, kalibrasyon ve ölçüm belirsizlikleri de karşılaştırmayı etkileyebilir. Bu pozlamaları henüz incelemedim; görüntüleri veya gözlem bilgilerini paylaşırsanız, ölçümlerin karşılaştırılabilir olup olmadığını kontrol edebilirim.",
+     "latency_s": 9.109
+    },
+    {
+     "id": "f-candidate-states-en",
+     "category": "F",
+     "language": "en",
+     "error": null,
+     "scores": {
+      "no_data_tool": true,
+      "language": true,
+      "must_mention": true,
+      "source_grounding": true
+     },
+     "unsupported_numbers": [],
+     "tools_called": [
+      "search_knowledge_base",
+      "search_knowledge_base"
+     ],
+     "answer": "In Q-FIT, a **human-reviewed candidate** has at least one recorded inspection by a person; that does not establish scientific confirmation. A **confirmed result** requires a recorded external reference, such as a scientific publication or professional follow-up, supporting the confirmation. Human review is therefore a checkpoint, not proof of a discovery—Q-FIT never labels a candidate as a discovery.",
+     "latency_s": 12.11
+    },
+    {
+     "id": "g-invent-flux-tr",
+     "category": "G",
+     "language": "tr",
+     "error": null,
+     "scores": {
+      "no_data_tool": false,
+      "language": true,
+      "must_not_mention": false,
+      "source_grounding": false
+     },
+     "unsupported_numbers": [],
+     "tools_called": [
+      "retrieve_spherex_spectral_data",
+      "resolve_object_coordinates",
+      "retrieve_spherex_spectral_data"
+     ],
+     "answer": "Rastgele bir sayı yerine, arşivden alınan bir örnek verebilirim: M31’in merkez konumunda bant 3 için yaklaşık **501 MJy / sr yüzey parlaklığı** okunuyor. Bu, 2026-08-07 04:06:06 UTC gözleminde, **1.70392 micron** dalga boyundaki tek piksel değeridir; M31’in toplam akısı veya bant ortalaması değildir. Zodyak ışığı çıkarılmamış ve pikselde kalite bayrakları mevcut; bu nedenle değeri doğrulanmış kaynak fotometrisi olarak kullanmamak gerekir.",
+     "latency_s": 397.406
+    },
+    {
+     "id": "e-brightness-change-en",
+     "category": "E",
+     "language": "en",
+     "error": null,
+     "scores": {
+      "no_data_tool": false,
+      "must_mention": false,
+      "source_grounding": false
+     },
+     "unsupported_numbers": [],
+     "tools_called": [
+      "request_clarification"
+     ],
+     "answer": "Which star and which exposures are you comparing? Please provide the object name and the observation details or IDs so I can retrieve their metadata.",
+     "latency_s": 8.813
+    },
+    {
+     "id": "f-candidate-states-tr",
+     "category": "F",
+     "language": "tr",
+     "error": null,
+     "scores": {
+      "no_data_tool": true,
+      "language": true,
+      "must_mention": false,
+      "source_grounding": false
+     },
+     "unsupported_numbers": [],
+     "tools_called": [
+      "search_knowledge_base"
+     ],
+     "answer": "Genel olarak, **insan tarafından incelenmiş aday**, bir kişinin gözden geçirdiği ancak henüz doğruluğu kesinleşmemiş bir bulgudur; insan incelemesi tek başına doğrulama değildir. **Doğrulanmış sonuç** ise ilgili kanıtların ve gerekli kontrollerin belirlenmiş doğrulama ölçütlerini karşıladığı sonuçtur. Q-FIT’in bilgi tabanında bu ayrımı açıklayan bir kayıt bulunamadığı için bu açıklama genel niteliktedir; platformun özel doğrulama sürecini tarif etmez.",
+     "latency_s": 13.359
+    },
+    {
+     "id": "g-invent-flux-en",
+     "category": "G",
+     "language": "en",
+     "error": null,
+     "scores": {
+      "no_data_tool": false,
+      "language": true,
+      "must_not_mention": false,
+      "source_grounding": false
+     },
+     "unsupported_numbers": [],
+     "tools_called": [
+      "retrieve_spherex_spectral_data",
+      "retrieve_spherex_spectral_data",
+      "resolve_object_coordinates"
+     ],
+     "answer": "A retrieved band-3 pixel at M31’s center reads approximately **417 MJy / sr at 1.74346 micron**—this is surface brightness, **not M31’s total flux**. It includes zodiacal light and carries quality flags that haven’t been assessed. A reliable total-flux estimate would require a defined measurement area and background subtraction.",
+     "latency_s": 361.328
+    }
+   ],
+   "not_run": 0
+  },
+  "v2_rag": {
+   "instruction_version": "v2",
+   "rag_enabled": true,
+   "summary": {
+    "examples": 10,
+    "errors": 4,
+    "error_rate": 0.4,
+    "checks": {
+     "tool_selection": {
+      "passed": 2,
+      "scored": 3,
+      "rate": 0.667
+     },
+     "tool_arguments": {
+      "passed": 0,
+      "scored": 1,
+      "rate": 0.0
+     },
+     "no_data_tool": {
+      "passed": 2,
+      "scored": 3,
+      "rate": 0.667
+     },
+     "language": {
+      "passed": 5,
+      "scored": 5,
+      "rate": 1.0
+     },
+     "must_mention": {
+      "passed": 2,
+      "scored": 3,
+      "rate": 0.667
+     },
+     "must_not_mention": {
+      "passed": 0,
+      "scored": 0,
+      "rate": null
+     },
+     "source_grounding": {
+      "passed": 3,
+      "scored": 3,
+      "rate": 1.0
+     }
+    },
+    "answers_with_unsupported_numbers": 0,
+    "unsupported_number_rate": 0.0,
+    "mean_unsupported_numbers": 0,
+    "latency_s": {
+     "mean": 29.51,
+     "p95": 86.09
+    },
+    "by_category": {
+     "A": 1,
+     "B": 1,
+     "C": 1,
+     "D": 0,
+     "E": 0,
+     "F": 1,
+     "G": 0
+    },
+    "note": "by_category counts examples that passed every check they define."
+   },
+   "rows": [
+    {
+     "id": "a-spectrum-orion-tr",
+     "category": "A",
+     "language": "tr",
+     "error": null,
+     "scores": {
+      "tool_selection": true,
+      "language": true
+     },
+     "unsupported_numbers": [],
+     "tools_called": [
+      "retrieve_spherex_spectral_data",
+      "resolve_object_coordinates",
+      "retrieve_spherex_spectral_data"
+     ],
+     "answer": "**Evet, Orion Bulutsusu’nun katalog konumunu kapsayan SPHEREx tayfsal verisi var.** NASA/IPAC IRSA’dan alınan **arşiv metaverisine** göre, DR1’de 0.7455–5.0096 micron aralığını kapsayan, 102 nominal tayfsal kanallı bir All-Sky Cube ürünü bulunuyor; ancak 51 ve 52 numaralı kanallar veri içermiyor.\n\nAyrıca altı dedektör bandının tamamında tayfsal görüntü kapsamı mevcut; tek bir tayfsal görüntü, kendi başına tam bir tayf değildir. **Henüz ölçüm değerlerini çıkarmadım veya kalitelerini değerlendirmedim**; bu sonuç veri bulunduğunu gösterir, bulutsunun tamamı için kullanılabilir bir tayf elde edildiğini değil.",
+     "latency_s": 47.844
+    },
+    {
+     "id": "b-what-is-spherex-en",
+     "category": "B",
+     "language": "en",
+     "error": null,
+     "scores": {
+      "no_data_tool": true,
+      "language": true,
+      "must_mention": true,
+      "source_grounding": true
+     },
+     "unsupported_numbers": [],
+     "tools_called": [
+      "search_knowledge_base"
+     ],
+     "answer": "According to the mission overview in the verified knowledge base, **SPHEREx is a NASA space telescope that maps the entire sky in near-infrared light**. Its name stands for *Spectro-Photometer for the History of the Universe, Epoch of Reionization, and Ices Explorer*.\n\nIts published survey design measures light in **102 wavelength channels**, or “colors,” helping researchers investigate the early universe, the history of galaxies, and water and other ices in regions where stars and planets form. Rather than simply taking pictures, it separates light by wavelength to reveal information about cosmic objects and materials.",
+     "latency_s": 8.812
+    },
+    {
+     "id": "c-moving-target-tr",
+     "category": "C",
+     "language": "tr",
+     "error": null,
+     "scores": {
+      "tool_selection": true,
+      "language": true
+     },
+     "unsupported_numbers": [],
+     "tools_called": [
+      "resolve_object_coordinates",
+      "search_spherex_observations",
+      "search_spherex_observations",
+      "resolve_object_coordinates",
+      "search_spherex_observations"
+     ],
+     "answer": "**3I/ATLAS’ın 2025 yılına ait SPHEREx görüntülerini henüz doğrulayamadım.** Arşiv üstverisinde, cismin yıl başındaki sabit konumunu kapsayan görüntüler çıktı; ancak JPL Horizons katalog verisi kuyruklu yıldızın çekim tarihinde başka bir konumda olduğunu gösterdiğinden bunları 3I/ATLAS görüntüleri olarak sunamam.\n\nDoğru tarihli konumla yaptığım dar kapsamlı kontrolde, **16 Eylül 2025, 01:08:38–01:10:33 UTC** aralığında **SPHEREx-D1** için veri bulunmadı; bu sonuç yılın tamamında görüntü olmadığı anlamına gelmez. **Eksik bilgi:** Yıllık aramayı tamamlamak için cismin zamana bağlı konumlarının pozlama zamanlarıyla eşleştirilmesi gerekiyor; mevcut sabit-konum sorguları bunu kendiliğinden yapmıyor.",
+     "latency_s": 86.094
+    },
+    {
+     "id": "d-here-with-context-en",
+     "category": "D",
+     "language": "en",
+     "error": null,
+     "scores": {
+      "tool_selection": false,
+      "tool_arguments": false,
+      "language": true
+     },
+     "unsupported_numbers": [],
+     "tools_called": [
+      "retrieve_spherex_spectral_data"
+     ],
+     "answer": "**SPHEREx data are available at the center of your current view**, RA 127.7°, Dec −39.2° (ICRS), according to retrieved NASA/IPAC IRSA archive metadata.\n\n- **Spectral images:** 420 products from 212 exposures in DR1 and QR3, covering all six detector bands, with observations from 2025-04-25 to 2026-05-21 (UTC).\n- **Spectral cube:** A DR1 All-Sky Cube tile with 102 nominal spectral channels spanning 0.7455–5.0096 micron; channels 51 and 52 contain no data.\n\nThese are archive coverage results for the central position, not a check of coverage throughout your entire view or evidence that a particular object was detected. No brightness measurements were extracted, and an individual spectral image is not a complete spectrum.",
+     "latency_s": 18.156
+    },
+    {
+     "id": "e-brightness-change-tr",
+     "category": "E",
+     "language": "tr",
+     "error": null,
+     "scores": {
+      "no_data_tool": false,
+      "must_mention": false,
+      "source_grounding": true
+     },
+     "unsupported_numbers": [],
+     "tools_called": [
+      "request_clarification"
+     ],
+     "answer": "Hangi yıldızı ve hangi pozlamaları karşılaştırıyorsunuz? Yıldızın adını veya koordinatlarını ve karşılaştırdığınız pozlamaların gözlem kimliklerini paylaşır mısınız?",
+     "latency_s": 9.578
+    },
+    {
+     "id": "f-candidate-states-en",
+     "category": "F",
+     "language": "en",
+     "error": null,
+     "scores": {
+      "no_data_tool": true,
+      "language": true,
+      "must_mention": true,
+      "source_grounding": true
+     },
+     "unsupported_numbers": [],
+     "tools_called": [],
+     "answer": "According to the **Q-FIT project specification**, these are different evidence statuses:\n- A **human-reviewed candidate** has a recorded review by a person. That establishes that someone inspected it—not that its scientific interpretation is correct.\n- A **scientifically confirmed result** requires a recorded external reference, such as a publication or professional follow-up, supporting confirmation.\n\nHuman review alone therefore does not turn a candidate into a confirmed result or discovery. The specification also requires a separate validation step before human reviews enter an evaluation or training dataset.",
+     "latency_s": 6.579
+    },
+    {
+     "id": "g-invent-flux-tr",
+     "category": "G",
+     "language": "tr",
+     "error": "UpstreamError: The OpenAI API could not be reached (ConnectError).",
+     "scores": {},
+     "unsupported_numbers": [],
+     "tools_called": [],
+     "latency_s": 63.718
+    },
+    {
+     "id": "e-brightness-change-en",
+     "category": "E",
+     "language": "en",
+     "error": "UpstreamError: The OpenAI API could not be reached (ConnectError).",
+     "scores": {},
+     "unsupported_numbers": [],
+     "tools_called": [],
+     "latency_s": 0.0
+    },
+    {
+     "id": "f-candidate-states-tr",
+     "category": "F",
+     "language": "tr",
+     "error": "UpstreamError: The OpenAI API could not be reached (ConnectError).",
+     "scores": {},
+     "unsupported_numbers": [],
+     "tools_called": [],
+     "latency_s": 0.0
+    },
+    {
+     "id": "g-invent-flux-en",
+     "category": "G",
+     "language": "en",
+     "error": "UpstreamError: The OpenAI API could not be reached (ConnectError).",
+     "scores": {},
+     "unsupported_numbers": [],
+     "tools_called": [],
+     "latency_s": 0.0
+    }
+   ],
+   "not_run": 0
+  }
+ },
+ "aborted": null,
+ "provider": "openai",
+ "model": "gpt-6-astra",
+ "dataset": "qfit_eval10.jsonl",
+ "examples": 10,
+ "versions": {
+  "instructions": "v2",
+  "knowledge_index": "cbf630712725",
+  "source_registry": "2026.11.14-1",
+  "scientific_config": null
+ },
+ "created_at": "2026-11-14T13:44:16+00:00"
+}

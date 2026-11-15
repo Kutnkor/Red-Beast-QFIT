@@ -1,0 +1,348 @@
+{
+ "suite": "retrieval",
+ "k": 4,
+ "queries": 42,
+ "index_version": "4bf9b3d4515a",
+ "relevance": "strict chunk id match",
+ "configurations": {
+  "naive": {
+   "description": "raw term overlap, no stemming, no language handling",
+   "overall": {
+    "queries": 42,
+    "precision_at_k": 0.232,
+    "recall_at_k": 0.81,
+    "mrr": 0.673,
+    "empty_rate": 0.0
+   },
+   "by_language": {
+    "en": {
+     "queries": 21,
+     "precision_at_k": 0.238,
+     "recall_at_k": 0.833,
+     "mrr": 0.671,
+     "empty_rate": 0.0
+    },
+    "tr": {
+     "queries": 21,
+     "precision_at_k": 0.226,
+     "recall_at_k": 0.786,
+     "mrr": 0.675,
+     "empty_rate": 0.0
+    }
+   },
+   "misses": [
+    {
+     "id": "e-coverage-gap-tr",
+     "relevant": [
+      "temporal-coverage:tr:2"
+     ],
+     "returned": [
+      "temporal-coverage:tr:3",
+      "spherex-mission:tr:3",
+      "temporal-coverage:tr:4",
+      "hr-diagram:tr:5"
+     ]
+    },
+    {
+     "id": "f-did-i-discover-en",
+     "relevant": [
+      "citizen-science:en:3",
+      "citizen-science:en:4"
+     ],
+     "returned": [
+      "brown-dwarfs:en:1",
+      "spherex-data-products:en:5",
+      "temporal-coverage:en:3",
+      "brown-dwarfs:en:2"
+     ]
+    },
+    {
+     "id": "f-did-i-discover-tr",
+     "relevant": [
+      "citizen-science:tr:3",
+      "citizen-science:tr:4"
+     ],
+     "returned": [
+      "temporal-coverage:tr:4",
+      "brown-dwarfs:tr:1",
+      "hr-diagram:tr:5",
+      "brown-dwarfs:tr:4"
+     ]
+    },
+    {
+     "id": "g-confidence-percent-en",
+     "relevant": [
+      "qfit-evidence-policy:en:2"
+     ],
+     "returned": [
+      "brown-dwarfs:en:1",
+      "brown-dwarfs:en:2",
+      "brown-dwarfs:en:5",
+      "spherex-data-access:en:2"
+     ]
+    },
+    {
+     "id": "g-confidence-percent-tr",
+     "relevant": [
+      "qfit-evidence-policy:tr:2"
+     ],
+     "returned": [
+      "brown-dwarfs:tr:2",
+      "brown-dwarfs:tr:1",
+      "brown-dwarfs:tr:4",
+      "brown-dwarfs:tr:5"
+     ]
+    }
+   ]
+  },
+  "bm25_prefix4": {
+   "description": "BM25, Turkish words cut to 4 letters",
+   "overall": {
+    "queries": 42,
+    "precision_at_k": 0.262,
+    "recall_at_k": 0.881,
+    "mrr": 0.815,
+    "empty_rate": 0.0
+   },
+   "by_language": {
+    "en": {
+     "queries": 21,
+     "precision_at_k": 0.262,
+     "recall_at_k": 0.881,
+     "mrr": 0.821,
+     "empty_rate": 0.0
+    },
+    "tr": {
+     "queries": 21,
+     "precision_at_k": 0.262,
+     "recall_at_k": 0.881,
+     "mrr": 0.81,
+     "empty_rate": 0.0
+    }
+   },
+   "misses": [
+    {
+     "id": "f-did-i-discover-en",
+     "relevant": [
+      "citizen-science:en:3",
+      "citizen-science:en:4"
+     ],
+     "returned": [
+      "brown-dwarfs:en:1",
+      "brown-dwarfs:en:5",
+      "brown-dwarfs:en:3",
+      "spectroscopy:en:5"
+     ]
+    },
+    {
+     "id": "f-did-i-discover-tr",
+     "relevant": [
+      "citizen-science:tr:3",
+      "citizen-science:tr:4"
+     ],
+     "returned": [
+      "brown-dwarfs:tr:5",
+      "brown-dwarfs:tr:1",
+      "citizen-science:tr:2",
+      "temporal-coverage:tr:4"
+     ]
+    },
+    {
+     "id": "g-confidence-percent-en",
+     "relevant": [
+      "qfit-evidence-policy:en:2"
+     ],
+     "returned": [
+      "brown-dwarfs:en:1",
+      "spectroscopy:en:5",
+      "brown-dwarfs:en:3",
+      "brown-dwarfs:en:4"
+     ]
+    },
+    {
+     "id": "g-confidence-percent-tr",
+     "relevant": [
+      "qfit-evidence-policy:tr:2"
+     ],
+     "returned": [
+      "brown-dwarfs:tr:1",
+      "brown-dwarfs:tr:5",
+      "spectroscopy:tr:5",
+      "brown-dwarfs:tr:3"
+     ]
+    }
+   ]
+  },
+  "bm25_prefix5": {
+   "description": "BM25, Turkish words cut to 5 letters (default)",
+   "overall": {
+    "queries": 42,
+    "precision_at_k": 0.256,
+    "recall_at_k": 0.869,
+    "mrr": 0.815,
+    "empty_rate": 0.0
+   },
+   "by_language": {
+    "en": {
+     "queries": 21,
+     "precision_at_k": 0.25,
+     "recall_at_k": 0.857,
+     "mrr": 0.821,
+     "empty_rate": 0.0
+    },
+    "tr": {
+     "queries": 21,
+     "precision_at_k": 0.262,
+     "recall_at_k": 0.881,
+     "mrr": 0.81,
+     "empty_rate": 0.0
+    }
+   },
+   "misses": [
+    {
+     "id": "f-did-i-discover-en",
+     "relevant": [
+      "citizen-science:en:3",
+      "citizen-science:en:4"
+     ],
+     "returned": [
+      "brown-dwarfs:en:1",
+      "brown-dwarfs:en:5",
+      "brown-dwarfs:en:3",
+      "spectroscopy:en:5"
+     ]
+    },
+    {
+     "id": "f-did-i-discover-tr",
+     "relevant": [
+      "citizen-science:tr:3",
+      "citizen-science:tr:4"
+     ],
+     "returned": [
+      "brown-dwarfs:tr:1",
+      "temporal-coverage:tr:4",
+      "citizen-science:tr:2",
+      "spectroscopy:tr:1"
+     ]
+    },
+    {
+     "id": "g-confidence-percent-en",
+     "relevant": [
+      "qfit-evidence-policy:en:2"
+     ],
+     "returned": [
+      "brown-dwarfs:en:1",
+      "spectroscopy:en:5",
+      "brown-dwarfs:en:3",
+      "brown-dwarfs:en:4"
+     ]
+    },
+    {
+     "id": "g-confidence-percent-tr",
+     "relevant": [
+      "qfit-evidence-policy:tr:2"
+     ],
+     "returned": [
+      "brown-dwarfs:tr:1",
+      "brown-dwarfs:tr:4",
+      "hr-diagram:tr:5",
+      "brown-dwarfs:tr:5"
+     ]
+    }
+   ]
+  },
+  "bm25_prefix6": {
+   "description": "BM25, Turkish words cut to 6 letters",
+   "overall": {
+    "queries": 42,
+    "precision_at_k": 0.25,
+    "recall_at_k": 0.845,
+    "mrr": 0.81,
+    "empty_rate": 0.0
+   },
+   "by_language": {
+    "en": {
+     "queries": 21,
+     "precision_at_k": 0.25,
+     "recall_at_k": 0.857,
+     "mrr": 0.821,
+     "empty_rate": 0.0
+    },
+    "tr": {
+     "queries": 21,
+     "precision_at_k": 0.25,
+     "recall_at_k": 0.833,
+     "mrr": 0.798,
+     "empty_rate": 0.0
+    }
+   },
+   "misses": [
+    {
+     "id": "e-coverage-gap-tr",
+     "relevant": [
+      "temporal-coverage:tr:2"
+     ],
+     "returned": [
+      "temporal-coverage:tr:3",
+      "temporal-coverage:tr:4",
+      "temporal-coverage:tr:1",
+      "spherex-data-access:tr:4"
+     ]
+    },
+    {
+     "id": "f-did-i-discover-en",
+     "relevant": [
+      "citizen-science:en:3",
+      "citizen-science:en:4"
+     ],
+     "returned": [
+      "brown-dwarfs:en:1",
+      "brown-dwarfs:en:5",
+      "brown-dwarfs:en:3",
+      "spectroscopy:en:5"
+     ]
+    },
+    {
+     "id": "f-did-i-discover-tr",
+     "relevant": [
+      "citizen-science:tr:3",
+      "citizen-science:tr:4"
+     ],
+     "returned": [
+      "brown-dwarfs:tr:1",
+      "citizen-science:tr:2",
+      "temporal-coverage:tr:4",
+      "brown-dwarfs:tr:4"
+     ]
+    },
+    {
+     "id": "g-confidence-percent-en",
+     "relevant": [
+      "qfit-evidence-policy:en:2"
+     ],
+     "returned": [
+      "brown-dwarfs:en:1",
+      "spectroscopy:en:5",
+      "brown-dwarfs:en:3",
+      "brown-dwarfs:en:4"
+     ]
+    },
+    {
+     "id": "g-confidence-percent-tr",
+     "relevant": [
+      "qfit-evidence-policy:tr:2"
+     ],
+     "returned": [
+      "brown-dwarfs:tr:1",
+      "brown-dwarfs:tr:4",
+      "brown-dwarfs:tr:2",
+      "brown-dwarfs:tr:5"
+     ]
+    }
+   ]
+  }
+ },
+ "best_by_mrr": "bm25_prefix4",
+ "dataset": "qfit_seed_v1.jsonl",
+ "created_at": "2026-11-14T14:34:23+00:00"
+}

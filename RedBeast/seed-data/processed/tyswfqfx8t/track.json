@@ -1,0 +1,205 @@
+{
+  "sequence_id": "tyswfqfx8t",
+  "target_id": "barnard",
+  "source": "precomputed",
+  "frames": [
+    {
+      "index": 0,
+      "mjd": 60912.714812798,
+      "date": "2025-08-25T17:09:20Z",
+      "predicted": {
+        "ra": 269.446347,
+        "dec": 4.767193,
+        "method": "proper_motion_only"
+      },
+      "measured": {
+        "ra": 269.447207,
+        "dec": 4.76685,
+        "err_arcsec": 1.84,
+        "method": "saturated_core_centroid"
+      },
+      "measured_reason": null
+    },
+    {
+      "index": 1,
+      "mjd": 60917.674605726,
+      "date": "2025-08-30T16:11:26Z",
+      "predicted": {
+        "ra": 269.446344,
+        "dec": 4.767233,
+        "method": "proper_motion_only"
+      },
+      "measured": {
+        "ra": 269.446523,
+        "dec": 4.76735,
+        "err_arcsec": 1.84,
+        "method": "saturated_core_centroid"
+      },
+      "measured_reason": null
+    },
+    {
+      "index": 2,
+      "mjd": 61114.035654152,
+      "date": "2026-03-15T00:51:21Z",
+      "predicted": {
+        "ra": 269.446224,
+        "dec": 4.76878,
+        "method": "proper_motion_only"
+      },
+      "measured": {
+        "ra": 269.447126,
+        "dec": 4.768807,
+        "err_arcsec": 1.84,
+        "method": "saturated_core_centroid"
+      },
+      "measured_reason": null
+    },
+    {
+      "index": 3,
+      "mjd": 61270.86778171,
+      "date": "2026-08-18T20:49:36Z",
+      "predicted": {
+        "ra": 269.446128,
+        "dec": 4.770016,
+        "method": "proper_motion_only"
+      },
+      "measured": {
+        "ra": 269.445412,
+        "dec": 4.769912,
+        "err_arcsec": 1.84,
+        "method": "saturated_core_centroid"
+      },
+      "measured_reason": null
+    },
+    {
+      "index": 4,
+      "mjd": 61273.788888342,
+      "date": "2026-08-21T18:56:00Z",
+      "predicted": {
+        "ra": 269.446126,
+        "dec": 4.770039,
+        "method": "proper_motion_only"
+      },
+      "measured": {
+        "ra": 269.444866,
+        "dec": 4.770223,
+        "err_arcsec": 1.84,
+        "method": "saturated_core_centroid"
+      },
+      "measured_reason": null
+    },
+    {
+      "index": 5,
+      "mjd": 61305.628686803,
+      "date": "2026-09-22T15:05:19Z",
+      "predicted": {
+        "ra": 269.446107,
+        "dec": 4.77029,
+        "method": "proper_motion_only"
+      },
+      "measured": {
+        "ra": 269.445912,
+        "dec": 4.769984,
+        "err_arcsec": 1.84,
+        "method": "saturated_core_centroid"
+      },
+      "measured_reason": null
+    }
+  ],
+  "motion": {
+    "n_points": 6,
+    "from_date": "2025-08-25T17:09:20Z",
+    "to_date": "2026-09-22T15:05:19Z",
+    "span_years": 1.076,
+    "fit_pm_e_arcsec_yr": -5.24,
+    "fit_pm_n_arcsec_yr": 10.43,
+    "fit_pm_total_arcsec_yr": 11.67,
+    "fit_pm_err_arcsec_yr": 1.66,
+    "catalog_pm_e_arcsec_yr": -0.8,
+    "catalog_pm_n_arcsec_yr": 10.36,
+    "catalog_pm_total_arcsec_yr": 10.39,
+    "measured_shift_arcsec": 12.56,
+    "measured_shift_px": 2.04,
+    "predicted_shift_arcsec": 11.18,
+    "significance_sigma": 5.0,
+    "residual_vs_catalog_sigma": 1.9,
+    "significant": true,
+    "consistent_with_catalog": true,
+    "per_point_error_arcsec": 1.84,
+    "per_point_error_source": "assumed 0.3 px (saturated-core centroid)",
+    "methods": [
+      "saturated_core_centroid"
+    ],
+    "note": "doğrusal uyum; paralaks ve gözlemci etkisi modellenmedi"
+  },
+  "status": {
+    "data_available": true,
+    "source_detected": true,
+    "change_seen": true,
+    "change_kind": "motion",
+    "change_scientifically_confirmed": false
+  },
+  "caveats": [
+    "proper_motion_only_no_parallax",
+    "scientific_confirmation_requires_follow_up"
+  ],
+  "data_fingerprint": "a98abfbe3e94e0eeeea8ee4a",
+  "forced_mean": null,
+  "blending": {
+    "radius_arcsec": 20.0,
+    "gaia": [
+      {
+        "id": "4472835876142910336",
+        "g": 16.69599,
+        "min_sep_arcsec": 17.3,
+        "date": "2025-08-25T17:09:20Z"
+      },
+      {
+        "id": "4472835979222166400",
+        "g": 17.450994,
+        "min_sep_arcsec": 19.7,
+        "date": "2026-09-22T15:05:19Z"
+      }
+    ],
+    "allwise": [
+      {
+        "id": "J175746.84+044624.0",
+        "w1": 17.099,
+        "w2": 17.106,
+        "min_sep_arcsec": 11.5,
+        "date": "2026-09-22T15:05:19Z"
+      },
+      {
+        "id": "J175747.64+044546.5",
+        "w1": 14.786,
+        "w2": 14.863,
+        "min_sep_arcsec": 17.2,
+        "date": "2025-08-25T17:09:20Z"
+      }
+    ],
+    "status": "ok",
+    "catalogue_provenance": {
+      "gaia": {
+        "source_url": "https://gea.esac.esa.int/tap-server/tap",
+        "epoch_jyear": 2016.0
+      },
+      "allwise": {
+        "source_url": "https://vizier.cfa.harvard.edu/viz-bin/asu-tsv",
+        "epoch_jyear": 2010.56,
+        "provider": "VizieR Harvard mirror",
+        "catalogue_id": "II/328/allwise",
+        "bibcode": "2014yCat.2328....0C",
+        "query_url": "https://vizier.cfa.harvard.edu/viz-bin/asu-tsv?-source=II%2F328%2Fallwise&-c=269.4462690+4.7682040&-c.rm=4.3860000&-out=AllWISE%2CRAJ2000%2CDEJ2000%2CW1mag%2CW2mag%2Csnr1%2Csnr2&-out.max=50000",
+        "response_sha256": "d01090cfbe14e5e88359a6a80acd5a930238c128809916862315dae51df01a4a",
+        "response_bytes": 28012,
+        "retrieved_utc": "2026-11-14T17:16:34.495642+00:00"
+      }
+    },
+    "target_in_gaia": {
+      "id": "4472832130942575872",
+      "g": 8.1939745,
+      "sep_arcsec": 0.0
+    },
+    "n_within_aperture": 1
+  }
+}

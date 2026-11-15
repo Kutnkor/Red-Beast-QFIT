@@ -1,0 +1,6 @@
+{
+  "image_id": "sha256:99253f902ec2a51a5789289dfaa92c792db49119d0a7d4a7b0405521c7748594",
+  "image_bytes": 265013964,
+  "ready_seconds": null,
+  "note": "Image size read from the existing baseline release tag before this integration; baseline boot time was not recorded."
+}

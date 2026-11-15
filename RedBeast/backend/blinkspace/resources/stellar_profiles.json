@@ -1,0 +1,718 @@
+{
+  "schema_version": 1,
+  "curated_on": "2026-11-14",
+  "purpose": "Source-cited physical context and explicitly illustrative 3D environments; independent of image measurement.",
+  "classifications": {
+    "measured": "Observation-derived catalogue or fitted measurement; consult method and uncertainty.",
+    "computed": "Literature model inference or derived quantity, not an independent direct measurement.",
+    "representative": "Class or qualitative mechanism illustration without object-specific geometry.",
+    "assumed": "Display choice with no claim of physical measurement.",
+    "unknown": "No value is adopted; null never means zero."
+  },
+  "profiles": [
+    {
+      "target_id": "barnard",
+      "name": "Barnard's Star",
+      "type": "M-dwarf main-sequence star",
+      "stellar_class": "M_dwarf",
+      "parameters": {
+        "radius_solar": {
+          "value": 0.187,
+          "unit": "R_sun",
+          "classification": "measured",
+          "source_ids": [
+            "barnard-2024"
+          ],
+          "note": "Interferometric radius adopted in Table 2; uncertainty is 0.001 solar radii.",
+          "note_tr": "Tablo 2'de benimsenen girişimölçer yarıçapı; belirsizlik 0,001 Güneş yarıçapı.",
+          "uncertainty": 0.001,
+          "method": "interferometry_and_parallax"
+        },
+        "teff_k": {
+          "value": 3195,
+          "unit": "K",
+          "classification": "measured",
+          "source_ids": [
+            "barnard-2024"
+          ],
+          "note": "ESPRESSO spectroscopic model fit; different spectral analyses give different estimates.",
+          "note_tr": "ESPRESSO tayfına model uyumu; farklı tayf analizleri farklı tahminler verir.",
+          "uncertainty": 28,
+          "method": "spectroscopic_model_fit"
+        },
+        "period_days": {
+          "value": null,
+          "unit": "d",
+          "classification": "unknown",
+          "source_ids": [],
+          "note": "No radial-pulsation period is adopted.",
+          "note_tr": "Bir radyal titreşim dönemi benimsenmedi."
+        },
+        "rotation_period_days": {
+          "value": 142,
+          "unit": "d",
+          "classification": "measured",
+          "source_ids": [
+            "barnard-2024"
+          ],
+          "note": "Activity-model rotation estimate, not the animation speed.",
+          "note_tr": "Etkinlik modelinden dönüş tahmini; animasyon hızı değildir.",
+          "uncertainty": 9
+        }
+      },
+      "phenomena": [
+        {
+          "id": "corona",
+          "enabled": true,
+          "classification": "representative",
+          "source_ids": [
+            "barnard-flares"
+          ],
+          "note": "X-ray and UV flares were detected in 2019; the drawn coronal shell and magnetic geometry are a class illustration.",
+          "note_tr": "2019'da X-ışını ve morötesi parlamalar ölçüldü; çizilen korona ve manyetik geometri bu yıldız sınıfını temsil eder."
+        },
+        {
+          "id": "wind",
+          "enabled": true,
+          "classification": "representative",
+          "source_ids": [
+            "barnard-wind"
+          ],
+          "note": "A qualitative magnetized-wind template; no wind speed, mass-loss rate or measured field map is adopted.",
+          "note_tr": "Manyetize rüzgârın nitel temsili; rüzgâr hızı, kütle kaybı oranı veya ölçülmüş alan haritası kullanılmıyor."
+        }
+      ],
+      "rendering": {
+        "radius_mode": "square_root_compressed",
+        "radius_formula": "sqrt(radius_solar)",
+        "unknown_radius_mode": "representative_one_display_unit",
+        "time_mode": "illustrative",
+        "color_mode": "blackbody_approximation",
+        "classification": "assumed",
+        "source_ids": [],
+        "astrometric_year_changes_stellar_properties": false,
+        "measured_surface_map": false,
+        "hydrodynamic_simulation": false,
+        "note": "Surface patterns, flow geometry, contrast and animation speed are illustrative. They are not telescope images, fitted fluid simulations or a stellar-evolution clock.",
+        "note_tr": "Yüzey desenleri, akış geometrisi, kontrast ve animasyon hızı temsilidir. Teleskop görüntüsü, nicel akış çözümü veya yıldız evrimi saati değildir."
+      },
+      "sources": [
+        {
+          "id": "barnard-2024",
+          "title": "González Hernández et al. (2024) — A sub-Earth-mass planet orbiting Barnard's star",
+          "url": "https://arxiv.org/html/2410.00569v1",
+          "locator": "Table 2 and section 3",
+          "checked_on": "2026-11-14",
+          "doi": "10.1051/0004-6361/202451311"
+        },
+        {
+          "id": "barnard-flares",
+          "title": "NASA Chandra (2020) — GJ 699: X-ray and ultraviolet flares",
+          "url": "https://www.chandra.si.edu/photo/2020/barnards/index.html",
+          "locator": "2019 Chandra and Hubble observations; France et al. 2020",
+          "checked_on": "2026-11-14"
+        },
+        {
+          "id": "barnard-wind",
+          "title": "Alvarado-Gómez et al. (2019) — Breezing through the space environment of Barnard's Star b",
+          "url": "https://arxiv.org/abs/1901.00219",
+          "locator": "Stellar-wind model; used only to motivate a qualitative template",
+          "checked_on": "2026-11-14",
+          "doi": "10.3847/2041-8213/ab1489"
+        }
+      ],
+      "caveats": [
+        "The surface and plasma are not resolved images of Barnard's Star.",
+        "Changing the sky year changes space motion only, not its temperature or stellar age.",
+        "The 2019 wind study concerned an older planet candidate; no planet or planetary claim is used here."
+      ],
+      "caveats_tr": [
+        "Yüzey ve plazma, Barnard Yıldızı'nın çözünürlüklü görüntüleri değildir.",
+        "Gökyüzü yılı yalnızca uzaydaki konumu değiştirir; sıcaklığı veya evrimsel yaşı değiştirmez.",
+        "2019 rüzgâr çalışması eski bir gezegen adayıyla ilgiliydi; burada gezegen gösterilmiyor veya gezegen iddiası kullanılmıyor."
+      ]
+    },
+    {
+      "target_id": "eps-indi-b",
+      "name": "Epsilon Indi Ba/Bb",
+      "type": "T-dwarf binary",
+      "stellar_class": "T_dwarf",
+      "parameters": {
+        "radius_solar": {
+          "value": null,
+          "unit": "R_sun",
+          "classification": "unknown",
+          "source_ids": [],
+          "note": "A binary system has no single stellar radius.",
+          "note_tr": "İkili sistemin tek bir yıldız yarıçapı yoktur."
+        },
+        "teff_k": {
+          "value": null,
+          "unit": "K",
+          "classification": "unknown",
+          "source_ids": [],
+          "note": "Ba and Bb have separate atmospheric temperatures.",
+          "note_tr": "Ba ve Bb'nin atmosfer sıcaklıkları ayrıdır."
+        },
+        "period_days": {
+          "value": null,
+          "unit": "d",
+          "classification": "unknown",
+          "source_ids": [],
+          "note": "No reliable rotation period is adopted.",
+          "note_tr": "Güvenilir bir dönüş dönemi benimsenmedi."
+        },
+        "orbital_period_years": {
+          "value": 11.0197,
+          "unit": "Julian yr",
+          "classification": "measured",
+          "source_ids": [
+            "eps-orbit"
+          ],
+          "note": "Relative astrometric orbital fit, Table 4.",
+          "note_tr": "Göreli astrometrik yörünge uyumu, Tablo 4.",
+          "uncertainty": 0.0076
+        },
+        "binary_semimajor_axis_au": {
+          "value": 2.4058,
+          "unit": "au",
+          "classification": "computed",
+          "source_ids": [
+            "eps-orbit"
+          ],
+          "note": "Relative-orbit semimajor axis from astrometry and parallax; not instantaneous separation.",
+          "note_tr": "Astrometri ve paralakstan göreli yörüngenin büyük yarı ekseni; anlık ayrıklık değildir.",
+          "uncertainty": 0.004
+        },
+        "orbital_eccentricity": {
+          "value": 0.54042,
+          "unit": "dimensionless",
+          "classification": "measured",
+          "source_ids": [
+            "eps-orbit"
+          ],
+          "note": "Orbital fit, Table 4.",
+          "note_tr": "Yörünge uyumu, Tablo 4.",
+          "uncertainty": 0.00063
+        },
+        "orbital_inclination_deg": {
+          "value": 77.082,
+          "unit": "deg",
+          "classification": "measured",
+          "source_ids": [
+            "eps-orbit"
+          ],
+          "note": "Relative-orbit inclination to the sky plane; not either spin-axis orientation.",
+          "note_tr": "Göreli yörüngenin gökyüzü düzlemine eğimi; yıldızların dönme ekseni yönü değildir.",
+          "uncertainty": 0.032
+        }
+      },
+      "components": [
+        {
+          "id": "ba",
+          "name": "Epsilon Indi Ba",
+          "stellar_class": "T_dwarf",
+          "parameters": {
+            "radius_solar": {
+              "value": null,
+              "unit": "R_sun",
+              "classification": "unknown",
+              "source_ids": [],
+              "note": "No adopted object-specific estimate.",
+              "note_tr": "Hedefe özgü bir değer benimsenmedi."
+            },
+            "teff_k": {
+              "value": 1320,
+              "unit": "K",
+              "classification": "computed",
+              "source_ids": [
+                "eps-atmospheres"
+              ],
+              "note": "Display midpoint of the 1300–1340 K atmospheric-model range, not a new measurement.",
+              "note_tr": "1300–1340 K atmosfer modeli aralığının gösterim orta noktası; yeni ölçüm değildir.",
+              "range": [
+                1300,
+                1340
+              ],
+              "method": "BT-Settl_spectral_model_fit_midpoint"
+            }
+          }
+        },
+        {
+          "id": "bb",
+          "name": "Epsilon Indi Bb",
+          "stellar_class": "T_dwarf",
+          "parameters": {
+            "radius_solar": {
+              "value": null,
+              "unit": "R_sun",
+              "classification": "unknown",
+              "source_ids": [],
+              "note": "No adopted object-specific estimate.",
+              "note_tr": "Hedefe özgü bir değer benimsenmedi."
+            },
+            "teff_k": {
+              "value": 910,
+              "unit": "K",
+              "classification": "computed",
+              "source_ids": [
+                "eps-atmospheres"
+              ],
+              "note": "Display midpoint of the 880–940 K atmospheric-model range, not a new measurement.",
+              "note_tr": "880–940 K atmosfer modeli aralığının gösterim orta noktası; yeni ölçüm değildir.",
+              "range": [
+                880,
+                940
+              ],
+              "method": "BT-Settl_spectral_model_fit_midpoint"
+            }
+          }
+        }
+      ],
+      "phenomena": [
+        {
+          "id": "clouds",
+          "enabled": true,
+          "classification": "computed",
+          "source_ids": [
+            "eps-clouds"
+          ],
+          "note": "Cloud changes are an interpretation of unresolved brightness variability, mostly associated with Ba; bands and rotation are illustrative.",
+          "note_tr": "Bulut değişimi, çoğunlukla Ba'ya bağlanan çözünmemiş parlaklık değişiminin yorumudur; bantlar ve dönüş temsilidir."
+        },
+        {
+          "id": "binary_orbit",
+          "enabled": true,
+          "classification": "measured",
+          "source_ids": [
+            "eps-orbit"
+          ],
+          "note": "The binary orbit is measured; displayed separation, component size and accelerated phase are schematic.",
+          "note_tr": "İkili yörünge ölçülmüştür; gösterilen ayrıklık, bileşen boyutları ve hızlandırılmış faz şematiktir."
+        }
+      ],
+      "rendering": {
+        "radius_mode": "square_root_compressed",
+        "radius_formula": "sqrt(radius_solar)",
+        "unknown_radius_mode": "representative_equal_components",
+        "time_mode": "illustrative",
+        "color_mode": "illustrative_cloud_contrast",
+        "classification": "assumed",
+        "source_ids": [],
+        "astrometric_year_changes_stellar_properties": false,
+        "measured_surface_map": false,
+        "hydrodynamic_simulation": false,
+        "note": "Surface patterns, flow geometry, contrast and animation speed are illustrative. They are not telescope images, fitted fluid simulations or a stellar-evolution clock.",
+        "note_tr": "Yüzey desenleri, akış geometrisi, kontrast ve animasyon hızı temsilidir. Teleskop görüntüsü, nicel akış çözümü veya yıldız evrimi saati değildir.",
+        "component_display_radius": 0.55
+      },
+      "sources": [
+        {
+          "id": "eps-atmospheres",
+          "title": "King et al. (2010) — Epsilon Indi Ba, Bb: a detailed study",
+          "url": "https://arxiv.org/abs/0911.3143",
+          "locator": "Abstract: BT-Settl temperature ranges differ from evolutionary-model temperatures",
+          "checked_on": "2026-11-14",
+          "doi": "10.1051/0004-6361/200912981"
+        },
+        {
+          "id": "eps-clouds",
+          "title": "Hitchcock et al. (2020) — Large-scale changes of cloud coverage in Epsilon Indi Ba/Bb",
+          "url": "https://academic.oup.com/mnras/article/495/4/3881/5838753",
+          "locator": "Sections 4.1–4.3: no convincing rotation period or lightning detection; cloud interpretation",
+          "checked_on": "2026-11-14"
+        },
+        {
+          "id": "eps-orbit",
+          "title": "Chen et al. (2022) — Precise Dynamical Masses of Epsilon Indi Ba and Bb",
+          "url": "https://arxiv.org/pdf/2205.08077",
+          "locator": "Table 4; section 6.3",
+          "checked_on": "2026-11-14"
+        }
+      ],
+      "caveats": [
+        "SPHEREx does not resolve Ba from Bb.",
+        "Component radii are unadopted; their display sizes are representative.",
+        "The cloud pattern is not a measured map. Atmospheric and evolutionary models give different temperatures."
+      ],
+      "caveats_tr": [
+        "SPHEREx, Ba ile Bb'yi birbirinden ayıramaz.",
+        "Bileşen yarıçapları benimsenmedi; ekrandaki boyutları temsilidir.",
+        "Bulut deseni ölçülmüş bir harita değildir. Atmosfer ve evrim modelleri farklı sıcaklıklar verir."
+      ]
+    },
+    {
+      "target_id": "wise-0855",
+      "name": "WISE 0855−0714",
+      "type": "Ultracool Y dwarf",
+      "stellar_class": "Y_dwarf",
+      "parameters": {
+        "radius_solar": {
+          "value": null,
+          "unit": "R_sun",
+          "classification": "unknown",
+          "source_ids": [],
+          "note": "No adopted object-specific estimate.",
+          "note_tr": "Hedefe özgü bir değer benimsenmedi."
+        },
+        "teff_k": {
+          "value": 250,
+          "unit": "K",
+          "classification": "computed",
+          "source_ids": [
+            "wise-nasa",
+            "wise-2025",
+            "wise-2026"
+          ],
+          "note": "Historical approximate atmospheric-model reference (2014–2016). More recent model-dependent analyses use about 265–285 K; 250 K is not a current precision measurement.",
+          "note_tr": "2014–2016 çalışmalarından yaklaşık atmosfer modeli referansı. Daha yeni, modele bağlı analizlerde yaklaşık 265–285 K kullanılır; 250 K güncel bir hassas ölçüm değildir.",
+          "approximate": true
+        },
+        "period_days": {
+          "value": null,
+          "unit": "d",
+          "classification": "unknown",
+          "source_ids": [],
+          "note": "No rotation period is adopted for this illustration.",
+          "note_tr": "Bu temsil için dönüş dönemi benimsenmedi."
+        }
+      },
+      "phenomena": [
+        {
+          "id": "clouds",
+          "enabled": true,
+          "classification": "computed",
+          "source_ids": [
+            "wise-nasa",
+            "wise-2025",
+            "wise-2026"
+          ],
+          "note": "Water-cloud interpretations depend on spectral models: 2025 MIRI found no clear ice-cloud signature; a September 2026 preprint supports patchy clouds. Spatial bands are illustrative.",
+          "note_tr": "Su bulutu yorumu tayf modellerine bağlıdır: 2025 MIRI çalışması açık buz bulutu izi bulmadı; Eylül 2026 ön baskısı parçalı bulutları destekliyor. Uzaysal bantlar temsilidir."
+        }
+      ],
+      "rendering": {
+        "radius_mode": "square_root_compressed",
+        "radius_formula": "sqrt(radius_solar)",
+        "unknown_radius_mode": "representative_one_display_unit",
+        "time_mode": "illustrative",
+        "color_mode": "dark_visible_light_placeholder",
+        "classification": "assumed",
+        "source_ids": [],
+        "astrometric_year_changes_stellar_properties": false,
+        "measured_surface_map": false,
+        "hydrodynamic_simulation": false,
+        "note": "Surface patterns, flow geometry, contrast and animation speed are illustrative. They are not telescope images, fitted fluid simulations or a stellar-evolution clock.",
+        "note_tr": "Yüzey desenleri, akış geometrisi, kontrast ve animasyon hızı temsilidir. Teleskop görüntüsü, nicel akış çözümü veya yıldız evrimi saati değildir.",
+        "visible_self_emission": "negligible",
+        "cloud_geometry": "illustrative"
+      },
+      "sources": [
+        {
+          "id": "wise-nasa",
+          "title": "NASA (2016) — Water-cloud evidence in WISE 0855",
+          "url": "https://science.nasa.gov/universe/exoplanets/astronomers-find-water-clouds-in-cold-jupiter-like-object/",
+          "locator": "250 K model, infrared spectrum, explicitly arbitrary illustration colors",
+          "checked_on": "2026-11-14"
+        },
+        {
+          "id": "wise-2025",
+          "title": "Kühnle et al. (2025) — Water depletion and 15NH3 with JWST/MIRI",
+          "url": "https://doi.org/10.1051/0004-6361/202452547",
+          "locator": "Abstract and section 6: model dependence; no clear spectral water-ice signature",
+          "checked_on": "2026-11-14"
+        },
+        {
+          "id": "wise-2026",
+          "title": "Miles et al. (2026 preprint) — Water Cloud and Chemical Modulations in the Coldest Brown Dwarf",
+          "url": "https://arxiv.org/html/2609.20664v1",
+          "locator": "Time-series NIRSpec atmospheric-model comparison",
+          "checked_on": "2026-11-14",
+          "publication_status": "preprint"
+        }
+      ],
+      "caveats": [
+        "Visible color is arbitrary: this cold object is observed through infrared emission.",
+        "The cloud map, radius and animation phase are illustrative.",
+        "250 K is an older reference estimate; new spectral analyses are model dependent."
+      ],
+      "caveats_tr": [
+        "Görünür renk keyfidir; bu soğuk cisim kızılötesi yayımıyla gözlenir.",
+        "Bulut haritası, yarıçap ve animasyon fazı temsilidir.",
+        "250 K eski bir referans tahminidir; yeni tayf analizleri modele bağlıdır."
+      ]
+    },
+    {
+      "target_id": "rw-aur",
+      "name": "RW Aurigae A",
+      "type": "Accreting T Tauri star",
+      "stellar_class": "T_Tauri",
+      "modeled_component": "A",
+      "parameters": {
+        "radius_solar": {
+          "value": 1.8,
+          "unit": "R_sun",
+          "classification": "computed",
+          "source_ids": [
+            "rw-stellar"
+          ],
+          "note": "Radius derived from luminosity and effective temperature; sample-average log-radius uncertainty is about 0.3 dex, not a target-specific error bar.",
+          "note_tr": "Işınım gücü ve etkin sıcaklıktan hesaplanan yarıçap; örneklem ortalaması log-yarıçap belirsizliği yaklaşık 0,3 dex, hedefe özgü hata çubuğu değildir.",
+          "method": "luminosity_and_effective_temperature"
+        },
+        "teff_k": {
+          "value": 4870,
+          "unit": "K",
+          "classification": "measured",
+          "source_ids": [
+            "rw-stellar"
+          ],
+          "note": "Adopted spectroscopic parameter in Table 2 for the 2017-11-13 observation; no individual uncertainty is quoted in that row.",
+          "note_tr": "2017-11-13 gözlemi için Tablo 2'de benimsenen tayfsal parametre; o satırda ayrı belirsizlik verilmemiştir.",
+          "observation_date": "2017-11-13"
+        },
+        "period_days": {
+          "value": null,
+          "unit": "d",
+          "classification": "unknown",
+          "source_ids": [],
+          "note": "Irregular dimmings are not assigned a periodic clock.",
+          "note_tr": "Düzensiz sönükleşmelere periyodik bir saat atanmıyor."
+        },
+        "disk_inclination_deg": {
+          "value": 55.51,
+          "unit": "deg",
+          "classification": "measured",
+          "source_ids": [
+            "rw-alma"
+          ],
+          "note": "2018 ALMA Band 6 outer-disk Gaussian fit; the inner disk may be misaligned.",
+          "note_tr": "2018 ALMA Band 6 dış disk Gauss uyumu; iç disk farklı yöne eğilmiş olabilir.",
+          "uncertainty": 0.13
+        },
+        "disk_radius_au": {
+          "value": 21.28,
+          "unit": "au",
+          "classification": "computed",
+          "source_ids": [
+            "rw-alma"
+          ],
+          "note": "Band 6 Gaussian continuum radius, not a hard disk edge; the CO gas extends farther.",
+          "note_tr": "Band 6 Gauss süreklilik yarıçapı; kesin disk kenarı değildir, CO gazı daha uzağa uzanır.",
+          "uncertainty": 0.03
+        }
+      },
+      "phenomena": [
+        {
+          "id": "disk",
+          "enabled": true,
+          "classification": "measured",
+          "source_ids": [
+            "rw-alma"
+          ],
+          "note": "ALMA resolves a circumstellar disk and tidal material. Screen extent and particle density are schematic.",
+          "note_tr": "ALMA çevresel diski ve gelgit maddesini çözümler. Ekrandaki genişlik ve parçacık yoğunluğu şematiktir."
+        },
+        {
+          "id": "jets",
+          "enabled": true,
+          "classification": "measured",
+          "source_ids": [
+            "rw-jets"
+          ],
+          "note": "Jet emission is observed spectroscopically; drawn speeds, opening angle and knots are illustrative.",
+          "note_tr": "Jet yayımı tayfsal olarak gözlenmiştir; çizilen hızlar, açılma açısı ve düğümler temsilidir."
+        },
+        {
+          "id": "dust_extinction",
+          "enabled": true,
+          "classification": "computed",
+          "source_ids": [
+            "rw-dust"
+          ],
+          "note": "Occulting dust is a proposed explanation of dimming; no current extinction map is reconstructed.",
+          "note_tr": "Sönükleşmenin açıklaması olarak örtücü toz önerilir; güncel bir sönüm haritası oluşturulmuyor."
+        }
+      ],
+      "rendering": {
+        "radius_mode": "square_root_compressed",
+        "radius_formula": "sqrt(radius_solar)",
+        "unknown_radius_mode": "representative_one_display_unit",
+        "time_mode": "illustrative",
+        "color_mode": "blackbody_approximation",
+        "classification": "assumed",
+        "source_ids": [],
+        "astrometric_year_changes_stellar_properties": false,
+        "measured_surface_map": false,
+        "hydrodynamic_simulation": false,
+        "note": "Surface patterns, flow geometry, contrast and animation speed are illustrative. They are not telescope images, fitted fluid simulations or a stellar-evolution clock.",
+        "note_tr": "Yüzey desenleri, akış geometrisi, kontrast ve animasyon hızı temsilidir. Teleskop görüntüsü, nicel akış çözümü veya yıldız evrimi saati değildir.",
+        "environment_scale": "independently_compressed"
+      },
+      "sources": [
+        {
+          "id": "rw-stellar",
+          "title": "Gangi et al. (2022) — GHOsT IV: accretion properties of Taurus-Auriga",
+          "url": "https://arxiv.org/pdf/2208.14895",
+          "locator": "Table 2, RW Aur A row; section 5.1.1",
+          "checked_on": "2026-11-14",
+          "doi": "10.1051/0004-6361/202244042"
+        },
+        {
+          "id": "rw-alma",
+          "title": "Rodriguez et al. (2018) — Multiple Stellar Flybys Sculpting RW Aurigae",
+          "url": "https://doi.org/10.3847/1538-4357/aac08f",
+          "locator": "Table 1: Band 6 Gaussian disk parameters",
+          "checked_on": "2026-11-14",
+          "accessible_url": "https://air.unimi.it/retrieve/dfa8b9a8-2097-748b-e053-3a05fe0a3a96/Rodriguez2018.pdf"
+        },
+        {
+          "id": "rw-jets",
+          "title": "Giannini et al. (2019) — GHOsT I: jet line emission",
+          "url": "https://arxiv.org/abs/1909.10392",
+          "locator": "RW Aur A forbidden-line spectroscopy",
+          "checked_on": "2026-11-14",
+          "doi": "10.1051/0004-6361/201936085"
+        },
+        {
+          "id": "rw-dust",
+          "title": "Schneider et al. (2015) — Nature of the 2014–2015 dim state of RW Aurigae",
+          "url": "https://doi.org/10.1051/0004-6361/201527237",
+          "locator": "X-ray, optical and near-infrared constraints on absorbing material",
+          "checked_on": "2026-11-14"
+        }
+      ],
+      "caveats": [
+        "This physical illustration represents A; SPHEREx blends A and B.",
+        "The disk, stellar radius and jets use separate display scales.",
+        "The flow is a qualitative animation, not a simulation fitted to the SPHEREx frames."
+      ],
+      "caveats_tr": [
+        "Bu fiziksel temsil A bileşenidir; SPHEREx A ve B'yi birlikte görür.",
+        "Disk, yıldız yarıçapı ve jetler ayrı gösterim ölçekleri kullanır.",
+        "Akış nitel bir animasyondur; SPHEREx karelerine uydurulmuş benzetim değildir."
+      ]
+    },
+    {
+      "target_id": "r-dra",
+      "name": "R Draconis",
+      "type": "Mira variable red giant",
+      "stellar_class": "Mira",
+      "parameters": {
+        "radius_solar": {
+          "value": 511,
+          "unit": "R_sun",
+          "classification": "computed",
+          "source_ids": [
+            "r-dra-iota"
+          ],
+          "note": "Historical 1997-07-05 K-band uniform-disk equivalent radius using a period-luminosity distance of 395 pc; molecular layers affect this value. Not a present photospheric radius.",
+          "note_tr": "1997-07-05 K-bandı düzgün disk eşdeğer yarıçapı; dönem-ışınım gücü uzaklığı 395 pc kullanılmıştır. Moleküler katmanlardan etkilenir; güncel fotosfer yarıçapı değildir.",
+          "uncertainty": 142,
+          "observation_date": "1997-07-05",
+          "pulsation_phase": 0.83,
+          "method": "K_band_uniform_disk_and_period_luminosity_distance"
+        },
+        "teff_k": {
+          "value": 2034,
+          "unit": "K",
+          "classification": "computed",
+          "source_ids": [
+            "r-dra-iota"
+          ],
+          "note": "1997 phase-specific effective temperature from bolometric flux and K-band angular diameter, not a cycle average.",
+          "note_tr": "1997'de tek faza ait bolometrik akı ve K-bandı açısal çapından etkin sıcaklık; çevrim ortalaması değildir.",
+          "uncertainty": 139,
+          "observation_date": "1997-07-05"
+        },
+        "period_days": {
+          "value": 245.6,
+          "unit": "d",
+          "classification": "measured",
+          "source_ids": [
+            "gcvs-r-dra"
+          ],
+          "note": "GCVS catalogue period; no contemporary light-curve phase or radius amplitude is fitted.",
+          "note_tr": "GCVS katalog dönemi; güncel ışık eğrisi fazı veya yarıçap genliği için uyum yapılmıyor."
+        }
+      },
+      "phenomena": [
+        {
+          "id": "pulsation",
+          "enabled": true,
+          "classification": "measured",
+          "source_ids": [
+            "gcvs-r-dra",
+            "r-dra-iota"
+          ],
+          "note": "Mira pulsation is established; the animation amplitude, color excursion and zero phase are illustrative.",
+          "note_tr": "Mira titreşimi biliniyor; animasyon genliği, renk değişimi ve sıfır fazı temsilidir."
+        },
+        {
+          "id": "dust_outflow",
+          "enabled": true,
+          "classification": "representative",
+          "source_ids": [
+            "mira-wind"
+          ],
+          "note": "Pulsation-assisted dusty wind is a Mira-class template; no R Dra mass-loss rate, wind speed or dust density is adopted.",
+          "note_tr": "Titreşim destekli tozlu rüzgâr Mira sınıfını temsil eder; R Dra kütle kaybı oranı, rüzgâr hızı veya toz yoğunluğu benimsenmedi."
+        }
+      ],
+      "rendering": {
+        "radius_mode": "square_root_compressed",
+        "radius_formula": "sqrt(radius_solar)",
+        "unknown_radius_mode": "representative_one_display_unit",
+        "time_mode": "illustrative",
+        "color_mode": "blackbody_approximation",
+        "classification": "assumed",
+        "source_ids": [],
+        "astrometric_year_changes_stellar_properties": false,
+        "measured_surface_map": false,
+        "hydrodynamic_simulation": false,
+        "note": "Surface patterns, flow geometry, contrast and animation speed are illustrative. They are not telescope images, fitted fluid simulations or a stellar-evolution clock.",
+        "note_tr": "Yüzey desenleri, akış geometrisi, kontrast ve animasyon hızı temsilidir. Teleskop görüntüsü, nicel akış çözümü veya yıldız evrimi saati değildir.",
+        "pulsation_amplitude_classification": "assumed",
+        "environment_scale": "independently_compressed"
+      },
+      "sources": [
+        {
+          "id": "gcvs-r-dra",
+          "title": "General Catalogue of Variable Stars 5.1 — R Dra",
+          "url": "https://vizier.cfa.harvard.edu/viz-bin/asu-tsv?-source=B%2fgcvs%2fgcvs_cat&GCVS=R+Dra&-out.all=1&-out.max=3",
+          "locator": "B/gcvs/gcvs_cat: R Dra, Period [d], VarType M; catalogue version October 2020",
+          "checked_on": "2026-11-14",
+          "bibcode": "2017ARep...61...80S",
+          "raw_path": "source_data/r-dra-gcvs.tsv",
+          "response_sha256": "f1a1acebd1ec59f391f55f1f301129d764a2fb18e167fbe81357b7df199fb6e1",
+          "response_bytes": 6132
+        },
+        {
+          "id": "r-dra-iota",
+          "title": "van Belle, Thompson & Creech-Eakman (2002) — Angular Size Measurements of Mira Variables II",
+          "url": "https://arxiv.org/pdf/astro-ph/0210167",
+          "locator": "Tables 1–3, R Dra row; section 4 excludes R Dra from dust-color correlations because its K−[12] excess was suspect",
+          "checked_on": "2026-11-14",
+          "doi": "10.1086/342282"
+        },
+        {
+          "id": "mira-wind",
+          "title": "Uttenthaler et al. (2024) — The impact of third dredge-up on the mass loss of Mira variables",
+          "url": "https://doi.org/10.1051/0004-6361/202451708",
+          "locator": "Introduction: class-level pulsation-enhanced dust-driven outflow mechanism",
+          "checked_on": "2026-11-14"
+        }
+      ],
+      "caveats": [
+        "The 511 R☉ radius and 2034 K temperature are historical, phase-specific and model dependent.",
+        "The cited study rejected R Dra's dust-color excess from its mass-loss correlation; no dust quantity is inferred from it here.",
+        "The animated radius/temperature cycle is schematic and does not predict the observed SPHEREx light curve."
+      ],
+      "caveats_tr": [
+        "511 R☉ yarıçap ve 2034 K sıcaklık tarihsel, faza özgü ve modele bağlıdır.",
+        "Kaynak çalışma R Dra'nın toz rengi fazlasını kütle kaybı ilişkisinden çıkarmıştır; burada bu değerden toz miktarı türetilmiyor.",
+        "Animasyondaki yarıçap/sıcaklık çevrimi şematiktir; gözlenen SPHEREx ışık eğrisini öngörmez."
+      ]
+    }
+  ]
+}

@@ -1,0 +1,219 @@
+{
+  "sequence_id": "hq75kubcj4",
+  "target_id": "r-dra",
+  "source": "precomputed",
+  "frames": [
+    {
+      "index": 0,
+      "mjd": 60832.474553631,
+      "date": "2025-06-06T11:23:21Z",
+      "predicted": {
+        "ra": 248.167241,
+        "dec": 66.755023,
+        "method": "proper_motion_only"
+      },
+      "measured": {
+        "ra": 248.166883,
+        "dec": 66.754646,
+        "err_arcsec": 1.84,
+        "method": "saturated_core_centroid"
+      },
+      "measured_reason": null
+    },
+    {
+      "index": 1,
+      "mjd": 60926.428011837,
+      "date": "2025-09-08T10:16:20Z",
+      "predicted": {
+        "ra": 248.167238,
+        "dec": 66.755023,
+        "method": "proper_motion_only"
+      },
+      "measured": {
+        "ra": 248.167762,
+        "dec": 66.755062,
+        "err_arcsec": 1.84,
+        "method": "saturated_core_centroid"
+      },
+      "measured_reason": null
+    },
+    {
+      "index": 2,
+      "mjd": 60967.042036143,
+      "date": "2025-10-19T01:00:32Z",
+      "predicted": {
+        "ra": 248.167236,
+        "dec": 66.755023,
+        "method": "proper_motion_only"
+      },
+      "measured": {
+        "ra": 248.167606,
+        "dec": 66.7547,
+        "err_arcsec": 1.84,
+        "method": "saturated_core_centroid"
+      },
+      "measured_reason": null
+    },
+    {
+      "index": 3,
+      "mjd": 61235.903945854,
+      "date": "2026-07-14T21:41:41Z",
+      "predicted": {
+        "ra": 248.167225,
+        "dec": 66.755025,
+        "method": "proper_motion_only"
+      },
+      "measured": {
+        "ra": 248.167167,
+        "dec": 66.755111,
+        "err_arcsec": 1.84,
+        "method": "saturated_core_centroid"
+      },
+      "measured_reason": null
+    },
+    {
+      "index": 4,
+      "mjd": 61262.851814557,
+      "date": "2026-08-10T20:26:37Z",
+      "predicted": {
+        "ra": 248.167224,
+        "dec": 66.755025,
+        "method": "proper_motion_only"
+      },
+      "measured": {
+        "ra": 248.166795,
+        "dec": 66.755446,
+        "err_arcsec": 1.84,
+        "method": "saturated_core_centroid"
+      },
+      "measured_reason": null
+    },
+    {
+      "index": 5,
+      "mjd": 61279.681891513,
+      "date": "2026-08-27T16:21:55Z",
+      "predicted": {
+        "ra": 248.167224,
+        "dec": 66.755025,
+        "method": "proper_motion_only"
+      },
+      "measured": {
+        "ra": 248.167381,
+        "dec": 66.754995,
+        "err_arcsec": 1.84,
+        "method": "saturated_core_centroid"
+      },
+      "measured_reason": null
+    },
+    {
+      "index": 6,
+      "mjd": 61288.237770784,
+      "date": "2026-09-05T05:42:23Z",
+      "predicted": {
+        "ra": 248.167223,
+        "dec": 66.755025,
+        "method": "proper_motion_only"
+      },
+      "measured": {
+        "ra": 248.166874,
+        "dec": 66.755059,
+        "err_arcsec": 1.84,
+        "method": "saturated_core_centroid"
+      },
+      "measured_reason": null
+    },
+    {
+      "index": 7,
+      "mjd": 61300.455376918,
+      "date": "2026-09-17T10:55:45Z",
+      "predicted": {
+        "ra": 248.167223,
+        "dec": 66.755025,
+        "method": "proper_motion_only"
+      },
+      "measured": {
+        "ra": 248.167233,
+        "dec": 66.754862,
+        "err_arcsec": 1.84,
+        "method": "saturated_core_centroid"
+      },
+      "measured_reason": null
+    }
+  ],
+  "motion": {
+    "n_points": 8,
+    "from_date": "2025-06-06T11:23:21Z",
+    "to_date": "2026-09-17T10:55:45Z",
+    "span_years": 1.281,
+    "fit_pm_e_arcsec_yr": -0.32,
+    "fit_pm_n_arcsec_yr": 1.0,
+    "fit_pm_total_arcsec_yr": 1.05,
+    "fit_pm_err_arcsec_yr": 1.32,
+    "catalog_pm_e_arcsec_yr": -0.02,
+    "catalog_pm_n_arcsec_yr": 0.01,
+    "catalog_pm_total_arcsec_yr": 0.02,
+    "measured_shift_arcsec": 1.34,
+    "measured_shift_px": 0.22,
+    "predicted_shift_arcsec": 0.03,
+    "significance_sigma": 0.6,
+    "residual_vs_catalog_sigma": 0.6,
+    "significant": false,
+    "consistent_with_catalog": true,
+    "per_point_error_arcsec": 1.84,
+    "per_point_error_source": "assumed 0.3 px (saturated-core centroid)",
+    "methods": [
+      "saturated_core_centroid"
+    ],
+    "note": "doğrusal uyum; paralaks ve gözlemci etkisi modellenmedi"
+  },
+  "status": {
+    "data_available": true,
+    "source_detected": true,
+    "change_seen": false,
+    "change_kind": null,
+    "change_scientifically_confirmed": false
+  },
+  "caveats": [
+    "proper_motion_only_no_parallax",
+    "scientific_confirmation_requires_follow_up"
+  ],
+  "data_fingerprint": "d49cef941d4826cace01e513",
+  "forced_mean": null,
+  "blending": {
+    "radius_arcsec": 20.0,
+    "gaia": [],
+    "allwise": [
+      {
+        "id": "J163240.19+664517.9",
+        "w1": 0.393,
+        "w2": 0.129,
+        "min_sep_arcsec": 0.4,
+        "date": "2025-06-06T11:23:21Z"
+      }
+    ],
+    "status": "ok",
+    "catalogue_provenance": {
+      "gaia": {
+        "source_url": "https://gea.esac.esa.int/tap-server/tap",
+        "epoch_jyear": 2016.0
+      },
+      "allwise": {
+        "source_url": "https://vizier.cfa.harvard.edu/viz-bin/asu-tsv",
+        "epoch_jyear": 2010.56,
+        "provider": "VizieR Harvard mirror",
+        "catalogue_id": "II/328/allwise",
+        "bibcode": "2014yCat.2328....0C",
+        "query_url": "https://vizier.cfa.harvard.edu/viz-bin/asu-tsv?-source=II%2F328%2Fallwise&-c=248.1672330+66.7550240&-c.rm=4.3860000&-out=AllWISE%2CRAJ2000%2CDEJ2000%2CW1mag%2CW2mag%2Csnr1%2Csnr2&-out.max=50000",
+        "response_sha256": "af14e90e166258c2915162f0a70d3c71ffc304587962a09aac90f092e02cdd07",
+        "response_bytes": 5147,
+        "retrieved_utc": "2026-11-14T17:16:59.066980+00:00"
+      }
+    },
+    "target_in_gaia": {
+      "id": "1648328016354496384",
+      "g": 6.374379,
+      "sep_arcsec": 0.0
+    },
+    "n_within_aperture": 1
+  }
+}

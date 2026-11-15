@@ -1,0 +1,743 @@
+{
+  "schema_version": 1,
+  "notice": "Source documents retain their original dates; inclusion is not a new verification.",
+  "chunks": [
+    {
+      "id": "method#intro",
+      "document_id": "method",
+      "source": "docs/METHOD.md",
+      "source_sha256": "b5a7c8d23199fa5ed6a54736df0f180a458a42d41fd26c6ee84949ff89c44afe",
+      "verification": "source_document_only",
+      "text": "# Scientific method and limitations\n\nBlinkSpace shows real SPHEREx Level-2 spectral images of one sky position at different times, and nothing else.\nThis document states exactly what the pipeline does to the data, why, and where it stops being trustworthy.\nEvery rule below is enforced by a test in `backend/tests` (file names in brackets)."
+    },
+    {
+      "id": "method#1",
+      "document_id": "method",
+      "source": "docs/METHOD.md",
+      "source_sha256": "b5a7c8d23199fa5ed6a54736df0f180a458a42d41fd26c6ee84949ff89c44afe",
+      "verification": "source_document_only",
+      "text": "## 1. What a SPHEREx \"image at a wavelength\" is\n\nEach SPHEREx detector sits behind a linear variable filter: the central wavelength changes continuously across the\ndetector. A star is therefore observed at a different wavelength in every exposure, depending on where it lands.\n**The same detector does not mean the same wavelength** [`test_science.py::test_same_detector_does_not_mean_same_wavelength`].\n\nConsequences for a time comparison:\n\n- Two frames may be compared in time only if the wavelength *at the target* is the same. BlinkSpace requires\n  `|λ − λ_ref| ≤ tol × Δλ`, with Δλ the bandwidth (FWHM) at λ_ref. Default `tol = 0.5` (centres at most half a\n  resolution element apart: adequate for visual inspection). Quantitative brightness comparison uses `tol = 0.25`;\n  if fewer than two/three points satisfy it, the 0.5 set is used with an added 10% systematic for the spectral\n  slope, and this is stated in the result.\n- The match at the centre does not hold across the field: the wavelength gradient is about one resolution element\n  per ~180 detector pixels. A per-pixel wavelength map is computed for every frame, and pixels outside the tolerance\n  are masked as \"not comparable\" (blue layer in the viewer) [`test_wavelength_map_and_comparable_mask`].\n- Frames at other wavelengths are offered separately as \"wavelength exploration\" and as a spectrum; they are never\n  placed in a time sequence.\n\nWavelengths come from the `WCS-WAVE` lookup table inside each file (bilinear interpolation, ~1 nm accuracy per the\narchive documentation). Our evaluation is checked against astropy's `-TAB` implementation on real files (identical\nto 1e-9 µm) [`test_live_archive.py`]. The SIP distortion must not be applied to the alternate \"A\"/\"W\" coordinate\nsystems; astropy applies it by default, which shifted detector coordinates by ~24 pixels in our first reading."
+    },
+    {
+      "id": "method#2",
+      "document_id": "method",
+      "source": "docs/METHOD.md",
+      "source_sha256": "b5a7c8d23199fa5ed6a54736df0f180a458a42d41fd26c6ee84949ff89c44afe",
+      "verification": "source_document_only",
+      "text": "## 2. Finding and selecting observations\n\n- One TAP query (`spherex.plane ⨝ spherex.artifact`, `CONTAINS(POINT, poly)`) returns every Level-2 image whose\n  footprint contains the position. Times are UTC (MJD).\n- A record is one exposure × one detector. Reprocessed copies of the same (observation id, detector) are **one**\n  observation: the newest release/L2 version/processing date is kept. Different detectors stay separate\n  [`test_reprocessed_copies_are_one_observation_and_detectors_stay_separate`].\n- Before downloading, the target's detector pixel is estimated from the four footprint corners (measured accuracy on\n  real files: 3–8 pixels) and its wavelength from a per-detector `WCS-WAVE` table. Exposures with the target too\n  close to the detector edge for the requested field are dropped.\n- Candidates are grouped by wavelength; the default group is the one with the most separate visits, then the longest\n  time span. Up to N frames are chosen, one per visit first, keeping the first and last visit.\n- After download the wavelength is recomputed from the file itself and the tolerance re-applied; a frame that fails\n  is rejected and listed."
+    },
+    {
+      "id": "method#3",
+      "document_id": "method",
+      "source": "docs/METHOD.md",
+      "source_sha256": "b5a7c8d23199fa5ed6a54736df0f180a458a42d41fd26c6ee84949ff89c44afe",
+      "verification": "source_document_only",
+      "text": "## 3. Reading the files\n\nHDUs are read **by name**. Verified on real files: QR2 (pipeline 6.4, 6.5.x) has `PSF` as the fifth HDU, pipeline\n7.0.x has `EPSF`. Flag definitions are read from each file's `FLAGS` header (`MP_<NAME>` in 6.x, `MSKNnnnn` in 7.x);\nno fixed bit table is assumed [`test_reads_both_release_layouts_by_name`, `test_flag_definitions_come_from_each_file_header`].\n\nFlag classes:\n\n| Class | Flags | Treatment |\n|---|---|---|\n| invalid | NONFUNC, MISSING_DATA, SUR_ERROR, HOT, COLD, PHANTOM, REFERENCE, non-finite values | no measurement: NaN, transparent in previews, never zero |\n| suspect | TRANSIENT, OVERFLOW, NONLINEAR, PERSIST, OUTLIER, PHANMISS, DICHROIC, FULLSAMPLE, CROSSTALK, GHOST*, STREAK, BLOOM, SNOWBALL, HALO, and any unknown new name | value shown, mask carried separately |\n| info | SOURCE | no mask |"
+    },
+    {
+      "id": "method#4",
+      "document_id": "method",
+      "source": "docs/METHOD.md",
+      "source_sha256": "b5a7c8d23199fa5ed6a54736df0f180a458a42d41fd26c6ee84949ff89c44afe",
+      "verification": "source_document_only",
+      "text": "## 4. Alignment\n\nAll frames are resampled (bilinear, `reproject`) onto one grid: tangent projection centred on the requested ICRS\nposition, north up, east left, native 6.15″ pixels, odd size. Alignment uses only each file's own WCS (TAN-SIP).\n**No source is pinned between frames**, so real motion survives [`test_controlled_shift_is_measured_and_moving_source_is_not_pinned`].\n\n- Invalid pixels are set to NaN before resampling; the invalid mask is resampled as a float and any output pixel it\n  touches is invalid (conservative growth). Suspect masks are carried by nearest neighbour. Flag bits are never\n  interpolated [`test_invalid_pixels_stay_missing_not_zero_and_flags_are_not_averaged`].\n- Coverage outside a frame's footprint is invalid; frames covering < 60% of the grid are rejected.\n- **Check:** for every sequence, Gaia DR3 stars (G ≤ 15.5, isolated, clean) are propagated to each frame epoch and\n  their centroids measured in the aligned frame. Residual rms on the five targets: 0.4–1.3″ (0.06–0.2 pixel), except\n  R Dra where stars inside the saturated star's halo dominate (reported as measured)."
+    },
+    {
+      "id": "method#5",
+      "document_id": "method",
+      "source": "docs/METHOD.md",
+      "source_sha256": "b5a7c8d23199fa5ed6a54736df0f180a458a42d41fd26c6ee84949ff89c44afe",
+      "verification": "source_document_only",
+      "text": "## 5. Background and display\n\nPer frame, a sigma-clipped median of valid, unflagged, non-source pixels is subtracted (constant; value and scatter\nrecorded per frame; the archive's ZODI model median is recorded too but not used). All frames of a sequence share one\nasinh stretch and one black/white pair. Previews are 8-bit PNGs with transparent invalid pixels and are **never** used\nfor measurement."
+    },
+    {
+      "id": "method#6",
+      "document_id": "method",
+      "source": "docs/METHOD.md",
+      "source_sha256": "b5a7c8d23199fa5ed6a54736df0f180a458a42d41fd26c6ee84949ff89c44afe",
+      "verification": "source_document_only",
+      "text": "## 6. Measurements\n\n- **Position:** flux-weighted centroid in a 5×5 box on the aligned frame. Per-point error = the sequence's own Gaia\n  residual rms (floor 0.1 pixel). For a saturated star the centroid of the invalid core is used with an assumed\n  0.3-pixel error.\n- **Motion:** linear fit of position against time; compared with the catalogue proper motion. Parallax and\n  spacecraft position are not modelled (≤ 0.55″ for these targets, < 0.1 pixel). The predicted-position overlay is\n  proper-motion-only and labelled so.\n- **Brightness:** aperture photometry (r = 2 pixels, annulus 4–7) on the **native, un-resampled** cutout with the\n  VARIANCE layer. Any invalid pixel in the aperture → no measurement. OVERFLOW/NONLINEAR in the aperture → value\n  kept but marked unreliable. No aperture correction: only relative changes at one wavelength are meaningful.\n  Comparison stars (Gaia, same frames, same aperture) give a per-frame scale and a systematic scatter that is added\n  to the errors.\n- **\"Change seen\"** = ≥ 3σ in our own measurement (brightness additionally ≥ 20% and normalised by comparison\n  stars). It is never reported as scientifically confirmed."
+    },
+    {
+      "id": "method#7",
+      "document_id": "method",
+      "source": "docs/METHOD.md",
+      "source_sha256": "b5a7c8d23199fa5ed6a54736df0f180a458a42d41fd26c6ee84949ff89c44afe",
+      "verification": "source_document_only",
+      "text": "## 7. Advanced products and their limits\n\n| Product | What it is | Limits |\n|---|---|---|\n| Difference | B − A of background-subtracted, wavelength-comparable valid pixels | no PSF matching; undersampled PSF leaves residuals on static stars; PSF FWHM differs between releases (5.3″ vs 7.5″) |\n| Stack | mean of valid comparable pixels, ≥ max(2, n/2) frames per pixel | moving sources blur (expected motion in pixels is shown); variable sources are averaged |\n| Gaia / AllWISE layers | **catalogue** positions (not images) | Gaia epoch 2016.0, propagated by proper motion; AllWISE ≈ 2010.5, not propagated; resolutions differ |\n| Light curve | aperture flux vs real date for one wavelength group | see Brightness above |\n| Spectrum | aperture flux vs wavelength from all exposures in a time window | **not simultaneous**; each point carries its date; blended neighbours within 12″ |\n| Candidate suggestions | ≥ 6σ regions of the difference image whose 5×5 box flux changes by ≥ 25%; ± pair within 4 px = possible motion; touching flagged pixels = possible artefact | review aid only; validated on synthetic injections (labelled as such in the tests), not a detection pipeline |"
+    },
+    {
+      "id": "method#8",
+      "document_id": "method",
+      "source": "docs/METHOD.md",
+      "source_sha256": "b5a7c8d23199fa5ed6a54736df0f180a458a42d41fd26c6ee84949ff89c44afe",
+      "verification": "source_document_only",
+      "text": "## 8. Known limitations\n\n- Pixel scale 6.15″ and an undersampled PSF: close pairs (Eps Indi Ba/Bb, RW Aur A/B) are one source; background\n  stars within ~12″ contaminate photometry (this is what prevents a clean WISE 0855 measurement).\n- Bright stars saturate: Barnard's Star, R Dra and RW Aur longward of ~0.85 µm have invalid or unreliable cores.\n- Quick-release / first-release calibration; aperture fluxes are not absolute.\n- The Gaia query for the alignment check adds 30–85 s for a new position.\n- No shift-and-stack along a predicted motion, no PSF photometry, no PSF-matched differencing.\n- Synthetic data are used only in automated tests (`conftest.py::FakeArchive`), never in the app or the reports."
+    },
+    {
+      "id": "data-sources#intro",
+      "document_id": "data-sources",
+      "source": "docs/DATA_SOURCES.md",
+      "source_sha256": "252db3ba49e168940ad53e096bf40f21c9a9538cd1573e0a0f5200f06d90b7e6",
+      "verification": "source_document_only",
+      "text": "# Data sources, licences and attributions\n\nAccess dates: 2026-11-14 and 2026-11-14 (all services queried live on those days)."
+    },
+    {
+      "id": "data-sources#data",
+      "document_id": "data-sources",
+      "source": "docs/DATA_SOURCES.md",
+      "source_sha256": "252db3ba49e168940ad53e096bf40f21c9a9538cd1573e0a0f5200f06d90b7e6",
+      "verification": "source_document_only",
+      "text": "## Data\n\n| Source | What we use | How | Notes |\n|---|---|---|---|\n| **SPHEREx Level-2 spectral images** (NASA/JPL-Caltech; served by IRSA) | IMAGE, FLAGS, VARIANCE, ZODI, WCS-WAVE layers of cutouts | TAP `https://irsa.ipac.caltech.edu/TAP` (`spherex.plane`, `spherex.artifact`); IBE cutouts `https://irsa.ipac.caltech.edu/ibe/data/spherex/...?center=&size=` | On 2026-11-14 the query returned collections `spherex_qr2`, `spherex_qr2_deep`, `spherex_qr3_deep` (pipeline 6.4–7.0.5). On 2026-11-14 it returned `spherex_dr1`, `spherex_dr1_deep`, `spherex_qr3`, `spherex_qr3_deep` (all pipeline 7.0.5). The app reads the release from each product's path and keeps the newest copy. |\n| Gaia DR3 (ESA/DPAC) | positions, proper motions, G magnitudes | IRSA TAP table `gaia_dr3_source` | alignment check, comparison stars, catalogue layer |\n| AllWISE Source Catalog (NASA/JPL-Caltech/UCLA) | positions, W1/W2 | IRSA TAP table `allwise_p3as_psd` | catalogue layer, blending check |\n| SIMBAD (CDS, Strasbourg) | identities, J2000 positions, proper motions, parallaxes of the five targets | TAP at the CfA mirror `https://simbad.harvard.edu/simbad/sim-tap (the Strasbourg endpoint returned 404 on 2026-11-14) | stored in `backend/blinkspace/resources/targets.json` with bibcodes |\n\n### Citations and acknowledgements\n\n- SPHEREx Team (2025), *SPHEREx Quick Release Spectral Images*, IRSA, doi:10.26131/IRSA629. **Open item:** the\n  citation/DOI for the DR1 collection that appeared on 2026-11-14 could not be verified from the documentation\n  pages we read; check the IRSA SPHEREx page before publishing.\n- This work makes use of the NASA/IPAC Infrared Science Archive, which is funded by NASA and operated by the\n  California Institute of Technology.\n- This work has made use of data from the European Space Agency (ESA) mission Gaia\n  (https://www.cosmos.esa.int/gaia), processed by the Gaia Data Processing and Analysis Consortium (DPAC).\n- This publication makes use of data products from the Wide-field Infrared Survey Explorer, a joint project of the\n  University of California, Los Angeles, and the Jet Propulsion Laboratory/California Institute of Technology,\n  funded by NASA.\n- This research has made use of the SIMBAD database, operated at CDS, Strasbourg, France.\n- Coordinate sources per target (bibcodes from SIMBAD): Gaia DR3 `2020yCat.1350....0G` (Barnard's Star, Eps Indi B,\n  R Dra); Kirkpatrick et al. `2021ApJS..253....7K` (WISE 0855−0714); van Leeuwen `2007A&A...474..653V` (RW Aur).\n\nNASA data are used as published. **BlinkSpace is an independent project; it is not developed, endorsed or\nsponsored by NASA, JPL, Caltech/IPAC or ESA.**"
+    },
+    {
+      "id": "data-sources#documentation-consulted",
+      "document_id": "data-sources",
+      "source": "docs/DATA_SOURCES.md",
+      "source_sha256": "252db3ba49e168940ad53e096bf40f21c9a9538cd1573e0a0f5200f06d90b7e6",
+      "verification": "source_document_only",
+      "text": "## Documentation consulted\n\n- IRSA SPHEREx archive documentation: data access, data products (read 2026-11-14).\n- IRSA tutorials (content licence BSD-3-Clause): *SPHEREx cutouts*, *SPHEREx source discovery tool demo*.\n  **Adapted ideas, no code copied:** the `plane ⨝ artifact` footprint query, appending `?center=&size=` to the\n  artifact URI, and evaluating the \"W\" alternate WCS with SIP disabled; the list of flags treated as bad for\n  photometry. The tutorial's QR2-era HDU order and file paths were *not* reused; both were re-verified on current files.\n- astropy coordinates/WCS and `reproject` documentation."
+    },
+    {
+      "id": "data-sources#software",
+      "document_id": "data-sources",
+      "source": "docs/DATA_SOURCES.md",
+      "source_sha256": "252db3ba49e168940ad53e096bf40f21c9a9538cd1573e0a0f5200f06d90b7e6",
+      "verification": "source_document_only",
+      "text": "## Software\n\n| Package | Version | Licence |\n|---|---|---|\n| astropy | 8.0.2 | BSD-3-Clause |\n| numpy | 2.5.4 | BSD-3-Clause |\n| scipy | 1.18.1 | BSD-3-Clause |\n| reproject | 0.21.0 | BSD-3-Clause |\n| photutils | 3.1.1 | BSD-3-Clause |\n| FastAPI | 0.162.4 | MIT |\n| uvicorn | 0.54.0 | BSD-3-Clause |\n| httpx | 0.28.1 | BSD-3-Clause |\n| pydantic | 2.14.3 | MIT |\n| Pillow | 13.0.0 | MIT-CMU |\n| psutil | 7.2.2 | BSD-3-Clause |\n| pytest (dev) | 9.2.0 | MIT |\n| React, React DOM | 19.3.1 | MIT |\n| Vite | 8.3.8 | MIT |\n| TypeScript (dev) | 7.0.2 | Apache-2.0 |\n| vitest, Testing Library, jsdom, oxlint (dev) | 5.1.0 / 16.3.3 / 31.0.0 / 1.93.0 | MIT |\n\nExact pins: `backend/requirements.txt`, `backend/requirements.lock`, `frontend/package-lock.json`.\nBlinkSpace itself is released under the MIT licence (`LICENSE`)."
+    },
+    {
+      "id": "data-sources#use-of-ai-tools",
+      "document_id": "data-sources",
+      "source": "docs/DATA_SOURCES.md",
+      "source_sha256": "252db3ba49e168940ad53e096bf40f21c9a9538cd1573e0a0f5200f06d90b7e6",
+      "verification": "source_document_only",
+      "text": "## Use of AI tools\n\nThe code, tests and documentation in this repository were produced with Claude (Anthropic)\ndriven by a written specification. See `docs/AI_USAGE.md`."
+    },
+    {
+      "id": "features#intro",
+      "document_id": "features",
+      "source": "docs/FEATURES.md",
+      "source_sha256": "d54b1ebdd138384658a68f08468dc1f4fc443c658d04a2534c8e70198fbafdfe",
+      "verification": "source_document_only",
+      "text": "# Features and current validation\n\nThis document describes the 2026-11-14 integration. Old screenshots and old performance figures from the imported source are not acceptance evidence for this interface.\n\n| Feature | Implementation and limitations |\n|---|---|\n| SPHERE-X v5 shell | Local typography, glass panels, target tabs, measurements, year ruler, Gaia color–magnitude diagram and original observation/analysis controls. `?ui=legacy` retained. Automated DOM checks pass; actual visual/mobile/GPU acceptance is pending. |\n| Three stellar scenes | Persistent renderer; stellar surface/environment, 120 Gaia DR3 neighbours, real dated SPHEREx image planes. Unit-tested motion and WCS geometry; full visual/performance acceptance remains pending browser access. |\n| Real catalogues | 120 nearby stars plus five targets; 8,785 real Hipparcos background stars. Effective temperatures retain their source or are null. |\n| 2000–2100 motion | Cartesian linear space motion with measured RV; missing RV explicitly assumed zero. No parallax, observer effect or acceleration. |\n| Stellar appearance | Source-backed radius and temperature, representative convection, clouds and accretion structures. Barnard: corona/wind; Epsilon Indi: separate Ba/Bb atmospheres and illustrative orbit; WISE: dark, cold cloudy surface; RW Aur: disk, dust and bipolar outflow; R Dra: compressed radius, a schematic radius/temperature cycle and outflow. See `STELLAR_MODELS.md` for sources and display assumptions. |\n| SPHEREx views | Single, side-by-side, difference, stack and co-moving stack; invalid pixels remain transparent. A continuous A/B wavelength readout is shown. |\n| Time stack | Depth represents the real observation date. Predicted tracks and measured centroids have distinct styles; missing measurements have explicit reasons. |\n| Co-moving stack | Proper-motion shift and validity-weighted combination. Static sources smear. Display product only, never the input to photometry. |\n| Analysis drawer | Frame metadata, layers, marks, light curve, spectrum and tasks retained. |\n| Marks and sharing | Point/region marks, four classes, editable local drafts, read-only shared links and creator edit tokens. User notes are excluded from assistant context and release seed. |\n| Search | Degrees/hours/sexagesimal RA/Dec, FOV, wavelength and date constraints; real job progress/cancel/retry. NASA archive outages return an error rather than fake results. |\n| TR/EN and accessibility | Paired text keys, semantic controls, keyboard controls and data fallback for unavailable WebGL. Screen-reader and physical-device acceptance is not yet performed. |\n| Assistant | QFIT robin, original Python agent and OpenAI gpt-5.4-mini adapter; same-origin SSE, source links, local non-AI cards, stop/retry, validated manual commands, context<=4KB and durable daily call budget. Off in the distributed package; private local activation uses `.env`. No key is included in source or ZIP. |\n| Deployment | Docker uses a non-root user, configurable PORT, one process, healthcheck and a verified seed export. No public deployment has been made. |\n\nScience limits include unresolved close binaries at the SPHEREx pixel scale, saturation, PSF differences, approximate proper-motion-only prediction and possible blending. The final scientific-confirmation field is always false. Current numerical results belong in regenerated `reports/targets/`, not in hard-coded interface copy.\n\nFive-person user testing, full desktop/mobile browser acceptance, rendering FPS/resource stability, a public HTTPS link and competition submission remain separate acceptance tasks. See `EVIDENCE.md` and `STATUS.md` for current results."
+    },
+    {
+      "id": "motion#intro",
+      "document_id": "motion",
+      "source": "backend/blinkspace/knowledge/motion.md",
+      "source_sha256": "6d6fe1a49f34b582a2db1deb8fe6418db05b61e6c12d1c357ec63a35a8ad1fb9",
+      "verification": "source_document_only",
+      "text": "# Motion model"
+    },
+    {
+      "id": "motion#model",
+      "document_id": "motion",
+      "source": "backend/blinkspace/knowledge/motion.md",
+      "source_sha256": "6d6fe1a49f34b582a2db1deb8fe6418db05b61e6c12d1c357ec63a35a8ad1fb9",
+      "verification": "source_document_only",
+      "text": "## model\n\nThe 3D scenes propagate catalogue astrometry as a Cartesian ICRS position and a constant\nspace velocity between 2000 and 2100. Right ascension proper motion includes cos(declination).\nThe Three.js presentation uses the coordinate order (ICRS x, ICRS z, ICRS y), with +Y north.\nOne neighbourhood unit is one parsec. Missing radial velocity is represented by an explicit\nzero-velocity assumption; it is not a measured zero. Annual parallax, spacecraft viewpoint\nand orbital motion are not included in this catalogue space-motion model.\n\nThe stellar surface and limb darkening are representative. Its colour follows a\ntemperature-labelled blackbody calculation when a temperature exists. A source-cited\nradius can parameterize a compressed visual scale, but the drawn diameter is not an\nangular-size measurement. A cool infrared source can be nearly invisible in visible\nlight. Neither the texture nor its surrounding animation is a resolved SPHEREx image.\n\nSPHEREx time stacks contain the real, individually dated image planes. The planes do not\ninterpolate or animate the image pixels. A line through predicted catalogue positions is a\ncomputed guide. Measured centroids are separate and can be missing, saturated or blended.\nThe co-moving stack is a display product, not photometry; static sources become smeared.\n\nSources: the application's source-labelled catalogue and reference constants, `SPEC.md`\nrules 7–10, `docs/METHOD.md`, and the motion golden tests. Numerical results must be taken\nfrom the current catalogue/context or a dated report, not inferred from this description."
+    },
+    {
+      "id": "motion#source-labelled-stellar-models",
+      "document_id": "motion",
+      "source": "backend/blinkspace/knowledge/motion.md",
+      "source_sha256": "6d6fe1a49f34b582a2db1deb8fe6418db05b61e6c12d1c357ec63a35a8ad1fb9",
+      "verification": "source_document_only",
+      "text": "## source-labelled-stellar-models\n\nThe five curated profiles served at `/api/models` cite their parameter sources and mark\nmeasured, computed, representative or assumed values. Missing radius or temperature\nvalues stay missing. The interface exposes the source parameters separately from the\ndrawing. The resource is `backend/blinkspace/resources/stellar_profiles.json`.\n\nBarnard's Star has a representative active M-dwarf environment. Epsilon Indi B contains\ntwo T-dwarf components; the display can illustrate a binary orbit without claiming a\nmeasured orbital phase or sky orientation. WISE 0855 uses a cool Y-dwarf atmosphere\nrepresentation. RW Aurigae includes a schematic disk, jets and dust obscuration. R Draconis\nincludes illustrative pulsation and dust outflow. A sourced pulsation period does not\nestablish the displayed phase, angular radius or outflow geometry.\n\nThese environment animations explain source-supported phenomena. Particle trajectories,\ntexture patterns, apparent separations and animation speeds are representative unless\na specific displayed quantity has an explicit source and epistemic label. They are not\ntime-resolved images or hydrodynamic simulations."
+    },
+    {
+      "id": "epistemic#intro",
+      "document_id": "epistemic",
+      "source": "backend/blinkspace/knowledge/epistemic.md",
+      "source_sha256": "476ce1def9d016cbc4cd0b44449c37c91aaffa27610397a1c7dd2d4502a54882",
+      "verification": "source_document_only",
+      "text": "# Epistemic labels"
+    },
+    {
+      "id": "epistemic#labels",
+      "document_id": "epistemic",
+      "source": "backend/blinkspace/knowledge/epistemic.md",
+      "source_sha256": "476ce1def9d016cbc4cd0b44449c37c91aaffa27610397a1c7dd2d4502a54882",
+      "verification": "source_document_only",
+      "text": "## labels\n\n- **Measured / ölçülen:** an observed catalogue value or a measurement on valid image data;\n  include its unit, source and uncertainty when available. The UI uses white.\n- **Computed / hesaplanan:** a result calculated from cited inputs, for example distance\n  from parallax or a predicted position at a chosen year. The UI uses orange.\n- **Representative / temsili:** a graphic chosen to explain the data, such as the enlarged\n  stellar surface or the spacing of time-stack planes. Its size is not a measurement;\n  use a label and a dashed boundary.\n- **Assumed / varsayılan:** an explicit modelling choice when an input is unavailable,\n  for example radial velocity set to zero for propagation. Use an underlined label.\n\nThese categories do not represent confidence scores. A computed result can depend on an\nassumption. Missing values remain missing; they must not be silently replaced with zeros.\nUser marks are unverified observations, not catalogue measurements or discoveries."
+    },
+    {
+      "id": "stellar-models#intro",
+      "document_id": "stellar-models",
+      "source": "docs/STELLAR_MODELS.md",
+      "source_sha256": "4cc56b608ebf1761488e62c3238c0992a4216cf7913c0330615f933de87d3da4",
+      "verification": "source_document_only",
+      "text": "# Stellar surfaces and surroundings\n\nThe five target models use the cited parameters in `backend/blinkspace/resources/stellar_profiles.json`, served by `/api/models`. Each parameter retains its unit, uncertainty or range where supplied, evidence class, source and limitations. The interface shows these in English and Turkish. Unknown radius or temperature remains unknown.\n\n| Target | Displayed structure | Evidence and limits |\n|---|---|---|\n| Barnard's Star | Granulated photosphere, coronal shell, magnetic arches and radial wind tracers | Radius 0.187 ± 0.001 R☉, temperature 3195 ± 28 K from the [2024 ESPRESSO study](https://arxiv.org/html/2410.00569v1). [Chandra/Hubble observations](https://www.chandra.si.edu/photo/2020/barnards/index.html) support magnetic activity; the drawn shell and wind are qualitative. No measured field map, wind speed, flare event or planet is invented. |\n| Epsilon Indi Ba/Bb | Two separate surfaces, layered advecting clouds and illustrative orbit | 1320 K and 910 K are display midpoints of [BT-Settl model ranges](https://arxiv.org/abs/0911.3143), not new measurements. Each atmosphere follows its own component. The eccentricity and inclination use the [published orbit](https://arxiv.org/pdf/2205.08077); phase, display separation, equal component size and symmetric placement are illustrative. SPHEREx does not resolve the two components. |\n| WISE 0855 | Very dark surface, representative cloud bands and thin atmosphere | The adopted 250 K historical reference and later model-dependent analyses are linked in the profile. Visible emission is negligible. The renderer deliberately uses a dark placeholder, not a visible-light photograph or a measured infrared surface map. No physical radius is adopted. |\n| RW Aurigae | Flared accretion disk, funnel flows onto the star, differential disk flow, dust contrast and two jet tracer streams | The cited stellar and ALMA measurements describe RW Aur A. [GHOsT spectroscopy](https://arxiv.org/abs/1909.10392) constrains gas in its jet. The drawing illustrates A; SPHEREx blends A and B. Star, disk and jet display scales differ. Particle speeds and densities are not inferred measurements. |\n| R Draconis | Large convection cells, irregular molecular layers, a radius/temperature/colour cycle and extended outflow | The 511 ± 142 R☉ and 2034 ± 139 K values are [historical, phase-specific K-band estimates](https://arxiv.org/abs/astro-ph/0210167), not a current photospheric radius or cycle average. GCVS supplies the 245.6-day period. Outflow is a class illustration, not a measured dust quantity. The SPHEREx sequence is saturated. |"
+    },
+    {
+      "id": "stellar-models#display-choices",
+      "document_id": "stellar-models",
+      "source": "docs/STELLAR_MODELS.md",
+      "source_sha256": "4cc56b608ebf1761488e62c3238c0992a4216cf7913c0330615f933de87d3da4",
+      "verification": "source_document_only",
+      "text": "## Display choices\n\n- Physical radii, when adopted, use `sqrt(R/R☉)` display units, with a solar reference in the context view. Close-up framing excludes that reference. Unknown single radii use one representative unit; the two unknown binary radii use 0.55 units each. These are separate from the astrometric trail's ×600 scale.\n- Photospheric colour uses the existing Planck/CIE/Wyman calculation. Unknown temperatures use a neutral colour. Below 1000 K, the clamped colour is strongly dimmed and explicitly labelled as emitting almost no visible light.\n- Eddington limb darkening gives surface depth. Convection cells, cloud bands, accretion polar structure and disk density patterns are procedural, representative structure, not telescope imagery.\n- The Mira cycle uses a deliberately illustrative ±5.5% display-radius variation and ±4% temperature excursion. The contraction/heating phase, eight-second cycle and display intensity are not fitted to the SPHEREx light curve. Colours interpolate precomputed blackbody endpoints to avoid an unbounded per-frame temperature cache.\n- Disk angular flow decreases with radius as `r^-3/2`; radial wind and bipolar jet particles show direction. Their dimensions, speed and density do not form a fluid or magnetohydrodynamic solution.\n- The calendar controls the catalogue's linear space motion. It does not evolve a star's age or predict its future surface. The separate illustrative animation clock advances only with the Surface & flow animation control. It is independent of calendar playback. Pause and reduced-motion preference freeze that clock.\n- Surroundings can be hidden without hiding the photosphere or motion trail. A target change disposes its prior disk, atmosphere, jets and secondary component."
+    },
+    {
+      "id": "stellar-models#reusable-three-js-models",
+      "document_id": "stellar-models",
+      "source": "docs/STELLAR_MODELS.md",
+      "source_sha256": "4cc56b608ebf1761488e62c3238c0992a4216cf7913c0330615f933de87d3da4",
+      "verification": "source_document_only",
+      "text": "## Reusable Three.js models\n\nThe live scene now uses five named model recipes through `createStellarModel` in\n`frontend/src/three/models/StellarModel.ts`. The same factory exports five `.three.json`\nassets in `frontend/public/models/`. The selected target's measurement panel has a\nlocalized model-download link. Each asset contains geometry, procedural materials,\nembedded halo texture, adopted parameters, sources, caveats and animation metadata.\n\n`animate-stellar-model.js` updates an ObjectLoader-loaded model with the same animation\ncode as the live scene. `faceStellarModel` keeps reference circles camera-facing and\ncaps particle pixel scaling at two. `display_extent` includes vertex-shader outflow;\na static geometry bounding box alone would miss those particles. The model pack README\nincludes integration instructions. This is the pinned r170 ObjectLoader format, not GLB.\n\nBarnard's added arches use a dipole-like geometric construction. Its magnetic topology\nis unknown: even the cited [Barnard wind study](https://arxiv.org/abs/1901.00219) uses\nproxy magnetic maps. The new arcs are not measured lines or a claim about particular\nflares. RW Aur's funnel paths, disk thickness and corrugations are class illustrations;\nall disk, funnel and jet structures share one local orientation. The cited disk angle\ndoes not measure the field map. Brown-dwarf cloud opacity and Mira envelope clumping\nare also schematic. None of these new structures changes measured SPHEREx pixels.\n\n`npm run models:export` produces deterministic scene identifiers and file hashes, checks\nall position values are finite, and parses all five results through ObjectLoader. It\nexports reduced geometry while retaining the full procedural materials. The live app\ncontinues to use its selected geometry-quality setting. `npm run build` regenerates the\nassets automatically; the build has no archive or model-provider dependency."
+    },
+    {
+      "id": "stellar-models#verification",
+      "document_id": "stellar-models",
+      "source": "docs/STELLAR_MODELS.md",
+      "source_sha256": "4cc56b608ebf1761488e62c3238c0992a4216cf7913c0330615f933de87d3da4",
+      "verification": "source_document_only",
+      "text": "## Verification\n\n`frontend/src/tests/stellarModels.test.ts` exercises the actual delivered profiles and motion catalogue: unknown values, class selection, compressed radii, Kepler extrema, wide/narrow camera fitting, binary atmosphere attachment, resource disposal, layer isolation, pause, reduced motion and idle update termination. Two UI tests verify uncertainty, source limitations, component temperatures and Turkish formatting. These are numerical/component checks, not a GPU or visual acceptance test.\n\nThe profile builder is reproducible with `PYTHONPATH=backend python -m tools.build_stellar_profiles`. Backend tests reject uncited measurements, promoted unknown values and a false stellar-evolution clock. The fetched GCVS response is bundled with its SHA-256 and parsed period."
+    },
+    {
+      "id": "stellar-models#separate-evolution-explorer",
+      "document_id": "stellar-models",
+      "source": "docs/STELLAR_MODELS.md",
+      "source_sha256": "4cc56b608ebf1761488e62c3238c0992a4216cf7913c0330615f933de87d3da4",
+      "verification": "source_document_only",
+      "text": "## Separate evolution explorer\n\nSee [EVOLUTION_EXPLORER.md](EVOLUTION_EXPLORER.md) for the newly authorized published-track lifecycle view, separate clocks, layout/occlusion fixes, coordinate search and explicit model limits. Surface contrast is now enhanced for inspection with advecting granulation and darker inter-cell lanes; this remains illustrative, not a measured contrast map."
+    },
+    {
+      "id": "report:barnard#intro",
+      "document_id": "report:barnard",
+      "source": "reports/targets/barnard.md",
+      "source_sha256": "3bbcc9cb9f10999218961684a2f54e1688573bf6ecf54ed6a998095aea1f9660",
+      "verification": "source_document_only",
+      "text": "# Barnard's Star — target report\n\nBlinkSpace pipeline 1.2.0 · sequence `tyswfqfx8t` · data: SPHEREx DR1, QR3 Level-2 spectral images (IRSA)."
+    },
+    {
+      "id": "report:barnard#status",
+      "document_id": "report:barnard",
+      "source": "reports/targets/barnard.md",
+      "source_sha256": "3bbcc9cb9f10999218961684a2f54e1688573bf6ecf54ed6a998095aea1f9660",
+      "verification": "source_document_only",
+      "text": "## Status\n\n| Step | Result |\n|---|---|\n| Data available (≥ 2 matched-wavelength frames) | **yes** — 6 frames, 6 visits, 393 days |\n| Source detected at the expected position | **yes** — 6/6 frames (6 saturated) |\n| Change seen | **yes** — motion |\n| Change scientifically confirmed | **no** — this tool never claims confirmation |"
+    },
+    {
+      "id": "report:barnard#1",
+      "document_id": "report:barnard",
+      "source": "reports/targets/barnard.md",
+      "source_sha256": "3bbcc9cb9f10999218961684a2f54e1688573bf6ecf54ed6a998095aea1f9660",
+      "verification": "source_document_only",
+      "text": "## 1. Identity and coordinate source\n\n- SIMBAD main id: `NAME Barnard's star` · type BY* · spectral type M4V\n- Aliases: 2MASS J17574849+0441405, GJ 699, Gaia DR2 4472832130942575872, Gaia DR3 4472832130942575872, HIP 87937, NAME Barnard Star\n- Catalogue position (ICRS, epoch J2000.0): 17h57m48.50s +04d41m36.1s = (269.452077, 4.693365) · source 2020yCat.1350....0G\n- Proper motion: (-801.551, 10362.394) mas/yr · source 2020yCat.1350....0G · parallax 546.9759 mas\n- Largest known proper motion of any star (~10.4″/yr). With 6.15″ SPHEREx pixels it shifts about 1.7 pixels per year. Very bright (K≈4.5); core pixels may be saturated."
+    },
+    {
+      "id": "report:barnard#2",
+      "document_id": "report:barnard",
+      "source": "reports/targets/barnard.md",
+      "source_sha256": "3bbcc9cb9f10999218961684a2f54e1688573bf6ecf54ed6a998095aea1f9660",
+      "verification": "source_document_only",
+      "text": "## 2. Query parameters\n\n- Search centre (ICRS): (269.44627, 4.7682), epoch J2026.0 — 270.2″ from the J2000 position by proper motion only (no parallax, no observer position).\n- Field 6.0′ · wavelength tolerance 0.5 × bandwidth · max frames 8 · requested wavelength: automatic (best time coverage)\n- Discovery service: IRSA TAP (bundled inventory snapshot); cached index: True.\n- ADQL: `SELECT p.obs_publisher_did, p.energy_bandpassname, p.time_bounds_lower, p.time_bounds_upper, p.time_exposure, p.provenance_version, p.poly, a.uri, a.contentchecksum, a.contentlength FROM spherex.plane p JOIN spherex.artifact a ON a.planeid = p.planeid WHERE 1 = CONTAINS(POINT('ICRS', 269.4462690, 4.7682040), p.poly)`"
+    },
+    {
+      "id": "report:barnard#3",
+      "document_id": "report:barnard",
+      "source": "reports/targets/barnard.md",
+      "source_sha256": "3bbcc9cb9f10999218961684a2f54e1688573bf6ecf54ed6a998095aea1f9660",
+      "verification": "source_document_only",
+      "text": "## 3. Bundled inventory snapshot\n\nThis inventory was supplied with the project; it is not represented as a fresh search. Current sequence discovery provenance appears in the JSON report under meta.archive.\n\n- Archive rows 358 · unique observation×detector 357 · reprocessed copies dropped 0\n- Time range (UTC): 2025-08-15T20:45:11Z → 2026-09-22T15:04:21Z · per detector {'1': 60, '2': 60, '3': 59, '4': 59, '5': 61, '6': 58}\n- Collections {'spherex_dr1': 238, 'spherex_qr3': 119} · pipeline versions {'7.0.5': 357}\n- Usable at this field size 339 (rejected near detector edge: 18) · wavelength groups with ≥ 2 visits: 40\n- Full list: `reports/inventory/barnard_observations.csv`"
+    },
+    {
+      "id": "report:barnard#4",
+      "document_id": "report:barnard",
+      "source": "reports/targets/barnard.md",
+      "source_sha256": "3bbcc9cb9f10999218961684a2f54e1688573bf6ecf54ed6a998095aea1f9660",
+      "verification": "source_document_only",
+      "text": "## 4. Selected images\n\n| # | Date (UTC) | Obs. id | Det. | Release / L2 tag | Pipeline | λ (µm) | Δλ/bw | invalid | suspect | comparable | raw SHA-256 |\n|---|---|---|---|---|---|---|---|---|---|---|---|\n| 1 | 2025-08-25T17:09:20Z | 2025W35_1A_0146_1 | 2 | dr1 / l2b-v27-2026-230 | 7.0.5 | 1.51677 | +0.14 | 0.026 | 0.007 | 0.974 | `bd04bc03db8e90f4…` |\n| 2 | 2025-08-30T16:11:26Z | 2025W35_2A_0418_1 | 2 | dr1 / l2b-v27-2026-231 | 7.0.5 | 1.49617 | -0.42 | 0.033 | 0.012 | 0.636 | `443c9cffa9071fb3…` |\n| 3 | 2026-03-15T00:51:21Z | 2026W11_2A_0501_3 | 2 | dr1 / l2b-v27-2026-234 | 7.0.5 | 1.51623 | +0.12 | 0.022 | 0.020 | 0.978 | `f261180dd0b96512…` |\n| 4 | 2026-08-18T20:49:36Z | 2026W34_1A_0363_1 | 2 | qr3 / l2b-v27-2026-243 | 7.0.5 | 1.51115 | -0.02 | 0.034 | 0.006 | 0.966 | `bf248f899491dc47…` |\n| 5 | 2026-08-21T18:56:00Z | 2026W34_2A_0264_1 | 2 | qr3 / l2b-v27-2026-243 | 7.0.5 | 1.50255 | -0.25 | 0.022 | 0.007 | 0.969 | `0332b27158e9dbe9…` |\n| 6 | 2026-09-22T15:05:19Z | 2026W39_1A_0371_1 | 2 | qr3 / l2b-v27-2026-268 | 7.0.5 | 1.51119 | -0.01 | 0.036 | 0.046 | 0.964 | `e8c81fe24a84b85f…` |\n\n![frames](barnard.png)\n\n*Preview tiles (magnified, common display scale; purple = no measurement). Previews are for inspection only, not for measurement.*"
+    },
+    {
+      "id": "report:barnard#5",
+      "document_id": "report:barnard",
+      "source": "reports/targets/barnard.md",
+      "source_sha256": "3bbcc9cb9f10999218961684a2f54e1688573bf6ecf54ed6a998095aea1f9660",
+      "verification": "source_document_only",
+      "text": "## 5. Time span and wavelength agreement\n\n- 6 frames in 6 visits over 392.9 days (2025-08-25 → 2026-09-22).\n- Reference wavelength 1.51174 µm, bandwidth 0.03711 µm (FWHM); all frames within 0.5 × bandwidth at the field centre (largest offset 0.42). The matched group in the archive has 6 frames in 6 visits.\n- Pixels whose wavelength is outside the tolerance are masked per frame; area comparable in all frames: 57%."
+    },
+    {
+      "id": "report:barnard#6",
+      "document_id": "report:barnard",
+      "source": "reports/targets/barnard.md",
+      "source_sha256": "3bbcc9cb9f10999218961684a2f54e1688573bf6ecf54ed6a998095aea1f9660",
+      "verification": "source_document_only",
+      "text": "## 6. Quality issues and rejected images\n\n- Rejected after download: none\n- Warnings: center_saturated\n- Frame 1: flags within 2.5 px of field centre: TRANSIENT (15), OVERFLOW (5), SUR_ERROR (19), BLOOM (19); L2 QA Pass; PSF FWHM 7.46″ (EPSF).\n- Frame 2: flags within 2.5 px of field centre: TRANSIENT (14), OVERFLOW (7), SUR_ERROR (18), BLOOM (19); L2 QA Pass; PSF FWHM 7.46″ (EPSF).\n- Frame 3: flags within 2.5 px of field centre: TRANSIENT (14), OVERFLOW (5), SUR_ERROR (16), BLOOM (19); L2 QA Pass; PSF FWHM 7.46″ (EPSF).\n- Frame 4: flags within 2.5 px of field centre: TRANSIENT (14), OVERFLOW (5), SUR_ERROR (13), BLOOM (19); L2 QA Pass; PSF FWHM 7.46″ (EPSF).\n- Frame 5: flags within 2.5 px of field centre: TRANSIENT (14), OVERFLOW (7), SUR_ERROR (16), BLOOM (20); L2 QA Pass; PSF FWHM 7.46″ (EPSF).\n- Frame 6: flags within 2.5 px of field centre: TRANSIENT (14), OVERFLOW (6), SUR_ERROR (16), BLOOM (19); L2 QA Pass; PSF FWHM 7.46″ (EPSF)."
+    },
+    {
+      "id": "report:barnard#7",
+      "document_id": "report:barnard",
+      "source": "reports/targets/barnard.md",
+      "source_sha256": "3bbcc9cb9f10999218961684a2f54e1688573bf6ecf54ed6a998095aea1f9660",
+      "verification": "source_document_only",
+      "text": "## 7. Alignment check\n\n- 21 centroid measurements of Gaia DR3 stars (G ≤ 15.5) propagated to each frame epoch: median offset (-0.12″ E, -0.07″ N), rms 0.4″ = 0.07 pixel.\n- Per frame: #1: n=4, rms 0.39″; #2: n=4, rms 0.48″; #3: n=2, rms 0.4″; #4: n=4, rms 0.33″; #5: n=4, rms 0.47″; #6: n=3, rms 0.22″"
+    },
+    {
+      "id": "report:barnard#8",
+      "document_id": "report:barnard",
+      "source": "reports/targets/barnard.md",
+      "source_sha256": "3bbcc9cb9f10999218961684a2f54e1688573bf6ecf54ed6a998095aea1f9660",
+      "verification": "source_document_only",
+      "text": "## 8. Detectability of the source\n\n| # | Date | Method | Offset from prediction (E, N ″) | Aperture flux (mJy) | S/N | Note |\n|---|---|---|---|---|---|---|\n| 1 | 2025-08-25 | saturated_core_centroid | +3.09, -1.23 | no measurement | — | invalid_pixels_in_aperture |\n| 2 | 2025-08-30 | saturated_core_centroid | +0.64, +0.42 | no measurement | — | invalid_pixels_in_aperture |\n| 3 | 2026-03-15 | saturated_core_centroid | +3.24, +0.10 | no measurement | — | invalid_pixels_in_aperture |\n| 4 | 2026-08-18 | saturated_core_centroid | -2.57, -0.37 | no measurement | — | invalid_pixels_in_aperture |\n| 5 | 2026-08-21 | saturated_core_centroid | -4.52, +0.66 | no measurement | — | invalid_pixels_in_aperture |\n| 6 | 2026-09-22 | saturated_core_centroid | -0.70, -1.10 | no measurement | — | invalid_pixels_in_aperture |\n\n**Blending.** Catalogue sources within 20″ of the predicted positions (aperture radius 12.3″): Gaia DR3 4472835876142910336 (G=16.7, 17.3″ on 2025-08-25); Gaia DR3 4472835979222166400 (G=17.5, 19.7″ on 2026-09-22); AllWISE J175746.84+044624.0 (W1=17.099, W2=17.106, 11.5″, epoch ≈2010.5); AllWISE J175747.64+044546.5 (W1=14.786, W2=14.863, 17.2″, epoch ≈2010.5)."
+    },
+    {
+      "id": "report:barnard#9",
+      "document_id": "report:barnard",
+      "source": "reports/targets/barnard.md",
+      "source_sha256": "3bbcc9cb9f10999218961684a2f54e1688573bf6ecf54ed6a998095aea1f9660",
+      "verification": "source_document_only",
+      "text": "## 9. Possible change seen\n\n- **Motion.** Linear fit to 6 positions over 1.076 yr: (-5.24, +10.43) ± 1.66 ″/yr (E, N); catalogue (-0.80, +10.36) ″/yr. Total shift 12.56″ = 2.04 pixels; significance 5.0σ; deviation from catalogue 1.9σ. Per-point error 1.84″ (assumed 0.3 px (saturated-core centroid)).\n- **Brightness.** Insufficient reliable matched-wavelength measurements for a brightness comparison; consult the per-frame measurement reasons above.\n- Wing-brightness proxy (unsaturated pixels 5–9 px from the centre, indicative only): max/min 1.83 over 6 usable frames. Not used for the status above."
+    },
+    {
+      "id": "report:barnard#10",
+      "document_id": "report:barnard",
+      "source": "reports/targets/barnard.md",
+      "source_sha256": "3bbcc9cb9f10999218961684a2f54e1688573bf6ecf54ed6a998095aea1f9660",
+      "verification": "source_document_only",
+      "text": "## 10. Uncertainties and alternative explanations\n\n- Where the method is saturated_core_centroid, the location describes the invalid saturated core rather than the stellar flux; pixel phase and bloom can shift that centroid.\n- Observer parallax and spacecraft position are not modelled. The catalogue parallax is 0.5470 arcsec (0.089 SPHEREx pixels).\n- The current motion fit uses per-point error 1.84 arcsec: assumed 0.3 px (saturated-core centroid).\n- In this sequence, 6/6 frames meet the source-detection rule; 6 frames are flagged as saturated at the target.\n- A valid comparison-star ensemble is unavailable for this measurement; no ensemble-verified brightness change is claimed.\n- The scientific-confirmation status remains false. Neither catalogue predictions nor the display stack provide independent confirmation."
+    },
+    {
+      "id": "report:barnard#11",
+      "document_id": "report:barnard",
+      "source": "reports/targets/barnard.md",
+      "source_sha256": "3bbcc9cb9f10999218961684a2f54e1688573bf6ecf54ed6a998095aea1f9660",
+      "verification": "source_document_only",
+      "text": "## 11. How to reproduce\n\n```bash\ncd backend\npython -m tools.run_search --target barnard        # query, select, download, align, preview\npython -m tools.measure_presets --only barnard     # detection, motion, brightness\npython -m tools.target_report                  # regenerate these reports\n```\n\nRaw cutouts are stored unmodified under `data/raw/<sha256>.fits`; the SHA-256 of each is in the table above and in `barnard.json`. A later archive update produces a new sequence id; this report refers to the sequence above."
+    },
+    {
+      "id": "report:eps-indi-b#intro",
+      "document_id": "report:eps-indi-b",
+      "source": "reports/targets/eps-indi-b.md",
+      "source_sha256": "9a91548a37ad35884cbf7a308b4eb304b930942a0d77be5c8cdf536f3e39c479",
+      "verification": "source_document_only",
+      "text": "# Epsilon Indi B — target report\n\nBlinkSpace pipeline 1.2.0 · sequence `vaszj8xtz2` · data: SPHEREx DR1, QR3 Level-2 spectral images (IRSA)."
+    },
+    {
+      "id": "report:eps-indi-b#status",
+      "document_id": "report:eps-indi-b",
+      "source": "reports/targets/eps-indi-b.md",
+      "source_sha256": "9a91548a37ad35884cbf7a308b4eb304b930942a0d77be5c8cdf536f3e39c479",
+      "verification": "source_document_only",
+      "text": "## Status\n\n| Step | Result |\n|---|---|\n| Data available (≥ 2 matched-wavelength frames) | **yes** — 6 frames, 6 visits, 525 days |\n| Source detected at the expected position | **yes** — 4/6 frames (0 saturated) |\n| Change seen | **yes** — motion |\n| Change scientifically confirmed | **no** — this tool never claims confirmation |"
+    },
+    {
+      "id": "report:eps-indi-b#1",
+      "document_id": "report:eps-indi-b",
+      "source": "reports/targets/eps-indi-b.md",
+      "source_sha256": "9a91548a37ad35884cbf7a308b4eb304b930942a0d77be5c8cdf536f3e39c479",
+      "verification": "source_document_only",
+      "text": "## 1. Identity and coordinate source\n\n- SIMBAD main id: `* eps Ind B` · type BD* · spectral type T1V+T6V\n- Aliases: * eps Ind B, 2MASS J22041052-5646577, GJ 845 B, GJ 845 C, Gaia DR2 6412596012146094848, Gaia DR3 6412596012146801152\n- Catalogue position (ICRS, epoch J2000.0): 22h04m10.60s -56d46m58.2s = (331.044147, -56.782844) · source 2020yCat.1350....0G\n- Proper motion: (3981.977, -2466.832) mas/yr · source 2020yCat.1350....0G · parallax 270.658 mas\n- Brown-dwarf binary (Ba: T1, Bb: T6; separation ≈0.7″) about 400″ from Eps Indi A. SPHEREx cannot resolve the pair: expect a single blended source. This is not the primary star Eps Indi A.\n- Not the primary: `* eps Ind` is 402.3″ away."
+    },
+    {
+      "id": "report:eps-indi-b#2",
+      "document_id": "report:eps-indi-b",
+      "source": "reports/targets/eps-indi-b.md",
+      "source_sha256": "9a91548a37ad35884cbf7a308b4eb304b930942a0d77be5c8cdf536f3e39c479",
+      "verification": "source_document_only",
+      "text": "## 2. Query parameters\n\n- Search centre (ICRS): (331.09664, -56.80066), epoch J2026.0 — 121.8″ from the J2000 position by proper motion only (no parallax, no observer position).\n- Field 6.0′ · wavelength tolerance 0.5 × bandwidth · max frames 8 · requested wavelength: automatic (best time coverage)\n- Discovery service: IRSA TAP (bundled inventory snapshot); cached index: True.\n- ADQL: `SELECT p.obs_publisher_did, p.energy_bandpassname, p.time_bounds_lower, p.time_bounds_upper, p.time_exposure, p.provenance_version, p.poly, a.uri, a.contentchecksum, a.contentlength FROM spherex.plane p JOIN spherex.artifact a ON a.planeid = p.planeid WHERE 1 = CONTAINS(POINT('ICRS', 331.0966440, -56.8006600), p.poly)`"
+    },
+    {
+      "id": "report:eps-indi-b#3",
+      "document_id": "report:eps-indi-b",
+      "source": "reports/targets/eps-indi-b.md",
+      "source_sha256": "9a91548a37ad35884cbf7a308b4eb304b930942a0d77be5c8cdf536f3e39c479",
+      "verification": "source_document_only",
+      "text": "## 3. Bundled inventory snapshot\n\nThis inventory was supplied with the project; it is not represented as a fresh search. Current sequence discovery provenance appears in the JSON report under meta.archive.\n\n- Archive rows 458 · unique observation×detector 456 · reprocessed copies dropped 0\n- Time range (UTC): 2025-04-24T20:31:57Z → 2026-10-02T11:28:26Z · per detector {'1': 46, '2': 93, '3': 96, '4': 46, '5': 83, '6': 92}\n- Collections {'spherex_dr1': 338, 'spherex_qr3': 118} · pipeline versions {'7.0.5': 456}\n- Usable at this field size 401 (rejected near detector edge: 55) · wavelength groups with ≥ 2 visits: 40\n- Full list: `reports/inventory/eps-indi-b_observations.csv`"
+    },
+    {
+      "id": "report:eps-indi-b#4",
+      "document_id": "report:eps-indi-b",
+      "source": "reports/targets/eps-indi-b.md",
+      "source_sha256": "9a91548a37ad35884cbf7a308b4eb304b930942a0d77be5c8cdf536f3e39c479",
+      "verification": "source_document_only",
+      "text": "## 4. Selected images\n\n| # | Date (UTC) | Obs. id | Det. | Release / L2 tag | Pipeline | λ (µm) | Δλ/bw | invalid | suspect | comparable | raw SHA-256 |\n|---|---|---|---|---|---|---|---|---|---|---|---|\n| 1 | 2025-04-24T20:35:04Z | 2025W17_4B_0017_2 | 2 | dr1 / l2b-v27-2026-196 | 7.0.5 | 1.59932 | +0.46 | 0.015 | 0.010 | 0.574 | `fbb6e8e06aebec64…` |\n| 2 | 2025-04-26T19:44:33Z | 2025W17_4B_0315_1 | 2 | dr1 / l2b-v27-2026-196 | 7.0.5 | 1.57576 | -0.15 | 0.011 | 0.055 | 0.989 | `444d55e7f660014c…` |\n| 3 | 2025-05-04T16:52:51Z | 2025W18_2B_0489_1 | 2 | dr1 / l2b-v27-2026-197 | 7.0.5 | 1.57571 | -0.15 | 0.085 | 0.077 | 0.915 | `96c1ae7918cfae77…` |\n| 4 | 2025-10-09T19:54:45Z | 2025W41_2B_0083_1 | 2 | dr1 / l2b-v27-2026-242 | 7.0.5 | 1.57939 | -0.06 | 0.038 | 0.060 | 0.962 | `f75fd280e770c0b7…` |\n| 5 | 2026-09-30T07:23:10Z | 2026W40_1A_0518_1 | 2 | qr3 / l2b-v27-2026-276 | 7.0.5 | 1.57952 | -0.05 | 0.018 | 0.010 | 0.983 | `3e4333edb762556a…` |\n| 6 | 2026-10-02T06:32:51Z | 2026W40_2A_0172_1 | 2 | qr3 / l2b-v27-2026-285 | 7.0.5 | 1.59887 | +0.45 | 0.020 | 0.007 | 0.592 | `810c84488b0f84fe…` |\n\n![frames](eps-indi-b.png)\n\n*Preview tiles (magnified, common display scale; purple = no measurement). Previews are for inspection only, not for measurement.*"
+    },
+    {
+      "id": "report:eps-indi-b#5",
+      "document_id": "report:eps-indi-b",
+      "source": "reports/targets/eps-indi-b.md",
+      "source_sha256": "9a91548a37ad35884cbf7a308b4eb304b930942a0d77be5c8cdf536f3e39c479",
+      "verification": "source_document_only",
+      "text": "## 5. Time span and wavelength agreement\n\n- 6 frames in 6 visits over 525.4 days (2025-04-24 → 2026-10-02).\n- Reference wavelength 1.58153 µm, bandwidth 0.03839 µm (FWHM); all frames within 0.5 × bandwidth at the field centre (largest offset 0.46). The matched group in the archive has 10 frames in 8 visits.\n- Pixels whose wavelength is outside the tolerance are masked per frame; area comparable in all frames: 15%."
+    },
+    {
+      "id": "report:eps-indi-b#6",
+      "document_id": "report:eps-indi-b",
+      "source": "reports/targets/eps-indi-b.md",
+      "source_sha256": "9a91548a37ad35884cbf7a308b4eb304b930942a0d77be5c8cdf536f3e39c479",
+      "verification": "source_document_only",
+      "text": "## 6. Quality issues and rejected images\n\n- Rejected after download: 2025W23_2B_0285_1 D2 (wavelength_mismatch_after_download); 2026W40_1A_0721_3 D2 (wavelength_mismatch_after_download)\n- Warnings: partial_data\n- Frame 1: flags within 2.5 px of field centre: NONFUNC (1); L2 QA Pass; PSF FWHM 7.46″ (EPSF).\n- Frame 2: flags within 2.5 px of field centre: none; L2 QA Pass; PSF FWHM 7.46″ (EPSF).\n- Frame 3: flags within 2.5 px of field centre: HALO (1); L2 QA Pass; PSF FWHM 7.46″ (EPSF).\n- Frame 4: flags within 2.5 px of field centre: PERSIST (2); L2 QA Pass; PSF FWHM 7.46″ (EPSF).\n- Frame 5: flags within 2.5 px of field centre: none; L2 QA Pass; PSF FWHM 7.46″ (EPSF).\n- Frame 6: flags within 2.5 px of field centre: none; L2 QA Pass; PSF FWHM 7.46″ (EPSF)."
+    },
+    {
+      "id": "report:eps-indi-b#7",
+      "document_id": "report:eps-indi-b",
+      "source": "reports/targets/eps-indi-b.md",
+      "source_sha256": "9a91548a37ad35884cbf7a308b4eb304b930942a0d77be5c8cdf536f3e39c479",
+      "verification": "source_document_only",
+      "text": "## 7. Alignment check\n\n- 11 centroid measurements of Gaia DR3 stars (G ≤ 15.5) propagated to each frame epoch: median offset (-0.09″ E, -0.22″ N), rms 0.46″ = 0.07 pixel.\n- Per frame: #1: n=1, rms 0.49″; #2: n=1, rms 0.36″; #3: n=1, rms 0.57″; #4: n=3, rms 0.54″; #5: n=2, rms 0.24″; #6: n=3, rms 0.47″"
+    },
+    {
+      "id": "report:eps-indi-b#8",
+      "document_id": "report:eps-indi-b",
+      "source": "reports/targets/eps-indi-b.md",
+      "source_sha256": "9a91548a37ad35884cbf7a308b4eb304b930942a0d77be5c8cdf536f3e39c479",
+      "verification": "source_document_only",
+      "text": "## 8. Detectability of the source\n\n| # | Date | Method | Offset from prediction (E, N ″) | Aperture flux (mJy) | S/N | Note |\n|---|---|---|---|---|---|---|\n| 1 | 2025-04-24 | invalid_pixels_at_target | — | no measurement | — | invalid_pixels_in_aperture |\n| 2 | 2025-04-26 | flux_weighted_centroid | +0.07, -0.33 | 39.077 ± 0.207 | 188.6 |  |\n| 3 | 2025-05-04 | not located | — | no measurement | — | invalid_pixels_in_aperture |\n| 4 | 2025-10-09 | flux_weighted_centroid | -0.16, -0.81 | 41.128 ± 0.212 | 194.4 |  |\n| 5 | 2026-09-30 | flux_weighted_centroid | +0.18, -1.33 | 40.174 ± 0.203 | 197.6 |  |\n| 6 | 2026-10-02 | flux_weighted_centroid | -0.36, -0.96 | 39.004 ± 0.201 | 193.6 |  |\n\n- Weighted mean of forced photometry at the predicted positions: 39.8239 ± 0.1029 mJy (S/N 387.0, 4 frames). This is a mean at a known position, not an independent detection.\n\n**Blending.** Catalogue sources within 20″ of the predicted positions (aperture radius 12.3″): AllWISE J220422.36-564811.2 (W1=16.824, W2=16.563, 11.1″, epoch ≈2010.5); AllWISE J220424.47-564755.3 (W1=16.866, W2=17.114, 11.7″, epoch ≈2010.5); AllWISE J220423.27-564742.3 (W1=16.397, W2=16.074, 18.7″, epoch ≈2010.5)."
+    },
+    {
+      "id": "report:eps-indi-b#9",
+      "document_id": "report:eps-indi-b",
+      "source": "reports/targets/eps-indi-b.md",
+      "source_sha256": "9a91548a37ad35884cbf7a308b4eb304b930942a0d77be5c8cdf536f3e39c479",
+      "verification": "source_document_only",
+      "text": "## 9. Possible change seen\n\n- **Motion.** Linear fit to 4 positions over 1.433 yr: (+3.91, -2.98) ± 0.49 ″/yr (E, N); catalogue (+3.98, -2.47) ″/yr. Total shift 7.05″ = 1.15 pixels; significance 7.0σ; deviation from catalogue 0.7σ. Per-point error 0.62″ (sequence alignment rms vs Gaia (per-axis, floor 0.1 px)).\n- **Brightness.** 3 reliable points at 1.57936 µm (mJy; normalised by 3 comparison stars; systematic 4%; wavelength tolerance used 0.25): 2025-04-26: 39.1 ± 1.8, 2025-10-09: 41.4 ± 1.9, 2026-09-30: 40.2 ± 1.8. Max/min 1.06, difference 0.9σ."
+    },
+    {
+      "id": "report:eps-indi-b#10",
+      "document_id": "report:eps-indi-b",
+      "source": "reports/targets/eps-indi-b.md",
+      "source_sha256": "9a91548a37ad35884cbf7a308b4eb304b930942a0d77be5c8cdf536f3e39c479",
+      "verification": "source_document_only",
+      "text": "## 10. Uncertainties and alternative explanations\n\n- Ba and Bb are unresolved at SPHEREx's pixel scale. A measured location or flux refers to their combined image, not a resolved component.\n- Observer parallax and spacecraft position are not modelled. The catalogue parallax is 0.2707 arcsec (0.044 SPHEREx pixels).\n- The current motion fit uses per-point error 0.62 arcsec: sequence alignment rms vs Gaia (per-axis, floor 0.1 px).\n- In this sequence, 4/6 frames meet the source-detection rule; 0 frames are flagged as saturated at the target.\n- The current brightness analysis uses wavelength tolerance 0.25 bandwidth and a 4.5% systematic term. These values are computed for this sequence, not inherited from earlier reports.\n- The scientific-confirmation status remains false. Neither catalogue predictions nor the display stack provide independent confirmation."
+    },
+    {
+      "id": "report:eps-indi-b#11",
+      "document_id": "report:eps-indi-b",
+      "source": "reports/targets/eps-indi-b.md",
+      "source_sha256": "9a91548a37ad35884cbf7a308b4eb304b930942a0d77be5c8cdf536f3e39c479",
+      "verification": "source_document_only",
+      "text": "## 11. How to reproduce\n\n```bash\ncd backend\npython -m tools.run_search --target eps-indi-b        # query, select, download, align, preview\npython -m tools.measure_presets --only eps-indi-b     # detection, motion, brightness\npython -m tools.target_report                  # regenerate these reports\n```\n\nRaw cutouts are stored unmodified under `data/raw/<sha256>.fits`; the SHA-256 of each is in the table above and in `eps-indi-b.json`. A later archive update produces a new sequence id; this report refers to the sequence above."
+    },
+    {
+      "id": "report:OZET#intro",
+      "document_id": "report:OZET",
+      "source": "reports/targets/OZET.md",
+      "source_sha256": "5cc9e20eff82ed40395d56c864e535d6a4c878df78c34e7907714a5949cc535f",
+      "verification": "source_document_only",
+      "text": "# Beş hedef test özeti\n\nİşlem sürümü 1.2.0 · yalnızca gerçek SPHEREx verisi.\n\n| Hedef | λ (µm) | Kare / ziyaret / gün | Veri mevcut | Kaynak seçiliyor | Değişim görülüyor | Bilimsel olarak doğrulandı | Hizalama rms (″) |\n|---|---|---|---|---|---|---|---|\n| [Barnard's Star](barnard.md) | 1.51174 | 6 / 6 / 393 | evet | evet (6/6, 6 doymuş) | evet hareket: 2.04 piksel, 5.0σ, katalogla uyumlu | hayır | 0.4 |\n| [Epsilon Indi B](eps-indi-b.md) | 1.58153 | 6 / 6 / 525 | evet | evet (4/6, 0 doymuş) | evet hareket: 1.15 piksel, 7.0σ, katalogla uyumlu | hayır | 0.46 |\n| [WISE 0855−0714](wise-0855.md) | 4.86 | 2 / 2 / 368 | evet | hayır (0/2, 0 doymuş) | hayır — | hayır | 1.28 |\n| [RW Aurigae](rw-aur.md) | 0.765 | 3 / 3 / 371 | evet | evet (3/3, 0 doymuş) | evet parlaklık: 2.587×, 5.6σ | hayır | 0.49 |\n| [R Draconis](r-dra.md) | 3.2084 | 8 / 8 / 468 | evet | evet (8/8, 8 doymuş) | hayır — | hayır | 4.86 |\n\n\"Değişim görülüyor\": bu aracın kendi ölçümünde ≥ 3σ (hareket: ölçülen konumlara doğrusal uyum; parlaklık: ham piksellerde açıklık fotometrisi, karşılaştırma yıldızlarıyla ölçeklenmiş, en az %20 değişim). Bilimsel doğrulama değildir. Sonuç yokluğu olduğu gibi raporlanır."
+    },
+    {
+      "id": "report:r-dra#intro",
+      "document_id": "report:r-dra",
+      "source": "reports/targets/r-dra.md",
+      "source_sha256": "37f9bf82635cac808b8cf624921097b0f35345a5097a5977ffd465fa1fed5e25",
+      "verification": "source_document_only",
+      "text": "# R Draconis — target report\n\nBlinkSpace pipeline 1.2.0 · sequence `hq75kubcj4` · data: SPHEREx DR1, QR3 Level-2 spectral images (IRSA)."
+    },
+    {
+      "id": "report:r-dra#status",
+      "document_id": "report:r-dra",
+      "source": "reports/targets/r-dra.md",
+      "source_sha256": "37f9bf82635cac808b8cf624921097b0f35345a5097a5977ffd465fa1fed5e25",
+      "verification": "source_document_only",
+      "text": "## Status\n\n| Step | Result |\n|---|---|\n| Data available (≥ 2 matched-wavelength frames) | **yes** — 8 frames, 8 visits, 468 days |\n| Source detected at the expected position | **yes** — 8/8 frames (8 saturated) |\n| Change seen | **no** |\n| Change scientifically confirmed | **no** — this tool never claims confirmation |"
+    },
+    {
+      "id": "report:r-dra#1",
+      "document_id": "report:r-dra",
+      "source": "reports/targets/r-dra.md",
+      "source_sha256": "37f9bf82635cac808b8cf624921097b0f35345a5097a5977ffd465fa1fed5e25",
+      "verification": "source_document_only",
+      "text": "## 1. Identity and coordinate source\n\n- SIMBAD main id: `V* R Dra` · type Mi* · spectral type M4.5-6+e\n- Aliases: 2MASS J16324023+6645180, Gaia DR2 1648328016352398848, Gaia DR3 1648328016354496384, HD 149880, HIP 81014, V* R Dra\n- Catalogue position (ICRS, epoch J2000.0): 16h32m40.23s +66d45m17.9s = (248.167611, 66.754979) · source 2020yCat.1350....0G\n- Proper motion: (-20.643, 6.149) mas/yr · source 2020yCat.1350....0G · parallax 1.2509 mas\n- Mira-type long-period variable (period ≈245 d). About 9° from the north ecliptic pole inside the SPHEREx deep field: hundreds of repeat observations. Very bright in the near-infrared; core pixels are saturated."
+    },
+    {
+      "id": "report:r-dra#2",
+      "document_id": "report:r-dra",
+      "source": "reports/targets/r-dra.md",
+      "source_sha256": "37f9bf82635cac808b8cf624921097b0f35345a5097a5977ffd465fa1fed5e25",
+      "verification": "source_document_only",
+      "text": "## 2. Query parameters\n\n- Search centre (ICRS): (248.16723, 66.75502), epoch J2026.0 — 0.6″ from the J2000 position by proper motion only (no parallax, no observer position).\n- Field 6.0′ · wavelength tolerance 0.5 × bandwidth · max frames 8 · requested wavelength: automatic (best time coverage)\n- Discovery service: IRSA TAP (bundled inventory snapshot); cached index: True.\n- ADQL: `SELECT p.obs_publisher_did, p.energy_bandpassname, p.time_bounds_lower, p.time_bounds_upper, p.time_exposure, p.provenance_version, p.poly, a.uri, a.contentchecksum, a.contentlength FROM spherex.plane p JOIN spherex.artifact a ON a.planeid = p.planeid WHERE 1 = CONTAINS(POINT('ICRS', 248.1672330, 66.7550240), p.poly)`"
+    },
+    {
+      "id": "report:r-dra#3",
+      "document_id": "report:r-dra",
+      "source": "reports/targets/r-dra.md",
+      "source_sha256": "37f9bf82635cac808b8cf624921097b0f35345a5097a5977ffd465fa1fed5e25",
+      "verification": "source_document_only",
+      "text": "## 3. Bundled inventory snapshot\n\nThis inventory was supplied with the project; it is not represented as a fresh search. Current sequence discovery provenance appears in the JSON report under meta.archive.\n\n- Archive rows 2493 · unique observation×detector 2485 · reprocessed copies dropped 0\n- Time range (UTC): 2025-04-24T21:06:38Z → 2026-09-27T06:59:18Z · per detector {'1': 579, '2': 89, '3': 573, '4': 582, '5': 89, '6': 573}\n- Collections {'spherex_dr1_deep': 1224, 'spherex_dr1': 413, 'spherex_qr3': 126, 'spherex_qr3_deep': 722} · pipeline versions {'7.0.5': 2485}\n- Usable at this field size 2298 (rejected near detector edge: 187) · wavelength groups with ≥ 2 visits: 40\n- Full list: `reports/inventory/r-dra_observations.csv`"
+    },
+    {
+      "id": "report:r-dra#4",
+      "document_id": "report:r-dra",
+      "source": "reports/targets/r-dra.md",
+      "source_sha256": "37f9bf82635cac808b8cf624921097b0f35345a5097a5977ffd465fa1fed5e25",
+      "verification": "source_document_only",
+      "text": "## 4. Selected images\n\n| # | Date (UTC) | Obs. id | Det. | Release / L2 tag | Pipeline | λ (µm) | Δλ/bw | invalid | suspect | comparable | raw SHA-256 |\n|---|---|---|---|---|---|---|---|---|---|---|---|\n| 1 | 2025-06-06T11:23:21Z | 2025W23_2B_0206_1 | 4 | dr1 / l2b-v27-2026-201 | 7.0.5 | 3.16908 | -0.42 | 0.090 | 0.015 | 0.615 | `87d787050dcdb293…` |\n| 2 | 2025-09-08T10:16:20Z | 2025W37_1A_0100_3 | 4 | dr1 / l2b-v27-2026-235 | 7.0.5 | 3.16835 | -0.43 | 0.098 | 0.009 | 0.582 | `2343e06ff24e9b33…` |\n| 3 | 2025-10-19T01:00:32Z | 2025W42_2A_0526_3 | 4 | dr1 / l2b-v27-2026-243 | 7.0.5 | 3.24817 | +0.43 | 0.068 | 0.011 | 0.606 | `421f01e5c4244315…` |\n| 4 | 2026-07-14T21:41:41Z | 2026W29_1A_0364_1 | 4 | qr3 / l2b-v27-2026-276 | 7.0.5 | 3.24598 | +0.40 | 0.092 | 0.011 | 0.666 | `16789410c46696eb…` |\n| 5 | 2026-08-10T20:26:37Z | 2026W33_1A_0175_3 | 4 | qr3 / l2b-v27-2026-240 | 7.0.5 | 3.22787 | +0.21 | 0.084 | 0.019 | 0.916 | `57cdad049861c494…` |\n| 6 | 2026-08-27T16:21:55Z | 2026W35_2A_0040_1 | 4 | qr3 / l2b-v27-2026-246 | 7.0.5 | 3.22626 | +0.19 | 0.092 | 0.034 | 0.908 | `3622976ae0e35b53…` |\n| 7 | 2026-09-05T05:42:23Z | 2026W36_2A_0474_3 | 4 | qr3 / l2b-v27-2026-254 | 7.0.5 | 3.22823 | +0.21 | 0.086 | 0.015 | 0.906 | `29ec03484840f4b6…` |\n| 8 | 2026-09-17T10:55:45Z | 2026W38_1A_0674_4 | 4 | qr3 / l2b-v27-2026-261 | 7.0.5 | 3.2374 | +0.31 | 0.076 | 0.021 | 0.827 | `96a940a7a46ebe85…` |\n\n![frames](r-dra.png)\n\n*Preview tiles (magnified, common display scale; purple = no measurement). Previews are for inspection only, not for measurement.*"
+    },
+    {
+      "id": "report:r-dra#5",
+      "document_id": "report:r-dra",
+      "source": "reports/targets/r-dra.md",
+      "source_sha256": "37f9bf82635cac808b8cf624921097b0f35345a5097a5977ffd465fa1fed5e25",
+      "verification": "source_document_only",
+      "text": "## 5. Time span and wavelength agreement\n\n- 8 frames in 8 visits over 468.0 days (2025-06-06 → 2026-09-17).\n- Reference wavelength 3.2084 µm, bandwidth 0.09339 µm (FWHM); all frames within 0.5 × bandwidth at the field centre (largest offset 0.43). The matched group in the archive has 44 frames in 40 visits.\n- Pixels whose wavelength is outside the tolerance are masked per frame; area comparable in all frames: 5%."
+    },
+    {
+      "id": "report:r-dra#6",
+      "document_id": "report:r-dra",
+      "source": "reports/targets/r-dra.md",
+      "source_sha256": "37f9bf82635cac808b8cf624921097b0f35345a5097a5977ffd465fa1fed5e25",
+      "verification": "source_document_only",
+      "text": "## 6. Quality issues and rejected images\n\n- Rejected after download: none\n- Warnings: center_saturated\n- Frame 1: flags within 2.5 px of field centre: OVERFLOW (21), SUR_ERROR (21), NONFUNC (1), BLOOM (20); L2 QA Pass; PSF FWHM 8.67″ (EPSF).\n- Frame 2: flags within 2.5 px of field centre: OVERFLOW (21), SUR_ERROR (19), BLOOM (21); L2 QA Pass; PSF FWHM 8.67″ (EPSF).\n- Frame 3: flags within 2.5 px of field centre: OVERFLOW (21), SUR_ERROR (18), BLOOM (21); L2 QA Pass; PSF FWHM 8.67″ (EPSF).\n- Frame 4: flags within 2.5 px of field centre: OVERFLOW (20), SUR_ERROR (20), BLOOM (20); L2 QA Pass; PSF FWHM 8.67″ (EPSF).\n- Frame 5: flags within 2.5 px of field centre: OVERFLOW (19), SUR_ERROR (19), BLOOM (19); L2 QA Pass; PSF FWHM 8.67″ (EPSF).\n- Frame 6: flags within 2.5 px of field centre: OVERFLOW (21), SUR_ERROR (21), BLOOM (21); L2 QA Pass; PSF FWHM 8.67″ (EPSF).\n- Frame 7: flags within 2.5 px of field centre: OVERFLOW (18), SUR_ERROR (18), BLOOM (18); L2 QA Pass; PSF FWHM 8.67″ (EPSF).\n- Frame 8: flags within 2.5 px of field centre: OVERFLOW (20), SUR_ERROR (20), BLOOM (20); L2 QA Pass; PSF FWHM 8.67″ (EPSF)."
+    },
+    {
+      "id": "report:r-dra#7",
+      "document_id": "report:r-dra",
+      "source": "reports/targets/r-dra.md",
+      "source_sha256": "37f9bf82635cac808b8cf624921097b0f35345a5097a5977ffd465fa1fed5e25",
+      "verification": "source_document_only",
+      "text": "## 7. Alignment check\n\n- 12 centroid measurements of Gaia DR3 stars (G ≤ 15.5) propagated to each frame epoch: median offset (-3.25″ E, 1.57″ N), rms 4.86″ = 0.79 pixel.\n- Per frame: #1: n=1, rms 4.09″; #2: n=1, rms 6.04″; #3: n=1, rms 3.15″; #4: n=2, rms 4.4″; #5: n=2, rms 4.95″; #6: n=2, rms 5.28″; #7: n=1, rms 3.13″; #8: n=2, rms 5.77″"
+    },
+    {
+      "id": "report:r-dra#8",
+      "document_id": "report:r-dra",
+      "source": "reports/targets/r-dra.md",
+      "source_sha256": "37f9bf82635cac808b8cf624921097b0f35345a5097a5977ffd465fa1fed5e25",
+      "verification": "source_document_only",
+      "text": "## 8. Detectability of the source\n\n| # | Date | Method | Offset from prediction (E, N ″) | Aperture flux (mJy) | S/N | Note |\n|---|---|---|---|---|---|---|\n| 1 | 2025-06-06 | saturated_core_centroid | -0.51, -1.36 | no measurement | — | invalid_pixels_in_aperture |\n| 2 | 2025-09-08 | saturated_core_centroid | +0.74, +0.14 | no measurement | — | invalid_pixels_in_aperture |\n| 3 | 2025-10-19 | saturated_core_centroid | +0.53, -1.16 | no measurement | — | invalid_pixels_in_aperture |\n| 4 | 2026-07-14 | saturated_core_centroid | -0.08, +0.31 | no measurement | — | invalid_pixels_in_aperture |\n| 5 | 2026-08-10 | saturated_core_centroid | -0.61, +1.52 | no measurement | — | invalid_pixels_in_aperture |\n| 6 | 2026-08-27 | saturated_core_centroid | +0.22, -0.11 | no measurement | — | invalid_pixels_in_aperture |\n| 7 | 2026-09-05 | saturated_core_centroid | -0.50, +0.12 | no measurement | — | invalid_pixels_in_aperture |\n| 8 | 2026-09-17 | saturated_core_centroid | +0.01, -0.59 | no measurement | — | invalid_pixels_in_aperture |\n\n**Blending.** Catalogue sources within 20″ of the predicted positions (aperture radius 12.3″): AllWISE J163240.19+664517.9 (W1=0.393, W2=0.129, 0.4″, epoch ≈2010.5)."
+    },
+    {
+      "id": "report:r-dra#9",
+      "document_id": "report:r-dra",
+      "source": "reports/targets/r-dra.md",
+      "source_sha256": "37f9bf82635cac808b8cf624921097b0f35345a5097a5977ffd465fa1fed5e25",
+      "verification": "source_document_only",
+      "text": "## 9. Possible change seen\n\n- **Motion.** Linear fit to 8 positions over 1.281 yr: (-0.32, +1.00) ± 1.32 ″/yr (E, N); catalogue (-0.02, +0.01) ″/yr. Total shift 1.34″ = 0.22 pixels; significance 0.6σ; deviation from catalogue 0.6σ. Per-point error 1.84″ (assumed 0.3 px (saturated-core centroid)).\n- **Brightness.** Insufficient reliable matched-wavelength measurements for a brightness comparison; consult the per-frame measurement reasons above.\n- Wing-brightness proxy (unsaturated pixels 5–9 px from the centre, indicative only): max/min 1.2 over 6 usable frames. Not used for the status above."
+    },
+    {
+      "id": "report:r-dra#10",
+      "document_id": "report:r-dra",
+      "source": "reports/targets/r-dra.md",
+      "source_sha256": "37f9bf82635cac808b8cf624921097b0f35345a5097a5977ffd465fa1fed5e25",
+      "verification": "source_document_only",
+      "text": "## 10. Uncertainties and alternative explanations\n\n- Saturated or invalid core pixels have no flux measurement. A wing-brightness proxy, if available, is only indicative and is not used to establish variability.\n- Bloom, halo, persistence and scattered light can affect centroids and background estimates; the actual per-frame quality flags above identify which effects were recorded.\n- Observer parallax and spacecraft position are not modelled. The catalogue parallax is 0.0013 arcsec (0.000 SPHEREx pixels).\n- The current motion fit uses per-point error 1.84 arcsec: assumed 0.3 px (saturated-core centroid).\n- In this sequence, 8/8 frames meet the source-detection rule; 8 frames are flagged as saturated at the target.\n- A valid comparison-star ensemble is unavailable for this measurement; no ensemble-verified brightness change is claimed.\n- The scientific-confirmation status remains false. Neither catalogue predictions nor the display stack provide independent confirmation."
+    },
+    {
+      "id": "report:r-dra#11",
+      "document_id": "report:r-dra",
+      "source": "reports/targets/r-dra.md",
+      "source_sha256": "37f9bf82635cac808b8cf624921097b0f35345a5097a5977ffd465fa1fed5e25",
+      "verification": "source_document_only",
+      "text": "## 11. How to reproduce\n\n```bash\ncd backend\npython -m tools.run_search --target r-dra        # query, select, download, align, preview\npython -m tools.measure_presets --only r-dra     # detection, motion, brightness\npython -m tools.target_report                  # regenerate these reports\n```\n\nRaw cutouts are stored unmodified under `data/raw/<sha256>.fits`; the SHA-256 of each is in the table above and in `r-dra.json`. A later archive update produces a new sequence id; this report refers to the sequence above."
+    },
+    {
+      "id": "report:README#intro",
+      "document_id": "report:README",
+      "source": "reports/targets/README.md",
+      "source_sha256": "4d75ba48021fcd5cd4e2af33101cc093ff2e0b29b48102d58a45c57c27df2f97",
+      "verification": "source_document_only",
+      "text": "# Five-target test summary\n\nPipeline 1.2.0 · real SPHEREx data only (no synthetic data in this table).\n\n| Target | λ (µm) | Frames / visits / days | Data available | Source detected | Change seen | Scientifically confirmed | Alignment rms (″) |\n|---|---|---|---|---|---|---|---|\n| [Barnard's Star](barnard.md) | 1.51174 | 6 / 6 / 393 | yes | yes (6/6, 6 saturated) | yes motion: 2.04 px, 5.0σ, consistent with catalogue | no | 0.4 |\n| [Epsilon Indi B](eps-indi-b.md) | 1.58153 | 6 / 6 / 525 | yes | yes (4/6, 0 saturated) | yes motion: 1.15 px, 7.0σ, consistent with catalogue | no | 0.46 |\n| [WISE 0855−0714](wise-0855.md) | 4.86 | 2 / 2 / 368 | yes | no (0/2, 0 saturated) | no — | no | 1.28 |\n| [RW Aurigae](rw-aur.md) | 0.765 | 3 / 3 / 371 | yes | yes (3/3, 0 saturated) | yes brightness: 2.587×, 5.6σ | no | 0.49 |\n| [R Draconis](r-dra.md) | 3.2084 | 8 / 8 / 468 | yes | yes (8/8, 8 saturated) | no — | no | 4.86 |\n\n\"Change seen\" means ≥ 3σ in this tool's own measurement (motion: linear fit to measured positions; brightness: aperture photometry on native pixels, normalised by comparison stars, ≥ 20% change). It is not a scientific confirmation. Absence of a result is reported as such."
+    },
+    {
+      "id": "report:rw-aur#intro",
+      "document_id": "report:rw-aur",
+      "source": "reports/targets/rw-aur.md",
+      "source_sha256": "013e59087ce8c24c7ae0f274b42420034e3cf4140ffde706c342345b99e69818",
+      "verification": "source_document_only",
+      "text": "# RW Aurigae — target report\n\nBlinkSpace pipeline 1.2.0 · sequence `nhvk2kebw6` · data: SPHEREx DR1, QR3 Level-2 spectral images (IRSA)."
+    },
+    {
+      "id": "report:rw-aur#status",
+      "document_id": "report:rw-aur",
+      "source": "reports/targets/rw-aur.md",
+      "source_sha256": "013e59087ce8c24c7ae0f274b42420034e3cf4140ffde706c342345b99e69818",
+      "verification": "source_document_only",
+      "text": "## Status\n\n| Step | Result |\n|---|---|\n| Data available (≥ 2 matched-wavelength frames) | **yes** — 3 frames, 3 visits, 371 days |\n| Source detected at the expected position | **yes** — 3/3 frames (0 saturated) |\n| Change seen | **yes** — brightness |\n| Change scientifically confirmed | **no** — this tool never claims confirmation |"
+    },
+    {
+      "id": "report:rw-aur#1",
+      "document_id": "report:rw-aur",
+      "source": "reports/targets/rw-aur.md",
+      "source_sha256": "013e59087ce8c24c7ae0f274b42420034e3cf4140ffde706c342345b99e69818",
+      "verification": "source_document_only",
+      "text": "## 1. Identity and coordinate source\n\n- SIMBAD main id: `V* RW Aur` · type TT* · spectral type K1/5e+K5e\n- Aliases: 2MASS J05074953+3024050, HD 240764, HIP 23873, V* RW Aur, WISE J050749.55+302404.9, WISEA J050749.54+302404.7\n- Catalogue position (ICRS, epoch J2000.0): 05h07m49.57s +30d24m05.2s = (76.956526, 30.401438) · source 2007A&A...474..653V\n- Proper motion: (7.23, -20.33) mas/yr · source 2007A&A...474..653V · parallax 15.42 mas\n- Young (T Tauri) variable; components A and B are ≈1.4″ apart and appear as one source to SPHEREx. Known for irregular deep dimming events."
+    },
+    {
+      "id": "report:rw-aur#2",
+      "document_id": "report:rw-aur",
+      "source": "reports/targets/rw-aur.md",
+      "source_sha256": "013e59087ce8c24c7ae0f274b42420034e3cf4140ffde706c342345b99e69818",
+      "verification": "source_document_only",
+      "text": "## 2. Query parameters\n\n- Search centre (ICRS): (76.95659, 30.40129), epoch J2026.0 — 0.6″ from the J2000 position by proper motion only (no parallax, no observer position).\n- Field 6.0′ · wavelength tolerance 0.5 × bandwidth · max frames 8 · requested wavelength: 0.765\n- Discovery service: IRSA TAP (bundled inventory snapshot); cached index: True.\n- ADQL: `SELECT p.obs_publisher_did, p.energy_bandpassname, p.time_bounds_lower, p.time_bounds_upper, p.time_exposure, p.provenance_version, p.poly, a.uri, a.contentchecksum, a.contentlength FROM spherex.plane p JOIN spherex.artifact a ON a.planeid = p.planeid WHERE 1 = CONTAINS(POINT('ICRS', 76.9565870, 30.4012910), p.poly)`\n- Preset wavelength rationale from the prior inventory: The star carries saturation/non-linearity flags longward of 0.85 µm (the automatically chosen 2.16 µm group has a saturated core). In the 0.765 µm group all three visits are flag-free and usable for quantitative measurement."
+    },
+    {
+      "id": "report:rw-aur#3",
+      "document_id": "report:rw-aur",
+      "source": "reports/targets/rw-aur.md",
+      "source_sha256": "013e59087ce8c24c7ae0f274b42420034e3cf4140ffde706c342345b99e69818",
+      "verification": "source_document_only",
+      "text": "## 3. Bundled inventory snapshot\n\nThis inventory was supplied with the project; it is not represented as a fresh search. Current sequence discovery provenance appears in the JSON report under meta.archive.\n\n- Archive rows 335 · unique observation×detector 330 · reprocessed copies dropped 0\n- Time range (UTC): 2025-09-01T10:04:18Z → 2026-09-16T21:30:06Z · per detector {'1': 56, '2': 55, '3': 56, '4': 56, '5': 56, '6': 51}\n- Collections {'spherex_dr1': 223, 'spherex_qr3': 107} · pipeline versions {'7.0.5': 330}\n- Usable at this field size 307 (rejected near detector edge: 23) · wavelength groups with ≥ 2 visits: 40\n- Full list: `reports/inventory/rw-aur_observations.csv`"
+    },
+    {
+      "id": "report:rw-aur#4",
+      "document_id": "report:rw-aur",
+      "source": "reports/targets/rw-aur.md",
+      "source_sha256": "013e59087ce8c24c7ae0f274b42420034e3cf4140ffde706c342345b99e69818",
+      "verification": "source_document_only",
+      "text": "## 4. Selected images\n\n| # | Date (UTC) | Obs. id | Det. | Release / L2 tag | Pipeline | λ (µm) | Δλ/bw | invalid | suspect | comparable | raw SHA-256 |\n|---|---|---|---|---|---|---|---|---|---|---|---|\n| 1 | 2025-09-02T00:46:30Z | 2025W36_1A_0233_3 | 1 | dr1 / l2b-v27-2026-232 | 7.0.5 | 0.76447 | -0.03 | 0.023 | 0.040 | 0.977 | `05a906b170cd81f9…` |\n| 2 | 2026-03-08T16:15:59Z | 2026W10_2B_0591_4 | 1 | dr1 / l2b-v27-2026-231 | 7.0.5 | 0.75832 | -0.37 | 0.016 | 0.027 | 0.757 | `71af4a9171c330d6…` |\n| 3 | 2026-09-08T06:39:20Z | 2026W37_1A_0234_3 | 1 | qr3 / l2b-v27-2026-255 | 7.0.5 | 0.77119 | +0.34 | 0.018 | 0.034 | 0.811 | `a3fb18e6f4e7a446…` |\n\n![frames](rw-aur.png)\n\n*Preview tiles (magnified, common display scale; purple = no measurement). Previews are for inspection only, not for measurement.*"
+    },
+    {
+      "id": "report:rw-aur#5",
+      "document_id": "report:rw-aur",
+      "source": "reports/targets/rw-aur.md",
+      "source_sha256": "013e59087ce8c24c7ae0f274b42420034e3cf4140ffde706c342345b99e69818",
+      "verification": "source_document_only",
+      "text": "## 5. Time span and wavelength agreement\n\n- 3 frames in 3 visits over 371.2 days (2025-09-02 → 2026-09-08).\n- Reference wavelength 0.765 µm, bandwidth 0.0181 µm (FWHM); all frames within 0.5 × bandwidth at the field centre (largest offset 0.37). The matched group in the archive has 3 frames in 3 visits.\n- Pixels whose wavelength is outside the tolerance are masked per frame; area comparable in all frames: 73%."
+    },
+    {
+      "id": "report:rw-aur#6",
+      "document_id": "report:rw-aur",
+      "source": "reports/targets/rw-aur.md",
+      "source_sha256": "013e59087ce8c24c7ae0f274b42420034e3cf4140ffde706c342345b99e69818",
+      "verification": "source_document_only",
+      "text": "## 6. Quality issues and rejected images\n\n- Rejected after download: none\n- Warnings: none\n- Frame 1: flags within 2.5 px of field centre: none; L2 QA Pass; PSF FWHM 7.53″ (EPSF).\n- Frame 2: flags within 2.5 px of field centre: none; L2 QA Pass; PSF FWHM 7.53″ (EPSF).\n- Frame 3: flags within 2.5 px of field centre: none; L2 QA Pass; PSF FWHM 7.53″ (EPSF)."
+    },
+    {
+      "id": "report:rw-aur#7",
+      "document_id": "report:rw-aur",
+      "source": "reports/targets/rw-aur.md",
+      "source_sha256": "013e59087ce8c24c7ae0f274b42420034e3cf4140ffde706c342345b99e69818",
+      "verification": "source_document_only",
+      "text": "## 7. Alignment check\n\n- 8 centroid measurements of Gaia DR3 stars (G ≤ 15.5) propagated to each frame epoch: median offset (-0.16″ E, 0.04″ N), rms 0.49″ = 0.08 pixel.\n- Per frame: #1: n=3, rms 0.14″; #2: n=2, rms 0.38″; #3: n=3, rms 0.73″"
+    },
+    {
+      "id": "report:rw-aur#8",
+      "document_id": "report:rw-aur",
+      "source": "reports/targets/rw-aur.md",
+      "source_sha256": "013e59087ce8c24c7ae0f274b42420034e3cf4140ffde706c342345b99e69818",
+      "verification": "source_document_only",
+      "text": "## 8. Detectability of the source\n\n| # | Date | Method | Offset from prediction (E, N ″) | Aperture flux (mJy) | S/N | Note |\n|---|---|---|---|---|---|---|\n| 1 | 2025-09-02 | flux_weighted_centroid | -1.16, -0.37 | 74.075 ± 0.299 | 247.5 |  |\n| 2 | 2026-03-08 | flux_weighted_centroid | -1.12, -0.85 | 124.510 ± 0.387 | 321.6 |  |\n| 3 | 2026-09-08 | flux_weighted_centroid | -0.56, -0.37 | 191.644 ± 0.479 | 400.0 |  |\n\n- Weighted mean of forced photometry at the predicted positions: 112.3207 ± 0.2123 mJy (S/N 529.1, 3 frames). This is a mean at a known position, not an independent detection.\n\n**Blending.** Catalogue sources within 20″ of the predicted positions (aperture radius 12.3″): AllWISE J050749.54+302404.7 (W1=6.246, W2=5.228, 0.4″, epoch ≈2010.5)."
+    },
+    {
+      "id": "report:rw-aur#9",
+      "document_id": "report:rw-aur",
+      "source": "reports/targets/rw-aur.md",
+      "source_sha256": "013e59087ce8c24c7ae0f274b42420034e3cf4140ffde706c342345b99e69818",
+      "verification": "source_document_only",
+      "text": "## 9. Possible change seen\n\n- **Motion.** Linear fit to 3 positions over 1.016 yr: (+0.60, -0.03) ± 0.86 ″/yr (E, N); catalogue (+0.01, -0.02) ″/yr. Total shift 0.61″ = 0.1 pixels; significance 0.5σ; deviation from catalogue 0.5σ. Per-point error 0.62″ (sequence alignment rms vs Gaia (per-axis, floor 0.1 px)).\n- **Brightness.** 3 reliable points at 0.76447 µm (mJy; normalised by 5 comparison stars; systematic 10%; wavelength tolerance used 0.5): 2025-09-02: 74.1 ± 7.6, 2026-03-08: 124.4 ± 12.8, 2026-09-08: 191.6 ± 19.7. Max/min 2.587, difference 5.6σ."
+    },
+    {
+      "id": "report:rw-aur#10",
+      "document_id": "report:rw-aur",
+      "source": "reports/targets/rw-aur.md",
+      "source_sha256": "013e59087ce8c24c7ae0f274b42420034e3cf4140ffde706c342345b99e69818",
+      "verification": "source_document_only",
+      "text": "## 10. Uncertainties and alternative explanations\n\n- A and B are unresolved at SPHEREx's pixel scale; any supported change refers to their combined light.\n- Aperture losses can differ with PSF and wavelength. Comparison-star normalisation and the explicitly reported systematic error only partly control these effects; no extinction mechanism is inferred from this report.\n- Observer parallax and spacecraft position are not modelled. The catalogue parallax is 0.0154 arcsec (0.003 SPHEREx pixels).\n- The current motion fit uses per-point error 0.62 arcsec: sequence alignment rms vs Gaia (per-axis, floor 0.1 px).\n- In this sequence, 3/3 frames meet the source-detection rule; 0 frames are flagged as saturated at the target.\n- The current brightness analysis uses wavelength tolerance 0.5 bandwidth and a 10.3% systematic term. These values are computed for this sequence, not inherited from earlier reports.\n- The scientific-confirmation status remains false. Neither catalogue predictions nor the display stack provide independent confirmation."
+    },
+    {
+      "id": "report:rw-aur#11",
+      "document_id": "report:rw-aur",
+      "source": "reports/targets/rw-aur.md",
+      "source_sha256": "013e59087ce8c24c7ae0f274b42420034e3cf4140ffde706c342345b99e69818",
+      "verification": "source_document_only",
+      "text": "## 11. How to reproduce\n\n```bash\ncd backend\npython -m tools.run_search --target rw-aur        # query, select, download, align, preview\npython -m tools.measure_presets --only rw-aur     # detection, motion, brightness\npython -m tools.target_report                  # regenerate these reports\n```\n\nRaw cutouts are stored unmodified under `data/raw/<sha256>.fits`; the SHA-256 of each is in the table above and in `rw-aur.json`. A later archive update produces a new sequence id; this report refers to the sequence above."
+    },
+    {
+      "id": "report:wise-0855#intro",
+      "document_id": "report:wise-0855",
+      "source": "reports/targets/wise-0855.md",
+      "source_sha256": "4e3c4dca8612b45808a1e279f1469b2b373a39ee084c108073f99aa8f8edddfb",
+      "verification": "source_document_only",
+      "text": "# WISE 0855−0714 — target report\n\nBlinkSpace pipeline 1.2.0 · sequence `453tr9wzhc` · data: SPHEREx DR1 Level-2 spectral images (IRSA)."
+    },
+    {
+      "id": "report:wise-0855#status",
+      "document_id": "report:wise-0855",
+      "source": "reports/targets/wise-0855.md",
+      "source_sha256": "4e3c4dca8612b45808a1e279f1469b2b373a39ee084c108073f99aa8f8edddfb",
+      "verification": "source_document_only",
+      "text": "## Status\n\n| Step | Result |\n|---|---|\n| Data available (≥ 2 matched-wavelength frames) | **yes** — 2 frames, 2 visits, 368 days |\n| Source detected at the expected position | **no** — 0/2 frames (0 saturated) |\n| Change seen | **no** |\n| Change scientifically confirmed | **no** — this tool never claims confirmation |"
+    },
+    {
+      "id": "report:wise-0855#1",
+      "document_id": "report:wise-0855",
+      "source": "reports/targets/wise-0855.md",
+      "source_sha256": "4e3c4dca8612b45808a1e279f1469b2b373a39ee084c108073f99aa8f8edddfb",
+      "verification": "source_document_only",
+      "text": "## 1. Identity and coordinate source\n\n- SIMBAD main id: `WISEA J085510.74-071442.5` · type BD* · spectral type Y2\n- Aliases: WISE J085510.83-071442.5, WISEA J085510.74-071442.5\n- Catalogue position (ICRS, epoch J2000.0): 08h55m16.54s -07d14m49.4s = (133.818908, -7.247048) · source 2021ApJS..253....7K\n- Proper motion: (-8123.7, 673.2) mas/yr · source 2021ApJS..253....7K · parallax 439.0 mas\n- Coldest known brown dwarf (Y type), proper motion ~8.1″/yr. Visible only near 4.5–5 µm and very faint (W2≈13.9); close to the single-exposure SPHEREx detection limit. The commonly quoted published coordinate is from the WISE epoch (~2010); by 2026 the source is ~2′ further west.\n- Reference (WISE-epoch) coordinate 08h55m10.831s -7d14m42.53s is 85.2″ from the J2000 position (≈ WISE epoch) and 126.7″ from the J2026.0 search centre."
+    },
+    {
+      "id": "report:wise-0855#2",
+      "document_id": "report:wise-0855",
+      "source": "reports/targets/wise-0855.md",
+      "source_sha256": "4e3c4dca8612b45808a1e279f1469b2b373a39ee084c108073f99aa8f8edddfb",
+      "verification": "source_document_only",
+      "text": "## 2. Query parameters\n\n- Search centre (ICRS): (133.75976, -7.24219), epoch J2026.0 — 211.9″ from the J2000 position by proper motion only (no parallax, no observer position).\n- Field 6.0′ · wavelength tolerance 0.5 × bandwidth · max frames 8 · requested wavelength: 4.86\n- Discovery service: IRSA TAP (bundled inventory snapshot); cached index: True.\n- ADQL: `SELECT p.obs_publisher_did, p.energy_bandpassname, p.time_bounds_lower, p.time_bounds_upper, p.time_exposure, p.provenance_version, p.poly, a.uri, a.contentchecksum, a.contentlength FROM spherex.plane p JOIN spherex.artifact a ON a.planeid = p.planeid WHERE 1 = CONTAINS(POINT('ICRS', 133.7597650, -7.2421860), p.poly)`\n- Preset wavelength rationale from the prior inventory: The Y dwarf is only bright near 4.5–5 µm. In the archive inventory the 4.86 µm group has the longest baseline among suitable groups (3 visits, ~368 days); the automatic choice (2.34 µm) lands where the source is invisible."
+    },
+    {
+      "id": "report:wise-0855#3",
+      "document_id": "report:wise-0855",
+      "source": "reports/targets/wise-0855.md",
+      "source_sha256": "4e3c4dca8612b45808a1e279f1469b2b373a39ee084c108073f99aa8f8edddfb",
+      "verification": "source_document_only",
+      "text": "## 3. Bundled inventory snapshot\n\nThis inventory was supplied with the project; it is not represented as a fresh search. Current sequence discovery provenance appears in the JSON report under meta.archive.\n\n- Archive rows 258 · unique observation×detector 255 · reprocessed copies dropped 0\n- Time range (UTC): 2025-05-05T16:48:02Z → 2026-05-14T06:53:36Z · per detector {'1': 36, '2': 47, '3': 45, '4': 36, '5': 48, '6': 43}\n- Collections {'spherex_dr1': 255} · pipeline versions {'7.0.5': 255}\n- Usable at this field size 249 (rejected near detector edge: 6) · wavelength groups with ≥ 2 visits: 40\n- Full list: `reports/inventory/wise-0855_observations.csv`"
+    },
+    {
+      "id": "report:wise-0855#4",
+      "document_id": "report:wise-0855",
+      "source": "reports/targets/wise-0855.md",
+      "source_sha256": "4e3c4dca8612b45808a1e279f1469b2b373a39ee084c108073f99aa8f8edddfb",
+      "verification": "source_document_only",
+      "text": "## 4. Selected images\n\n| # | Date (UTC) | Obs. id | Det. | Release / L2 tag | Pipeline | λ (µm) | Δλ/bw | invalid | suspect | comparable | raw SHA-256 |\n|---|---|---|---|---|---|---|---|---|---|---|---|\n| 1 | 2025-05-05T20:02:33Z | 2025W19_1B_0138_1 | 6 | dr1 / l2b-v27-2026-197 | 7.0.5 | 4.85985 | -0.00 | 0.026 | 0.019 | 0.974 | `beffad39f3f84a8b…` |\n| 2 | 2026-05-09T04:40:38Z | 2026W19_2A_0651_1 | 6 | dr1 / l2b-v27-2026-245 | 7.0.5 | 4.85971 | -0.01 | 0.027 | 0.019 | 0.973 | `27203bf4678d4c38…` |\n\n![frames](wise-0855.png)\n\n*Preview tiles (magnified, common display scale; purple = no measurement). Previews are for inspection only, not for measurement.*"
+    },
+    {
+      "id": "report:wise-0855#5",
+      "document_id": "report:wise-0855",
+      "source": "reports/targets/wise-0855.md",
+      "source_sha256": "4e3c4dca8612b45808a1e279f1469b2b373a39ee084c108073f99aa8f8edddfb",
+      "verification": "source_document_only",
+      "text": "## 5. Time span and wavelength agreement\n\n- 2 frames in 2 visits over 368.4 days (2025-05-05 → 2026-05-09).\n- Reference wavelength 4.86 µm, bandwidth 0.03791 µm (FWHM); all frames within 0.5 × bandwidth at the field centre (largest offset 0.01). The matched group in the archive has 3 frames in 3 visits.\n- Pixels whose wavelength is outside the tolerance are masked per frame; area comparable in all frames: 96%."
+    },
+    {
+      "id": "report:wise-0855#6",
+      "document_id": "report:wise-0855",
+      "source": "reports/targets/wise-0855.md",
+      "source_sha256": "4e3c4dca8612b45808a1e279f1469b2b373a39ee084c108073f99aa8f8edddfb",
+      "verification": "source_document_only",
+      "text": "## 6. Quality issues and rejected images\n\n- Rejected after download: 2025W46_2A_0226_1 D6 (wavelength_mismatch_after_download)\n- Warnings: partial_data\n- Frame 1: flags within 2.5 px of field centre: none; L2 QA Pass; PSF FWHM 9.04″ (EPSF).\n- Frame 2: flags within 2.5 px of field centre: none; L2 QA Pass; PSF FWHM 9.04″ (EPSF)."
+    },
+    {
+      "id": "report:wise-0855#7",
+      "document_id": "report:wise-0855",
+      "source": "reports/targets/wise-0855.md",
+      "source_sha256": "4e3c4dca8612b45808a1e279f1469b2b373a39ee084c108073f99aa8f8edddfb",
+      "verification": "source_document_only",
+      "text": "## 7. Alignment check\n\n- 10 centroid measurements of Gaia DR3 stars (G ≤ 15.5) propagated to each frame epoch: median offset (0.01″ E, 0.49″ N), rms 1.28″ = 0.21 pixel.\n- Per frame: #1: n=5, rms 1.05″; #2: n=5, rms 1.48″"
+    },
+    {
+      "id": "report:wise-0855#8",
+      "document_id": "report:wise-0855",
+      "source": "reports/targets/wise-0855.md",
+      "source_sha256": "4e3c4dca8612b45808a1e279f1469b2b373a39ee084c108073f99aa8f8edddfb",
+      "verification": "source_document_only",
+      "text": "## 8. Detectability of the source\n\n| # | Date | Method | Offset from prediction (E, N ″) | Aperture flux (mJy) | S/N | Note |\n|---|---|---|---|---|---|---|\n| 1 | 2025-05-05 | not located | — | 0.413 ± 0.207 | 2.0 |  |\n| 2 | 2026-05-09 | not located | — | 0.795 ± 0.219 | 3.6 |  |\n\n- Weighted mean of forced photometry at the predicted positions: 0.5928 ± 0.1506 mJy (S/N 3.9, 2 frames). This is a mean at a known position, not an independent detection.\n\n**Blending.** Catalogue sources within 20″ of the predicted positions (aperture radius 12.3″): Gaia DR3 5756956644387831296 (G=16.3, 4.5″ on 2026-05-09); AllWISE J085501.95-071428.1 (W1=14.983, W2=15.051, 4.6″, epoch ≈2010.5)."
+    },
+    {
+      "id": "report:wise-0855#9",
+      "document_id": "report:wise-0855",
+      "source": "reports/targets/wise-0855.md",
+      "source_sha256": "4e3c4dca8612b45808a1e279f1469b2b373a39ee084c108073f99aa8f8edddfb",
+      "verification": "source_document_only",
+      "text": "## 9. Possible change seen\n\n- **Motion.** Not measurable (fewer than two located detections more than 30 days apart).\n- **Brightness.** 2 reliable points at 4.85979 µm (mJy; no comparison-star check; systematic 0%; wavelength tolerance used 0.25): 2025-05-05: 0.4 ± 0.2, 2026-05-09: 0.8 ± 0.2. Max/min 1.924, difference 1.3σ."
+    },
+    {
+      "id": "report:wise-0855#10",
+      "document_id": "report:wise-0855",
+      "source": "reports/targets/wise-0855.md",
+      "source_sha256": "4e3c4dca8612b45808a1e279f1469b2b373a39ee084c108073f99aa8f8edddfb",
+      "verification": "source_document_only",
+      "text": "## 10. Uncertainties and alternative explanations\n\n- Flux at a predicted position can include unrelated background sources. The current catalogue blending check and per-frame S/N, when available, must be inspected before attributing the flux to WISE 0855.\n- A co-moving display stack is available at the sequence track_stack endpoint. It aligns catalogue predictions but does not automatically remove blending or constitute a detection; quantitative values remain native-pixel forced photometry.\n- Observer parallax and spacecraft position are not modelled. The catalogue parallax is 0.4390 arcsec (0.071 SPHEREx pixels).\n- In this sequence, 0/2 frames meet the source-detection rule; 0 frames are flagged as saturated at the target.\n- The current brightness analysis uses wavelength tolerance 0.25 bandwidth and a 0.0% systematic term. These values are computed for this sequence, not inherited from earlier reports.\n- A valid comparison-star ensemble is unavailable for this measurement; no ensemble-verified brightness change is claimed.\n- The scientific-confirmation status remains false. Neither catalogue predictions nor the display stack provide independent confirmation."
+    },
+    {
+      "id": "report:wise-0855#11",
+      "document_id": "report:wise-0855",
+      "source": "reports/targets/wise-0855.md",
+      "source_sha256": "4e3c4dca8612b45808a1e279f1469b2b373a39ee084c108073f99aa8f8edddfb",
+      "verification": "source_document_only",
+      "text": "## 11. How to reproduce\n\n```bash\ncd backend\npython -m tools.run_search --target wise-0855        # query, select, download, align, preview\npython -m tools.measure_presets --only wise-0855     # detection, motion, brightness\npython -m tools.target_report                  # regenerate these reports\n```\n\nRaw cutouts are stored unmodified under `data/raw/<sha256>.fits`; the SHA-256 of each is in the table above and in `wise-0855.json`. A later archive update produces a new sequence id; this report refers to the sequence above."
+    }
+  ],
+  "utf8_bytes": 72176
+}

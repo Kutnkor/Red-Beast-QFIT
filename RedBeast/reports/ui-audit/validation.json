@@ -1,0 +1,58 @@
+{
+  "date": "2026-11-15",
+  "active_base": "user supplied app-v4.html",
+  "v5_is_active_base": false,
+  "default_view": "real SPHEREx observations",
+  "frontend": {
+    "passed": 217,
+    "failed": 0
+  },
+  "backend": {
+    "passed": 204,
+    "skipped_live_in_ordinary_run": 4,
+    "failed": 0
+  },
+  "live_archive": {
+    "passed": 4,
+    "failed": 0,
+    "duration_s": 74.44,
+    "configuration": {
+      "BLINKSPACE_ARCHIVE_PROTOCOL": "sia",
+      "BLINKSPACE_GAIA_PROVIDER": "esa",
+      "BLINKSPACE_ALLWISE_PROVIDER": "vizier"
+    },
+    "cases": [
+      "unique Level-2 query",
+      "real cutout layers/wavelength/footprint",
+      "preset end-to-end pipeline",
+      "arbitrary-coordinate end-to-end pipeline"
+    ],
+    "earlier_attempts": "SIA-only attempt failed or stalled on the default IRSA Gaia mirror; two diagnostic reruns were interrupted. The final run uses the same providers as the launcher and Compose."
+  },
+  "build": "passed; known chunk-size warning",
+  "lint": "exit 0; warnings in preserved prototype and React lifecycle patterns",
+  "python_health": "GET /api/health status ok",
+  "api_schema": "docs/openapi.json; 29 paths",
+  "browser_checks": {
+    "desktop": "1280x720, source-based RW Aur track, illustrative nebula, TR/EN, QFIT analysis-panel bridge and real observation dates verified",
+    "mobile": "390x844 interaction pass; no horizontal overflow; decorative layer no longer intercepts buttons",
+    "selection": "all five preset targets choose their supported comparison track; target survives observation-to-evolution transitions",
+    "animation": "separate observation/model clocks; pause and language change preserve education visual time; reduced motion propagated; hidden-page rendering paused",
+    "data_views": "single/side-by-side/difference/stack/co-moving, A/B controls, time stack, sources, frame/layers/marks/curve/wavelength/task/assistant checked",
+    "search": "RA 269.4463, Dec 4.7682 locates Barnard; native iframe keyboard shortcut routes to shared app",
+    "console": "no errors or warnings in final inspected desktop tab",
+    "qfit": "Open QFIT from Assistant analysis tab opens the shared assistant and closes the analysis drawer; configured server status visible; no new paid response evaluation"
+  },
+  "known_limits": [
+    "Illustrative education morphologies and 0.1–100 M☉ scenarios are not fitted predictions of a selected target.",
+    "Published tracks cover selected masses and phases, not the entire education ruler.",
+    "Upstream archives can become unavailable; ready public seed remains usable.",
+    "No quantitative FPS/memory benchmark or independent user acceptance study in this audit.",
+    "No public hosting or new paid AI evaluation; GitHub publication tracked separately in handoff manifest."
+  ],
+  "screenshots": [
+    "ui-audit/published-rw-aur.jpg",
+    "ui-audit/education-nebula.jpg",
+    "ui-audit/education-tr.jpg"
+  ]
+}

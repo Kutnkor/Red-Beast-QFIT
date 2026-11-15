@@ -1,0 +1,192 @@
+/* Q-FIT assistant widget: robin mascot in a screen corner + chat panel the robin pulls open with
+   its beak. Plain HTML/JS version; the React version is mascot/react/src/qfit. Spec: docs/MASCOT_AND_CHAT_UI.md. */
+:root {
+  --qf-navy: #0b1d3a;
+  --qf-navy-2: #13294f;
+  --qf-orange: #ff5a36;
+  --qf-orange-2: #ff8a3d;
+  --qf-cream: #fff4e0;
+  --qf-ink: #e9eef7;
+  --qf-muted: #9fb0c8;
+  --qf-panel-w: min(420px, calc(100vw - 24px));
+  --qf-mascot-w: 160px;                 /* canvas 320 x 272 shown at half size */
+  --qf-mascot-h: calc(var(--qf-mascot-w) * 272 / 320);
+  --qf-gap: 16px;
+  --qf-ease: cubic-bezier(.2, .8, .2, 1);
+
+  /* Pull-open animation. The beak tip of normalized/quiet.png is at (169, 85) on the 320 x 272
+     canvas. The robin's position and the panel slide share one duration and easing, so the beak
+     stays on the panel's handle the whole way. */
+  --qf-handle-w: 22px;
+  --qf-handle-h: 44px;
+  --qf-beak-front: calc(var(--qf-mascot-w) * 151 / 320);   /* beak tip -> box edge it faces */
+  --qf-beak-top: calc(var(--qf-mascot-h) * 85 / 272);      /* beak tip -> box top */
+  --qf-reach: calc(var(--qf-beak-front) + var(--qf-gap) - var(--qf-handle-w) / 2);
+  --qf-open-offset: calc(var(--qf-panel-w) + var(--qf-handle-w) / 2 - var(--qf-beak-front));
+  --qf-grab-ms: 180ms;                  /* reach for the handle */
+  --qf-pull-ms: 600ms;                  /* pull the panel out */
+  --qf-pull-ease: cubic-bezier(.45, .05, .25, 1);
+}
+
+/* ---------------------------------------------------------------- mascot */
+.qf-mascot {
+  position: fixed; z-index: 1001; width: var(--qf-mascot-w); height: var(--qf-mascot-h);
+  border: 0; padding: 0; background: none; cursor: pointer; -webkit-tap-highlight-color: transparent;
+  transition: right var(--qf-pull-ms) var(--qf-pull-ease), left var(--qf-pull-ms) var(--qf-pull-ease),
+              transform .25s var(--qf-ease);
+}
+.qf-mascot:focus-visible { outline: 3px solid var(--qf-orange-2); outline-offset: 4px; border-radius: 12px; }
+[data-corner="bottom-right"] .qf-mascot { right: var(--qf-gap); bottom: var(--qf-gap); }
+[data-corner="bottom-left"]  .qf-mascot { left: var(--qf-gap);  bottom: var(--qf-gap); }
+[data-corner="top-right"]    .qf-mascot { right: var(--qf-gap); top: var(--qf-gap); }
+[data-corner="top-left"]     .qf-mascot { left: var(--qf-gap);  top: var(--qf-gap); }
+/* Open: the robin stands at the panel's edge with its beak on the handle. The move waits for the
+   grab (delay); closing has no delay because the robin pushes straight away. */
+[data-corner$="right"][data-open="true"] .qf-mascot { right: var(--qf-open-offset); }
+[data-corner$="left"][data-open="true"]  .qf-mascot { left: var(--qf-open-offset); }
+.qf-root[data-open="true"] .qf-mascot {
+  transition: right var(--qf-pull-ms) var(--qf-pull-ease) var(--qf-grab-ms),
+              left var(--qf-pull-ms) var(--qf-pull-ease) var(--qf-grab-ms), transform .25s var(--qf-ease);
+}
+
+/* Facing. The art faces right. At rest the robin looks into the screen; while pulling, pushing and
+   while the panel is open it faces the panel. */
+/* Pivot at the bottom centre: mirroring (scaleX(-1)) must be about the centre, or the mirrored
+   bird shifts sideways by a quarter of its width (measured: 40 px). */
+.qf-art { position: absolute; inset: 0; transform-origin: 50% 92%; }
+[data-corner$="right"]:not([data-open="true"]):not([data-motion]) .qf-art { transform: scaleX(-1); }
+[data-corner$="left"][data-open="true"] .qf-art,
+[data-corner$="left"][data-motion] .qf-art { transform: scaleX(-1); }
+.qf-sprite { position: absolute; inset: 0; background-repeat: no-repeat; background-size: 100% 100%; }
+
+/* Pull / push choreography (data-motion is set by the script for the length of the move). */
+[data-corner$="right"] { --qf-dir: 1; }
+[data-corner$="left"]  { --qf-dir: -1; }
+.qf-root[data-motion="opening"] .qf-mascot { animation: qf-pull calc(var(--qf-grab-ms) + var(--qf-pull-ms)) linear 1; }
+.qf-root[data-motion="closing"] .qf-mascot { animation: qf-push calc(var(--qf-grab-ms) + var(--qf-pull-ms)) linear 1; }
+@keyframes qf-pull {           /* reach to the handle, then come back while the panel follows */
+  0%   { translate: 0 0; animation-timing-function: var(--qf-ease); }
+  23%  { translate: calc(var(--qf-dir) * var(--qf-reach)) 0; animation-timing-function: var(--qf-pull-ease); }
+  100% { translate: 0 0; }
+}
+@keyframes qf-push {           /* push the panel back to the edge, then step back into the corner */
+  0%   { translate: 0 0; animation-timing-function: var(--qf-pull-ease); }
+  77%  { translate: calc(var(--qf-dir) * var(--qf-reach)) 0; animation-timing-function: var(--qf-ease); }
+  100% { translate: 0 0; }
+}
+/* Lean away from the panel while pulling (backwards), into it while pushing. */
+.qf-root[data-motion="opening"] .qf-art { animation: qf-lean calc(var(--qf-grab-ms) + var(--qf-pull-ms)) ease-in-out 1; }
+.qf-root[data-motion="closing"] .qf-art { animation: qf-lean-push calc(var(--qf-grab-ms) + var(--qf-pull-ms)) ease-in-out 1; }
+@keyframes qf-lean      { 0% { rotate: 0deg; } 23% { rotate: calc(var(--qf-dir) * 6deg); } 60% { rotate: calc(var(--qf-dir) * -9deg); } 100% { rotate: 0deg; } }
+@keyframes qf-lean-push { 0% { rotate: 0deg; } 50% { rotate: calc(var(--qf-dir) * 7deg); } 100% { rotate: 0deg; } }
+/* Beak closed (holding) while moving the panel: the bird without beam or sparkles. */
+.qf-root[data-motion] .qf-mascot:not([data-state="thinking"]):not([data-state="speaking"]) .qf-sprite {
+  background-image: url("../assets/normalized/quiet.png") !important; animation: none !important;
+  background-size: 100% 100% !important; background-position: 0 0 !important;
+}
+.qf-root[data-motion] .qf-glow, .qf-root[data-motion] .qf-twinkle { opacity: 0 !important; animation: none !important; }
+
+/* States. Sprite sheets hold 9 frames of 320 x 272 side by side. */
+.qf-mascot[data-state="idle"] .qf-sprite,
+.qf-mascot[data-state="found"] .qf-sprite { background-image: url("../assets/normalized/idle.png"); }
+.qf-mascot[data-state="quiet"] .qf-sprite { background-image: url("../assets/normalized/quiet.png"); }
+.qf-mascot[data-state="thinking"] .qf-sprite {
+  background-image: url("../assets/spritesheets/thinking.png"); background-size: 900% 100%;
+  animation: qf-frames 3150ms steps(9) infinite;              /* 9 frames x 350 ms */
+}
+.qf-mascot[data-state="speaking"] .qf-sprite {
+  background-image: url("../assets/spritesheets/speaking.png"); background-size: 900% 100%;
+  animation: qf-frames 720ms steps(9) infinite;               /* 9 frames x 80 ms */
+}
+@keyframes qf-frames { from { background-position: 0 0; } to { background-position: 112.5% 0; } }
+
+/* Idle life: slow breathing, the eye glow pulses and the star twinkles (overlays on idle.png). */
+.qf-root:not([data-motion]) .qf-mascot[data-state="idle"] .qf-art { animation: qf-breathe 3.6s ease-in-out infinite; }
+@keyframes qf-breathe { 0%, 100% { scale: 1 1; } 50% { scale: 1.012 1.03; } }
+.qf-glow, .qf-twinkle, .qf-burst {
+  position: absolute; pointer-events: none; border-radius: 50%; opacity: 0; translate: -50% -50%;
+}
+.qf-glow    { left: 34.56%; top: 30.7%;  width: 13%; aspect-ratio: 1;
+              background: radial-gradient(circle, rgba(255,244,224,.95) 0 18%, rgba(255,138,61,.55) 40%, transparent 70%); }
+.qf-twinkle { left: 69.47%; top: 17.57%; width: 12%; aspect-ratio: 1;
+              background: radial-gradient(circle, rgba(255,244,224,.9) 0 15%, rgba(255,138,61,.35) 45%, transparent 70%); }
+.qf-mascot[data-state="idle"] .qf-glow    { animation: qf-pulse 2.4s ease-in-out infinite; }
+.qf-mascot[data-state="idle"] .qf-twinkle { animation: qf-pulse 3.1s ease-in-out .6s infinite; }
+@keyframes qf-pulse { 0%, 100% { opacity: .15; scale: .8; } 50% { opacity: .9; scale: 1.15; } }
+
+/* Found: an answer with real data arrived; the star flares once. */
+.qf-burst { left: 69.47%; top: 17.57%; width: 34%; aspect-ratio: 1;
+            background: radial-gradient(circle, rgba(255,244,224,1) 0 10%, rgba(255,138,61,.6) 30%, transparent 65%); }
+.qf-mascot[data-state="found"] .qf-burst { animation: qf-burst 1.2s var(--qf-ease) 1; }
+@keyframes qf-burst { 0% { opacity: 0; scale: .2; } 30% { opacity: 1; scale: 1; } 100% { opacity: 0; scale: 1.6; } }
+
+/* Quiet: no data, AI unavailable or an error. Calm head tilt, no beam. */
+.qf-root:not([data-motion]) .qf-mascot[data-state="quiet"] .qf-art { animation: qf-tilt 1.6s var(--qf-ease) 1 both; }
+@keyframes qf-tilt { 0% { rotate: 0deg; } 40% { rotate: -5deg; } 100% { rotate: -2deg; } }
+
+/* Hover / attention. */
+.qf-mascot:hover { transform: translateY(-4px); }
+.qf-mascot[data-attention="true"] .qf-art { animation: qf-hop .9s var(--qf-ease) 2; }
+@keyframes qf-hop { 0%, 100% { translate: 0 0; } 30% { translate: 0 -10%; } 55% { translate: 0 0; } 70% { translate: 0 -4%; } }
+.qf-badge {
+  position: absolute; top: 6%; width: 18px; height: 18px; border-radius: 50%; background: var(--qf-orange);
+  box-shadow: 0 0 0 3px var(--qf-navy); display: none;
+}
+[data-corner$="right"] .qf-badge { left: 12%; }
+[data-corner$="left"]  .qf-badge { right: 12%; }
+.qf-mascot[data-attention="true"] .qf-badge { display: block; }
+
+/* ----------------------------------------------------------------- panel */
+.qf-panel {
+  position: fixed; z-index: 1000; top: 0; bottom: 0; width: var(--qf-panel-w);
+  display: flex; flex-direction: column; background: var(--qf-navy); color: var(--qf-ink);
+  transition: transform var(--qf-pull-ms) var(--qf-pull-ease), box-shadow var(--qf-pull-ms);
+  font: 15px/1.5 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+}
+/* Closed: off screen except the handle at the edge (the panel is `inert` while closed). */
+[data-corner$="right"] .qf-panel { right: 0; transform: translateX(100%); border-left: 1px solid var(--qf-navy-2); }
+[data-corner$="left"]  .qf-panel { left: 0;  transform: translateX(-100%); border-right: 1px solid var(--qf-navy-2); }
+.qf-root[data-open="true"] .qf-panel {
+  transform: translateX(0); box-shadow: 0 0 40px rgba(0,0,0,.45);
+  transition: transform var(--qf-pull-ms) var(--qf-pull-ease) var(--qf-grab-ms), box-shadow var(--qf-pull-ms);
+}
+
+/* The handle the robin grabs: a tab on the panel's leading edge, level with the beak. */
+.qf-handle {
+  position: absolute; width: var(--qf-handle-w); height: var(--qf-handle-h); padding: 0; border: 0; cursor: pointer;
+  background: var(--qf-orange); box-shadow: 0 2px 8px rgba(0,0,0,.35);
+  background-image: repeating-linear-gradient(to bottom, transparent 0 7px, rgba(255,255,255,.55) 7px 9px);
+  background-size: 6px 26px; background-repeat: no-repeat; background-position: center;
+}
+[data-corner$="right"] .qf-handle { left: calc(-1 * var(--qf-handle-w)); border-radius: 10px 0 0 10px; }
+[data-corner$="left"]  .qf-handle { right: calc(-1 * var(--qf-handle-w)); border-radius: 0 10px 10px 0; }
+[data-corner^="bottom"] .qf-handle {
+  bottom: calc(var(--qf-gap) + var(--qf-mascot-h) - var(--qf-beak-top) - var(--qf-handle-h) / 2);
+}
+[data-corner^="top"] .qf-handle { top: calc(var(--qf-gap) + var(--qf-beak-top) - var(--qf-handle-h) / 2); }
+
+.qf-head { display: flex; align-items: center; gap: 10px; padding: 14px 16px; border-bottom: 1px solid var(--qf-navy-2); }
+.qf-head img { width: 36px; height: 36px; }
+.qf-title { font-weight: 700; letter-spacing: .02em; }
+.qf-sub { color: var(--qf-muted); font-size: 12px; }
+.qf-close { margin-left: auto; background: none; border: 0; color: var(--qf-muted); font-size: 22px; cursor: pointer; }
+.qf-close:focus-visible, .qf-send:focus-visible { outline: 2px solid var(--qf-orange-2); }
+
+.qf-log { flex: 1; overflow-y: auto; padding: 16px; display: flex; flex-direction: column; gap: 12px; }
+.qf-msg { max-width: 92%; padding: 10px 12px; border-radius: 12px; white-space: pre-wrap; word-wrap: break-word; }
+.qf-msg.user { align-self: flex-end; background: var(--qf-orange); color: #fff; border-bottom-right-radius: 4px; }
+.qf-msg.bot  { align-self: flex-start; background: var(--qf-navy-2); border-bottom-left-radius: 4px; }
+.qf-msg.bot.system { border-left: 3px solid var(--qf-orange-2); }
+.qf-note { font-size: 12px; color: var(--qf-muted); margin-top: 8px; }
+.qf-msg details { margin-top: 8px; font-size: 13px; color: var(--qf-muted); }
+.qf-msg a { color: var(--qf-orange-2); }
+
+.qf-form { display: flex; gap: 8px; padding: 12px; border-top: 1px solid var(--qf-navy-2); }
+.qf-input { flex: 1; resize: none; border-radius: 10px; border: 1px solid var(--qf-navy-2); background: #091530;
+            color: var(--qf-ink); padding: 10px; font: inherit; min-height: 44px; max-height: 140px; }
+.qf-send { border: 0; border-radius: 10px; padding: 0 16px; background: var(--qf-orange); color: #fff; font-weight: 700; cursor: pointer; }
+.qf-send:disabled { opacity: .5; cursor: progress; }
+
+@media (prefers-reduced-motion: reduce) {
+  .qf-mascot, .qf-mascot *, .qf-panel { animation: none !important; transition: none !important; }
+}

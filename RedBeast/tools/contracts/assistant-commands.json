@@ -1,0 +1,207 @@
+{
+  "select_target": {
+    "type": "object",
+    "properties": {
+      "target_id": {
+        "type": "string"
+      }
+    },
+    "required": [
+      "target_id"
+    ],
+    "additionalProperties": false
+  },
+  "set_mode": {
+    "type": "object",
+    "properties": {
+      "mode": {
+        "type": "string",
+        "enum": [
+          "star",
+          "neighbors",
+          "observations"
+        ]
+      }
+    },
+    "required": [
+      "mode"
+    ],
+    "additionalProperties": false
+  },
+  "set_year": {
+    "type": "object",
+    "properties": {
+      "year": {
+        "type": "number",
+        "minimum": 2000,
+        "maximum": 2100,
+        "integer": false
+      }
+    },
+    "required": [
+      "year"
+    ],
+    "additionalProperties": false
+  },
+  "set_frame": {
+    "type": "object",
+    "properties": {
+      "index": {
+        "type": "number",
+        "minimum": 0,
+        "maximum": 10000,
+        "integer": true
+      }
+    },
+    "required": [
+      "index"
+    ],
+    "additionalProperties": false
+  },
+  "set_view_mode": {
+    "type": "object",
+    "properties": {
+      "view": {
+        "type": "string",
+        "enum": [
+          "single",
+          "side",
+          "diff",
+          "stack",
+          "trackstack"
+        ]
+      }
+    },
+    "required": [
+      "view"
+    ],
+    "additionalProperties": false
+  },
+  "set_stage_view": {
+    "type": "object",
+    "properties": {
+      "view": {
+        "type": "string",
+        "enum": [
+          "frames",
+          "timestack"
+        ]
+      }
+    },
+    "required": [
+      "view"
+    ],
+    "additionalProperties": false
+  },
+  "toggle_layer": {
+    "type": "object",
+    "properties": {
+      "layer": {
+        "type": "string",
+        "enum": [
+          "environment",
+          "trail",
+          "grid",
+          "sky",
+          "gaia",
+          "allwise",
+          "predicted"
+        ]
+      },
+      "on": {
+        "type": "boolean"
+      }
+    },
+    "required": [
+      "layer",
+      "on"
+    ],
+    "additionalProperties": false
+  },
+  "open_drawer_tab": {
+    "type": "object",
+    "properties": {
+      "tab": {
+        "type": "string",
+        "enum": [
+          "frame",
+          "layers",
+          "marks",
+          "curve",
+          "wave",
+          "task",
+          "assistant"
+        ]
+      }
+    },
+    "required": [
+      "tab"
+    ],
+    "additionalProperties": false
+  },
+  "open_sources": {
+    "type": "object",
+    "properties": {},
+    "required": [],
+    "additionalProperties": false
+  },
+  "start_search": {
+    "type": "object",
+    "properties": {
+      "ra": {
+        "type": "string"
+      },
+      "dec": {
+        "type": "string"
+      },
+      "ra_unit": {
+        "type": "string",
+        "enum": [
+          "auto",
+          "deg",
+          "hour"
+        ]
+      },
+      "fov_arcmin": {
+        "type": "number",
+        "minimum": 2,
+        "maximum": 30,
+        "integer": false
+      }
+    },
+    "required": [
+      "ra",
+      "dec",
+      "ra_unit",
+      "fov_arcmin"
+    ],
+    "additionalProperties": false
+  },
+  "save_view": {
+    "type": "object",
+    "properties": {},
+    "required": [],
+    "additionalProperties": false
+  },
+  "explain_value": {
+    "type": "object",
+    "properties": {
+      "field": {
+        "type": "string",
+        "enum": [
+          "distance",
+          "parallax",
+          "proper_motion",
+          "radial_velocity",
+          "teff",
+          "position",
+          "surface"
+        ]
+      }
+    },
+    "required": [
+      "field"
+    ],
+    "additionalProperties": false
+  }
+}

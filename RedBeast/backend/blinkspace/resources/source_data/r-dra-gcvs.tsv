@@ -1,0 +1,79 @@
+#
+#   VizieR Astronomical Server vizier.cfa.harvard.edu
+#    Date: 2026-11-14T17:19:04 [V7.6.1]
+#   In case of problem, please report to:	cds-question@unistra.fr
+#
+#
+#Coosys	J2000:	eq_FK5 J2000
+#INFO	service_protocol=ASU	  IVOID of the protocol through which the data was retrieved
+#INFO	request_date=2026-11-14T17:19:04	  Query execution date
+#INFO	request=https://vizier.cfa.harvard.edu/viz-bin/asu-tsv?-source=B%2fgcvs%2fgcvs_cat&GCVS=R+Dra&-out.all=1&-out.max=3	  Full request URL
+#INFO	contact=cds-question@unistra.fr	  Email or URL to contact publisher
+#INFO	server_software=VizieR/7.6.1	  Software version
+#INFO	publisher=CDS	  Data centre that produced the VOTable
+
+#RESOURCE=yCat_102025
+#Name: B/gcvs
+#Title: General Catalogue of Variable Stars (Samus+, 2007-2017)
+#INFO	ivoid=ivo://cds.vizier/b/gcvs	    IVOID of underlying data collection
+#INFO	data_ivoid=ivo://cds.vizier/b/gcvs	    IVOID of underlying data collection
+#INFO	creator=Samus N.N.	    First author or institution
+#INFO	cites=bibcode:2017ARep...61...80S	    Article or Data origin sources
+#INFO	journal=ARep	    Journal name
+#INFO	original_date=2017	    Year of the article publication
+#INFO	reference_url=https://cdsarc.cds.unistra.fr/viz-bin/cat/B/gcvs	    Dataset landing page
+#INFO	publication_date=2025-04-23	    Date of first publication in the data centre
+#INFO	rights_uri=https://cds.unistra.fr/vizier-org/licences_vizier.html	    Licence URI
+#Table	B_gcvs_gcvs_cat:
+#Name: B/gcvs/gcvs_cat
+#Title: GCVS catalog (GCVS 5.1, version Oct, 2020)
+#Column	recno	(I8)	Record number assigned by the VizieR team. Should Not be used for identification.	[ucd=meta.record]
+#Column	VarNum	(A6)	Numeric designation, made from constellation and star names (codes in file "constel.txt")	[ucd=meta.id]
+#Column	m_VarNum	(A1)	Component identification (1)	[ucd=meta.code.multip]
+#Column	GCVS	(A10)	Variable star designation (2)	[ucd=meta.id;meta.main]
+#Column	n_GCVS	(A1)	[*] indicates a remark in "gcvs_rem.dat" file	[ucd=meta.note]
+#Column	RAJ2000	(A11)	? Hours RA, equinox J2000.0 (G1)	[ucd=pos.eq.ra;meta.main]
+#Column	DEJ2000	(A11)	? Degrees Dec, equinox J2000.0 (G1)	[ucd=pos.eq.dec;meta.main]
+#Column	u_DEJ2000	(A1)	[:] position accuracy flag (G2)	[ucd=meta.code.error;pos.eq.dec]
+#Column	VarType	(a10)	Type of variability (see file "vartype.txt")	[ucd=meta.code;src.var]
+#Column	l_magMax	(A1)	[<>(] Limit or amplitude symbol on magMax (G3)	[ucd=meta.code.error]
+#Column	magMax	(F6.3)	? Magnitude at maximum brightness	[ucd=phot.mag]
+#Column	u_magMax	(A1)	Uncertainty flag (:) on magMax	[ucd=meta.code.error]
+#Column	l_Min1	(A2)	[< (] Limit or amplitude symbol on Min1 (G3)	[ucd=meta.code.error]
+#Column	Min1	(F6.3)	? Minimum I magnitude or amplitude	[ucd=phot.mag]
+#Column	u_Min1	(A1)	Uncertainty flag (:) on magMinI	[ucd=meta.code.error]
+#Column	n_Min1	(A2)	Alternative photometric system for Min1 (G4)	[ucd=meta.note]
+#Column	l_Min2	(A2)	[< (] Limit or amplitude symbol on Min2 (G3)	[ucd=meta.code.error]
+#Column	Min2	(F6.3)	? Minimum II magnitude or amplitude	[ucd=phot.mag]
+#Column	u_Min2	(A1)	Uncertainty flag (:) on magMinII	[ucd=meta.code.error]
+#Column	n_Min2	(A2)	Alternative photometric system for Min2 (G4)	[ucd=meta.note]
+#Column	flt	(A2)	The photometric system for magnitudes (G4)	[ucd=meta.code;instr.filter]
+#Column	Epoch	(F11.5)	? Epoch for maximum light, Julian days (G5)	[ucd=time.epoch]
+#Column	u_Epoch	(A1)	[:+-] Uncertainty flag on Epoch (6)	[ucd=meta.code.error;time.epoch]
+#Column	Year	(A4)	Year of outburst for nova or supernova	[ucd=time.epoch]
+#Column	u_Year	(A1)	[:] Quality flag on Year of outburst	[ucd=meta.code.error]
+#Column	l_Period	(A1)	[<>(] Code for upper or lower limits (7)	[ucd=meta.code.error;time.period]
+#Column	Period	(F16.10)	? Period of the variable star	[ucd=time.period]
+#Column	u_Period	(A1)	[:] Uncertainty flag (:) on Period	[ucd=meta.code.error;time.period]
+#Column	n_Period	(A3)	[*/N) 2] Flag on Period (8)	[ucd=meta.note]
+#Column	M-m/D	(A3)	Rising time (M-m) or duration of eclipse (D) (G6)	[ucd=time.interval]
+#Column	u_M-m/D	(A1)	Uncertainty flag (:) on M-m/D	[ucd=meta.code.error]
+#Column	n_M-m/D	(A1)	[*: ] Note for eclipsing variable (G6)	[ucd=meta.note]
+#Column	SpType	(a17)	Spectral type	[ucd=src.spType]
+#Column	Ref1	(A5)	Reference to a study of the star (G7)	[ucd=meta.bib]
+#Column	Ref2	(A5)	Reference to a chart or photograph (G7)	[ucd=meta.bib]
+#Column	Exists	(A12)	Cases of non-existence of the variable etc. (12)	[ucd=meta.note]
+#Column	pmRA	(F6.3)	? Proper motion RA	[ucd=pos.pm;pos.eq.ra]
+#Column	pmDE	(F6.3)	? Proper motion DE	[ucd=pos.pm;pos.eq.dec]
+#Column	Ep-coor	(F8.3)	? Epoch of the coordinates (13)	[ucd=time.epoch]
+#Column	u_Ident	(A1)	[?] Uncertainty flag (?) on identification (14)	[ucd=meta.code.error]
+#Column	Ident	(a10)	The source of astrometric data (15)	[ucd=meta.code]
+#Column	VarTypeII	(a10)	The new type of variability (16)	[ucd=meta.note;src.var]
+#Column	VarName	(A11)	Variable star designation (17)	[ucd=meta.id]
+#Column	AFOEV	(a5)	VizieR added column, not part of original data	[ucd=meta.ref.url]
+#Column	Simbad	(a6)	Simbad column added by the CDS	[ucd=meta.ref.url]
+recno	VarNum	m_VarNum	GCVS	n_GCVS	RAJ2000	DEJ2000	u_DEJ2000	VarType	l_magMax	magMax	u_magMax	l_Min1	Min1	u_Min1	n_Min1	l_Min2	Min2	u_Min2	n_Min2	flt	Epoch	u_Epoch	Year	u_Year	l_Period	Period	u_Period	n_Period	M-m/D	u_M-m/D	n_M-m/D	SpType	Ref1	Ref2	Exists	pmRA	pmDE	Ep-coor	u_Ident	Ident	VarTypeII	VarName	AFOEV	Simbad
+ 	 	 	 	 	"h:m:s"	"d:m:s"	 	 	 	mag	 	 	mag	 	 	 	mag	 	 	 	d	 	 	 	 	d	 	 	%	 	 	 	 	 	 	arcsec/yr	arcsec/yr	yr	 	 	 	 	 	
+--------	------	-	----------	-	-----------	-----------	-	----------	-	------	-	--	------	-	--	--	------	-	--	--	-----------	-	----	-	-	----------------	-	---	---	-	-	-----------------	-----	-----	------------	------	------	--------	-	----------	----------	-----------	-----	------
+   21235	340001	 	R Dra     	x	16 32 40.23	+66 45 17.9	 	M         	 	 6.700	 	  	13.200	 	  	  	      	 	  	V 	44779.00000	 	    	 	 	  245.6000000000	 	   	45 	 	 	M5e-M9eIII       	00001	00002	            	-0.020	 0.007	2000.000	 	Hip       	          	R     Dra  	AFOEV	Simbad
+

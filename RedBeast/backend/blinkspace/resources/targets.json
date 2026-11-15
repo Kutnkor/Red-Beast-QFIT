@@ -1,0 +1,277 @@
+{
+ "generated_at": "2026-11-14T15:34:23Z",
+ "source": {
+  "service": "SIMBAD TAP",
+  "url": "https://simbad.harvard.edu/simbad/sim-tap",
+  "note": "SIMBAD konumları ICRS, dönem J2000.0. WISE 0855 ve Barnard için özdevinim aritmetiğiyle doğrulandı."
+ },
+ "targets": [
+  {
+   "id": "barnard",
+   "name": "Barnard's Star",
+   "kind": "motion",
+   "simbad_main_id": "NAME Barnard's star",
+   "simbad_query": "Barnard's Star",
+   "aliases": [
+    "2MASS J17574849+0441405",
+    "GJ 699",
+    "Gaia DR2 4472832130942575872",
+    "Gaia DR3 4472832130942575872",
+    "HIP 87937",
+    "NAME Barnard Star",
+    "NAME Barnard's star",
+    "V* V2500 Oph",
+    "WISEA J175747.94+044323.8"
+   ],
+   "object_type": "BY*",
+   "spectral_type": "M4V",
+   "ra_deg": 269.4520769586187,
+   "dec_deg": 4.693364966576667,
+   "frame": "ICRS",
+   "epoch_jyear": 2000.0,
+   "ra_hms": "17h57m48.50s",
+   "dec_dms": "+04d41m36.1s",
+   "coo_bibcode": "2020yCat.1350....0G",
+   "pmra_masyr": -801.551,
+   "pmdec_masyr": 10362.394,
+   "pm_total_masyr": 10393.3,
+   "pm_bibcode": "2020yCat.1350....0G",
+   "parallax_mas": 546.9759,
+   "plx_bibcode": "2020yCat.1350....0G",
+   "search": {
+    "ra_deg": 269.446269,
+    "dec_deg": 4.768204,
+    "epoch_jyear": 2026.0,
+    "fov_arcmin": 6.0,
+    "method": "J2000.0 katalog konumu, yalnızca özdevinimle J2026.0'a doğrusal ilerletildi (paralaks ve gözlemci etkisi yok)",
+    "shift_arcsec": 270.2,
+    "rationale": {
+     "tr": "Alan, SPHEREx gözlem aralığının (2025.3–2026.8) ortasındaki öngörülen konuma merkezlenir; 6′ görüş alanı 1.5 yıllık hareketi ve karşılaştırma yıldızlarını içerir.",
+     "en": "The field is centred on the predicted position at the middle of the SPHEREx baseline (2025.3–2026.8); a 6′ field contains 1.5 years of motion plus comparison stars."
+    }
+   },
+   "pixels_per_year": 1.69,
+   "preferred_lam_um": null,
+   "preferred_lam_rationale": null,
+   "notes": {
+    "tr": "Bilinen en büyük özdevinimli yıldız (~10.4″/yıl). SPHEREx pikseli 6.15″ olduğundan bir yılda yaklaşık 1.7 piksel kayar. Çok parlaktır (K≈4.5); çekirdek pikselleri doymuş olabilir.",
+    "en": "Largest known proper motion of any star (~10.4″/yr). With 6.15″ SPHEREx pixels it shifts about 1.7 pixels per year. Very bright (K≈4.5); core pixels may be saturated."
+   }
+  },
+  {
+   "id": "eps-indi-b",
+   "name": "Epsilon Indi B",
+   "kind": "motion",
+   "simbad_main_id": "* eps Ind B",
+   "simbad_query": "eps Ind B",
+   "aliases": [
+    "* eps Ind B",
+    "2MASS J22041052-5646577",
+    "GJ 845 B",
+    "GJ 845 C",
+    "Gaia DR2 6412596012146094848",
+    "Gaia DR3 6412596012146801152",
+    "V* CI Ind",
+    "WISE J220415.65-564723.6",
+    "WISEA J220415.75-564724.4"
+   ],
+   "object_type": "BD*",
+   "spectral_type": "T1V+T6V",
+   "ra_deg": 331.04414658852124,
+   "dec_deg": -56.782844195116105,
+   "frame": "ICRS",
+   "epoch_jyear": 2000.0,
+   "ra_hms": "22h04m10.60s",
+   "dec_dms": "-56d46m58.2s",
+   "coo_bibcode": "2020yCat.1350....0G",
+   "pmra_masyr": 3981.977,
+   "pmdec_masyr": -2466.832,
+   "pm_total_masyr": 4684.2,
+   "pm_bibcode": "2020yCat.1350....0G",
+   "parallax_mas": 270.658,
+   "plx_bibcode": "2020yCat.1350....0G",
+   "search": {
+    "ra_deg": 331.096644,
+    "dec_deg": -56.80066,
+    "epoch_jyear": 2026.0,
+    "fov_arcmin": 6.0,
+    "method": "J2000.0 katalog konumu, yalnızca özdevinimle J2026.0'a doğrusal ilerletildi (paralaks ve gözlemci etkisi yok)",
+    "shift_arcsec": 121.8,
+    "rationale": {
+     "tr": "Alan, SPHEREx gözlem aralığının (2025.3–2026.8) ortasındaki öngörülen konuma merkezlenir; 6′ görüş alanı 1.5 yıllık hareketi ve karşılaştırma yıldızlarını içerir.",
+     "en": "The field is centred on the predicted position at the middle of the SPHEREx baseline (2025.3–2026.8); a 6′ field contains 1.5 years of motion plus comparison stars."
+    }
+   },
+   "pixels_per_year": 0.76,
+   "preferred_lam_um": null,
+   "preferred_lam_rationale": null,
+   "notes": {
+    "tr": "Eps Indi A'nın ~400″ uzağındaki kahverengi cüce çifti (Ba: T1, Bb: T6; ayrıklık ≈0.7″). SPHEREx çifti ayrı çözemez: tek, karışık bir kaynak beklenir. Ana yıldız Eps Indi A değildir.",
+    "en": "Brown-dwarf binary (Ba: T1, Bb: T6; separation ≈0.7″) about 400″ from Eps Indi A. SPHEREx cannot resolve the pair: expect a single blended source. This is not the primary star Eps Indi A."
+   },
+   "primary_star": {
+    "simbad_main_id": "* eps Ind",
+    "ra_deg": 330.8402234423433,
+    "dec_deg": -56.785978554364995,
+    "separation_arcsec": 402.3
+   }
+  },
+  {
+   "id": "wise-0855",
+   "name": "WISE 0855−0714",
+   "kind": "motion",
+   "simbad_main_id": "WISEA J085510.74-071442.5",
+   "simbad_query": "WISE J085510.83-071442.5",
+   "aliases": [
+    "WISE J085510.83-071442.5",
+    "WISEA J085510.74-071442.5"
+   ],
+   "object_type": "BD*",
+   "spectral_type": "Y2",
+   "ra_deg": 133.81890825,
+   "dec_deg": -7.247048000000001,
+   "frame": "ICRS",
+   "epoch_jyear": 2000.0,
+   "ra_hms": "08h55m16.54s",
+   "dec_dms": "-07d14m49.4s",
+   "coo_bibcode": "2021ApJS..253....7K",
+   "pmra_masyr": -8123.7,
+   "pmdec_masyr": 673.2,
+   "pm_total_masyr": 8151.5,
+   "pm_bibcode": "2021ApJS..253....7K",
+   "parallax_mas": 439.0,
+   "plx_bibcode": "2021ApJS..253....7K",
+   "search": {
+    "ra_deg": 133.759765,
+    "dec_deg": -7.242186,
+    "epoch_jyear": 2026.0,
+    "fov_arcmin": 6.0,
+    "method": "J2000.0 katalog konumu, yalnızca özdevinimle J2026.0'a doğrusal ilerletildi (paralaks ve gözlemci etkisi yok)",
+    "shift_arcsec": 211.9,
+    "rationale": {
+     "tr": "Alan, SPHEREx gözlem aralığının (2025.3–2026.8) ortasındaki öngörülen konuma merkezlenir; 6′ görüş alanı 1.5 yıllık hareketi ve karşılaştırma yıldızlarını içerir.",
+     "en": "The field is centred on the predicted position at the middle of the SPHEREx baseline (2025.3–2026.8); a 6′ field contains 1.5 years of motion plus comparison stars."
+    }
+   },
+   "pixels_per_year": 1.33,
+   "preferred_lam_um": 4.86,
+   "preferred_lam_rationale": {
+    "tr": "Y cücesi yalnızca ~4.5–5 µm'de parlaktır. Arşiv envanterinde 4.86 µm grubu en uzun zaman aralığına (3 ziyaret, ~368 gün) sahip uygun gruptur; otomatik seçim (2.34 µm) kaynağın görünmediği bir dalga boyuna düşer.",
+    "en": "The Y dwarf is only bright near 4.5–5 µm. In the archive inventory the 4.86 µm group has the longest baseline among suitable groups (3 visits, ~368 days); the automatic choice (2.34 µm) lands where the source is invisible."
+   },
+   "notes": {
+    "tr": "Bilinen en soğuk kahverengi cüce (Y tipi), ~8.1″/yıl özdevinim. Yalnızca ~4.5–5 µm'de ve çok sönük (W2≈13.9) görünür; tek SPHEREx pozlamasında algılama sınırına yakındır. Sık kullanılan yayımlanmış koordinat WISE dönemine (~2010) aittir; 2026'da kaynak ~2′ batıdadır.",
+    "en": "Coldest known brown dwarf (Y type), proper motion ~8.1″/yr. Visible only near 4.5–5 µm and very faint (W2≈13.9); close to the single-exposure SPHEREx detection limit. The commonly quoted published coordinate is from the WISE epoch (~2010); by 2026 the source is ~2′ further west."
+   },
+   "reference_coords": {
+    "ra": "08h55m10.831s",
+    "dec": "-7d14m42.53s",
+    "ra_deg": 133.795129,
+    "dec_deg": -7.245147,
+    "offset_from_search_center_arcsec": 126.7,
+    "offset_from_j2000_arcsec": 85.2
+   }
+  },
+  {
+   "id": "rw-aur",
+   "name": "RW Aurigae",
+   "kind": "variability",
+   "simbad_main_id": "V* RW Aur",
+   "simbad_query": "RW Aur",
+   "aliases": [
+    "2MASS J05074953+3024050",
+    "HD 240764",
+    "HIP 23873",
+    "V* RW Aur",
+    "WISE J050749.55+302404.9",
+    "WISEA J050749.54+302404.7"
+   ],
+   "object_type": "TT*",
+   "spectral_type": "K1/5e+K5e",
+   "ra_deg": 76.95652603458333,
+   "dec_deg": 30.401438173888888,
+   "frame": "ICRS",
+   "epoch_jyear": 2000.0,
+   "ra_hms": "05h07m49.57s",
+   "dec_dms": "+30d24m05.2s",
+   "coo_bibcode": "2007A&A...474..653V",
+   "pmra_masyr": 7.23,
+   "pmdec_masyr": -20.33,
+   "pm_total_masyr": 21.6,
+   "pm_bibcode": "2007A&A...474..653V",
+   "parallax_mas": 15.42,
+   "plx_bibcode": "2007A&A...474..653V",
+   "search": {
+    "ra_deg": 76.956587,
+    "dec_deg": 30.401291,
+    "epoch_jyear": 2026.0,
+    "fov_arcmin": 6.0,
+    "method": "J2000.0 katalog konumu, yalnızca özdevinimle J2026.0'a doğrusal ilerletildi (paralaks ve gözlemci etkisi yok)",
+    "shift_arcsec": 0.6,
+    "rationale": {
+     "tr": "Alan, SPHEREx gözlem aralığının (2025.3–2026.8) ortasındaki öngörülen konuma merkezlenir; 6′ görüş alanı 1.5 yıllık hareketi ve karşılaştırma yıldızlarını içerir.",
+     "en": "The field is centred on the predicted position at the middle of the SPHEREx baseline (2025.3–2026.8); a 6′ field contains 1.5 years of motion plus comparison stars."
+    }
+   },
+   "pixels_per_year": 0.0,
+   "preferred_lam_um": 0.765,
+   "preferred_lam_rationale": {
+    "tr": "Yıldız 0.85 µm'den uzun dalga boylarında doyma/doğrusalsızlık bayrağı taşıyor (otomatik seçilen 2.16 µm'de çekirdek doymuş). 0.765 µm grubunda üç ziyaretin tamamı bayraksız ve nicel ölçüme uygundur.",
+    "en": "The star carries saturation/non-linearity flags longward of 0.85 µm (the automatically chosen 2.16 µm group has a saturated core). In the 0.765 µm group all three visits are flag-free and usable for quantitative measurement."
+   },
+   "notes": {
+    "tr": "Genç (T Tauri) değişen yıldız; A ve B bileşenleri ≈1.4″ ayrıktır ve SPHEREx'te tek kaynak olarak görünür. Düzensiz derin sönükleşmeleriyle bilinir.",
+    "en": "Young (T Tauri) variable; components A and B are ≈1.4″ apart and appear as one source to SPHEREx. Known for irregular deep dimming events."
+   }
+  },
+  {
+   "id": "r-dra",
+   "name": "R Draconis",
+   "kind": "variability",
+   "simbad_main_id": "V* R Dra",
+   "simbad_query": "R Dra",
+   "aliases": [
+    "2MASS J16324023+6645180",
+    "Gaia DR2 1648328016352398848",
+    "Gaia DR3 1648328016354496384",
+    "HD 149880",
+    "HIP 81014",
+    "V* R Dra"
+   ],
+   "object_type": "Mi*",
+   "spectral_type": "M4.5-6+e",
+   "ra_deg": 248.16761083295,
+   "dec_deg": 66.75497941722,
+   "frame": "ICRS",
+   "epoch_jyear": 2000.0,
+   "ra_hms": "16h32m40.23s",
+   "dec_dms": "+66d45m17.9s",
+   "coo_bibcode": "2020yCat.1350....0G",
+   "pmra_masyr": -20.643,
+   "pmdec_masyr": 6.149,
+   "pm_total_masyr": 21.5,
+   "pm_bibcode": "2020yCat.1350....0G",
+   "parallax_mas": 1.2509,
+   "plx_bibcode": "2020yCat.1350....0G",
+   "search": {
+    "ra_deg": 248.167233,
+    "dec_deg": 66.755024,
+    "epoch_jyear": 2026.0,
+    "fov_arcmin": 6.0,
+    "method": "J2000.0 katalog konumu, yalnızca özdevinimle J2026.0'a doğrusal ilerletildi (paralaks ve gözlemci etkisi yok)",
+    "shift_arcsec": 0.6,
+    "rationale": {
+     "tr": "Alan, SPHEREx gözlem aralığının (2025.3–2026.8) ortasındaki öngörülen konuma merkezlenir; 6′ görüş alanı 1.5 yıllık hareketi ve karşılaştırma yıldızlarını içerir.",
+     "en": "The field is centred on the predicted position at the middle of the SPHEREx baseline (2025.3–2026.8); a 6′ field contains 1.5 years of motion plus comparison stars."
+    }
+   },
+   "pixels_per_year": 0.0,
+   "preferred_lam_um": null,
+   "preferred_lam_rationale": null,
+   "notes": {
+    "tr": "Mira türü uzun dönemli değişen (dönem ≈245 gün). Kuzey ekliptik kutbuna ~9° uzaklıkta, SPHEREx derin alanında: yüzlerce tekrar gözlem var. Yakın kızılötesinde çok parlaktır; çekirdek pikselleri doymuştur.",
+    "en": "Mira-type long-period variable (period ≈245 d). About 9° from the north ecliptic pole inside the SPHEREx deep field: hundreds of repeat observations. Very bright in the near-infrared; core pixels are saturated."
+   }
+  }
+ ]
+}

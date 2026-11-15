@@ -1,0 +1,409 @@
+{
+  "schema_version": 1,
+  "model": "Astropy SkyCoord ICRS Cartesian position + velocity * delta Julian years; no apply_space_motion",
+  "coordinate_system": {
+    "icrs_pc": "ICRS Cartesian parsecs",
+    "three_pc": "[ICRS x, ICRS z, ICRS y]"
+  },
+  "provenance": {
+    "input_sha256": "9937bf8a8ab421a965f79c391979988729a1e9808dba9e30907d4a05062caee8",
+    "astropy_version": "8.0.2",
+    "source_url": "https://docs.astropy.org/en/stable/coordinates/velocities.html"
+  },
+  "stars": [
+    {
+      "id": "barnard",
+      "input": {
+        "id": "barnard",
+        "name": "Barnard's Star",
+        "ra": 269.44850252543836,
+        "dec": 4.739420051112412,
+        "epoch": 2016.0,
+        "parallax": 546.975939730948,
+        "parallaxError": 0.040116355,
+        "pmRa": -801.5509783684709,
+        "pmDec": 10362.394206546573,
+        "radialVelocity": -110.46822,
+        "hasRadialVelocity": true,
+        "distancePc": 1.828233981355542,
+        "magnitude": 8.1939745,
+        "colorIndex": 2.8336968,
+        "spectralType": "M4V",
+        "source": "ESA Gaia DR3",
+        "sourceUrl": "https://gea.esac.esa.int/archive/",
+        "subtitleTr": "Yüksek özdevinimli yıldız",
+        "subtitleEn": "High proper-motion star"
+      },
+      "positions": [
+        {
+          "year": 2000.0,
+          "icrs_pc": [
+            -0.017441968400933892,
+            -1.8238223191448146,
+            0.14974116445606658
+          ],
+          "three_pc": [
+            -0.017441968400933892,
+            0.14974116445606658,
+            -1.8238223191448146
+          ]
+        },
+        {
+          "year": 2026.0,
+          "icrs_pc": [
+            -0.017596602757051983,
+            -1.8206960133867676,
+            0.15187833015706698
+          ],
+          "three_pc": [
+            -0.017596602757051983,
+            0.15187833015706698,
+            -1.8206960133867676
+          ]
+        },
+        {
+          "year": 2050.0,
+          "icrs_pc": [
+            -0.017739342162699453,
+            -1.8178101926870318,
+            0.15385109849645198
+          ],
+          "three_pc": [
+            -0.017739342162699453,
+            0.15385109849645198,
+            -1.8178101926870318
+          ]
+        },
+        {
+          "year": 2100.0,
+          "icrs_pc": [
+            -0.01803671592446501,
+            -1.811798066229249,
+            0.15796103253683735
+          ],
+          "three_pc": [
+            -0.01803671592446501,
+            0.15796103253683735,
+            -1.811798066229249
+          ]
+        }
+      ]
+    },
+    {
+      "id": "eps-indi-b",
+      "input": {
+        "id": "epsilon",
+        "name": "Epsilon Indi B",
+        "catalogueName": "* eps Ind B",
+        "ra": 331.04414658852124,
+        "dec": -56.782844195116105,
+        "epoch": 2000,
+        "parallax": 270.658,
+        "parallaxError": 0,
+        "distancePc": 3.694699583976827,
+        "pmRa": 3981.977,
+        "pmDec": -2466.832,
+        "radialVelocity": 0,
+        "hasRadialVelocity": false,
+        "spectralType": "T1V+T6V",
+        "colorIndex": 3.0,
+        "source": "SIMBAD / CDS",
+        "bibcode": "2020yCat.1350....0G",
+        "sourceUrl": "https://simbad.cfa.harvard.edu/simbad/sim-id?Ident=%2A%20eps%20Ind%20B",
+        "subtitleTr": "Kahverengi cüce çifti",
+        "subtitleEn": "Brown dwarf pair"
+      },
+      "positions": [
+        {
+          "year": 2000.0,
+          "icrs_pc": [
+            1.7709921429593507,
+            -0.9798939094937286,
+            -3.0909868604625097
+          ],
+          "three_pc": [
+            1.7709921429593507,
+            -3.0909868604625097,
+            -0.9798939094937286
+          ]
+        },
+        {
+          "year": 2026.0,
+          "icrs_pc": [
+            1.7710489833862244,
+            -0.9778059175203777,
+            -3.0916162214906158
+          ],
+          "three_pc": [
+            1.7710489833862244,
+            -3.0916162214906158,
+            -0.9778059175203777
+          ]
+        },
+        {
+          "year": 2050.0,
+          "icrs_pc": [
+            1.7711014514725694,
+            -0.9758785403142077,
+            -3.092197170131944
+          ],
+          "three_pc": [
+            1.7711014514725694,
+            -3.092197170131944,
+            -0.9758785403142077
+          ]
+        },
+        {
+          "year": 2100.0,
+          "icrs_pc": [
+            1.7712107599857878,
+            -0.9718631711346868,
+            -3.0934074798013786
+          ],
+          "three_pc": [
+            1.7712107599857878,
+            -3.0934074798013786,
+            -0.9718631711346868
+          ]
+        }
+      ]
+    },
+    {
+      "id": "wise-0855",
+      "input": {
+        "id": "wise",
+        "name": "WISE 0855",
+        "catalogueName": "WISEA J085510.74-071442.5",
+        "ra": 133.81890825,
+        "dec": -7.247048000000001,
+        "epoch": 2000,
+        "parallax": 439,
+        "parallaxError": 2.4,
+        "distancePc": 2.277904328018223,
+        "pmRa": -8123.7,
+        "pmDec": 673.2,
+        "radialVelocity": 0,
+        "hasRadialVelocity": false,
+        "spectralType": "Y2",
+        "colorIndex": 3.0,
+        "source": "SIMBAD / CDS",
+        "bibcode": "2021ApJS..253....7K",
+        "sourceUrl": "https://simbad.cfa.harvard.edu/simbad/sim-id?Ident=WISEA%20J085510.74-071442.5",
+        "subtitleTr": "Soğuk kahverengi cüce",
+        "subtitleEn": "Cold brown dwarf"
+      },
+      "positions": [
+        {
+          "year": 2000.0,
+          "icrs_pc": [
+            -1.5645790491832374,
+            1.6304505271665213,
+            -0.28735275346417377
+          ],
+          "three_pc": [
+            -1.5645790491832374,
+            -0.28735275346417377,
+            1.6304505271665213
+          ]
+        },
+        {
+          "year": 2026.0,
+          "icrs_pc": [
+            -1.5629128977627775,
+            1.6320831597473366,
+            -0.2871609994399751
+          ],
+          "three_pc": [
+            -1.5629128977627775,
+            -0.2871609994399751,
+            1.6320831597473366
+          ]
+        },
+        {
+          "year": 2050.0,
+          "icrs_pc": [
+            -1.5613749118361993,
+            1.6335902052065507,
+            -0.2869839957253301
+          ],
+          "three_pc": [
+            -1.5613749118361993,
+            -0.2869839957253301,
+            1.6335902052065507
+          ]
+        },
+        {
+          "year": 2100.0,
+          "icrs_pc": [
+            -1.5581707744891613,
+            1.6367298832465804,
+            -0.2866152379864865
+          ],
+          "three_pc": [
+            -1.5581707744891613,
+            -0.2866152379864865,
+            1.6367298832465804
+          ]
+        }
+      ]
+    },
+    {
+      "id": "rw-aur",
+      "input": {
+        "id": "rwaur",
+        "name": "RW Aurigae",
+        "catalogueName": "V* RW Aur",
+        "ra": 76.95652603458333,
+        "dec": 30.401438173888888,
+        "epoch": 2000,
+        "parallax": 15.42,
+        "parallaxError": 0,
+        "distancePc": 64.85084306095979,
+        "pmRa": 7.23,
+        "pmDec": -20.33,
+        "radialVelocity": 15,
+        "hasRadialVelocity": true,
+        "spectralType": "K1/5e+K5e",
+        "colorIndex": 3.0,
+        "source": "SIMBAD / CDS",
+        "bibcode": "2007A&A...474..653V",
+        "sourceUrl": "https://simbad.cfa.harvard.edu/simbad/sim-id?Ident=V%2A%20RW%20Aur",
+        "subtitleTr": "Genç değişken yıldız sistemi",
+        "subtitleEn": "Young variable star system"
+      },
+      "positions": [
+        {
+          "year": 2000.0,
+          "icrs_pc": [
+            12.6237423751482,
+            54.49076948746169,
+            32.818120220808474
+          ],
+          "three_pc": [
+            12.6237423751482,
+            32.818120220808474,
+            54.49076948746169
+          ]
+        },
+        {
+          "year": 2026.0,
+          "icrs_pc": [
+            12.623781419630813,
+            54.49119989626422,
+            32.81817872710429
+          ],
+          "three_pc": [
+            12.623781419630813,
+            32.81817872710429,
+            54.49119989626422
+          ]
+        },
+        {
+          "year": 2050.0,
+          "icrs_pc": [
+            12.623817460691686,
+            54.49159719669733,
+            32.81823273291582
+          ],
+          "three_pc": [
+            12.623817460691686,
+            32.81823273291582,
+            54.49159719669733
+          ]
+        },
+        {
+          "year": 2100.0,
+          "icrs_pc": [
+            12.623892546235174,
+            54.49242490593297,
+            32.81834524502315
+          ],
+          "three_pc": [
+            12.623892546235174,
+            32.81834524502315,
+            54.49242490593297
+          ]
+        }
+      ]
+    },
+    {
+      "id": "r-dra",
+      "input": {
+        "id": "rdra",
+        "name": "R Draconis",
+        "catalogueName": "V* R Dra",
+        "ra": 248.16761083295,
+        "dec": 66.75497941722,
+        "epoch": 2000,
+        "parallax": 1.2509,
+        "parallaxError": 0,
+        "distancePc": 799.4244144216165,
+        "pmRa": -20.643,
+        "pmDec": 6.149,
+        "radialVelocity": -132.8,
+        "hasRadialVelocity": true,
+        "spectralType": "M4.5-6+e",
+        "colorIndex": 3.0,
+        "source": "SIMBAD / CDS",
+        "bibcode": "2020yCat.1350....0G",
+        "sourceUrl": "https://simbad.cfa.harvard.edu/simbad/sim-id?Ident=V%2A%20R%20Dra",
+        "subtitleTr": "Uzun dönemli değişken yıldız",
+        "subtitleEn": "Long-period variable"
+      },
+      "positions": [
+        {
+          "year": 2000.0,
+          "icrs_pc": [
+            -117.33363306947787,
+            -292.87474907524654,
+            734.5315475036949
+          ],
+          "three_pc": [
+            -117.33363306947787,
+            734.5315475036949,
+            -292.87474907524654
+          ]
+        },
+        {
+          "year": 2026.0,
+          "icrs_pc": [
+            -117.33483402331515,
+            -292.8721532944402,
+            734.5285474725006
+          ],
+          "three_pc": [
+            -117.33483402331515,
+            734.5285474725006,
+            -292.8721532944402
+          ]
+        },
+        {
+          "year": 2050.0,
+          "icrs_pc": [
+            -117.33594259608802,
+            -292.86975718908053,
+            734.5257782129366
+          ],
+          "three_pc": [
+            -117.33594259608802,
+            734.5257782129366,
+            -292.86975718908053
+          ]
+        },
+        {
+          "year": 2100.0,
+          "icrs_pc": [
+            -117.33825212269817,
+            -292.86476530291446,
+            734.5200089221784
+          ],
+          "three_pc": [
+            -117.33825212269817,
+            734.5200089221784,
+            -292.86476530291446
+          ]
+        }
+      ]
+    }
+  ]
+}

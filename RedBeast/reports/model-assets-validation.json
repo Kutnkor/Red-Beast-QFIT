@@ -1,0 +1,51 @@
+{
+  "models": 5,
+  "reexport_byte_identical": true,
+  "object_loader_roundtrip": "passed for all 5 models during export",
+  "animation_roundtrip": "covered by stellarModels.test.ts",
+  "shader_programs": 7,
+  "snapshots": [
+    {
+      "target_id": "barnard",
+      "file": "barnard.three.json",
+      "sha256": "d02449635361444ad6de7358ee21ea353ab40a099c187e5eb8df315d52ddbaf1",
+      "bytes": 121793,
+      "meshes": 10,
+      "point_clouds": 1
+    },
+    {
+      "target_id": "eps-indi-b",
+      "file": "eps-indi-b.three.json",
+      "sha256": "d02b88afb216e771e42283c6d9a0bbc6762d5297c00fbe65902febc1eeba3648",
+      "bytes": 187930,
+      "meshes": 6,
+      "point_clouds": 0
+    },
+    {
+      "target_id": "wise-0855",
+      "file": "wise-0855.three.json",
+      "sha256": "598c85076c59754d841d5400970f18bccd8446e5344c4d0dcec25a1500948afa",
+      "bytes": 78651,
+      "meshes": 3,
+      "point_clouds": 0
+    },
+    {
+      "target_id": "rw-aur",
+      "file": "rw-aur.three.json",
+      "sha256": "d9fe190f329e7c63fe19dd547058e1bf8f96c7c8d97c71f6ca12669f8b89a5e5",
+      "bytes": 306590,
+      "meshes": 9,
+      "point_clouds": 2
+    },
+    {
+      "target_id": "r-dra",
+      "file": "r-dra.three.json",
+      "sha256": "97d8b5ebda38877145f36e866b23fc2462a46908942a0125cc3a6827b6e2507f",
+      "bytes": 617671,
+      "meshes": 5,
+      "point_clouds": 1
+    }
+  ],
+  "animation_sha256": "aed6cc223d1991b4509d0bcb06ad41cfd3d51bcb1a87ed0814382cd311c4e126",
+  "browser_gpu_verified": false
+}

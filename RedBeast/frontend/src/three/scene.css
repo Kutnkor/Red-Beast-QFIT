@@ -1,0 +1,39 @@
+.sky-canvas { position: relative; width: 100%; height: 100%; min-height: 0; overflow: hidden; background: var(--sky); color: var(--fg); }
+.sky-canvas[hidden] { display: none; }
+.sky-canvas > canvas { display: block; width: 100%; height: 100%; cursor: grab; outline-offset: -3px; }
+.sky-canvas > canvas:active { cursor: grabbing; }
+.sky-labels { position: absolute; inset: 0; pointer-events: none; overflow: hidden; }
+.sky-label { position: absolute; left: 0; top: 0; width: 0; height: 0; display: block; pointer-events: none; font-family: var(--font, system-ui, sans-serif); font-size: 12.5px; line-height: 1.3; color: #fff; }
+.sky-label[hidden] { display: none; }
+.sky-dot { position: absolute; left: -3px; top: -3px; width: 6px; height: 6px; border-radius: 50%; background: #fff; box-shadow: 0 0 0 3px rgba(255,255,255,.16); }
+.sky-lead { position: absolute; left: 1px; top: -24px; width: 30px; height: 24px; overflow: visible; fill: none; stroke: rgba(198,211,247,.85); stroke-width: 1.2; stroke-linecap: round; }
+.sky-plate { position: absolute; left: 32px; top: -24px; translate: 0 -50%; white-space: nowrap; padding: 3px 9px; border-radius: 8px; font-weight: 600; font-style: normal; background: rgba(10,22,52,.8); box-shadow: inset 0 0 0 1px rgba(156,178,238,.38); pointer-events: auto; user-select: text; }
+.sky-label[data-side="left"] .sky-lead { left: -31px; transform: scaleX(-1); }
+.sky-label[data-side="left"] .sky-plate { left: auto; right: 32px; }
+.sky-label[data-kind="representative"] .sky-plate { color: #c6d3f7; box-shadow: none; outline: 1px dashed rgba(156,178,238,.55); outline-offset: -1px; }
+.sky-label[data-kind="here"] .sky-plate { background: #fff; color: #0a1634; font-weight: 700; box-shadow: 0 6px 18px rgba(0,0,0,.45); }
+.sky-label[data-kind="here"] .sky-dot { background: #ff6a1a; box-shadow: 0 0 0 3px rgba(255,106,26,.28); }
+.sky-label[data-kind="here"] .sky-lead { stroke: #fff; }
+.sky-loading { position: absolute; top: 50%; left: 24px; color: var(--fg-2); }
+.sky-science-caption { position: absolute; left: 16px; right: 16px; bottom: 48px; display: flex; align-items: flex-start; gap: 4px; flex-direction: column; pointer-events: none; font-family: var(--mono, monospace); font-size: var(--fs-xs, 12px); line-height: 1.5; color: var(--fg-2); }
+.sky-science-caption .assumed { text-decoration: underline; text-decoration-style: dotted; }
+.sky-background-credit { position: absolute; bottom: 12px; left: 16px; right: 16px; margin: 0; font-family: var(--mono, monospace); font-size: var(--fs-xs, 12px); line-height: 1.5; color: var(--fg-3); pointer-events: none; }
+.sky-fallback { position: absolute; inset: 0; padding: 24px; padding-bottom: 160px; overflow: auto; background: var(--sky); color: var(--fg); }
+.sky-fallback table { width: 100%; border-collapse: collapse; font-size: var(--fs-sm, 13px); }
+.sky-fallback td, .sky-fallback th { text-align: left; padding: 8px; border-bottom: 1px solid var(--rule); font-variant-numeric: tabular-nums; }
+.sky-fallback th { color: var(--fg-2); font-weight: 400; }
+.sky-fallback button { color: var(--fg); background: transparent; border: 0; text-align: left; min-height: 44px; padding: 4px; text-decoration: underline; }
+.sky-fallback svg { width: 100%; max-height: 200px; color: var(--signal); fill: currentColor; font-family: var(--mono, monospace); font-size: 12px; }
+.fallback-axis { fill: none; stroke: var(--rule); stroke-width: 1; }
+.fallback-trail { fill: none; stroke: var(--signal); stroke-width: 2; }
+.sky-neighbour-list { position: absolute; top: 16px; right: 16px; max-width: min(320px, calc(100% - 32px)); font-size: var(--fs-sm, 13px); color: var(--fg-2); }
+.sky-neighbour-list summary { min-height: 44px; padding: 8px; cursor: pointer; }
+.sky-neighbour-list[open] { background: var(--surface); border: 1px solid var(--rule); }
+.sky-neighbour-list > div { display: grid; max-height: 300px; overflow: auto; }
+.sky-neighbour-list button { min-height: 44px; padding: 8px 12px; text-align: left; color: var(--fg); background: transparent; border: 0; border-top: 1px solid var(--rule); font: inherit; }
+.sky-neighbour-list button:focus-visible { outline: 1px solid var(--signal); outline-offset: -2px; }
+@media (max-width: 759px) {
+  .sky-science-caption { left: 12px; right: 12px; bottom: 64px; }
+  .sky-background-credit { left: 12px; right: 12px; bottom: 12px; }
+  .sky-fallback { padding: 12px; padding-bottom: 180px; }
+}

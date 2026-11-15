@@ -1,0 +1,7 @@
+{
+  "url": "https://gea.esac.esa.int/tap-server/tap/sync",
+  "adql": "SELECT column_name, datatype FROM TAP_SCHEMA.columns WHERE table_name = 'gaiadr3.gaia_source' AND column_name IN ('source_id','teff_gspphot')",
+  "retrieved_utc": "2026-11-14T16:53:47+00:00",
+  "sha256": "ee4bd019686df7891c4e6585151a8a8aa7665c723200d15641d3d807d4cd7c7c",
+  "bytes": 55
+}

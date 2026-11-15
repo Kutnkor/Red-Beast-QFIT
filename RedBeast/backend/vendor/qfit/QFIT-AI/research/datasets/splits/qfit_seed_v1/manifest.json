@@ -1,0 +1,85 @@
+{
+  "dataset": "qfit_seed_v1.jsonl",
+  "dataset_sha256": "b2acf2400d3b8a6bf607e3de7d54f7077c81782e7f266b29ba1c0ae9f95d9e6a",
+  "dataset_versions": [
+    "qfit_seed_v1",
+    "qfit_seed_v1_source_review_2026-11-14"
+  ],
+  "created_at": "2026-11-14T16:43:18+00:00",
+  "split_method": "by family, stratified by category, seeded sha256 order",
+  "seed": "qfit",
+  "counts": {
+    "train": 38,
+    "validation": 16,
+    "test": 16
+  },
+  "families": {
+    "train": 19,
+    "validation": 8,
+    "test": 8
+  },
+  "by_category": {
+    "train": {
+      "A": 10,
+      "B": 14,
+      "C": 2,
+      "D": 2,
+      "E": 4,
+      "F": 2,
+      "G": 4
+    },
+    "validation": {
+      "A": 2,
+      "B": 4,
+      "C": 2,
+      "D": 2,
+      "E": 2,
+      "F": 2,
+      "G": 2
+    },
+    "test": {
+      "A": 2,
+      "B": 4,
+      "C": 2,
+      "D": 2,
+      "E": 2,
+      "F": 2,
+      "G": 2
+    }
+  },
+  "by_language": {
+    "train": {
+      "en": 19,
+      "tr": 19
+    },
+    "validation": {
+      "en": 8,
+      "tr": 8
+    },
+    "test": {
+      "en": 8,
+      "tr": 8
+    }
+  },
+  "annotation_status": {
+    "human_reviewed": 68,
+    "ai_drafted_pending_human_review": 2
+  },
+  "verification_status": {
+    "unverified": 34,
+    "source_checked": 36
+  },
+  "synthetic": 70,
+  "leakage": [],
+  "integrity": {
+    "ok": true,
+    "examples": 70,
+    "errors": [],
+    "warnings": []
+  },
+  "versions": {
+    "knowledge_index": "8c62698a68e7",
+    "source_registry": "2026.11.14-2"
+  },
+  "note": "Examples labelled ai_drafted_pending_human_review have not been checked by a person."
+}

@@ -1,0 +1,211 @@
+{
+  "image": "sha256:99253f902ec2a51a5789289dfaa92c792db49119d0a7d4a7b0405521c7748594",
+  "runtime_uid": "1000",
+  "health": {
+    "status": "ok",
+    "app": "BlinkSpace",
+    "pipeline_version": "1.2.0",
+    "active_jobs": 0,
+    "limits": {
+      "fov_arcmin": [
+        2.0,
+        30.0
+      ],
+      "max_frames": 16,
+      "default_fov_arcmin": 6.0,
+      "default_frames": 8
+    },
+    "classifications": [
+      "possible_motion",
+      "possible_brightness_change",
+      "possible_artifact",
+      "unsure"
+    ]
+  },
+  "static_files": [
+    {
+      "path": "/assets/CelestialSphere-fkhrADl3.js",
+      "bytes": 3853,
+      "sha256": "0f9b63b931df607bced86e7f221845b6ff7b0ef31541ff588dc86beb422f2f71"
+    },
+    {
+      "path": "/assets/NeighbourhoodScene-DgEG_IC4.js",
+      "bytes": 5538,
+      "sha256": "a0ad591e0930e81f1cd7c3af6f5bb98d0c2d2404181674d6a5b0dda465599a4f"
+    },
+    {
+      "path": "/assets/SkyCanvas-BuAR0Eo0.css",
+      "bytes": 2995,
+      "sha256": "b5264c97e52255360ce1fa62df15d2c13b4e402ec91487f9f5bdf05d29a4e02e"
+    },
+    {
+      "path": "/assets/SkyCanvas-Bv2TvhKd.js",
+      "bytes": 8917,
+      "sha256": "55b651a8bbf6060cde3c80d917d102606c6ad716b51f5ecf6ca8ec4585f29e8c"
+    },
+    {
+      "path": "/assets/StarPointsMaterial-Cqidqp9f.js",
+      "bytes": 39015,
+      "sha256": "09856cfb2f4b74073f3f33ac046ce5a41368fa1890a74f8de51aad43f724d7a9"
+    },
+    {
+      "path": "/assets/StarScene-Cu1Zypvg.js",
+      "bytes": 26717,
+      "sha256": "252d4dc5b618eb42c5df75782fe1fb48600504e5d302b4db39cad10de18583f0"
+    },
+    {
+      "path": "/assets/TimeStackScene-BvZnq7Fk.js",
+      "bytes": 5927,
+      "sha256": "879023ee5e200a76d6888df6705c7c0b55a293420f2fdf2289bb363f882d97ae"
+    },
+    {
+      "path": "/assets/Viewer-DqnDAlK6.js",
+      "bytes": 65277,
+      "sha256": "1f1a12586080aa92dee8db1847fa7dd92192f97f30165d300f46e553d524a36d"
+    },
+    {
+      "path": "/assets/index-C0MutYVY.css",
+      "bytes": 36860,
+      "sha256": "cabb4ef5d3d34216fa45fb59f3246e05e60ae25594f0d0c4ca7e836e9c96cc7f"
+    },
+    {
+      "path": "/assets/index-H77mIirL.js",
+      "bytes": 362744,
+      "sha256": "b8669367a6623493de0b033428fe2e5fd4ff3974ac96eaf600cfe52d04c4ff13"
+    },
+    {
+      "path": "/assets/picking-DSxlokR-.js",
+      "bytes": 779,
+      "sha256": "33218d6c45c7381d1f1b06444c6af033f023411facbecbdbc7fe10593423afe8"
+    },
+    {
+      "path": "/assets/runtime-CPQOYxsb.js",
+      "bytes": 513234,
+      "sha256": "4fe1479f77e223f0edb4dd759192788288fb77330e1a7070cc8cc0547c23d59d"
+    },
+    {
+      "path": "/assets/wcs-D87T_eQq.js",
+      "bytes": 899,
+      "sha256": "52de0e7e8c3fd7fe3093e01c1611502aabf9d9653f94754e13bed13161d843ae"
+    },
+    {
+      "path": "/favicon.svg",
+      "bytes": 325,
+      "sha256": "6d2f1cb5859ced0262a7c47fcfa59044f0d2cdb4cd20faf1610a8f10c58c79f3"
+    },
+    {
+      "path": "/fonts/Barlow-OFL.txt",
+      "bytes": 4377,
+      "sha256": "186d750eb496a4c17a76385f82be6aea2ac1cf2de074a811d63786cf374ea73f"
+    },
+    {
+      "path": "/fonts/Barlow-Regular.ttf",
+      "bytes": 104068,
+      "sha256": "95aa02c7c43096e0dd44d787ba6216864a67157e402adab59b35572e0c1577ea"
+    },
+    {
+      "path": "/fonts/Barlow-SemiBold.ttf",
+      "bytes": 108348,
+      "sha256": "86577cb32f8abe3673db53ca0f4221e6856751a4f6730c867e00f720f8bb1fc5"
+    },
+    {
+      "path": "/fonts/IBMPlexMono-Medium.ttf",
+      "bytes": 174008,
+      "sha256": "98fbd727aae340b236955879dabed4d991aac9e8e90b3b2a67ce4a59221cc97c"
+    },
+    {
+      "path": "/fonts/IBMPlexMono-Regular.ttf",
+      "bytes": 173052,
+      "sha256": "7c6fbddca4b700be918f5f6183d9bd4464fa427fe435f0b480d77fe2bb8c5a43"
+    },
+    {
+      "path": "/fonts/Plex-OFL.txt",
+      "bytes": 4456,
+      "sha256": "7e6b2818edbd8f6a01ae80641cc8f16a51080d08fb4e532be3a0b6f74adb07da"
+    },
+    {
+      "path": "/icons.svg",
+      "bytes": 5031,
+      "sha256": "b45fa506195cfcdef406ba9f0c77b36ddc1a7c224040926ec70abc2fdea7b93a"
+    },
+    {
+      "path": "/index.html",
+      "bytes": 2338,
+      "sha256": "bf45eb0e98d4f0c85bf1d28e10367684ebc89d4236939ee99c4dca7ae03a5cf8"
+    },
+    {
+      "path": "/models/LICENSE",
+      "bytes": 1080,
+      "sha256": "56c0cf31f7aee251dd498430aefdbcb8e6b81a6735245c84915399724f1bcbcf"
+    },
+    {
+      "path": "/models/README.md",
+      "bytes": 4541,
+      "sha256": "120a62de9348c7e0badb602d7a1ad8cd35c28f16d0d7b4b37eb59bc3821ad3b9"
+    },
+    {
+      "path": "/models/THREE-LICENSE.txt",
+      "bytes": 1081,
+      "sha256": "4c40a1ef62450b857c3b2aaf294936304cd552d965fbcd9d32d4c5bcf4ba4454"
+    },
+    {
+      "path": "/models/animate-stellar-model.js",
+      "bytes": 2825,
+      "sha256": "aed6cc223d1991b4509d0bcb06ad41cfd3d51bcb1a87ed0814382cd311c4e126"
+    },
+    {
+      "path": "/models/barnard.three.json",
+      "bytes": 121793,
+      "sha256": "d02449635361444ad6de7358ee21ea353ab40a099c187e5eb8df315d52ddbaf1"
+    },
+    {
+      "path": "/models/eps-indi-b.three.json",
+      "bytes": 187930,
+      "sha256": "d02b88afb216e771e42283c6d9a0bbc6762d5297c00fbe65902febc1eeba3648"
+    },
+    {
+      "path": "/models/manifest.json",
+      "bytes": 1659,
+      "sha256": "ca0a55f208a75f7c6fc47977cd77389631d71c2ce25ea923ed50e02c0698e4a3"
+    },
+    {
+      "path": "/models/r-dra.three.json",
+      "bytes": 617671,
+      "sha256": "97d8b5ebda38877145f36e866b23fc2462a46908942a0125cc3a6827b6e2507f"
+    },
+    {
+      "path": "/models/rw-aur.three.json",
+      "bytes": 306590,
+      "sha256": "d9fe190f329e7c63fe19dd547058e1bf8f96c7c8d97c71f6ca12669f8b89a5e5"
+    },
+    {
+      "path": "/models/wise-0855.three.json",
+      "bytes": 78651,
+      "sha256": "598c85076c59754d841d5400970f18bccd8446e5344c4d0dcec25a1500948afa"
+    }
+  ],
+  "method": "Fresh container build and direct HTTP body checks against local build; no browser or GPU verification",
+  "passed": true,
+  "ready_presets": [
+    {
+      "target_id": "barnard",
+      "sequence_id": "tyswfqfx8t"
+    },
+    {
+      "target_id": "eps-indi-b",
+      "sequence_id": "vaszj8xtz2"
+    },
+    {
+      "target_id": "wise-0855",
+      "sequence_id": "453tr9wzhc"
+    },
+    {
+      "target_id": "rw-aur",
+      "sequence_id": "nhvk2kebw6"
+    },
+    {
+      "target_id": "r-dra",
+      "sequence_id": "hq75kubcj4"
+    }
+  ]
+}

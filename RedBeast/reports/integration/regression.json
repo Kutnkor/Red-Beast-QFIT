@@ -1,0 +1,48 @@
+{
+  "baseline_commit": "77b410705f6de705423aca025794a03a73afd614",
+  "science_files_unchanged": 141,
+  "qfit_vendor_files_unchanged": 198,
+  "api_added_paths": [
+    "/api/assistant/commands",
+    "/api/assistant/knowledge",
+    "/api/assistant/sources/{source_id}"
+  ],
+  "api_removed_or_changed_fields": 0,
+  "frontend_passed": 181,
+  "backend_passed": 203,
+  "backend_skipped": 4,
+  "secret_scan": "no matching key/private-key patterns",
+  "browser_visual_gpu_acceptance": "not performed: prior saved browser access denial; no bypass used",
+  "paid_provider_live_test": {
+    "model": "gpt-5.4-mini",
+    "provider": "OpenAI via original QFIT adapter",
+    "live_connection": "passed",
+    "targets": 5,
+    "main_questions_completed": 10,
+    "main_responses_with_sources": 10,
+    "numeric_grounding_flags": 0,
+    "manual_review_findings": [
+      "One RW Aur answer incorrectly contrasted the sources and called an adopted computed radius unadopted.",
+      "One incidental R Dra numeric summary omitted available uncertainties."
+    ],
+    "fix": "System rules now distinguish adoption from measurement classification, keep shared source ids consistent, and require supplied uncertainties when quoting parameters.",
+    "followup_questions_completed": 2,
+    "followup_review": "RW Aur same-source/adopted-derived distinction and R Dra uncertainties corrected in live follow-up.",
+    "limits": [
+      "Small, nondeterministic language-model sample; not a guarantee of factual accuracy.",
+      "Numeric grounding detects absent numbers, not all semantic errors.",
+      "No new astronomical discovery, measurement or scientific validation is claimed."
+    ],
+    "credential_storage": "private ignored .env only; excluded from ZIP/image/repo",
+    "live_ui_proposal_test": {
+      "command": "set_year",
+      "args": {
+        "year": 2050
+      },
+      "tool": "propose_ui_command",
+      "emitted": true,
+      "executed": false
+    }
+  },
+  "public_deployment": false
+}

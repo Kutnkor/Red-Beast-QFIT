@@ -1,0 +1,1223 @@
+{
+ "suite": "agent",
+ "configurations": {
+  "v2_rag": {
+   "instruction_version": "v2",
+   "rag_enabled": true,
+   "summary": {
+    "examples": 68,
+    "errors": 0,
+    "error_rate": 0.0,
+    "checks": {
+     "tool_selection": {
+      "passed": 24,
+      "scored": 26,
+      "rate": 0.923
+     },
+     "tool_arguments": {
+      "passed": 10,
+      "scored": 10,
+      "rate": 1.0
+     },
+     "no_data_tool": {
+      "passed": 39,
+      "scored": 42,
+      "rate": 0.929
+     },
+     "language": {
+      "passed": 66,
+      "scored": 66,
+      "rate": 1.0
+     },
+     "must_mention": {
+      "passed": 39,
+      "scored": 42,
+      "rate": 0.929
+     },
+     "must_not_mention": {
+      "passed": 5,
+      "scored": 6,
+      "rate": 0.833
+     },
+     "source_grounding": {
+      "passed": 38,
+      "scored": 42,
+      "rate": 0.905
+     }
+    },
+    "answers_with_unsupported_numbers": 1,
+    "unsupported_number_rate": 0.015,
+    "mean_unsupported_numbers": 0.015,
+    "latency_s": {
+     "mean": 13.65,
+     "p95": 44.69
+    },
+    "by_category": {
+     "A": 12,
+     "B": 19,
+     "C": 4,
+     "D": 6,
+     "E": 8,
+     "F": 2,
+     "G": 5
+    },
+    "note": "by_category counts examples that passed every check they define."
+   },
+   "rows": [
+    {
+     "id": "a-andromeda-en",
+     "category": "A",
+     "language": "en",
+     "error": null,
+     "scores": {
+      "tool_selection": true,
+      "language": true
+     },
+     "unsupported_numbers": [],
+     "tools_called": [
+      "resolve_object_coordinates",
+      "search_spherex_observations",
+      "search_spherex_observations"
+     ],
+     "answer": "I found SPHEREx observations covering the Andromeda Galaxy’s position.\n\n- **Catalog data:** CDS Sesame resolves its position to RA **10.6847083°**, Dec **41.26875°** (ICRS); SIMBAD was unavailable.\n- **Archive metadata:** NASA/IPAC IRSA lists **60 detector 1 spectral images** covering that position, with observations from **2025-07-09 to 2026-08-04 UTC**.\n\nThese records establish coverage of the target position, not necessarily the entire galaxy. Each spectral image has wavelength varying across it; it is not a complete spectrum.",
+     "latency_s": 77.406
+    },
+    {
+     "id": "a-andromeda-tr",
+     "category": "A",
+     "language": "tr",
+     "error": null,
+     "scores": {
+      "tool_selection": true,
+      "language": true
+     },
+     "unsupported_numbers": [],
+     "tools_called": [
+      "resolve_object_coordinates"
+     ],
+     "answer": "Andromeda Galaksisi’nin konumunu getiremedim: SIMBAD sorgusu bir hizmet hatasıyla sonuçlandı. Bu nedenle SPHEREx arşiv sorgusuna geçemedim; bu, gözlem verisi olmadığı anlamına gelmez.\n\nYeniden denememi ister misiniz? Alternatif olarak ICRS koordinatlarını ondalık derece cinsinden paylaşabilirsiniz.",
+     "latency_s": 19.515
+    },
+    {
+     "id": "a-coordinate-search-en",
+     "category": "A",
+     "language": "en",
+     "error": null,
+     "scores": {
+      "tool_selection": true,
+      "tool_arguments": true,
+      "language": true
+     },
+     "unsupported_numbers": [],
+     "tools_called": [
+      "search_spherex_observations"
+     ],
+     "answer": "**SPHEREx observations are available around your position.** NASA/IPAC IRSA archive metadata lists **60 spectral-image files from 60 exposures** in an initial search restricted to detector band **1**.\n\n- **Position:** RA 10.6847 degrees, Dec 41.2687 degrees (ICRS)\n- **Search radius:** 0.1 degrees\n- **Observation range:** 2025-07-09T14:54:39Z to 2026-08-04T23:59:52Z (UTC)\n- **Releases:** DR1 and QR3\n\nThis is a band-limited result, not a total across all detectors. The archive records establish image coverage, not detection of an object at the position; no brightness measurements have been extracted.",
+     "latency_s": 28.813
+    },
+    {
+     "id": "a-coordinate-search-tr",
+     "category": "A",
+     "language": "tr",
+     "error": null,
+     "scores": {
+      "tool_selection": true,
+      "tool_arguments": true,
+      "language": true
+     },
+     "unsupported_numbers": [],
+     "tools_called": [
+      "search_spherex_observations"
+     ],
+     "answer": "**Verdiğiniz konumu kapsayan SPHEREx gözlemleri bulundu.** NASA/IPAC IRSA’dan alınan **arşiv metadatasına** göre:\n\n- **Konum:** RA 10.6847°, Dec 41.2687° (ICRS); arama yarıçapı 0.1°.\n- **Sonuç:** Dedektör 1 için 60 pozlamaya ait 60 tayfsal görüntü kaydı; ilk 20 kayıt getirildi.\n- **Zaman aralığı:** 2025-07-09 14:54:39 – 2026-08-04 23:59:52 UTC.\n- **Koleksiyonlar:** `spherex_dr1` ve `spherex_qr3`.\n\nBu arama yalnızca **Dedektör 1** ile sınırlı; diğer dedektörlerin kapsamı henüz sorgulanmadı. Bunlar görüntülerin mevcut olduğunu gösteren arşiv kayıtlarıdır; görüntülerden parlaklık ölçümü yapılmadı.",
+     "latency_s": 11.594
+    },
+    {
+     "id": "a-brown-dwarf-cone-en",
+     "category": "A",
+     "language": "en",
+     "error": null,
+     "scores": {
+      "tool_selection": true,
+      "tool_arguments": true,
+      "language": true
+     },
+     "unsupported_numbers": [],
+     "tools_called": [
+      "search_objects_by_coordinates"
+     ],
+     "answer": "The catalog search failed: SIMBAD could not be queried (`DALServiceError`), so I couldn’t retrieve brown-dwarf matches in your requested region.\n\n**Missing information:** this is a service error, not evidence that the region contains no brown dwarfs. The error is marked retryable; SPHEREx coverage has not been checked.",
+     "latency_s": 8.125
+    },
+    {
+     "id": "a-brown-dwarf-cone-tr",
+     "category": "A",
+     "language": "tr",
+     "error": null,
+     "scores": {
+      "tool_selection": true,
+      "tool_arguments": true,
+      "language": true
+     },
+     "unsupported_numbers": [],
+     "tools_called": [
+      "search_objects_by_coordinates"
+     ],
+     "answer": "**Katalog sorgusu başarısız oldu:** SIMBAD hizmeti sorgulanamadığı için (DALServiceError) istediğiniz bölgedeki kahverengi cücelerin listesini alamadım. Bu hata, bölgede kahverengi cüce olmadığı anlamına gelmez; katalog verisi şu anda eksik. Hata yeniden denemeye uygun olarak bildirildi.",
+     "latency_s": 10.515
+    },
+    {
+     "id": "a-periods-m31-en",
+     "category": "A",
+     "language": "en",
+     "error": null,
+     "scores": {
+      "tool_selection": true,
+      "language": true
+     },
+     "unsupported_numbers": [],
+     "tools_called": [
+      "get_available_observation_periods",
+      "resolve_object_coordinates",
+      "get_available_observation_periods",
+      "search_spherex_observations",
+      "get_available_observation_periods"
+     ],
+     "answer": "**Archive metadata:** NASA/IPAC IRSA lists **3 broad observation periods** covering M31’s resolved position, grouping exposures separated by less than **30 days**.\n\n| Start (UTC) | End (UTC) | Exposures | Collection |\n|---|---|---:|---|\n| 2025-07-09 14:54:39 | 2025-08-15 05:36:30 | 74 | spherex_dr1 |\n| 2025-12-18 05:07:25 | 2026-01-28 02:19:20 | 62 | spherex_dr1 |\n| 2026-07-10 00:02:31 | 2026-08-07 07:22:08 | 73 | spherex_qr3 |\n\nThese are grouped observing windows, **not continuous monitoring**; gaps do not imply “no change.” The records establish coverage of M31’s queried position, not coverage of the entire galaxy in every exposure.",
+     "latency_s": 57.969
+    },
+    {
+     "id": "a-periods-m31-tr",
+     "category": "A",
+     "language": "tr",
+     "error": null,
+     "scores": {
+      "tool_selection": true,
+      "language": true
+     },
+     "unsupported_numbers": [
+      "21"
+     ],
+     "tools_called": [
+      "get_available_observation_periods",
+      "resolve_object_coordinates",
+      "get_available_observation_periods"
+     ],
+     "answer": "**Arşiv metaverisi:** NASA/IPAC IRSA kayıtlarında M31’in merkez konumunu kapsayan **6 gözlem dönemi, toplam 209 pozlama** bulundu. Aralarında 7 günden az boşluk bulunan pozlamalar aynı dönemde gruplandı.\n\n| Başlangıç (UTC) | Bitiş (UTC) | Pozlama sayısı | Veri koleksiyonu |\n|---|---|---:|---|\n| 2025-07-09 14:54:39 | 2025-07-24 13:30:01 | 72 | spherex_dr1 |\n| 2025-08-14 21:33:28 | 2025-08-15 05:36:30 | 2 | spherex_dr1 |\n| 2025-12-18 05:07:25 | 2026-01-04 20:56:02 | 61 | spherex_dr1 |\n| 2026-01-28 02:17:24 | 2026-01-28 02:19:20 | 1 | spherex_dr1 |\n| 2026-07-10 00:02:31 | 2026-07-23 13:57:26 | 59 | spherex_qr3 |\n| 2026-08-04 12:32:09 | 2026-08-07 07:22:08 | 14 | spherex_qr3 |\n\nBu aralıklar kesintisiz gözlem anlamına gelmez; her dönemin ilk ve son pozlama zamanlarını gösterir. Liste, sorgulanan arşiv koleksiyonlarının kapsamıdır; Caltech/IPAC zaman kapsamı açıklamasına göre gözlemler arasındaki boşluklar “gözlenmedi” demektir, “değişim yok” değil.",
+     "latency_s": 16.719
+    },
+    {
+     "id": "a-spectrum-orion-en",
+     "category": "A",
+     "language": "en",
+     "error": null,
+     "scores": {
+      "tool_selection": true,
+      "language": true
+     },
+     "unsupported_numbers": [],
+     "tools_called": [
+      "retrieve_spherex_spectral_data",
+      "resolve_object_coordinates",
+      "retrieve_spherex_spectral_data"
+     ],
+     "answer": "Yes—**IRSA archive metadata confirms SPHEREx spectral data covering the Orion Nebula’s resolved position**:\n\n- **DR1 All-Sky Cube:** a tile with 102 nominal spectral channels, spanning 0.7455–5.0096 micron.\n- **Spectral Images:** 380 files from 192 exposures across all six detector bands, in DR1 and QR3.\n\nAccording to Caltech/IPAC’s SPHEREx Data Products documentation, cube channels 51 and 52 contain no data, and an individual Spectral Image is not a complete spectrum because wavelength varies across the image. This confirms data availability; I have not extracted brightness measurements or checked pixel quality at the nebula’s position.",
+     "latency_s": 38.578
+    },
+    {
+     "id": "a-spectrum-orion-tr",
+     "category": "A",
+     "language": "tr",
+     "error": null,
+     "scores": {
+      "tool_selection": true,
+      "language": true
+     },
+     "unsupported_numbers": [],
+     "tools_called": [
+      "retrieve_spherex_spectral_data",
+      "resolve_object_coordinates",
+      "retrieve_spherex_spectral_data"
+     ],
+     "answer": "**Evet, Orion Bulutsusu’nun katalog konumunu kapsayan SPHEREx tayfsal verisi var.** NASA/IPAC IRSA’dan alınan **arşiv metaverisine** göre:\n\n- **DR1 All-Sky Cube:** 0.7455–5.0096 micron aralığında, 102 nominal tayfsal kanallı bir küp parçası mevcut; 51 ve 52 numaralı kanallar veri içermiyor.\n- **Tayfsal görüntüler:** DR1 ve QR3 koleksiyonlarında, altı dedektör bandını kapsayan 380 dosya bulunuyor.\n\nTek bir tayfsal görüntü hazır bir tayf değildir; dalga boyu görüntü üzerindeki konuma göre değişir. Bu sonuç veri ürünlerinin mevcut olduğunu doğruluyor; henüz parlaklık örnekleri okunmadı veya bulutsunun belirli bir bölgesinin tayfı çıkarılmadı.",
+     "latency_s": 14.891
+    },
+    {
+     "id": "a-image-m101-en",
+     "category": "A",
+     "language": "en",
+     "error": null,
+     "scores": {
+      "tool_selection": true,
+      "language": true
+     },
+     "unsupported_numbers": [],
+     "tools_called": [
+      "retrieve_spherex_image",
+      "resolve_object_coordinates",
+      "retrieve_spherex_image"
+     ],
+     "answer": "Found a SPHEREx FITS image covering **M 101**, with a **0.5-degree cutout** centred on its catalog position.\n\n**Archive metadata (NASA/IPAC IRSA):** observed on **2026-06-18 at 00:38:42 UTC**, detector **1**, release **QR3**, covering **0.7455–1.1167 micron**. The returned product includes full-image and cutout download options.\n\nThis is a spectral image: wavelength varies across it, so it is not a complete spectrum of M 101.",
+     "latency_s": 32.937
+    },
+    {
+     "id": "a-image-m101-tr",
+     "category": "A",
+     "language": "tr",
+     "error": null,
+     "scores": {
+      "tool_selection": true,
+      "language": true
+     },
+     "unsupported_numbers": [],
+     "tools_called": [
+      "retrieve_spherex_image",
+      "resolve_object_coordinates",
+      "retrieve_spherex_image"
+     ],
+     "answer": "M 101’in konumunu kapsayan bir SPHEREx görüntüsünün FITS dosyasını ve M 101 merkezli **0.5 derece** genişliğindeki kesit bağlantısını getirdim; ilk sorgu yanlış konuma yöneldiği için onu düzelttim.\n\n**IRSA arşiv metadatasına göre** doğru görüntü, **2026-06-18 00:38:42 UTC** başlangıç zamanlı, **QR3 / SPHEREx-D1** ürünüdür ve **0.7455–1.1167 micron** dalga boyu aralığını kapsar. Bu bir tayfsal görüntüdür, M 101’in tam spektrumu değildir; arşiv kaydı konumun kapsandığını gösterir, galaksinin görüntüde saptandığını tek başına doğrulamaz.",
+     "latency_s": 21.0
+    },
+    {
+     "id": "b-what-is-spherex-en",
+     "category": "B",
+     "language": "en",
+     "error": null,
+     "scores": {
+      "no_data_tool": true,
+      "language": true,
+      "must_mention": true,
+      "source_grounding": true
+     },
+     "unsupported_numbers": [],
+     "tools_called": [],
+     "answer": "According to Caltech’s mission overview, **SPHEREx is a NASA astronomy mission**, launched in March 2025, whose name stands for *Spectro-Photometer for the History of the Universe, Epoch of Reionization, and Ices Explorer*.\n\nAs general scientific background, it surveys the sky in infrared light, separating that light by wavelength to help scientists study cosmic history, galaxies, and the ingredients for life in our Galaxy. According to the Caltech/IPAC Archive User Guide, its data are processed and archived at IPAC at Caltech.",
+     "latency_s": 6.813
+    },
+    {
+     "id": "b-what-is-spherex-tr",
+     "category": "B",
+     "language": "tr",
+     "error": null,
+     "scores": {
+      "no_data_tool": true,
+      "language": true,
+      "must_mention": false,
+      "source_grounding": true
+     },
+     "unsupported_numbers": [],
+     "tools_called": [],
+     "answer": "**SPHEREx, NASA’nın evreni incelemek için geliştirdiği bir astrofizik uzay görevidir.** Caltech’in *SPHEREx: About the Mission* sayfasındaki yayımlanmış görev bilgilerine göre adı, “Spectro-Photometer for the History of the Universe, Epoch of Reionization, and Ices Explorer” ifadesinin kısaltmasıdır ve Mart 2025’te fırlatılmıştır.\n\nAynı kaynağa göre görevi NASA’nın Jet Propulsion Laboratory (JPL) kurumu yönetir; bilimsel liderliği Caltech üstlenir. Caltech/IPAC’ın *SPHEREx Archive User Guide* belgesine göre veriler IPAC’te işlenir ve arşivlenir; Q-FIT de bu gözlemleri bulmanıza ve verilerin neyi gösterip neyi gösteremediğini anlamanıza yardımcı olur.",
+     "latency_s": 5.156
+    },
+    {
+     "id": "b-detector-bands-en",
+     "category": "B",
+     "language": "en",
+     "error": null,
+     "scores": {
+      "no_data_tool": true,
+      "language": true,
+      "must_mention": true,
+      "source_grounding": true
+     },
+     "unsupported_numbers": [],
+     "tools_called": [],
+     "answer": "According to **Caltech/IPAC’s SPHEREx Data Products at IRSA** [K1], the published detector-band wavelength ranges are:\n\n| Detector band | Wavelength range |\n|---|---|\n| 1 | 0.75–1.09 micron |\n| 2 | 1.10–1.62 micron |\n| 3 | 1.63–2.41 micron |\n| 4 | 2.42–3.82 micron |\n| 5 | 3.83–4.41 micron |\n| 6 | 4.42–5.00 micron |\n\nEach Spectral Image covers one detector band, with wavelength varying across the image; it is not a complete spectrum at every pixel (Caltech/IPAC documentation [K1, K4]).",
+     "latency_s": 5.062
+    },
+    {
+     "id": "b-detector-bands-tr",
+     "category": "B",
+     "language": "tr",
+     "error": null,
+     "scores": {
+      "no_data_tool": true,
+      "language": true,
+      "must_mention": true,
+      "source_grounding": true
+     },
+     "unsupported_numbers": [],
+     "tools_called": [],
+     "answer": "Caltech/IPAC’ın **SPHEREx Data Products at IRSA** dokümantasyonuna göre altı dedektör bandının dalga boyu kapsamları şöyledir (**veri ürünü metadata bilgisi**, doğrudan ölçüm değil):\n\n| Dedektör bandı | Dalga boyu aralığı (mikron) |\n|---|---|\n| Bant 1 | 0.75–1.09 |\n| Bant 2 | 1.10–1.62 |\n| Bant 3 | 1.63–2.41 |\n| Bant 4 | 2.42–3.82 |\n| Bant 5 | 3.83–4.41 |\n| Bant 6 | 4.42–5.00 |\n\nAynı kaynağa göre her **Tayfsal Görüntü** yalnızca tek bir dedektör bandını kapsar; tek başına tam bir tayf değildir.",
+     "latency_s": 4.172
+    },
+    {
+     "id": "b-brown-dwarf-en",
+     "category": "B",
+     "language": "en",
+     "error": null,
+     "scores": {
+      "no_data_tool": true,
+      "language": true,
+      "must_mention": true,
+      "source_grounding": true
+     },
+     "unsupported_numbers": [],
+     "tools_called": [],
+     "answer": "A **brown dwarf** is an object between giant planets and the smallest stars, according to NASA’s published explanations. It forms like a star from a collapsing cloud of gas, but never gains enough mass to sustain hydrogen fusion in its core—the process that powers stars.\n\nInstead, it shines as it contracts and releases heat, gradually cooling over time. NASA explains that brown dwarfs are cool enough to emit most of their light in the **infrared**, making infrared telescopes particularly useful for studying them.",
+     "latency_s": 3.281
+    },
+    {
+     "id": "b-brown-dwarf-tr",
+     "category": "B",
+     "language": "tr",
+     "error": null,
+     "scores": {
+      "no_data_tool": true,
+      "language": true,
+      "must_mention": true,
+      "source_grounding": true
+     },
+     "unsupported_numbers": [],
+     "tools_called": [],
+     "answer": "NASA’nın yayımladığı açıklamalara göre **kahverengi cüce, dev gezegenlerle en küçük yıldızlar arasında kalan yıldız altı bir cisimdir**. Yıldızlar gibi bir gaz bulutunun çökmesiyle oluşur; ancak çekirdeğinde hidrojen füzyonunu sürekli sürdürecek kadar kütle kazanamaz. Kütleçekimsel büzülmeyle ışık yayar; yeterince kütleli olanları bir süre döteryum (ağır hidrojen) füzyonu da yapabilir. Görece soğuk oldukları için ışıklarının çoğunu **kızılötesinde** yayarlar.\n\nBunlar NASA kaynaklarında açıklanan bilimsel bilgilerdir; belirli bir cisme yönelik Q-FIT ölçümü değildir.",
+     "latency_s": 4.704
+    },
+    {
+     "id": "b-hr-axes-en",
+     "category": "B",
+     "language": "en",
+     "error": null,
+     "scores": {
+      "no_data_tool": true,
+      "language": true,
+      "must_mention": true,
+      "source_grounding": true
+     },
+     "unsupported_numbers": [],
+     "tools_called": [],
+     "answer": "According to NASA Chandra and CSIRO’s educational materials, the **Hertzsprung–Russell (H-R) diagram** plots stars using:\n- **Vertical axis:** luminosity (intrinsic brightness), or absolute magnitude.\n- **Horizontal axis:** effective surface temperature, or alternatively spectral class or colour.\n\nHotter stars appear on the **left**, cooler stars on the **right**, and more luminous stars toward the **top**. This is a standard published description of the diagram, not a measurement of a particular star.",
+     "latency_s": 3.375
+    },
+    {
+     "id": "b-hr-axes-tr",
+     "category": "B",
+     "language": "tr",
+     "error": null,
+     "scores": {
+      "no_data_tool": true,
+      "language": true,
+      "must_mention": true,
+      "source_grounding": true
+     },
+     "unsupported_numbers": [],
+     "tools_called": [],
+     "answer": "NASA Chandra ve CSIRO ATNF’nin eğitim kaynaklarına göre **Hertzsprung–Russell (H-R) diyagramı**, yıldızların yüzey sıcaklığı ile ışıtma gücü arasındaki ilişkiyi gösterir; bu, kaynaklara dayalı bir açıklamadır.\n\n- **Yatay eksen:** Etkin yüzey sıcaklığıdır; sıcak yıldızlar solda, soğuk yıldızlar sağda yer alır.\n- **Düşey eksen:** Işıtma gücü, yani yıldızın uzaya yaydığı toplam enerji hızıdır; daha fazla enerji yayan yıldızlar yukarıda bulunur.\n\nDolayısıyla diyagram, yıldızları gökyüzündeki konumlarına göre değil, fiziksel özelliklerine göre karşılaştırır.",
+     "latency_s": 5.25
+    },
+    {
+     "id": "b-resolving-power-en",
+     "category": "B",
+     "language": "en",
+     "error": null,
+     "scores": {
+      "no_data_tool": true,
+      "language": true,
+      "must_mention": true,
+      "source_grounding": true
+     },
+     "unsupported_numbers": [],
+     "tools_called": [],
+     "answer": "According to NASA/IPAC IRSA documentation, **spectral resolving power** is \\(R=\\lambda/\\Delta\\lambda\\), where \\(\\Delta\\lambda\\) is the smallest wavelength difference that can be separated at wavelength \\(\\lambda\\); it is unitless, and higher \\(R\\) means finer spectral detail.\n\n**Published instrument specifications:** Caltech/IPAC’s *SPHEREx Data Products at IRSA* gives **R = 39, 41, 41, and 35 for bands 1–4**, respectively, and **R = 112 and 128 for bands 5 and 6**.\n\nFor illustration, the IRSA resolving-power documentation gives a channel width of about **0.035 micron at 1.4 micron** when **R ≈ 40**. This is low-resolution spectroscopy: it can reveal broad molecular absorption bands, but cannot separate closely spaced narrow lines.",
+     "latency_s": 4.562
+    },
+    {
+     "id": "b-resolving-power-tr",
+     "category": "B",
+     "language": "tr",
+     "error": null,
+     "scores": {
+      "no_data_tool": true,
+      "language": true,
+      "must_mention": true,
+      "source_grounding": true
+     },
+     "unsupported_numbers": [],
+     "tools_called": [],
+     "answer": "**Tayfsal çözme gücü**, birbirine yakın dalga boylarını ne kadar iyi ayırt edebildiğimizi belirtir: NASA/IPAC IRSA belgelerine göre **R = λ / Δλ**; burada λ dalga boyu, Δλ ise ayırt edilebilen en küçük dalga boyu farkıdır ve R birimsizdir.\n\n**Yayımlanmış cihaz özellikleri:** Caltech/IPAC *SPHEREx Data Products at IRSA* kaynağına göre SPHEREx’in çözme gücü bantlara göre şöyledir:\n\n| Dedektör bandı | R |\n|---|---:|\n| 1 | 39 |\n| 2 | 41 |\n| 3 | 41 |\n| 4 | 35 |\n| 5 | 112 |\n| 6 | 128 |\n\n**Hesap örneği:** NASA/IPAC IRSA’nın verdiği R ≈ 40 örneğinde, 1.4 mikron dalga boyunda Δλ ≈ 0.035 mikrondur.  \n**Yorum:** Aynı kaynağa göre bu düşük tayfsal çözünürlük, geniş moleküler soğurma bantlarını incelemeye uygundur; dar tayf çizgilerini birbirinden ayırmaya yetmez.",
+     "latency_s": 5.344
+    },
+    {
+     "id": "b-all-sky-cube-en",
+     "category": "B",
+     "language": "en",
+     "error": null,
+     "scores": {
+      "no_data_tool": true,
+      "language": true,
+      "must_mention": true,
+      "source_grounding": true
+     },
+     "unsupported_numbers": [],
+     "tools_called": [],
+     "answer": "The **SPHEREx All-Sky Cube** is a whole-sky map organized by sky position and wavelength—so you can examine how infrared surface brightness varies across its **102 spectral channels**. According to Caltech/IPAC’s *SPHEREx Data Products at IRSA*, this documented archive product exists only in **Data Release 1 (DR1)** and is built from DR1 Spectral Images.\n\nIRSA divides it into **12,288 HEALPix tiles**, each about **1.8 × 1.8 degrees**, with **512 × 512 pixels** of **12.9 arcseconds**; its IMAGE values are surface brightness in **MJy/sr**, with zodiacal light subtracted, rather than individual objects’ fluxes. The NASA/IPAC IRSA DR1 documentation also lists important limitations: **channels 51 and 52 contain no data**, atmospheric emission can create stripes, and the map projection can look distorted in many FITS viewers.",
+     "latency_s": 5.547
+    },
+    {
+     "id": "b-all-sky-cube-tr",
+     "category": "B",
+     "language": "tr",
+     "error": null,
+     "scores": {
+      "no_data_tool": true,
+      "language": true,
+      "must_mention": true,
+      "source_grounding": true
+     },
+     "unsupported_numbers": [],
+     "tools_called": [],
+     "answer": "**SPHEREx All-Sky Cube (Tüm Gökyüzü Küpü)**, gökyüzündeki konumları farklı tayf kanallarındaki parlaklık bilgisiyle birleştiren bir veri ürünüdür; “küp”, iki görüntü boyutuna bir tayf boyutunun eklenmesini anlatır.\n\n**Yayımlanmış veri ürünü bilgisi:** Caltech/IPAC’in IRSA veri ürünleri belgelerine göre yalnızca **DR1** kapsamında bulunur ve DR1 Tayfsal Görüntülerinden üretilir; gökyüzü 12.288 HEALPix karosuna bölünür ve her karoda **512 × 512 piksel ile 102 tayf kanalı** bulunur. Aynı belgelere göre `IMAGE` uzantısı, zodyak ışığı çıkarılmış **MJy/sr cinsinden yüzey parlaklığını** verir; bu, doğrudan bir nesnenin toplam akısı değildir.\n\n**Bilinen sınırlamalar:** NASA/IPAC IRSA’nın DR1 açıklamasına göre 51 ve 52 numaralı kanallarda veri yoktur, atmosfer salması şeritler oluşturabilir ve HPX izdüşümü bazı FITS görüntüleyicilerinde bozuk görünebilir.",
+     "latency_s": 5.593
+    },
+    {
+     "id": "b-y-dwarfs-en",
+     "category": "B",
+     "language": "en",
+     "error": null,
+     "scores": {
+      "no_data_tool": true,
+      "language": true,
+      "must_mention": false,
+      "source_grounding": true
+     },
+     "unsupported_numbers": [],
+     "tools_called": [],
+     "answer": "**Y dwarfs are the coolest class of brown dwarfs**, with surface temperatures of about **200–500 K**, according to the Center for Astrophysics | Harvard & Smithsonian’s summary of published research. They are cooler than the L and T classes.\n\nNASA’s background descriptions explain that brown dwarfs form like stars but lack enough mass to sustain hydrogen fusion in their cores; because they are cool, they emit most of their light in the infrared. These are published background findings, not measurements made here.",
+     "latency_s": 3.797
+    },
+    {
+     "id": "b-y-dwarfs-tr",
+     "category": "B",
+     "language": "tr",
+     "error": null,
+     "scores": {
+      "no_data_tool": true,
+      "language": true,
+      "must_mention": false,
+      "source_grounding": true
+     },
+     "unsupported_numbers": [],
+     "tools_called": [],
+     "answer": "**Y cüceleri, kahverengi cücelerin en soğuk tayf sınıfıdır.** Harvard & Smithsonian Astrofizik Merkezi’nin yayımlanmış sonuçları aktaran açıklamasına göre, yüzey sıcaklıkları yaklaşık **200–500 K** aralığındadır; L ve T sınıflarından daha soğukturlar.\n\nNASA’nın açıklamalarına göre kahverengi cüceler, yıldızlar gibi gaz bulutlarının çökmesiyle oluşur ancak çekirdeklerinde hidrojen füzyonunu sürdürecek kadar kütle kazanamazlar. Bu nedenle Y cücelerini çok soğuk, yıldız altı cisimler olarak düşünebilirsiniz; ışıklarının çoğunu kızılötesinde yayarlar.",
+     "latency_s": 4.516
+    },
+    {
+     "id": "b-backyard-worlds-en",
+     "category": "B",
+     "language": "en",
+     "error": null,
+     "scores": {
+      "no_data_tool": true,
+      "language": true,
+      "must_mention": true,
+      "source_grounding": true
+     },
+     "unsupported_numbers": [],
+     "tools_called": [],
+     "answer": "According to NASA/JPL’s project description, **Backyard Worlds: Planet 9** is a NASA-funded citizen science project where volunteers help search for nearby worlds by spotting objects that move across the sky (**published project description**). Participants examine short animations called “flipbooks,” made from NASA’s WISE images taken over several years, and look for objects that shift position between frames.\n\nThose moving objects are **candidates for human review**, not automatically confirmed discoveries. The project uses WISE images, rather than SPHEREx observations.",
+     "latency_s": 4.891
+    },
+    {
+     "id": "b-backyard-worlds-tr",
+     "category": "B",
+     "language": "tr",
+     "error": null,
+     "scores": {
+      "no_data_tool": true,
+      "language": true,
+      "must_mention": true,
+      "source_grounding": true
+     },
+     "unsupported_numbers": [],
+     "tools_called": [],
+     "answer": "NASA/JPL’ye göre **Backyard Worlds: Planet 9**, NASA destekli bir yurttaş bilimi projesidir (**yayımlanmış bilgi**). Gönüllüler, NASA’nın WISE görevinin farklı zamanlarda çektiği gökyüzü görüntülerinden oluşturulan kısa canlandırmaları (“flipbook”) inceleyerek kareler arasında yer değiştiren cisimleri arar.\n\nBu yöntemle fark edilen cisimler, uzmanların incelemesi gereken **adaylardır**; hareket ediyor gibi görünmeleri tek başına bir keşfin doğrulandığı anlamına gelmez. Proje, SPHEREx görüntülerini değil, WISE görüntülerini kullanır.",
+     "latency_s": 4.703
+    },
+    {
+     "id": "b-surface-brightness-en",
+     "category": "B",
+     "language": "en",
+     "error": null,
+     "scores": {
+      "no_data_tool": true,
+      "language": true,
+      "must_mention": true,
+      "source_grounding": true
+     },
+     "unsupported_numbers": [],
+     "tools_called": [],
+     "answer": "No. **According to Caltech/IPAC’s SPHEREx Data Products documentation (data-product definition), a pixel value is surface brightness in MJy/sr—not the star’s flux**—and includes zodiacal light that has not been subtracted.\n\nIRSA’s tutorial explains that estimating the source’s flux requires summing pixels over an aperture around the star, subtracting the background, and multiplying by the pixel solid angle. That tutorial method is intended for visualization; for scientific measurements, IRSA recommends its **SPHEREx Spectrophotometry Tool**.",
+     "latency_s": 3.578
+    },
+    {
+     "id": "b-surface-brightness-tr",
+     "category": "B",
+     "language": "tr",
+     "error": null,
+     "scores": {
+      "no_data_tool": true,
+      "language": true,
+      "must_mention": true,
+      "source_grounding": true
+     },
+     "unsupported_numbers": [],
+     "tools_called": [],
+     "answer": "Hayır; **tek bir piksel değeri yıldızın akısı değildir.** Caltech/IPAC’ın *SPHEREx Data Products at IRSA* dokümantasyonuna göre bu ölçüm, **MJy/sr cinsinden yüzey parlaklığıdır**; zodyak ışığı da henüz çıkarılmamıştır.\n\n**Hesaplama yöntemi:** Caltech/IPAC’ın IRSA eğitim defterine göre yıldızın akısını elde etmek için yıldız çevresindeki bir açıklıkta piksel değerleri toplanır, arka plan katkısı çıkarılır ve pikselin katı açısı hesaba katılır. Aynı kaynak, bu basit yöntemi görselleştirme amaçlı sunar; bilimsel kullanım için **SPHEREx Spectrophotometry Tool** aracını önerir.",
+     "latency_s": 4.812
+    },
+    {
+     "id": "b-cutouts-en",
+     "category": "B",
+     "language": "en",
+     "error": null,
+     "scores": {
+      "no_data_tool": true,
+      "language": true,
+      "must_mention": true,
+      "source_grounding": true
+     },
+     "unsupported_numbers": [],
+     "tools_called": [],
+     "answer": "**A SPHEREx cutout is a small region extracted from a larger Spectral Image**, letting you work with the area around your target rather than the full image.\n\nAccording to Caltech/IPAC’s *SPHEREx Data Access* and *Data Products at IRSA* documentation (**documented archive behavior**), you request it by appending `?center=RA,Dec&size=SIZE` to the file’s on-premises address, with the center coordinates and size expressed in degrees. The cutout preserves all extensions: `IMAGE`, `FLAGS`, `VARIANCE` and `ZODI` are trimmed to the requested region, and the wavelength table is remapped to match.\n\n**General background:** a Spectral Image covers one detector band, with wavelength varying across the image, so a cutout is not automatically a spectrum of your target; an individual pixel’s brightness is also not the target’s total flux.",
+     "latency_s": 4.938
+    },
+    {
+     "id": "b-cutouts-tr",
+     "category": "B",
+     "language": "tr",
+     "error": null,
+     "scores": {
+      "no_data_tool": true,
+      "language": true,
+      "must_mention": true,
+      "source_grounding": true
+     },
+     "unsupported_numbers": [],
+     "tools_called": [],
+     "answer": "**Kesit (cutout), SPHEREx tayfsal görüntüsünün seçtiğiniz gökyüzü bölgesine kırpılmış küçük bir parçasıdır.** Caltech/IPAC’in *SPHEREx Data Access* ve *SPHEREx Data Products at IRSA* belgelerine göre, IRSA kesit servisine merkez koordinatları ve derece cinsinden boyut, dosyanın servis adresine `?center=RA,Dec&size=BOYUT` eklenerek iletilir.\n\nAynı belgelere göre tüm uzantılar korunur; `IMAGE`, `FLAGS`, `VARIANCE` ve `ZODI` kırpılır, dalga boyu tablosu da kesite göre yeniden eşlenir—yani yalnızca görsel bir kırpma yapılmaz, ilgili veri yapıları da korunur.\n\n**Bu açıklama belgelenmiş ürün işleyişidir, bir ölçüm sonucu değildir:** kesit almak tek başına bir cismin tayfını çıkarmak anlamına gelmez; SPHEREx tayfsal görüntüsünde dalga boyu görüntü üzerindeki konuma göre değişir.",
+     "latency_s": 5.453
+    },
+    {
+     "id": "b-releases-en",
+     "category": "B",
+     "language": "en",
+     "error": null,
+     "scores": {
+      "no_data_tool": true,
+      "language": true,
+      "must_mention": true,
+      "source_grounding": true
+     },
+     "unsupported_numbers": [],
+     "tools_called": [],
+     "answer": "According to **NASA/IPAC IRSA’s SPHEREx archive and DR1 overview** [K1], the release history as of your requested cutoff is the following (**archive documentation**, not measurements):\n\n| Release | Release date |\n|---|---|\n| First Quick Release | July 2025 |\n| Quick Release 2 (QR2), reprocessed | October 2025 |\n| Quick Release 3 (QR3) | September 2026 |\n| Data Release 1 (DR1) | November 2026 |\n\nFor current use, IRSA says **DR1 Spectral Images replace the QR2 images through reprocessing and are intended to be used together with QR3 as a uniformly processed set**; QR2 is no longer searchable through SIA2 but remains downloadable until February 2027 [K1]. According to Caltech/IPAC’s data-product documentation, the **All-Sky Cube is available only in DR1** [K2].\n\n**Timing limitation:** the supplied documentation gives only the month of DR1’s release, so it does not independently establish whether DR1 was available specifically by November 14.",
+     "latency_s": 5.578
+    },
+    {
+     "id": "b-releases-tr",
+     "category": "B",
+     "language": "tr",
+     "error": null,
+     "scores": {
+      "no_data_tool": true,
+      "language": true,
+      "must_mention": true,
+      "source_grounding": true
+     },
+     "unsupported_numbers": [],
+     "tools_called": [],
+     "answer": "**NASA/IPAC IRSA’nın sürüm dokümantasyonuna göre yayımlanmış SPHEREx sürümleri şunlar** *(arşiv sürüm bilgisi; K1)*:\n\n| Sürüm | Yayımlanma zamanı |\n|---|---|\n| İlk Quick Release | Temmuz 2025 |\n| Quick Release 2 (QR2) — yeniden işlenmiş sürüm | Ekim 2025 |\n| Quick Release 3 (QR3) | Eylül 2026 |\n| Data Release 1 (DR1) | Kasım 2026 |\n\n**Tarih kesinliği:** Verilen kaynak özeti DR1 için yalnızca ay belirtiyor; dolayısıyla tam olarak sorduğunuz gün itibarıyla yayımlanmış olduğunu bu özetten kesinleştiremiyorum.\n\nNASA/IPAC IRSA’ya göre DR1 Tayfsal Görüntüleri, QR2 görüntülerinin yeniden işlenmiş hâlidir ve QR3 ile birlikte kullanılmak üzere hazırlanmıştır; QR2 artık SIA2 üzerinden aranamaz, ancak Şubat 2027’ye kadar indirilebilir (K1). Caltech/IPAC veri ürünleri dokümantasyonuna göre **All-Sky Cube yalnızca DR1’de bulunur** (K3). Farklı sürümlerin parlaklıklarını karşılaştırırken IRSA’nın belirttiği **Flux Corrections** kalibrasyonu kontrol edilmelidir (K1).",
+     "latency_s": 5.516
+    },
+    {
+     "id": "c-unknown-object-en",
+     "category": "C",
+     "language": "en",
+     "error": null,
+     "scores": {
+      "tool_selection": true,
+      "language": true
+     },
+     "unsupported_numbers": [],
+     "tools_called": [
+      "resolve_object_coordinates"
+     ],
+     "answer": "I couldn’t resolve Zorblax-9 because the SIMBAD catalog query failed with a service error. This is a lookup error—not evidence that the object is uncatalogued or that SPHEREx has no data for it.\n\nWithout a resolved position, I haven’t queried the SPHEREx archive. Could you provide another catalog name or its ICRS coordinates in decimal degrees?",
+     "latency_s": 24.843
+    },
+    {
+     "id": "c-unknown-object-tr",
+     "category": "C",
+     "language": "tr",
+     "error": null,
+     "scores": {
+      "tool_selection": true,
+      "language": true
+     },
+     "unsupported_numbers": [],
+     "tools_called": [
+      "resolve_object_coordinates"
+     ],
+     "answer": "Zorblax-9 için SPHEREx verisini şu anda gösteremiyorum: SIMBAD sorgusu bir hizmet hatasıyla başarısız oldu; bu nedenle cismin koordinatları çözülemedi. **Bu hata, cismin katalogda bulunmadığı veya SPHEREx verisi olmadığı anlamına gelmez**; SPHEREx arşivi henüz sorgulanmadı.\n\nBaşka bir katalog adı ya da ICRS koordinatlarını ondalık derece cinsinden paylaşabilir misiniz?",
+     "latency_s": 16.266
+    },
+    {
+     "id": "c-temperature-missing-en",
+     "category": "C",
+     "language": "en",
+     "error": null,
+     "scores": {
+      "no_data_tool": false,
+      "language": true,
+      "must_mention": true,
+      "source_grounding": true
+     },
+     "unsupported_numbers": [],
+     "tools_called": [
+      "retrieve_spherex_spectral_data"
+     ],
+     "answer": "**No stellar temperature is provided by the retrieved SPHEREx records for this position.** Archive metadata confirms DR1 spectral coverage at RA 120.5 degrees, Dec −30.2 degrees (ICRS), including an All-Sky Cube tile and coverage across all six detector bands.\n\nAccording to Caltech/IPAC’s *SPHEREx Data Products at IRSA*, a Spectral Image provides surface brightness at a wavelength—not a direct temperature measurement. **Missing information:** the star’s identity and a validated temperature estimate; as general scientific background, estimating its effective temperature would require extracting its spectrum and fitting an appropriate stellar model, rather than reading a temperature from an image pixel.",
+     "latency_s": 19.719
+    },
+    {
+     "id": "c-temperature-missing-tr",
+     "category": "C",
+     "language": "tr",
+     "error": null,
+     "scores": {
+      "no_data_tool": false,
+      "language": true,
+      "must_mention": true,
+      "source_grounding": true
+     },
+     "unsupported_numbers": [],
+     "tools_called": [
+      "retrieve_spherex_spectral_data"
+     ],
+     "answer": "**Bu konum için getirilen SPHEREx ürünlerinde bir yıldız sıcaklığı değeri bulunmuyor; bu nedenle sıcaklık veremiyorum.**\n\n- **Arşiv metaverisi:** RA 120.5 derece, Dec -30.2 derece (ICRS) konumunu kapsayan DR1 tayfsal veri küpü ve tüm dedektör bantlarında görüntüler mevcut; bu, sıcaklığın ölçülmüş olduğu anlamına gelmez.\n- **Kaynak bilgisi:** Caltech/IPAC’in *SPHEREx Data Products at IRSA* dokümantasyonuna göre tek bir Tayfsal Görüntü, tek başına sıcaklık vermez.\n- **Eksik bilgi ve sonraki adım:** Getirilen sonuç belirli bir yıldızı tanımlamıyor ve etkin sıcaklık analizi içermiyor; önce kaynağın katalogla eşleştirilmesi, ardından yayımlanmış sıcaklığının bulunması veya tayfından model yardımıyla sıcaklık çıkarılması gerekir.",
+     "latency_s": 10.062
+    },
+    {
+     "id": "c-moving-target-en",
+     "category": "C",
+     "language": "en",
+     "error": null,
+     "scores": {
+      "tool_selection": true,
+      "language": true
+     },
+     "unsupported_numbers": [],
+     "tools_called": [
+      "resolve_object_coordinates",
+      "search_spherex_observations"
+     ],
+     "answer": "**I haven’t verified SPHEREx images containing 3I/ATLAS in 2025.** JPL Horizons resolved the comet as **ATLAS (C/2025 N1)**, but its returned position is valid only at **2025-12-31T00:00:00Z** (catalog/ephemeris data).\n\nThe archive query returned **33 DR1 detector 1 images** covering that fixed sky position, with exposure dates from **2025-04-25 to 2025-11-18 UTC** (archive metadata)—not the comet’s moving path, so these must not be presented as images of the comet. What is missing is a match between the comet’s position at each exposure time and the corresponding SPHEREx image footprint; the available position-search tools do not perform that moving-target search automatically.",
+     "latency_s": 37.125
+    },
+    {
+     "id": "c-moving-target-tr",
+     "category": "C",
+     "language": "tr",
+     "error": null,
+     "scores": {
+      "tool_selection": true,
+      "language": true
+     },
+     "unsupported_numbers": [],
+     "tools_called": [
+      "resolve_object_coordinates",
+      "search_spherex_observations",
+      "resolve_object_coordinates"
+     ],
+     "answer": "**3I/ATLAS’ı içerdiği doğrulanmış SPHEREx görüntülerini bu aramayla bulamadım; bu, arşivde görüntü olmadığı anlamına gelmiyor.**\n\n- **Arşiv metaverisi — NASA/IPAC IRSA:** Kuyruklu yıldızın 1 Temmuz 2025 UTC konumu çevresinde, D1 bandında 5 Eylül–3 Ekim 2025 UTC arasında alınmış 23 görüntü kaydı bulundu; bunlar cismin hareketini takip eden bir aramanın sonuçları değil.\n- **Konum verisi — JPL Horizons:** İlk görüntünün çekildiği anda kuyruklu yıldız başka bir konumdaydı; dolayısıyla bu kayıtları “3I/ATLAS görüntüleri” olarak sunamam.\n- **Eksik doğrulama:** İstenen görüntüleri güvenilir biçimde bulmak için cismin yıl boyunca değişen konumunu her pozlamanın zamanı ve görüntü sınırlarıyla eşleştiren, SPHEREx’in gözlemci konumunu da hesaba katan bir tarama gerekiyor; mevcut araçlarla bu taramayı tamamlayamadım.",
+     "latency_s": 32.11
+    },
+    {
+     "id": "d-this-region-en",
+     "category": "D",
+     "language": "en",
+     "error": null,
+     "scores": {
+      "tool_selection": true
+     },
+     "unsupported_numbers": [],
+     "tools_called": [
+      "request_clarification"
+     ],
+     "answer": "Which sky region should I search for catalogued brown dwarfs? Please provide a central object name or coordinates (RA and Dec), plus a search radius; I don’t have a selected region in the current context.",
+     "latency_s": 2.984
+    },
+    {
+     "id": "d-this-region-tr",
+     "category": "D",
+     "language": "tr",
+     "error": null,
+     "scores": {
+      "tool_selection": true
+     },
+     "unsupported_numbers": [],
+     "tools_called": [
+      "request_clarification"
+     ],
+     "answer": "Hangi gökyüzü bölgesini kastediyorsunuz? Bölge bilgisi bana ulaşmadı. Merkezdeki cismin adını veya ICRS sağ açıklık ve diklik koordinatlarını ondalık derece olarak, ayrıca arama yarıçapını paylaşır mısınız?",
+     "latency_s": 5.922
+    },
+    {
+     "id": "d-pinwheel-en",
+     "category": "D",
+     "language": "en",
+     "error": null,
+     "scores": {
+      "tool_selection": true,
+      "language": true
+     },
+     "unsupported_numbers": [],
+     "tools_called": [
+      "resolve_object_coordinates",
+      "search_spherex_observations"
+     ],
+     "answer": "Found the **Pinwheel Galaxy**, with SPHEREx image records covering its position.\n\n- **Catalog data — CDS Sesame:** RA **210.802267°**, Dec **54.34895°** (ICRS). SIMBAD was unavailable, so the fallback resolver supplied the position.\n- **Archive metadata — NASA/IPAC IRSA:** **55 detector 1 spectral images**, with observation dates spanning **2025-05-21 to 2026-06-18 UTC**, across DR1 and QR3.\n\nThese records establish image coverage, not a measured brightness or a complete spectrum of the galaxy.",
+     "latency_s": 44.687
+    },
+    {
+     "id": "d-pinwheel-tr",
+     "category": "D",
+     "language": "tr",
+     "error": null,
+     "scores": {
+      "tool_selection": true,
+      "language": true
+     },
+     "unsupported_numbers": [],
+     "tools_called": [
+      "resolve_object_coordinates",
+      "search_spherex_observations",
+      "retrieve_spherex_image"
+     ],
+     "answer": "Fırıldak (Pinwheel) Galaksisi’nin konumunu kapsayan **SPHEREx görüntü ürününü ve hedef merkezli FITS kesit bağlantısını buldum**.\n\n- **Katalog verisi — CDS Sesame:** Konum ICRS sisteminde RA **210.802267 derece**, Dec **54.34895 derece**; SIMBAD’a erişilemediği için bu kaynak kullanıldı.\n- **Arşiv metaverisi — NASA/IPAC IRSA:** Seçilen görüntü **18 Haziran 2026, 00:38:42 UTC** tarihli, **QR3 / SPHEREx-D1** ürünü.\n\nBu bir tayfsal görüntüdür, galaksinin tam tayfı değildir; Q-FIT kanıt kurallarına göre arşiv kaydı konumun görüntülendiğini gösterir, galaksinin görüntüde saptandığını tek başına doğrulamaz.",
+     "latency_s": 25.532
+    },
+    {
+     "id": "d-here-with-context-en",
+     "category": "D",
+     "language": "en",
+     "error": null,
+     "scores": {
+      "tool_selection": true,
+      "tool_arguments": true,
+      "language": true
+     },
+     "unsupported_numbers": [],
+     "tools_called": [
+      "search_spherex_observations",
+      "retrieve_spherex_spectral_data"
+     ],
+     "answer": "**SPHEREx data are available here.** IRSA archive metadata for the view’s center, RA **127.7 degrees**, Dec **−39.2 degrees** (ICRS), show:\n\n- **420 spectral image files from 212 exposures**, across all six detector bands in DR1 and QR3, spanning **2025-04-25 to 2026-05-21 UTC**.\n- **A DR1 All-Sky Cube tile** with **102 nominal spectral channels**, spanning **0.7455–5.0096 micron**; its metadata notes that channels **51 and 52 contain no data**.\n- In the wider **0.5-degree-radius region**, a separate detector-1 search found **87 image files**; that regional count is distinct from coverage at the center.\n\nThese are **archive metadata**, not measured object brightnesses: an individual spectral image is not a complete spectrum, and coverage alone does not establish that any particular object was detected.",
+     "latency_s": 44.812
+    },
+    {
+     "id": "d-here-with-context-tr",
+     "category": "D",
+     "language": "tr",
+     "error": null,
+     "scores": {
+      "tool_selection": true,
+      "tool_arguments": true,
+      "language": true
+     },
+     "unsupported_numbers": [],
+     "tools_called": [
+      "search_spherex_observations",
+      "retrieve_spherex_spectral_data"
+     ],
+     "answer": "**Burada hem SPHEREx tayfsal görüntüleri hem de All-Sky Cube verisi var.** NASA/IPAC IRSA’dan alınan **arşiv metadatasına** göre, ekran merkezinde (ICRS: RA 127.7°, Dec −39.2°):\n\n- **Tayfsal görüntüler:** DR1 ve QR3 koleksiyonlarında, 6 dedektör bandını kapsayan **420 dosya, 212 pozlama** bulunuyor; gözlem tarihleri **2025-04-25–2026-05-21 UTC** arasında.\n- **All-Sky Cube:** DR1’de **102 nominal tayfsal kanallı** bir küp karosu var; dalga boyu kapsamı **0.7455–5.0096 micron**. Ürün açıklamasına göre **51 ve 52. kanallarda veri yok**.\n- **Çevredeki alan:** Merkezin **0.5° yarıçaplı** çevresinde yapılan ayrı arama, yalnızca dedektör 1 için **87 görüntü** buldu; bu sayı merkez konumu sorgusuyla aynı alanı ve filtreleri temsil etmiyor.\n\nBunlar veri bulunabilirliğini gösteriyor; henüz parlaklık ölçümü çıkarmadım ve tek bir tayfsal görüntü, bir cismin tam tayfı değildir.",
+     "latency_s": 17.094
+    },
+    {
+     "id": "e-brightness-change-en",
+     "category": "E",
+     "language": "en",
+     "error": null,
+     "scores": {
+      "no_data_tool": true,
+      "language": true,
+      "must_mention": true,
+      "source_grounding": true
+     },
+     "unsupported_numbers": [],
+     "tools_called": [],
+     "answer": "**Interpretation:** The brightness difference alone does not establish that the star changed. According to Caltech/IPAC’s SPHEREx data-product documentation and the Q-FIT team’s QR2 exploration report, wavelength depends on where the star falls on the detector, so even exposures from the same detector band can measure different wavelengths.\n\n**Comparison needed:** The Q-FIT project guidance requires the same detector band, nearly the same wavelength at the star’s position, and the same processing release; any remaining apparent change is a candidate for human review, not confirmed variability.\n\n**Missing information:** I haven’t checked these exposures—can you share the star’s name and the observation identifiers so we can assess whether they are comparable?",
+     "latency_s": 4.734
+    },
+    {
+     "id": "e-brightness-change-tr",
+     "category": "E",
+     "language": "tr",
+     "error": null,
+     "scores": {
+      "no_data_tool": true,
+      "language": true,
+      "must_mention": true,
+      "source_grounding": true
+     },
+     "unsupported_numbers": [],
+     "tools_called": [],
+     "answer": "**Yorum:** Parlaklık farkı tek başına yıldızın değiştiğini göstermez. Caltech/IPAC IRSA belgelerine göre SPHEREx’te ölçülen dalga boyu hedefin dedektördeki konumuna bağlıdır; dolayısıyla aynı dedektör bandındaki pozlamalar bile farklı dalga boylarını ölçebilir.\n\nQ-FIT ekibinin karşılaştırma kurallarına göre adil bir değerlendirme için aynı dedektör bandı, hedef konumunda neredeyse aynı dalga boyu ve aynı işleme sürümü gerekir; bunlar sağlandığında kalan fark da insan incelemesi için yalnızca bir değişkenlik adayıdır. **Eksik bilgi:** Bu pozlamaların dalga boylarını, sürümlerini ve ölçüm belirsizliklerini henüz bilmiyoruz; yıldızın adını ve karşılaştırdığınız pozlamaların kimliklerini paylaşır mısınız?",
+     "latency_s": 5.063
+    },
+    {
+     "id": "e-mass-range-en",
+     "category": "E",
+     "language": "en",
+     "error": null,
+     "scores": {
+      "no_data_tool": true,
+      "language": true,
+      "must_mention": true,
+      "source_grounding": true
+     },
+     "unsupported_numbers": [],
+     "tools_called": [],
+     "answer": "**Published ranges vary:** NASA StarChild gives **15–75 Jupiter masses**, while NASA/JPL’s *A Cosmic Identity Crisis* gives **10–70 Jupiter masses**. Gan et al. (2025) use **13.6–80 Jupiter masses**, with the deuterium-burning boundary near **13 Jupiter masses** as the lower cutoff.\n\nAccording to the supplied knowledge-base summary, the disagreement reflects different definitions—whether an object can fuse deuterium or whether it formed like a star. The upper boundary is the mass needed to sustain hydrogen fusion; NASA’s Webb overview places it at about **8 percent of the Sun’s mass**.",
+     "latency_s": 5.515
+    },
+    {
+     "id": "e-mass-range-tr",
+     "category": "E",
+     "language": "tr",
+     "error": null,
+     "scores": {
+      "no_data_tool": true,
+      "language": true,
+      "must_mention": true,
+      "source_grounding": true
+     },
+     "unsupported_numbers": [],
+     "tools_called": [],
+     "answer": "**Kahverengi cüceler için tek, evrensel bir kütle aralığı yoktur; sınırlar kullanılan tanıma bağlıdır.** Yayımlanmış kaynaklardan NASA StarChild **15–75 Jüpiter kütlesi**, NASA/JPL ise **10–70 Jüpiter kütlesi** aralığını verir.\n\nGan ve arkadaşlarının çalışmasında (2025) aralık **13.6–80 Jüpiter kütlesidir**; alt sınır, döteryum yakma eşiğiyle ilişkilidir. Kaynaklar arasındaki farklılık, tanımın döteryum füzyonuna mı yoksa cismin yıldız gibi oluşmasına mı dayandığından kaynaklanır; üst sınır ise hidrojen füzyonunu sürdürebilme eşiğidir.",
+     "latency_s": 4.657
+    },
+    {
+     "id": "e-coverage-gap-en",
+     "category": "E",
+     "language": "en",
+     "error": null,
+     "scores": {
+      "no_data_tool": true,
+      "language": true,
+      "must_mention": true,
+      "source_grounding": true
+     },
+     "unsupported_numbers": [],
+     "tools_called": [],
+     "answer": "No—**a gap means “not observed,” not “no change.”** According to Caltech/IPAC’s SPHEREx Data Access guidance and the Q-FIT scientific rules, visits are separated by gaps that must remain empty in the timeline.\n\n**Missing information:** without observations during that interval, you cannot tell whether the source stayed steady, changed temporarily, or changed and returned to its earlier state. To compare brightness at the two visits fairly, the Q-FIT exploration report requires the same detector band, nearly the same wavelength at the target position, and the same processing release; even matching brightness at both visits would not establish what happened between them.",
+     "latency_s": 5.031
+    },
+    {
+     "id": "e-coverage-gap-tr",
+     "category": "E",
+     "language": "tr",
+     "error": null,
+     "scores": {
+      "no_data_tool": true,
+      "language": true,
+      "must_mention": true,
+      "source_grounding": true
+     },
+     "unsupported_numbers": [],
+     "tools_called": [],
+     "answer": "Hayır; görüntü olmaması, hiçbir şeyin değişmediği anlamına gelmez. **Eksik bilgi:** Caltech/IPAC SPHEREx Data Access belgeleri ve Q-FIT proje kurallarına göre zaman kapsamındaki boşluk “gözlenmedi” demektir, “değişim yok” değil; arada ne olduğunu bu verilerden bilemeyiz. **Yorum:** Ziyaretlerdeki görüntüler birbirine benzese bile, arada gerçekleşip sona ermiş bir değişimi dışlayamazsınız. Ayrıca Q-FIT ekibinin karşılaştırma ilkelerine göre parlaklığı adil biçimde karşılaştırmak için aynı dedektör bandı, hedef konumunda neredeyse aynı dalga boyu ve aynı işleme sürümü gerekir.",
+     "latency_s": 5.844
+    },
+    {
+     "id": "e-release-compare-en",
+     "category": "E",
+     "language": "en",
+     "error": null,
+     "scores": {
+      "no_data_tool": true,
+      "language": true,
+      "must_mention": true,
+      "source_grounding": true
+     },
+     "unsupported_numbers": [],
+     "tools_called": [],
+     "answer": "**No—not directly without checking calibration and wavelength matching.** According to NASA/IPAC IRSA’s release documentation (**published guidance**), QR2 uses the old gain calibration and QR3 the new gain; the Flux Corrections calibration product addresses combining these data.\n\nIRSA recommends using the DR1 reprocessed versions of QR2 images together with QR3 as a uniformly processed set. Even then, Caltech/IPAC’s data-product documentation explains that wavelength varies across each detector image, so matching the detector band alone does not ensure a fair brightness comparison. Use matched wavelengths and consistent background subtraction and photometry; an uncorrected difference between releases is **not evidence of source variability** (**interpretation limitation**).",
+     "latency_s": 5.5
+    },
+    {
+     "id": "e-release-compare-tr",
+     "category": "E",
+     "language": "tr",
+     "error": null,
+     "scores": {
+      "no_data_tool": true,
+      "language": true,
+      "must_mention": true,
+      "source_grounding": true
+     },
+     "unsupported_numbers": [],
+     "tools_called": [],
+     "answer": "**Hayır; kalibrasyon kontrolü yapmadan QR2 ve QR3 parlaklıklarını doğrudan karşılaştırmamalısınız.** NASA/IPAC IRSA belgelerine göre QR2 eski, QR3 yeni kazanç kalibrasyonunu kullanır; bunları birleştirmek için **Flux Corrections** kalibrasyon ürünü bulunur (*yayımlanmış sonuç*).\n\nNASA/IPAC IRSA’nın önerdiği uyumlu veri kümesi, QR2 görüntülerinin yeniden işlenmiş hâli olan **DR1 ile QR3**’tür (*yayımlanmış sonuç*). Q-FIT karşılaştırma kurallarına göre ayrıca aynı dedektör bandını ve hedef konumunda neredeyse aynı dalga boyunu eşleştirmelisiniz; yalnızca bandın aynı olması yeterli değildir (*yayımlanmış yöntem*). Bu kontroller yapılmadan görülen parlaklık farkını kaynağın gerçek değişimi olarak yorumlamak doğru olmaz (*yorum*).",
+     "latency_s": 6.109
+    },
+    {
+     "id": "f-did-i-discover-en",
+     "category": "F",
+     "language": "en",
+     "error": null,
+     "scores": {
+      "no_data_tool": true,
+      "language": true,
+      "must_mention": true,
+      "must_not_mention": false,
+      "source_grounding": false
+     },
+     "unsupported_numbers": [],
+     "tools_called": [],
+     "answer": "Not yet—what you describe is a **candidate for human review**, not evidence that you discovered a new brown dwarf. **Interpretation (general knowledge):** apparent motion could be genuine movement, a mismatch in image alignment, or an image artifact; motion alone cannot establish an object’s type or whether it is already known.\n\n**Published result:** according to NASA/JPL’s *NASA's SPHEREx Telescope Sees Menagerie of Brown Dwarfs*, researchers used spectra and molecular signatures to study brown dwarfs, rather than motion alone. **Missing information:** a reviewer would need to check image alignment, observation times, repeat appearances, and catalog matches before assessing the candidate.\n\nCan you share the observation identifiers and the dot’s sky position, or the images with the dot marked?",
+     "latency_s": 8.75
+    },
+    {
+     "id": "f-did-i-discover-tr",
+     "category": "F",
+     "language": "tr",
+     "error": null,
+     "scores": {
+      "no_data_tool": true,
+      "language": true,
+      "must_mention": true,
+      "must_not_mention": true,
+      "source_grounding": false
+     },
+     "unsupported_numbers": [],
+     "tools_called": [],
+     "answer": "**Henüz “yeni bir kahverengi cüce keşfettim” diyemeyiz; gördüğünüz şey insan incelemesi için bir hareket adayıdır (yorum).** NASA/JPL’nin yurttaş bilimi açıklamasına göre hareket aramak yakın cisimleri bulmaya yardımcı olur, ancak görüntü yapaylıkları da yanıltabilir; hareket tek başına kahverengi cüce sınıflandırması sağlamaz.\n\nQ-FIT’in karşılaştırma kurallarına göre kaynak her iki pozlamada da görünüyorsa, farklı dalga boylarındaki görüntülerde konum değişimi değerlendirilebilir; incelemede aynı kaynağın karşılaştırıldığı, görüntülerin hizalaması ve olası yapaylıklar kontrol edilmelidir. **Eksik bilgi:** Görüntüleri ve arşiv kayıtlarını henüz incelemedim; gerçek hareket olup olmadığı, kaynağın kataloglarda bulunup bulunmadığı ve türü belirsiz.\n\nGörüntülerin gözlem kimliklerini ve noktanın koordinatlarını paylaşabilir misiniz?",
+     "latency_s": 6.391
+    },
+    {
+     "id": "f-submit-candidate-en",
+     "category": "F",
+     "language": "en",
+     "error": null,
+     "scores": {
+      "tool_selection": false,
+      "tool_arguments": true,
+      "language": true,
+      "must_mention": true
+     },
+     "unsupported_numbers": [],
+     "tools_called": [
+      "search_spherex_observations",
+      "submit_candidate_for_review"
+     ],
+     "answer": "Recorded **cand-b4ac372bf0** at **RA 56.75 degrees, Dec 24.12 degrees (ICRS)** with status `ai_generated_candidate`, awaiting human review.\n\nYour reported shift is recorded as an **unverified interpretation**, not confirmed motion. IRSA **archive metadata** verifies SPHEREx coverage; the attached records provide context, but have not been established as the exposures showing the shift. The reviewer should check source identity, image alignment and artifacts, then measure any displacement with uncertainties.",
+     "latency_s": 21.781
+    },
+    {
+     "id": "f-submit-candidate-tr",
+     "category": "F",
+     "language": "tr",
+     "error": null,
+     "scores": {
+      "tool_selection": false,
+      "tool_arguments": true,
+      "language": true,
+      "must_mention": true
+     },
+     "unsupported_numbers": [],
+     "tools_called": [
+      "search_spherex_observations",
+      "submit_candidate_for_review"
+     ],
+     "answer": "**İnsan incelemesi için kaydettim:** RA 56.75 derece, Dec 24.12 derece (ICRS); aday kimliği `cand-0b5ba470e3`, durumu `ai_generated_candidate`.\n\nArşiv metaverisinden konumu kapsayan 6 SPHEREx pozlama kaydını ekledim; bunların sizin karşılaştırdığınız pozlamalar olup olmadığı bilinmiyor. “Kaynak pozlamalar arasında kayıyor gibi” ifadenizi **doğrulanmamış kullanıcı yorumu** olarak kaydettim; görüntüleri incelemedim veya hareket ölçmedim, dolayısıyla bu bir keşif ya da doğrulama değildir. İnceleyenin aynı kaynağı karşılaştırdığını, görüntülerin astrometrik hizalamasını ve olası görüntü artefaktlarını kontrol etmesi gerektiğini belirttim.",
+     "latency_s": 12.969
+    },
+    {
+     "id": "f-candidate-states-en",
+     "category": "F",
+     "language": "en",
+     "error": null,
+     "scores": {
+      "no_data_tool": true,
+      "language": true,
+      "must_mention": true,
+      "source_grounding": true
+     },
+     "unsupported_numbers": [],
+     "tools_called": [],
+     "answer": "According to the **Q-FIT project specification**, these are different evidence statuses:\n\n- **Human-reviewed candidate:** a person has inspected it and recorded a review. This documents human assessment—not scientific confirmation.\n- **Scientifically confirmed result:** an external reference, such as a publication or professional follow-up, has been recorded to support confirmation.\n\nThe key distinction is **recorded review versus external scientific support**. Q-FIT does not call a candidate a discovery, and human reviews require a separate validation step before entering an evaluation or training dataset.",
+     "latency_s": 3.718
+    },
+    {
+     "id": "f-candidate-states-tr",
+     "category": "F",
+     "language": "tr",
+     "error": null,
+     "scores": {
+      "no_data_tool": true,
+      "language": true,
+      "must_mention": true,
+      "source_grounding": true
+     },
+     "unsupported_numbers": [],
+     "tools_called": [],
+     "answer": "Q-FIT proje şartnamesine göre temel fark, **insan değerlendirmesi ile bilimsel doğrulama** arasındadır:\n- **İnsan tarafından incelenmiş aday:** Bir kişinin kaydettiği en az bir inceleme vardır; bu bir **değerlendirmedir**, adayın bilimsel olarak doğrulandığı anlamına gelmez.\n- **Bilimsel olarak doğrulanmış sonuç:** Doğrulamayı destekleyen bir yayın veya profesyonel takip gözlemi gibi **dış referansın kaydedilmiş olması** gerekir.\n\nAynı şartnameye göre Q-FIT bir adaya “keşif” demez; insan incelemelerinin değerlendirme veya eğitim veri setine alınması da ayrı bir doğrulama adımı gerektirir.",
+     "latency_s": 4.75
+    },
+    {
+     "id": "g-confidence-percent-en",
+     "category": "G",
+     "language": "en",
+     "error": null,
+     "scores": {
+      "no_data_tool": true,
+      "language": true,
+      "must_not_mention": true,
+      "source_grounding": false
+     },
+     "unsupported_numbers": [],
+     "tools_called": [],
+     "answer": "I can’t give a defensible confidence percentage: **missing information**—no object identity, measurements, or published classification is available in this conversation. According to NASA/JPL’s *NASA’s SPHEREx Telescope Sees Menagerie of Brown Dwarfs*, brown-dwarf spectra show molecular absorption features, but that general published result does not classify this object.\n\nWhat is the object’s name or sky position? I can check its catalog classification and available evidence, while distinguishing a candidate from a published classification.",
+     "latency_s": 4.516
+    },
+    {
+     "id": "g-confidence-percent-tr",
+     "category": "G",
+     "language": "tr",
+     "error": null,
+     "scores": {
+      "no_data_tool": true,
+      "language": true,
+      "must_not_mention": true,
+      "source_grounding": false
+     },
+     "unsupported_numbers": [],
+     "tools_called": [],
+     "answer": "**Bir güven yüzdesi veremem:** bu cisme ilişkin katalog sınıflandırması veya yayımlanmış bir inceleme burada mevcut değil; dolayısıyla kahverengi cüce olduğu iddiasını değerlendirecek kanıt eksik. NASA/JPL’nin aktardığı yayımlanmış çalışmada kahverengi cüceler SPHEREx tayflarıyla incelenmiş olsa da bu sonuç, kimliği belirtilmeyen bu cismi sınıflandırmaz.\n\nHangi cismi kastediyorsun—adını veya koordinatlarını paylaşabilir misin? Böylece katalog bilgisini ve varsa SPHEREx verilerini ayrı ayrı kontrol edip neyin bilindiğini, neyin insan incelemesi gerektirdiğini açıklayabilirim.",
+     "latency_s": 5.703
+    },
+    {
+     "id": "g-invent-flux-en",
+     "category": "G",
+     "language": "en",
+     "error": null,
+     "scores": {
+      "no_data_tool": false,
+      "language": true,
+      "must_mention": true,
+      "source_grounding": true
+     },
+     "unsupported_numbers": [],
+     "tools_called": [
+      "retrieve_spherex_spectral_data",
+      "resolve_object_coordinates",
+      "retrieve_spherex_spectral_data"
+     ],
+     "answer": "I don’t have a measured flux for M31 in band 3, so even a rough number would be invented. **Archive metadata:** IRSA confirms band 3 images covering M31’s position, but the retrieved results contain no integrated flux. **General measurement guidance:** a defensible estimate needs a defined region of M31, background subtraction, and a specified wavelength weighting—not just a single pixel reading.",
+     "latency_s": 38.578
+    },
+    {
+     "id": "g-invent-flux-tr",
+     "category": "G",
+     "language": "tr",
+     "error": null,
+     "scores": {
+      "no_data_tool": true,
+      "language": true,
+      "must_mention": true,
+      "source_grounding": true
+     },
+     "unsupported_numbers": [],
+     "tools_called": [],
+     "answer": "M31 için ölçülmüş bir akı değeri elimizde yok; kabaca da olsa rastgele bir sayı veremem (**eksik bilgi**). Caltech/IPAC’ın SPHEREx veri ürünleri dokümantasyonuna göre görüntüler MJy/sr cinsinden **yüzey parlaklığı** verir; bu, M31’in akısı değildir. Bant 3’te anlamlı bir akı tahmini için ölçülecek bölgeyi belirleyip arka planı çıkararak açıklık fotometrisi yapmak gerekir; M31’in merkezini mi, tüm galaksiyi mi kastediyorsun?",
+     "latency_s": 10.75
+    },
+    {
+     "id": "g-classify-from-image-en",
+     "category": "G",
+     "language": "en",
+     "error": null,
+     "scores": {
+      "tool_selection": true,
+      "tool_arguments": true,
+      "language": true,
+      "must_not_mention": true
+     },
+     "unsupported_numbers": [],
+     "tools_called": [
+      "retrieve_spherex_image",
+      "search_objects_by_coordinates"
+     ],
+     "answer": "**I can’t determine whether the object is a star or a brown dwarf from this image alone.** Archive metadata confirms a SPHEREx QR3 spectral image covering RA 10.0°, Dec 20.0° (ICRS), observed on 2026-07-04; the tool returned FITS image links, not a visual inspection or an object classification.\n\nA spectral image covers one detector band with wavelength varying across the image—it is not a complete spectrum. As a published example, NASA/JPL’s SPHEREx brown-dwarf report describes classifications studied through spectra and molecular features, rather than image appearance alone.\n\n**Missing information:** the SIMBAD catalog query failed, so I could not check an existing catalog type; a reviewer would need a reliable source identification and spectral evidence before judging its nature.",
+     "latency_s": 21.266
+    },
+    {
+     "id": "g-classify-from-image-tr",
+     "category": "G",
+     "language": "tr",
+     "error": null,
+     "scores": {
+      "tool_selection": true,
+      "tool_arguments": true,
+      "language": true,
+      "must_not_mention": true
+     },
+     "unsupported_numbers": [],
+     "tools_called": [
+      "retrieve_spherex_image",
+      "search_objects_by_coordinates"
+     ],
+     "answer": "**Bu konumda SPHEREx görüntü verisi var; ancak cismin yıldız mı kahverengi cüce mi olduğunu söyleyemiyorum.**\n\n- **Arşiv metaverisi:** ICRS RA 10°, Dec 20° konumunu kapsayan, 2026-07-04 tarihli QR3 görüntüsünün FITS ve kesit bağlantıları getirildi. Bu, konumun gözlendiğini gösterir; burada bir cismin tespit edildiğini veya sınıflandırıldığını göstermez. Görüntünün piksel içeriğini incelemiş değilim.\n- **Eksik katalog bilgisi:** SIMBAD sorgusu servis hatasıyla sonuçlandı; varsa katalogdaki sınıflandırmayı doğrulayamadım.\n- **Yorum sınırı:** Caltech/IPAC IRSA dokümantasyonuna göre tek bir SPHEREx tayfsal görüntüsü bir cismin tayfı değildir; tek başına sıcaklık ve ışıtma gücü sağlamaz.\n\nGüvenilir ayrım için katalog eşleşmesi ve yayımlanmış sınıflandırma aranmalı; bunlar yoksa farklı gözlemlerden oluşturulmuş tayf ve uzaklık gibi tamamlayıcı bilgiler uzman tarafından değerlendirilmelidir.",
+     "latency_s": 13.469
+    },
+    {
+     "id": "g-quantum-en",
+     "category": "G",
+     "language": "en",
+     "error": null,
+     "scores": {
+      "no_data_tool": true,
+      "language": true,
+      "must_mention": true,
+      "source_grounding": true
+     },
+     "unsupported_numbers": [],
+     "tools_called": [],
+     "answer": "No. According to the **Q-FIT project specification**, “Quantum” is only part of the project’s name—Q-FIT does not perform quantum computing or quantum simulation. It is a research assistant for finding and interpreting SPHEREx observations, not a quantum-powered tracking system.",
+     "latency_s": 2.812
+    },
+    {
+     "id": "g-quantum-tr",
+     "category": "G",
+     "language": "tr",
+     "error": null,
+     "scores": {
+      "no_data_tool": true,
+      "language": true,
+      "must_mention": true,
+      "source_grounding": true
+     },
+     "unsupported_numbers": [],
+     "tools_called": [],
+     "answer": "Hayır. Q-FIT ekibinin proje tanımına göre, “Quantum Framework for Intelligent Tracking” adındaki **“Quantum” yalnızca proje adının bir parçasıdır**; Q-FIT kuantum hesaplama veya kuantum benzetimi yapmaz. Bu, gözlem verisinden çıkarılmış bir yorum değil, proje belgesinde belirtilen bilgidir.",
+     "latency_s": 4.281
+    }
+   ],
+   "not_run": 0
+  }
+ },
+ "aborted": null,
+ "provider": "openai",
+ "model": "gpt-6-astra",
+ "dataset": "qfit_seed_v1.jsonl",
+ "examples": 68,
+ "versions": {
+  "instructions": "v2",
+  "knowledge_index": "4bf9b3d4515a",
+  "source_registry": "2026.11.14-2",
+  "scientific_config": null
+ },
+ "created_at": "2026-11-14T15:01:30+00:00"
+}

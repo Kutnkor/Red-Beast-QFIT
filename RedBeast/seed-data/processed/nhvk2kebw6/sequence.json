@@ -1,0 +1,784 @@
+{
+ "meta": {
+  "id": "nhvk2kebw6",
+  "status": "ready",
+  "pipeline_version": "1.2.0",
+  "created_at": 1794676076.830411,
+  "center": {
+   "ra_deg": 76.956587,
+   "dec_deg": 30.401291,
+   "frame": "ICRS"
+  },
+  "grid": {
+   "projection": "TAN",
+   "frame": "ICRS",
+   "crval": [
+    76.956587,
+    30.401291
+   ],
+   "crpix": [
+    30.0,
+    30.0
+   ],
+   "cdelt": [
+    -0.0017083333333333334,
+    0.0017083333333333334
+   ],
+   "nx": 59,
+   "ny": 59,
+   "pixscale_arcsec": 6.15,
+   "orientation": "north_up_east_left"
+  },
+  "wavelength": {
+   "lam_ref_um": 0.765,
+   "bw_ref_um": 0.0181,
+   "tol": 0.5,
+   "mode": "requested",
+   "groups": [
+    {
+     "lam_ref_um": 2.15836,
+     "bw_ref_um": 0.05372,
+     "tol": 0.5,
+     "n_frames": 5,
+     "n_visits": 5,
+     "mjd_first": 60936.193798,
+     "mjd_last": 61299.895897,
+     "span_days": 363.702,
+     "detectors": [
+      3
+     ]
+    },
+    {
+     "lam_ref_um": 4.82537,
+     "bw_ref_um": 0.03653,
+     "tol": 0.5,
+     "n_frames": 5,
+     "n_visits": 5,
+     "mjd_first": 60936.193798,
+     "mjd_last": 61299.895897,
+     "span_days": 363.702,
+     "detectors": [
+      6
+     ]
+    },
+    {
+     "lam_ref_um": 1.43706,
+     "bw_ref_um": 0.03527,
+     "tol": 0.5,
+     "n_frames": 4,
+     "n_visits": 4,
+     "mjd_first": 60926.275136,
+     "mjd_last": 61298.33665,
+     "span_days": 372.062,
+     "detectors": [
+      2
+     ]
+    },
+    {
+     "lam_ref_um": 4.21418,
+     "bw_ref_um": 0.03674,
+     "tol": 0.5,
+     "n_frames": 4,
+     "n_visits": 4,
+     "mjd_first": 60926.275136,
+     "mjd_last": 61298.33665,
+     "span_days": 372.062,
+     "detectors": [
+      5
+     ]
+    },
+    {
+     "lam_ref_um": 0.97324,
+     "bw_ref_um": 0.02536,
+     "tol": 0.5,
+     "n_frames": 5,
+     "n_visits": 4,
+     "mjd_first": 60921.995509,
+     "mjd_last": 61292.904327,
+     "span_days": 370.909,
+     "detectors": [
+      1
+     ]
+    },
+    {
+     "lam_ref_um": 3.28446,
+     "bw_ref_um": 0.09569,
+     "tol": 0.5,
+     "n_frames": 5,
+     "n_visits": 4,
+     "mjd_first": 60921.995509,
+     "mjd_last": 61292.904327,
+     "span_days": 370.909,
+     "detectors": [
+      4
+     ]
+    },
+    {
+     "lam_ref_um": 0.85941,
+     "bw_ref_um": 0.02154,
+     "tol": 0.5,
+     "n_frames": 4,
+     "n_visits": 4,
+     "mjd_first": 60921.723883,
+     "mjd_last": 61291.821874,
+     "span_days": 370.098,
+     "detectors": [
+      1
+     ]
+    },
+    {
+     "lam_ref_um": 2.84625,
+     "bw_ref_um": 0.08171,
+     "tol": 0.5,
+     "n_frames": 4,
+     "n_visits": 4,
+     "mjd_first": 60921.723883,
+     "mjd_last": 61291.821874,
+     "span_days": 370.098,
+     "detectors": [
+      4
+     ]
+    },
+    {
+     "lam_ref_um": 1.26619,
+     "bw_ref_um": 0.03038,
+     "tol": 0.5,
+     "n_frames": 4,
+     "n_visits": 4,
+     "mjd_first": 60927.842998,
+     "mjd_last": 61297.316303,
+     "span_days": 369.473,
+     "detectors": [
+      2
+     ]
+    },
+    {
+     "lam_ref_um": 4.02283,
+     "bw_ref_um": 0.03678,
+     "tol": 0.5,
+     "n_frames": 4,
+     "n_visits": 4,
+     "mjd_first": 60927.842998,
+     "mjd_last": 61297.316303,
+     "span_days": 369.473,
+     "detectors": [
+      5
+     ]
+    },
+    {
+     "lam_ref_um": 1.0994,
+     "bw_ref_um": 0.02873,
+     "tol": 0.5,
+     "n_frames": 4,
+     "n_visits": 4,
+     "mjd_first": 60919.421139,
+     "mjd_last": 61285.237228,
+     "span_days": 365.816,
+     "detectors": [
+      1,
+      2
+     ]
+    },
+    {
+     "lam_ref_um": 1.92812,
+     "bw_ref_um": 0.04703,
+     "tol": 0.5,
+     "n_frames": 5,
+     "n_visits": 4,
+     "mjd_first": 60936.598803,
+     "mjd_last": 61298.881306,
+     "span_days": 362.283,
+     "detectors": [
+      3
+     ]
+    },
+    {
+     "lam_ref_um": 4.65612,
+     "bw_ref_um": 0.0364,
+     "tol": 0.5,
+     "n_frames": 5,
+     "n_visits": 4,
+     "mjd_first": 60936.598803,
+     "mjd_last": 61298.881306,
+     "span_days": 362.283,
+     "detectors": [
+      6
+     ]
+    },
+    {
+     "lam_ref_um": 2.48974,
+     "bw_ref_um": 0.0723,
+     "tol": 0.5,
+     "n_frames": 4,
+     "n_visits": 3,
+     "mjd_first": 60920.031631,
+     "mjd_last": 61291.27665,
+     "span_days": 371.245,
+     "detectors": [
+      4
+     ]
+    },
+    {
+     "lam_ref_um": 0.76501,
+     "bw_ref_um": 0.0181,
+     "tol": 0.5,
+     "n_frames": 3,
+     "n_visits": 3,
+     "mjd_first": 60920.031631,
+     "mjd_last": 61291.27665,
+     "span_days": 371.245,
+     "detectors": [
+      1
+     ]
+    },
+    {
+     "lam_ref_um": 0.82025,
+     "bw_ref_um": 0.0206,
+     "tol": 0.5,
+     "n_frames": 3,
+     "n_visits": 3,
+     "mjd_first": 60920.980349,
+     "mjd_last": 61291.818889,
+     "span_days": 370.839,
+     "detectors": [
+      1
+     ]
+    },
+    {
+     "lam_ref_um": 0.80148,
+     "bw_ref_um": 0.01966,
+     "tol": 0.5,
+     "n_frames": 3,
+     "n_visits": 3,
+     "mjd_first": 60920.978857,
+     "mjd_last": 61291.817397,
+     "span_days": 370.839,
+     "detectors": [
+      1
+     ]
+    },
+    {
+     "lam_ref_um": 2.62651,
+     "bw_ref_um": 0.07567,
+     "tol": 0.5,
+     "n_frames": 3,
+     "n_visits": 3,
+     "mjd_first": 60920.978857,
+     "mjd_last": 61291.817397,
+     "span_days": 370.839,
+     "detectors": [
+      4
+     ]
+    },
+    {
+     "lam_ref_um": 0.83977,
+     "bw_ref_um": 0.0211,
+     "tol": 0.5,
+     "n_frames": 3,
+     "n_visits": 3,
+     "mjd_first": 60920.981842,
+     "mjd_last": 61291.820382,
+     "span_days": 370.839,
+     "detectors": [
+      1
+     ]
+    },
+    {
+     "lam_ref_um": 2.77064,
+     "bw_ref_um": 0.0792,
+     "tol": 0.5,
+     "n_frames": 3,
+     "n_visits": 3,
+     "mjd_first": 60920.981842,
+     "mjd_last": 61291.820382,
+     "span_days": 370.839,
+     "detectors": [
+      4
+     ]
+    },
+    {
+     "lam_ref_um": 2.69736,
+     "bw_ref_um": 0.07843,
+     "tol": 0.5,
+     "n_frames": 3,
+     "n_visits": 3,
+     "mjd_first": 60920.98035,
+     "mjd_last": 61291.818889,
+     "span_days": 370.839,
+     "detectors": [
+      4
+     ]
+    },
+    {
+     "lam_ref_um": 1.39482,
+     "bw_ref_um": 0.03379,
+     "tol": 0.5,
+     "n_frames": 3,
+     "n_visits": 3,
+     "mjd_first": 60927.911286,
+     "mjd_last": 61298.333666,
+     "span_days": 370.422,
+     "detectors": [
+      2
+     ]
+    },
+    {
+     "lam_ref_um": 4.16912,
+     "bw_ref_um": 0.03692,
+     "tol": 0.5,
+     "n_frames": 3,
+     "n_visits": 3,
+     "mjd_first": 60927.911286,
+     "mjd_last": 61298.333666,
+     "span_days": 370.422,
+     "detectors": [
+      5
+     ]
+    },
+    {
+     "lam_ref_um": 0.78271,
+     "bw_ref_um": 0.01872,
+     "tol": 0.5,
+     "n_frames": 3,
+     "n_visits": 3,
+     "mjd_first": 60920.977365,
+     "mjd_last": 61291.278142,
+     "span_days": 370.301,
+     "detectors": [
+      1
+     ]
+    }
+   ],
+   "group_n_frames": 3,
+   "group_n_visits": 3
+  },
+  "display": {
+   "vmin": -0.04068733302354812,
+   "vmax": 9.798491477966309,
+   "soft": 0.06103099953532218,
+   "sigma": 0.02034366651177406,
+   "stretch": "asinh",
+   "unit": "MJy/sr",
+   "background_subtracted": true
+  },
+  "archive": {
+   "service": "IRSA TAP (bundled inventory snapshot)",
+   "tap_url": "https://irsa.ipac.caltech.edu/TAP",
+   "adql": "SELECT p.obs_publisher_did, p.energy_bandpassname, p.time_bounds_lower, p.time_bounds_upper, p.time_exposure, p.provenance_version, p.poly, a.uri, a.contentchecksum, a.contentlength FROM spherex.plane p JOIN spherex.artifact a ON a.planeid = p.planeid WHERE 1 = CONTAINS(POINT('ICRS', 76.9565870, 30.4012910), p.poly)",
+   "queried_at": 1794515256.5308456,
+   "from_cache": true,
+   "elapsed_s": 0.0,
+   "n_rows": 330,
+   "n_parsed": 330,
+   "n_unique": 330,
+   "n_reprocessed_dropped": 0,
+   "inventory_source": {
+    "file": "rw-aur_observations.csv",
+    "sha256": "99f5319a7cb0d2a7475a370770dbe848755850f627585436633b3558d7c553ce",
+    "report_file": "rw-aur.json",
+    "report_sha256": "b7fab53e653b0d672aad63f372987299e795db2ca6b18518267f7707e9b3ba9d",
+    "report_generated_at": "2026-11-14 21:03 UTC",
+    "note": "Bundled real IRSA inventory; not a fresh archive search. Footprint coordinates were rounded by the original CSV exporter. Raw FITS are downloaded and reprocessed."
+   }
+  },
+  "selection": {
+   "n_observations": 330,
+   "n_reprocessed_dropped": 0,
+   "n_candidates": 307,
+   "n_rejected_edge": 23,
+   "n_selected": 3,
+   "n_prepared": 3,
+   "rejected_after_download": [],
+   "cutout_size_deg": 0.157,
+   "min_edge_px": 51.4
+  },
+  "n_frames": 3,
+  "n_visits": 3,
+  "mjd_first": 60920.03229708,
+  "mjd_last": 61291.277316444,
+  "span_days": 371.245,
+  "common_valid_frac": 0.9437,
+  "common_comparable_frac": 0.7288,
+  "alignment": {
+   "status": "ok",
+   "catalog": "Gaia DR3",
+   "catalogue_providers": [
+    "https://gea.esac.esa.int/tap-server/tap"
+   ],
+   "n_catalog_stars": 114,
+   "n_bright": 18,
+   "gmax": 15.5,
+   "per_frame": [
+    {
+     "index": 0,
+     "n_stars": 3,
+     "median_de_arcsec": -0.02,
+     "median_dn_arcsec": 0.12,
+     "rms_arcsec": 0.14
+    },
+    {
+     "index": 1,
+     "n_stars": 2,
+     "median_de_arcsec": -0.36,
+     "median_dn_arcsec": -0.08,
+     "rms_arcsec": 0.38
+    },
+    {
+     "index": 2,
+     "n_stars": 3,
+     "median_de_arcsec": -0.3,
+     "median_dn_arcsec": 0.13,
+     "rms_arcsec": 0.73
+    }
+   ],
+   "method": "flux-weighted centroid in 5x5 px box vs Gaia position propagated by proper motion to frame epoch",
+   "n_measurements": 8,
+   "median_de_arcsec": -0.16,
+   "median_dn_arcsec": 0.04,
+   "rms_arcsec": 0.49,
+   "pixel_scale_arcsec": 6.15
+  },
+  "warnings": [],
+  "data_fingerprint": "242dc5758342f86010c34acf",
+  "timings": {
+   "search_s": 0.01,
+   "download_s": 0.0,
+   "download_bytes": 0,
+   "download_cached": 3,
+   "prepare_s": 0.08
+  },
+  "target_id": "rw-aur"
+ },
+ "frames": [
+  {
+   "index": 0,
+   "obs_id": "2025W36_1A_0233_3",
+   "detector": 1,
+   "collection": "spherex_dr1",
+   "release": "dr1",
+   "l2_tag": "l2b-v27-2026-232",
+   "pipeline_version": "7.0.5",
+   "timesys": "UTC",
+   "mjd_beg": 60920.031630891,
+   "mjd_avg": 60920.03229708,
+   "mjd_end": 60920.03296327,
+   "date_avg": "2025-09-02T00:46:30Z",
+   "epoch_jyear": 2025.6688,
+   "exposure_s": 113.5826,
+   "lam_um": 0.76447,
+   "bw_um": 0.01808,
+   "lam_pred_um": 0.76501,
+   "dlam_over_bw": -0.029,
+   "source_url": "https://irsa.ipac.caltech.edu/ibe/data/spherex/dr1/level2/2025W36_1A/l2b-v27-2026-232/1/level2_2025W36_1A_0233_3D1_spx_l2b-v27-2026-232.fits?center=76.956587,30.401291&size=0.15700",
+   "archive_file_url": "https://irsa.ipac.caltech.edu/ibe/data/spherex/dr1/level2/2025W36_1A/l2b-v27-2026-232/1/level2_2025W36_1A_0233_3D1_spx_l2b-v27-2026-232.fits",
+   "archive_checksum": "md5:5d3dea8b943b88d050ab84a618941805",
+   "raw_sha256": "05a906b170cd81f93543c22586efcd3f9ca04c5274c3b57a527bb34c1b22ec4b",
+   "raw_size": 4080960,
+   "quality": {
+    "n_pixels": 8464,
+    "frac_invalid": 0.0048,
+    "frac_suspect": 0.0448,
+    "n_nonfinite": 0,
+    "flags_present": {
+     "TRANSIENT": 71,
+     "OVERFLOW": 1,
+     "SUR_ERROR": 36,
+     "NONFUNC": 19,
+     "COLD": 3,
+     "PERSIST": 23,
+     "OUTLIER": 38,
+     "CROSSTALK": 127,
+     "SOURCE": 6978,
+     "HALO": 215
+    },
+    "unknown_flag_names": [],
+    "l1_dqa": "Pass",
+    "l2_dqa": "Pass",
+    "psf_fwhm_arcsec": 7.530770327317724,
+    "target": {
+     "in_cutout": true,
+     "edge_px": 45.3,
+     "flags": {},
+     "info_flags": {
+      "SOURCE": 19
+     },
+     "n_invalid": 0,
+     "saturated": false
+    }
+   },
+   "background": {
+    "value_mjy_sr": 0.41682,
+    "sigma_mjy_sr": 0.01985,
+    "n_pixels": 2711,
+    "method": "sigma_clipped_median",
+    "zodi_model_median_mjy_sr": 0.33842
+   },
+   "coverage_frac": 1.0,
+   "invalid_frac": 0.023,
+   "suspect_frac": 0.0396,
+   "comparable_frac": 0.977,
+   "lam_range_um": [
+    0.75913,
+    0.76983
+   ],
+   "psf_fwhm_arcsec": 7.530770327317724,
+   "psf_kind": "EPSF",
+   "cutout_wcs": {
+    "crval": [
+     75.4196141413,
+     28.7643298786
+    ],
+    "crpix": [
+     881.5,
+     -822.5
+    ],
+    "pc": [
+     [
+      -0.00170084420783,
+      -0.000117903978933
+     ],
+     [
+      -0.000183262193755,
+      0.00170505608242
+     ]
+    ],
+    "ctype": [
+     "RA---TAN-SIP",
+     "DEC--TAN-SIP"
+    ],
+    "det_origin": [
+     140.0,
+     1844.0
+    ]
+   },
+   "png": "frame_00.png",
+   "mask_png": "frame_00_mask.png",
+   "npz": "frame_00.npz",
+   "target_predicted": {
+    "ra": 76.956586,
+    "dec": 30.401293,
+    "method": "proper_motion_only"
+   }
+  },
+  {
+   "index": 1,
+   "obs_id": "2026W10_2B_0591_4",
+   "detector": 1,
+   "collection": "spherex_dr1",
+   "release": "dr1",
+   "l2_tag": "l2b-v27-2026-231",
+   "pipeline_version": "7.0.5",
+   "timesys": "UTC",
+   "mjd_beg": 61107.677094988,
+   "mjd_avg": 61107.677761178,
+   "mjd_end": 61107.678427367,
+   "date_avg": "2026-03-08T16:15:59Z",
+   "epoch_jyear": 2026.1826,
+   "exposure_s": 113.5826,
+   "lam_um": 0.75832,
+   "bw_um": 0.01785,
+   "lam_pred_um": 0.75936,
+   "dlam_over_bw": -0.369,
+   "source_url": "https://irsa.ipac.caltech.edu/ibe/data/spherex/dr1/level2/2026W10_2B/l2b-v27-2026-231/1/level2_2026W10_2B_0591_4D1_spx_l2b-v27-2026-231.fits?center=76.956587,30.401291&size=0.15700",
+   "archive_file_url": "https://irsa.ipac.caltech.edu/ibe/data/spherex/dr1/level2/2026W10_2B/l2b-v27-2026-231/1/level2_2026W10_2B_0591_4D1_spx_l2b-v27-2026-231.fits",
+   "archive_checksum": "md5:0e7deaca84e1bdf7b386431975765c32",
+   "raw_sha256": "71af4a9171c330d6a9f91255404b4b9b4bd8e343f2914d36b7d9d34841a27d10",
+   "raw_size": 4080960,
+   "quality": {
+    "n_pixels": 8464,
+    "frac_invalid": 0.0041,
+    "frac_suspect": 0.0273,
+    "n_nonfinite": 0,
+    "flags_present": {
+     "TRANSIENT": 38,
+     "SUR_ERROR": 25,
+     "NONFUNC": 23,
+     "COLD": 2,
+     "PERSIST": 77,
+     "OUTLIER": 31,
+     "CROSSTALK": 37,
+     "SOURCE": 6954,
+     "HALO": 103
+    },
+    "unknown_flag_names": [],
+    "l1_dqa": "Pass",
+    "l2_dqa": "Pass",
+    "psf_fwhm_arcsec": 7.530770327317724,
+    "target": {
+     "in_cutout": true,
+     "edge_px": 45.2,
+     "flags": {},
+     "info_flags": {
+      "SOURCE": 20
+     },
+     "n_invalid": 0,
+     "saturated": false
+    }
+   },
+   "background": {
+    "value_mjy_sr": 0.3998,
+    "sigma_mjy_sr": 0.02034,
+    "n_pixels": 2751,
+    "method": "sigma_clipped_median",
+    "zodi_model_median_mjy_sr": 0.32794
+   },
+   "coverage_frac": 1.0,
+   "invalid_frac": 0.0164,
+   "suspect_frac": 0.0273,
+   "comparable_frac": 0.7573,
+   "lam_range_um": [
+    0.75322,
+    0.76343
+   ],
+   "psf_fwhm_arcsec": 7.530770327317724,
+   "psf_kind": "EPSF",
+   "cutout_wcs": {
+    "crval": [
+     77.7044829233,
+     31.9871767419
+    ],
+    "crpix": [
+     486.5,
+     -831.5
+    ],
+    "pc": [
+     [
+      0.00170013043585,
+      0.000122017001008
+     ],
+     [
+      0.000187611592402,
+      -0.00170423743542
+     ]
+    ],
+    "ctype": [
+     "RA---TAN-SIP",
+     "DEC--TAN-SIP"
+    ],
+    "det_origin": [
+     535.0,
+     1853.0
+    ]
+   },
+   "png": "frame_01.png",
+   "mask_png": "frame_01_mask.png",
+   "npz": "frame_01.npz",
+   "target_predicted": {
+    "ra": 76.956587,
+    "dec": 30.40129,
+    "method": "proper_motion_only"
+   }
+  },
+  {
+   "index": 2,
+   "obs_id": "2026W37_1A_0234_3",
+   "detector": 1,
+   "collection": "spherex_qr3",
+   "release": "qr3",
+   "l2_tag": "l2b-v27-2026-255",
+   "pipeline_version": "7.0.5",
+   "timesys": "UTC",
+   "mjd_beg": 61291.276650255,
+   "mjd_avg": 61291.277316444,
+   "mjd_end": 61291.277982633,
+   "date_avg": "2026-09-08T06:39:20Z",
+   "epoch_jyear": 2026.6852,
+   "exposure_s": 113.5826,
+   "lam_um": 0.77119,
+   "bw_um": 0.01823,
+   "lam_pred_um": 0.77191,
+   "dlam_over_bw": 0.342,
+   "source_url": "https://irsa.ipac.caltech.edu/ibe/data/spherex/qr3/level2/2026W37_1A/l2b-v27-2026-255/1/level2_2026W37_1A_0234_3D1_spx_l2b-v27-2026-255.fits?center=76.956587,30.401291&size=0.15700",
+   "archive_file_url": "https://irsa.ipac.caltech.edu/ibe/data/spherex/qr3/level2/2026W37_1A/l2b-v27-2026-255/1/level2_2026W37_1A_0234_3D1_spx_l2b-v27-2026-255.fits",
+   "archive_checksum": "md5:8dd0325ae2c048e4e72c78acedde7c48",
+   "raw_sha256": "a3fb18e6f4e7a446cdf91d3aaa3a03c17f6447f2f4ff43a4011db533f900e128",
+   "raw_size": 4080960,
+   "quality": {
+    "n_pixels": 8464,
+    "frac_invalid": 0.0031,
+    "frac_suspect": 0.0345,
+    "n_nonfinite": 0,
+    "flags_present": {
+     "TRANSIENT": 32,
+     "OVERFLOW": 1,
+     "SUR_ERROR": 19,
+     "NONFUNC": 19,
+     "COLD": 2,
+     "PERSIST": 44,
+     "OUTLIER": 35,
+     "CROSSTALK": 133,
+     "SOURCE": 6964,
+     "BLOOM": 1,
+     "HALO": 91
+    },
+    "unknown_flag_names": [],
+    "l1_dqa": "Pass",
+    "l2_dqa": "Pass",
+    "psf_fwhm_arcsec": 7.530770327317724,
+    "target": {
+     "in_cutout": true,
+     "edge_px": 45.2,
+     "flags": {},
+     "info_flags": {
+      "SOURCE": 20
+     },
+     "n_invalid": 0,
+     "saturated": false
+    }
+   },
+   "background": {
+    "value_mjy_sr": 0.38906,
+    "sigma_mjy_sr": 0.02134,
+    "n_pixels": 2758,
+    "method": "sigma_clipped_median",
+    "zodi_model_median_mjy_sr": 0.31285
+   },
+   "coverage_frac": 1.0,
+   "invalid_frac": 0.0175,
+   "suspect_frac": 0.0336,
+   "comparable_frac": 0.8107,
+   "lam_range_um": [
+    0.76603,
+    0.77635
+   ],
+   "psf_fwhm_arcsec": 7.530770327317724,
+   "psf_kind": "EPSF",
+   "cutout_wcs": {
+    "crval": [
+     75.6277993654,
+     28.8793985446
+    ],
+    "crpix": [
+     771.5,
+     -767.5
+    ],
+    "pc": [
+     [
+      -0.00169918616808,
+      -0.000113820423418
+     ],
+     [
+      -0.00017465889578,
+      0.00170598309677
+     ]
+    ],
+    "ctype": [
+     "RA---TAN-SIP",
+     "DEC--TAN-SIP"
+    ],
+    "det_origin": [
+     250.0,
+     1789.0
+    ]
+   },
+   "png": "frame_02.png",
+   "mask_png": "frame_02_mask.png",
+   "npz": "frame_02.npz",
+   "target_predicted": {
+    "ra": 76.956588,
+    "dec": 30.401287,
+    "method": "proper_motion_only"
+   }
+  }
+ ]
+}

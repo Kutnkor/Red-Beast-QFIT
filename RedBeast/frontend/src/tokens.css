@@ -1,0 +1,36 @@
+/* One palette and one type system for the whole application (the V4 language).
+   Navy and white carry the interface, black is space, orange marks "now" and primary actions only. */
+@font-face { font-family: 'Bricolage Grotesque'; src: url('/fonts/BricolageGrotesque.ttf') format('truetype'); font-weight: 200 800; font-stretch: 75% 100%; font-display: swap; }
+@font-face { font-family: 'Martian Mono'; src: url('/fonts/MartianMono.ttf') format('truetype'); font-weight: 100 800; font-stretch: 75% 112.5%; font-display: swap; }
+:root {
+  --black:#000000;
+  --navy-0:#050b20;
+  --navy-1:#0a1634;
+  --navy-2:#1c2f66;
+  --navy-3:#6d86cc;
+  --white:#ffffff;
+  --white-2:#c6d3f7;
+  --white-3:#9cb2ee;
+  --orange:#ff6a1a;
+  --orange-hover:#ff8a4a;
+  --bg:var(--navy-0);
+  --surface:var(--navy-1);
+  --rule:var(--navy-2);
+  --control:var(--navy-3);
+  --sky:var(--black);
+  --fg:var(--white);
+  --fg-2:var(--white-2);
+  --fg-3:var(--white-3);
+  --signal:var(--orange);
+  --signal-hover:var(--orange-hover);
+  --signal-ink:var(--navy-0);
+  --font:'Bricolage Grotesque',system-ui,sans-serif;
+  --mono:'Martian Mono',ui-monospace,'SF Mono',Menlo,monospace;
+  --fs-xs:12px; --fs-sm:13px; --fs-md:15px; --fs-lg:19px;
+  --fs-xl:24px; --fs-2xl:32px; --fs-display:48px;
+  --space-1:4px; --space-2:8px; --space-3:12px; --space-4:16px;
+  --space-5:24px; --space-6:32px; --space-7:48px;
+  --radius:12px;
+  --head-h:48px;
+  color-scheme:dark;
+}
